@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/png" href="images/J.PATS.png" />
+<link rel="apple-touch-icon" href="images/J.PATS.png" />
+<title>Contact | JP Custom Gear</title>
+<meta name="description" content="Questions? Custom orders? Reach out to JP Custom Gear at jpatscustom@gmail.com." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/default.css" />
+<link rel="stylesheet" href="css/styles.css" />
+<link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+<div class="announce">Custom orders ship in 5–7 business days &nbsp;·&nbsp; Bulk discounts available — contact us</div>
+
+<header class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img class="nav-logo-img" src="images/J.PATS.png" alt="JP Custom Gear logo" />
+      <div class="nav-logo-text"><strong>JP</strong><small>Custom Gear</small></div>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="index.html#onduty">On Duty</a>
+      <a href="custom-work.html">Custom Work</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="nav-right">
+      <form class="nav-search" role="search" action="shop.html" method="get">
+        <svg class="nav-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="search" name="q" placeholder="Search products…" autocomplete="off" aria-label="Search products" />
+        <div class="nav-search-dropdown" hidden></div>
+      </form>
+      <a href="contact.html" class="nav-cta">Start Order</a>
+      <button class="burger" id="burgerBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head"><strong>JP Custom</strong><button class="drawer-close" id="drawerClose">✕</button></div>
+  <div class="drawer-search">
+    <form class="nav-search" role="search" action="shop.html" method="get">
+      <svg class="nav-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="search" name="q" placeholder="Search products…" autocomplete="off" aria-label="Search products" />
+      <div class="nav-search-dropdown" hidden></div>
+    </form>
+  </div>
+  <nav class="drawer-nav">
+    <a href="index.html">Home →</a>
+    <a href="shop.html">Shop →</a>
+    <a href="index.html#onduty">On Duty →</a>
+    <a href="custom-work.html">Custom Work →</a>
+    <a href="services.html">Services →</a>
+    <a href="contact.html">Contact →</a>
+  </nav>
+  <div class="drawer-foot"><a href="contact.html">Start Your Order</a></div>
+</div>
+
+<section class="contact" style="padding:100px 0 110px;">
+  <div class="contact-grain"></div>
+  <div class="contact-glow"></div>
+  <div class="contact-inner">
+    <div class="fade-in">
+      <div class="eyebrow" style="font-family:'Bebas Neue';color:var(--brass);font-size:20px;letter-spacing:0.2em;margin-bottom:10px;">Get In Touch</div>
+      <h2 class="font-display" style="font-family:'Playfair Display';font-weight:900;color:var(--cream);font-size:clamp(34px,4.5vw,54px);line-height:1.05;margin-bottom:20px;">Questions? Custom Orders?<br><em style="font-style:normal;color:var(--amber)">We're Here to Help.</em></h2>
+      <p style="color:rgba(237,229,208,0.6);font-size:15px;line-height:1.7;margin-bottom:28px;max-width:380px;">Ready to start your custom order? Have a question about bulk pricing? We're here — reach out and we'll get back to you fast.</p>
+      <div class="contact-email">
+        <div class="contact-email-icon">✉️</div>
+        <a href="mailto:jpatscustom@gmail.com">jpatscustom@gmail.com</a>
+      </div>
+      <div class="contact-tags">
+        <p>We handle:</p>
+        <div class="contact-tags-wrap">
+          <span class="contact-tag">Custom Hats</span>
+          <span class="contact-tag">Bulk Orders</span>
+          <span class="contact-tag">Agency Patches</span>
+          <span class="contact-tag">Engraved Cups</span>
+          <span class="contact-tag">Journals</span>
+          <span class="contact-tag">Keychains</span>
+          <span class="contact-tag">Shirts</span>
+          <span class="contact-tag">Logo Design</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="fade-in fade-in-delay-1">
+      <div id="contactForm">
+        <div id="cf-product-banner" class="cf-product-banner" style="display:none;">
+          <div class="cf-product-banner-label">Your selection</div>
+          <div class="cf-product-banner-name" id="cf-product-banner-name"></div>
+          <div class="cf-product-banner-meta" id="cf-product-banner-meta"></div>
+        </div>
+        <div class="contact-form">
+          <div>
+            <label class="form-label" for="cf-name">Your Name</label>
+            <input class="form-input" id="cf-name" type="text" placeholder="Full name" />
+          </div>
+          <div>
+            <label class="form-label" for="cf-email">Email</label>
+            <input class="form-input" id="cf-email" type="email" placeholder="you@email.com" />
+          </div>
+          <div>
+            <label class="form-label" for="cf-type">What are you looking for?</label>
+            <select class="form-select" id="cf-type">
+              <option>Custom Hat Order</option>
+              <option>Bulk / Agency Order</option>
+              <option>Engraved Drinkware</option>
+              <option>Laser Engraved Journals</option>
+              <option>Shirts</option>
+              <option>Logo Design</option>
+              <option>Something else</option>
+            </select>
+          </div>
+          <div>
+            <label class="form-label" for="cf-msg">Tell us about your project</label>
+            <textarea class="form-textarea" id="cf-msg" rows="5" placeholder="Quantity, design ideas, timeline, agency info..."></textarea>
+          </div>
+          <button class="form-submit" onclick="submitContact()"><span style="font-size:1.5em;line-height:1;display:inline-flex;align-items:center;">✉️</span> Send Message</button>
+        </div>
+      </div>
+      <div id="contactSuccess" class="form-success" style="display:none;">
+        <div class="check-big">✅</div>
+        <h3 class="font-display">Got it — we'll be in touch!</h3>
+        <p>Usually within 1 business day.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="footer-news">
+  <div class="footer-news-inner">
+    <div class="footer-news-copy"><strong>Stay in the loop.</strong><p>New collections, exclusive deals, and maker tips.</p></div>
+    <div class="footer-news-form">
+      <input class="footer-news-input" type="email" placeholder="your@email.com" />
+      <button class="footer-news-btn">Subscribe</button>
+    </div>
+  </div>
+</div>
+<footer class="footer-main">
+  <div class="footer-main-inner">
+    <div>
+      <div class="footer-brand-badge">
+        <img class="footer-logo-img" src="images/J.PATS.png" alt="JP Custom Gear logo" />
+        <div class="footer-brand-text"><strong>JP Custom</strong><small>Gear</small></div>
+      </div>
+      <p class="footer-brand-desc">Custom headwear built with care. From one hat to a hundred — made right.</p>
+      <div class="footer-socials">
+        <a href="#" class="footer-social" aria-label="Facebook"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.5l.5-3h-3V8.6c0-.9.3-1.5 1.6-1.5H17V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.7 1.4-3.7 3.9v2.2H8.5v3h2.5V21h2.5z"/></svg></a>
+        <a href="mailto:jpatscustom@gmail.com" class="footer-social">✉️</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Shop</div>
+      <ul>
+        <li><a href="shop.html">All Collections</a></li>
+        <li><a href="shop-woods-water.html">Woods &amp; Water</a></li>
+        <li><a href="shop-protectors-patriots.html">Protectors &amp; Patriots</a></li>
+        <li><a href="shop-infinity-her.html">Infinity Her</a></li>
+        <li><a href="shop-caution-may-offend.html">Caution: May Offend</a></li>
+        <li><a href="shop-foam-side.html">The Foam Side</a></li>
+        <li><a href="shop-forever-favorites.html">Forever Favorites</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Services</div>
+      <ul>
+        <li><a href="services.html">All Services</a></li>
+        <li><a href="contact.html">Custom Hats</a></li>
+        <li><a href="contact.html">Bulk Orders</a></li>
+        <li><a href="contact.html">Laser Engraved Journals</a></li>
+        <li><a href="contact.html">Custom Cups</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Company</div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="services.html">Services</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 JP Custom Gear. All rights reserved.</p>
+    <div class="footer-made">Handcrafted with <span class="footer-heart">♥</span> in the USA</div>
+  </div>
+</footer>
+
+<script src="js/products.js"></script>
+<script src="js/search.js"></script>
+<script src="js/site.js"></script>
+<script src="js/custom-select.js"></script>
+<script>
+  (function prefillFromProduct() {
+    const params = new URLSearchParams(window.location.search);
+    const source = params.get('source');
+    const product = params.get('product');
+    const style = params.get('style');
+    const color = params.get('color');
+    const qty = params.get('qty') || '1';
+
+    // Bulk-order handoff — read structured payload from sessionStorage
+    if (source === 'bulk') {
+      let payload = null;
+      try { payload = JSON.parse(sessionStorage.getItem('bulk_order') || 'null'); }
+      catch (e) { payload = null; }
+
+      if (payload) {
+        const banner = document.getElementById('cf-product-banner');
+        banner.classList.add('cf-customizer-banner');
+        document.querySelector('.cf-product-banner-label').textContent = 'Bulk Order Request';
+        document.getElementById('cf-product-banner-name').textContent = 'Bulk Order';
+
+        const productCount = payload.products ? Object.keys(payload.products).length : 0;
+        const totalItems = payload.products
+          ? Object.values(payload.products).reduce((sum, p) => sum + (p.qty || 0), 0)
+          : 0;
+        const metaParts = [];
+        if (productCount) metaParts.push(productCount + ' product' + (productCount === 1 ? '' : 's'));
+        if (totalItems) metaParts.push('Total: ' + totalItems);
+        if (payload.orgType) metaParts.push(payload.orgType);
+        document.getElementById('cf-product-banner-meta').textContent = metaParts.join('  ·  ');
+        banner.style.display = 'block';
+
+        if (payload.name) document.getElementById('cf-name').value = payload.name;
+        if (payload.email) document.getElementById('cf-email').value = payload.email;
+
+        const type = document.getElementById('cf-type');
+        for (let i = 0; i < type.options.length; i++) {
+          if (type.options[i].textContent === 'Bulk / Agency Order') { type.selectedIndex = i; break; }
+        }
+
+        document.getElementById('cf-msg').value = payload.summary || '';
+
+        try { sessionStorage.removeItem('bulk_order'); } catch (e) {}
+        return;
+      }
+    }
+
+    // Customizer handoff — read structured payload from sessionStorage
+    if (source === 'customizer') {
+      let payload = null;
+      try { payload = JSON.parse(sessionStorage.getItem('customizer_order') || 'null'); }
+      catch (e) { payload = null; }
+
+      if (payload) {
+        const banner = document.getElementById('cf-product-banner');
+        banner.classList.add('cf-customizer-banner');
+        document.querySelector('.cf-product-banner-label').textContent = 'Custom Build Request';
+        document.getElementById('cf-product-banner-name').textContent = payload.style;
+        document.getElementById('cf-product-banner-meta').textContent =
+          [payload.color, payload.suboption, payload.patch, 'Qty: ' + payload.qty]
+            .filter(Boolean).join('  ·  ');
+        banner.style.display = 'block';
+
+        // Prefill contact fields
+        if (payload.name) document.getElementById('cf-name').value = payload.name;
+        if (payload.email) document.getElementById('cf-email').value = payload.email;
+
+        // Set order type to Custom Hat Order
+        const type = document.getElementById('cf-type');
+        for (let i = 0; i < type.options.length; i++) {
+          if (type.options[i].textContent === 'Custom Hat Order') { type.selectedIndex = i; break; }
+        }
+
+        // Prefill message with the formatted summary
+        document.getElementById('cf-msg').value = payload.summary || '';
+
+        // Clear it so a refresh doesn't re-load stale data
+        try { sessionStorage.removeItem('customizer_order'); } catch (e) {}
+        return;
+      }
+    }
+
+    if (!product) return;
+
+    const banner = document.getElementById('cf-product-banner');
+    const nameEl = document.getElementById('cf-product-banner-name');
+    const metaEl = document.getElementById('cf-product-banner-meta');
+    const metaParts = [];
+    if (style) metaParts.push('Style: ' + style);
+    if (color) metaParts.push('Color: ' + color);
+    if (qty) metaParts.push('Qty: ' + qty);
+    nameEl.textContent = product;
+    metaEl.textContent = metaParts.join('  ·  ');
+    banner.style.display = 'block';
+
+    // Best-guess order type based on product name
+    const type = document.getElementById('cf-type');
+    const lower = product.toLowerCase();
+    let target = 'Custom Hat Order';
+    if (/tumbler|cup|engrav/.test(lower)) target = 'Engraved Drinkware';
+    else if (/tee|t-shirt|shirt/.test(lower)) target = 'Shirts';
+    for (let i = 0; i < type.options.length; i++) {
+      if (type.options[i].textContent === target) { type.selectedIndex = i; break; }
+    }
+
+    // Pre-fill the message
+    const msg = document.getElementById('cf-msg');
+    msg.value =
+      "I'd like to order the following:\n\n" +
+      "Product: " + product + "\n" +
+      (style ? "Style: " + style + "\n" : "") +
+      (color ? "Color: " + color + "\n" : "") +
+      "Quantity: " + qty + "\n\n" +
+      "Additional details:\n";
+  })();
+
+  function submitContact() {
+    const name = document.getElementById('cf-name').value.trim();
+    const email = document.getElementById('cf-email').value.trim();
+    const type = document.getElementById('cf-type').value;
+    const msg = document.getElementById('cf-msg').value.trim();
+    if (!name || !email || !msg) { alert('Please fill in all required fields.'); return; }
+
+    const btn = document.querySelector('.contact-form .form-submit');
+    const orig = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = 'Sending…';
+
+    fetch('https://formsubmit.co/ajax/jpatscustom@gmail.com', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        _subject: 'New project inquiry from ' + name,
+        _template: 'table',
+        name: name,
+        email: email,
+        looking_for: type || '(not selected)',
+        message: msg
+      })
+    })
+    .then(r => r.json())
+    .then(() => {
+      document.getElementById('contactForm').style.display = 'none';
+      document.getElementById('contactSuccess').style.display = 'block';
+    })
+    .catch(() => {
+      btn.disabled = false;
+      btn.innerHTML = orig;
+      alert('Sorry — there was a problem sending. Please email jpatscustom@gmail.com directly.');
+    });
+  }
+</script>
+</body>
+</html>

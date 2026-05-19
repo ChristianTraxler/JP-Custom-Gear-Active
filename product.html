@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/png" href="images/J.PATS.png" />
+<link rel="apple-touch-icon" href="images/J.PATS.png" />
+<title>Product | JP Custom Gear</title>
+<meta name="description" content="Custom hats, shirts, and engraved drinkware from JP Custom Gear. Made in the USA." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/default.css" />
+<link rel="stylesheet" href="css/styles.css" />
+<link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+<div class="announce">Custom orders ship in 5–7 business days &nbsp;·&nbsp; Bulk discounts available — contact us</div>
+
+<header class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img class="nav-logo-img" src="images/J.PATS.png" alt="JP Custom Gear logo" />
+      <div class="nav-logo-text"><strong>JP</strong><small>Custom Gear</small></div>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="index.html#onduty">On Duty</a>
+      <a href="custom-work.html">Custom Work</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="nav-right">
+      <form class="nav-search" role="search" action="shop.html" method="get">
+        <svg class="nav-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="search" name="q" placeholder="Search products…" autocomplete="off" aria-label="Search products" />
+        <div class="nav-search-dropdown" hidden></div>
+      </form>
+      <a href="contact.html" class="nav-cta">Start Order</a>
+      <button class="burger" id="burgerBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head"><strong>JP Custom</strong><button class="drawer-close" id="drawerClose">✕</button></div>
+  <div class="drawer-search">
+    <form class="nav-search" role="search" action="shop.html" method="get">
+      <svg class="nav-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="search" name="q" placeholder="Search products…" autocomplete="off" aria-label="Search products" />
+      <div class="nav-search-dropdown" hidden></div>
+    </form>
+  </div>
+  <nav class="drawer-nav">
+    <a href="index.html">Home →</a>
+    <a href="shop.html">Shop →</a>
+    <a href="index.html#onduty">On Duty →</a>
+    <a href="custom-work.html">Custom Work →</a>
+    <a href="services.html">Services →</a>
+    <a href="contact.html">Contact →</a>
+  </nav>
+  <div class="drawer-foot"><a href="contact.html">Start Your Order</a></div>
+</div>
+
+<section class="pdp-section">
+  <div class="pdp-inner">
+
+    <div class="pdp-breadcrumb" id="pdp-breadcrumb">
+      <a href="index.html">Home</a> <span>/</span> <a href="shop.html">Shop</a>
+    </div>
+
+    <div class="pdp-missing" id="pdp-missing" style="display:none;">
+      <h1>Product not found</h1>
+      <p>We couldn't find that product. Head back to the shop and try again.</p>
+      <a class="pdp-back-btn" href="shop.html">← Back to Shop</a>
+    </div>
+
+    <div class="pdp-layout" id="pdp-layout">
+      <div class="pdp-gallery">
+        <div class="pdp-image-wrap" id="pdp-image-wrap">
+          <span class="pdp-tag" id="pdp-tag">Hat</span>
+          <img class="pdp-image" id="pdp-image" src="" alt="" role="button" tabindex="0" aria-label="Click to enlarge image" />
+          <canvas class="pdp-canvas" id="pdp-canvas" hidden></canvas>
+          <button type="button" class="pdp-nav pdp-nav-prev" id="pdp-nav-prev" aria-label="Previous image" hidden>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button type="button" class="pdp-nav pdp-nav-next" id="pdp-nav-next" aria-label="Next image" hidden>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+        <div class="pdp-thumbs" id="pdp-thumbs" hidden></div>
+      </div>
+
+      <div class="pdp-info">
+        <div class="pdp-eyebrow" id="pdp-eyebrow">Hat</div>
+        <h1 class="pdp-title" id="pdp-title">Product</h1>
+        <div class="pdp-price-row">
+          <div class="pdp-price"><small>From</small><span id="pdp-price">$25</span></div>
+          <div class="pdp-usa">Made in the USA</div>
+        </div>
+
+        <p class="pdp-description" id="pdp-description"></p>
+
+        <ul class="pdp-features" id="pdp-features"></ul>
+
+        <form class="pdp-form" id="pdp-form" onsubmit="return goToOrder(event)">
+          <div class="pdp-field" id="pdp-style-field" style="display:none;">
+            <label class="pdp-label" for="pdp-style">Style — choose one</label>
+            <select class="pdp-select" id="pdp-style">
+              <option value="112">112</option>
+              <option value="168">168</option>
+            </select>
+          </div>
+
+          <div class="pdp-field">
+            <label class="pdp-label" id="pdp-colors-label" for="pdp-color">Color</label>
+            <select class="pdp-select" id="pdp-color" required></select>
+          </div>
+
+          <div class="pdp-field pdp-field-qty">
+            <label class="pdp-label" for="pdp-qty">Quantity</label>
+            <div class="pdp-qty-wrap">
+              <button type="button" class="pdp-qty-btn" onclick="adjustQty(-1)" aria-label="Decrease">−</button>
+              <input class="pdp-qty-input" id="pdp-qty" type="number" min="1" max="999" value="1" />
+              <button type="button" class="pdp-qty-btn" onclick="adjustQty(1)" aria-label="Increase">+</button>
+            </div>
+          </div>
+
+          <button class="pdp-cta" type="submit">Start Your Order →</button>
+          <p class="pdp-note">Click above to send your selection to JP — we'll confirm pricing, embroidery details, and ship date within 1 business day.</p>
+        </form>
+      </div>
+    </div>
+
+    <div class="pdp-related" id="pdp-related-wrap" style="display:none;">
+      <div class="pdp-related-head">
+        <div class="eyebrow">You Might Also Like</div>
+        <h2>More from the Shop</h2>
+      </div>
+      <div class="product-grid" id="pdp-related"></div>
+    </div>
+
+  </div>
+</section>
+
+<div class="lightbox" id="pdp-lightbox" role="dialog" aria-modal="true" aria-label="Product image" hidden>
+  <button type="button" class="lightbox-close" id="pdp-lightbox-close" aria-label="Close image">✕</button>
+  <img class="lightbox-img" id="pdp-lightbox-img" src="" alt="" />
+</div>
+
+<div class="footer-news">
+  <div class="footer-news-inner">
+    <div class="footer-news-copy"><strong>Stay in the loop.</strong><p>New collections, exclusive deals, and maker tips.</p></div>
+    <div class="footer-news-form">
+      <input class="footer-news-input" type="email" placeholder="your@email.com" />
+      <button class="footer-news-btn">Subscribe</button>
+    </div>
+  </div>
+</div>
+<footer class="footer-main">
+  <div class="footer-main-inner">
+    <div>
+      <div class="footer-brand-badge">
+        <img class="footer-logo-img" src="images/J.PATS.png" alt="JP Custom Gear logo" />
+        <div class="footer-brand-text"><strong>JP Custom</strong><small>Gear</small></div>
+      </div>
+      <p class="footer-brand-desc">Custom headwear built with care. From one hat to a hundred — made right.</p>
+      <div class="footer-socials">
+        <a href="#" class="footer-social" aria-label="Facebook"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.5l.5-3h-3V8.6c0-.9.3-1.5 1.6-1.5H17V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.7 1.4-3.7 3.9v2.2H8.5v3h2.5V21h2.5z"/></svg></a>
+        <a href="mailto:jpatscustom@gmail.com" class="footer-social">✉️</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Shop</div>
+      <ul>
+        <li><a href="shop.html">All Collections</a></li>
+        <li><a href="shop-woods-water.html">Woods &amp; Water</a></li>
+        <li><a href="shop-protectors-patriots.html">Protectors &amp; Patriots</a></li>
+        <li><a href="shop-infinity-her.html">Infinity Her</a></li>
+        <li><a href="shop-caution-may-offend.html">Caution: May Offend</a></li>
+        <li><a href="shop-foam-side.html">The Foam Side</a></li>
+        <li><a href="shop-forever-favorites.html">Forever Favorites</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Services</div>
+      <ul>
+        <li><a href="services.html">All Services</a></li>
+        <li><a href="contact.html">Custom Hats</a></li>
+        <li><a href="contact.html">Bulk Orders</a></li>
+        <li><a href="contact.html">Laser Engraved Journals</a></li>
+        <li><a href="contact.html">Custom Cups</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Company</div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="services.html">Services</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 JP Custom Gear. All rights reserved.</p>
+    <div class="footer-made">Handcrafted with <span class="footer-heart">♥</span> in the USA</div>
+  </div>
+</footer>
+
+<script src="js/products.js"></script>
+<script src="js/search.js"></script>
+<script src="js/site.js"></script>
+<script src="js/custom-select.js"></script>
+<script>
+  (function renderProduct() {
+    const params = new URLSearchParams(window.location.search);
+    const slug = params.get('id');
+    const product = slug ? getProduct(slug) : null;
+
+    if (!product) {
+      document.getElementById('pdp-layout').style.display = 'none';
+      document.getElementById('pdp-missing').style.display = 'block';
+      return;
+    }
+
+    document.title = product.name + " | JP Custom Gear";
+
+    // Breadcrumb
+    const crumb = document.getElementById('pdp-breadcrumb');
+    crumb.innerHTML =
+      '<a href="index.html">Home</a> <span>/</span> ' +
+      '<a href="shop.html">Shop</a> <span>/</span> ' +
+      (product.categoryHref
+        ? '<a href="' + product.categoryHref + '">' + product.category + '</a> <span>/</span> '
+        : '') +
+      '<span>' + product.name + '</span>';
+
+    document.getElementById('pdp-tag').textContent = product.tag;
+    document.getElementById('pdp-eyebrow').textContent = product.category || product.tag;
+    document.getElementById('pdp-title').textContent = product.name;
+    document.getElementById('pdp-price').textContent = '$' + product.price;
+
+    const img = document.getElementById('pdp-image');
+    img.src = product.image;
+    img.alt = product.name;
+
+    document.getElementById('pdp-description').textContent = product.description || '';
+
+    const featureList = document.getElementById('pdp-features');
+    featureList.innerHTML = '';
+    (product.features || []).forEach(f => {
+      const li = document.createElement('li');
+      li.textContent = f;
+      featureList.appendChild(li);
+    });
+
+    const styleField = document.getElementById('pdp-style-field');
+    const styleSelect = document.getElementById('pdp-style');
+    const isHat = product.tag === 'Hat';
+    const supportsStyleSwap = isHat && ['112', '112PFP', '168', '168P'].includes(product.hatType);
+    styleField.style.display = supportsStyleSwap ? '' : 'none';
+
+    document.getElementById('pdp-colors-label').textContent = (product.colorsLabel || 'Color') + ' — choose one';
+    const colorSelect = document.getElementById('pdp-color');
+    const originalColors = product.colors || [];
+    const nativeStyle = (product.hatType === '168' || product.hatType === '168P') ? '168' : '112';
+
+    function renderColors(list) {
+      colorSelect.innerHTML = '';
+      list.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c;
+        opt.textContent = c;
+        colorSelect.appendChild(opt);
+      });
+    }
+
+    renderColors(originalColors);
+
+    const BARK_112_IMAGES = [
+      'images/hats/product-showcase/web/IMG_0677.webp',
+      'images/hats/product-showcase/web/IMG_0678.webp',
+      'images/hats/product-showcase/web/IMG_4754.webp',
+      'images/hats/product-showcase/web/IMG_4756.webp',
+      'images/hats/product-showcase/web/IMG_4757.webp'
+    ];
+    const thumbsWrap = document.getElementById('pdp-thumbs');
+    const imageWrap = document.getElementById('pdp-image-wrap');
+    const canvas = document.getElementById('pdp-canvas');
+    const ctx = canvas.getContext('2d');
+    const navPrev = document.getElementById('pdp-nav-prev');
+    const navNext = document.getElementById('pdp-nav-next');
+    let galleryImages = [];
+    let galleryIndex = 0;
+
+    function currentStyle() {
+      return supportsStyleSwap ? styleSelect.value : nativeStyle;
+    }
+
+    const decodedCache = {};
+
+    function preload(src) {
+      if (decodedCache[src]) return decodedCache[src];
+      const i = new Image();
+      i.crossOrigin = 'anonymous';
+      i.src = src;
+      const p = new Promise((resolve) => {
+        const done = () => resolve(i);
+        if (i.decode) {
+          i.decode().then(done).catch(() => {
+            if (i.complete) done();
+            else i.addEventListener('load', done, { once: true });
+          });
+        } else if (i.complete) {
+          done();
+        } else {
+          i.addEventListener('load', done, { once: true });
+        }
+      });
+      decodedCache[src] = p;
+      return p;
+    }
+
+    function sizeCanvas() {
+      const rect = imageWrap.getBoundingClientRect();
+      const dpr = Math.max(1, window.devicePixelRatio || 1);
+      const w = Math.round(rect.width * dpr);
+      const h = Math.round(rect.height * dpr);
+      if (canvas.width !== w || canvas.height !== h) {
+        canvas.width = w;
+        canvas.height = h;
+      }
+    }
+
+    function drawCover(image) {
+      sizeCanvas();
+      const cw = canvas.width;
+      const ch = canvas.height;
+      const iw = image.naturalWidth;
+      const ih = image.naturalHeight;
+      const scale = Math.max(cw / iw, ch / ih);
+      const dw = iw * scale;
+      const dh = ih * scale;
+      const dx = (cw - dw) / 2;
+      const dy = (ch - dh) / 2;
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = 'high';
+      ctx.clearRect(0, 0, cw, ch);
+      ctx.drawImage(image, dx, dy, dw, dh);
+    }
+
+    function setMainImage(index) {
+      if (!galleryImages.length) return;
+      galleryIndex = (index + galleryImages.length) % galleryImages.length;
+      const src = galleryImages[galleryIndex];
+      thumbsWrap.querySelectorAll('.pdp-thumb').forEach((t, i) => {
+        t.classList.toggle('is-active', i === galleryIndex);
+      });
+      preload(src).then((image) => {
+        if (galleryImages[galleryIndex] !== src) return;
+        drawCover(image);
+        img.src = src;
+        img.alt = product.name;
+      });
+    }
+
+    function showSingleImage() {
+      thumbsWrap.hidden = true;
+      thumbsWrap.innerHTML = '';
+      navPrev.hidden = true;
+      navNext.hidden = true;
+      canvas.hidden = true;
+      img.hidden = false;
+      imageWrap.classList.toggle('is-cover', product.imageFit === 'cover');
+      galleryImages = [];
+      galleryIndex = 0;
+      img.src = product.image;
+      img.alt = product.name;
+    }
+
+    function showGallery(images) {
+      galleryImages = images;
+      images.forEach(preload);
+
+      thumbsWrap.innerHTML = '';
+      images.forEach((src, i) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'pdp-thumb';
+        btn.dataset.src = src;
+        btn.setAttribute('aria-label', 'View image ' + (i + 1));
+        btn.innerHTML = '<img src="' + src + '" alt="" />';
+        btn.addEventListener('click', () => setMainImage(i));
+        thumbsWrap.appendChild(btn);
+      });
+      thumbsWrap.hidden = false;
+      navPrev.hidden = images.length < 2;
+      navNext.hidden = images.length < 2;
+      imageWrap.classList.add('is-cover');
+      galleryIndex = 0;
+      preload(images[0]).then((image) => {
+        drawCover(image);
+        canvas.hidden = false;
+        img.hidden = true;
+        thumbsWrap.querySelectorAll('.pdp-thumb').forEach((t, i) => {
+          t.classList.toggle('is-active', i === 0);
+        });
+        img.src = images[0];
+        img.alt = product.name;
+      });
+    }
+
+    function updateGallery() {
+      const is112Bark = currentStyle() === '112' && colorSelect.value === 'Bark';
+      if (is112Bark) {
+        showGallery(BARK_112_IMAGES);
+      } else {
+        showSingleImage();
+      }
+    }
+
+    navPrev.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setMainImage(galleryIndex - 1);
+    });
+    navNext.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setMainImage(galleryIndex + 1);
+    });
+    canvas.addEventListener('click', () => img.click());
+
+    let resizeRaf = 0;
+    window.addEventListener('resize', () => {
+      if (resizeRaf) cancelAnimationFrame(resizeRaf);
+      resizeRaf = requestAnimationFrame(() => {
+        if (!galleryImages.length) return;
+        const src = galleryImages[galleryIndex];
+        if (decodedCache[src]) decodedCache[src].then(drawCover);
+      });
+    });
+
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchActive = false;
+    imageWrap.addEventListener('touchstart', (e) => {
+      if (galleryImages.length < 2) return;
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+      touchActive = true;
+    }, { passive: true });
+    imageWrap.addEventListener('touchend', (e) => {
+      if (!touchActive) return;
+      touchActive = false;
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      const dy = e.changedTouches[0].clientY - touchStartY;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+        setMainImage(galleryIndex + (dx < 0 ? 1 : -1));
+      }
+    });
+
+    if (supportsStyleSwap) {
+      styleSelect.value = nativeStyle;
+      styleSelect.addEventListener('change', () => {
+        if (styleSelect.value === nativeStyle) {
+          renderColors(originalColors);
+        } else if (styleSelect.value === '168') {
+          renderColors(RICHARDSON_168P_COLORS);
+        } else {
+          renderColors(RICHARDSON_112_COLORS);
+        }
+        updateGallery();
+      });
+    }
+
+    colorSelect.addEventListener('change', updateGallery);
+    updateGallery();
+
+    // Related products
+    const related = getRelatedProducts(slug, 4);
+    if (related.length) {
+      const wrap = document.getElementById('pdp-related-wrap');
+      const grid = document.getElementById('pdp-related');
+      wrap.style.display = 'block';
+      grid.innerHTML = related.map(r =>
+        '<a href="product.html?id=' + r.slug + '" class="product-card">' +
+          '<div class="product-image-wrap"><span class="product-tag">' + r.tag + '</span>' +
+            '<img class="product-image" src="' + r.image + '" alt="' + r.name.replace(/"/g, '&quot;') + '" loading="lazy" /></div>' +
+          '<div class="product-info">' +
+            '<div class="product-name">' + r.name + '</div>' +
+            '<div class="product-price-row"><div class="product-price"><small>From</small>$' + r.price + '</div><div class="product-cta">View →</div></div>' +
+          '</div>' +
+        '</a>'
+      ).join('');
+    }
+  })();
+
+  function adjustQty(delta) {
+    const input = document.getElementById('pdp-qty');
+    const next = Math.max(1, Math.min(999, parseInt(input.value || '1', 10) + delta));
+    input.value = next;
+  }
+
+  (function setupLightbox() {
+    const trigger = document.getElementById('pdp-image');
+    const lightbox = document.getElementById('pdp-lightbox');
+    const lightboxImg = document.getElementById('pdp-lightbox-img');
+    const closeBtn = document.getElementById('pdp-lightbox-close');
+    if (!trigger || !lightbox) return;
+
+    function open() {
+      const src = trigger.getAttribute('src');
+      if (!src) return;
+      lightboxImg.src = src;
+      lightboxImg.alt = trigger.getAttribute('alt') || '';
+      lightbox.hidden = false;
+      requestAnimationFrame(() => lightbox.classList.add('is-open'));
+      document.body.style.overflow = 'hidden';
+      closeBtn.focus();
+    }
+    function close() {
+      lightbox.classList.remove('is-open');
+      document.body.style.overflow = '';
+      setTimeout(() => { lightbox.hidden = true; lightboxImg.src = ''; }, 250);
+      trigger.focus();
+    }
+
+    trigger.addEventListener('click', open);
+    trigger.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+    });
+    closeBtn.addEventListener('click', close);
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) close();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !lightbox.hidden) close();
+    });
+  })();
+
+  function goToOrder(e) {
+    e.preventDefault();
+    const params = new URLSearchParams(window.location.search);
+    const slug = params.get('id');
+    const product = slug ? getProduct(slug) : null;
+    if (!product) return false;
+    const color = document.getElementById('pdp-color').value;
+    const qty = document.getElementById('pdp-qty').value || '1';
+    const styleField = document.getElementById('pdp-style-field');
+    const style = (product.tag === 'Hat' && styleField && styleField.style.display !== 'none')
+      ? document.getElementById('pdp-style').value
+      : '';
+    const url = 'contact.html?product=' + encodeURIComponent(product.name) +
+                (style ? '&style=' + encodeURIComponent(style) : '') +
+                '&color=' + encodeURIComponent(color) +
+                '&qty=' + encodeURIComponent(qty);
+    window.location.href = url;
+    return false;
+  }
+</script>
+</body>
+</html>

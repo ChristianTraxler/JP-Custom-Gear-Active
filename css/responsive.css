@@ -1,0 +1,25 @@
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-badge-wrap { display: none; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .coll-grid { grid-template-columns: repeat(2, 1fr); }
+  .why-inner { grid-template-columns: 1fr; gap: 40px; }
+  .onduty-inner { grid-template-columns: 1fr; }
+  .badge-cards { display: none; }
+  .svc-grid { grid-template-columns: 1fr; }
+  .contact-inner { grid-template-columns: 1fr; }
+  .footer-main-inner { grid-template-columns: 1fr 1fr; }
+  .nav-links, .nav-cta { display: none; }
+  .nav-right > .nav-search { display: none; }
+  .burger { display: block; }
+}
+@media (max-width: 600px) {
+  .coll-grid { grid-template-columns: 1fr; }
+  .hero-trust { flex-wrap: wrap; gap: 20px; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-main-inner { grid-template-columns: 1fr 1fr; gap: 28px; }
+  .comp-header, .comp-row { grid-template-columns: 1fr 80px 80px; }
+  .hero { clip-path: none; }
+  .onduty { clip-path: none; }
+}

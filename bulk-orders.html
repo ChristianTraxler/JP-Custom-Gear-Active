@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/png" href="images/J.PATS.png" />
+<link rel="apple-touch-icon" href="images/J.PATS.png" />
+<title>Place a Bulk Order | JP Custom Gear</title>
+<meta name="description" content="Place a bulk order for hats, patches, cups, keychains, koozies, journals, and shirts. Volume discounts on every product." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/default.css" />
+<link rel="stylesheet" href="css/styles.css" />
+<link rel="stylesheet" href="css/responsive.css" />
+<style>
+  /* Bulk order — product picker grid */
+  .bulk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 720px) { .bulk-grid { grid-template-columns: 1fr; } }
+
+  .bulk-product {
+    border: 1.5px solid var(--line, #e3d9c7);
+    border-radius: 12px;
+    padding: 14px 16px;
+    background: #fff;
+    transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
+    cursor: pointer;
+    user-select: none;
+  }
+  .bulk-product:hover { border-color: var(--brass); }
+  .bulk-product.is-selected {
+    border-color: var(--brass);
+    background: linear-gradient(180deg, #fffaf0 0%, #fff 100%);
+    box-shadow: 0 2px 10px rgba(184,134,46,0.10);
+  }
+
+  .bulk-product-row {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .bulk-product input[type="checkbox"] {
+    appearance: none; -webkit-appearance: none;
+    width: 20px; height: 20px;
+    border: 1.5px solid #c9bba3;
+    border-radius: 5px;
+    background: #fff;
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+    transition: all .15s ease;
+  }
+  .bulk-product input[type="checkbox"]:checked {
+    background: var(--brass);
+    border-color: var(--brass);
+  }
+  .bulk-product input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    left: 5px; top: 1px;
+    width: 6px; height: 11px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+  .bulk-product-icon { font-size: 22px; line-height: 1; }
+  .bulk-product-name { font-weight: 600; color: var(--ink, #2c1a0e); flex: 1; }
+  .bulk-product-price { font-size: 12px; color: var(--muted, #8a7a63); }
+
+  .bulk-product-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 1px dashed transparent;
+    transform: translateY(-4px);
+    transition:
+      max-height .42s cubic-bezier(.25, .85, .35, 1),
+      opacity .28s ease-out .06s,
+      transform .35s cubic-bezier(.25, .85, .35, 1) .04s,
+      margin-top .35s cubic-bezier(.25, .85, .35, 1),
+      padding-top .35s cubic-bezier(.25, .85, .35, 1),
+      border-top-color .35s ease;
+  }
+  .bulk-product.is-selected .bulk-product-options {
+    max-height: 600px;
+    opacity: 1;
+    transform: translateY(0);
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top-color: #e6dcc8;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bulk-product-options { transition: none; }
+  }
+
+  .bulk-qty-row {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .bulk-qty-row label {
+    font-size: 13px; font-weight: 500; color: var(--ink, #2c1a0e);
+    min-width: 70px;
+  }
+  .bulk-qty-input {
+    width: 90px; text-align: center;
+    padding: 8px 10px;
+    border: 1.5px solid var(--line, #e3d9c7);
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+  }
+  .bulk-qty-input:focus { outline: none; border-color: var(--brass); }
+  .bulk-variant-input {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1.5px solid var(--line, #e3d9c7);
+    border-radius: 8px;
+    font-size: 13px;
+    font-family: inherit;
+  }
+  .bulk-variant-input:focus { outline: none; border-color: var(--brass); }
+
+  .bulk-summary-empty {
+    color: var(--muted, #8a7a63);
+    font-size: 14px;
+    font-style: italic;
+    padding: 6px 0;
+  }
+  .bulk-total-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding-top: 10px; margin-top: 10px;
+    border-top: 1px solid #ede3cf;
+    font-weight: 600;
+  }
+  .bulk-total-row .label { color: var(--muted, #8a7a63); font-size: 13px; font-weight: 500; }
+  .bulk-total-row .value { color: var(--brass); font-size: 22px; font-family: 'Playfair Display', serif; }
+
+  .bulk-min-note {
+    font-size: 12px;
+    color: var(--muted, #8a7a63);
+    margin-top: 6px;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+
+<div class="announce">Custom orders ship in 5–7 business days &nbsp;·&nbsp; Bulk discounts available — contact us</div>
+
+<header class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img class="nav-logo-img" src="images/J.PATS.png" alt="JP Custom Gear logo" />
+      <div class="nav-logo-text"><strong>JP</strong><small>Custom Gear</small></div>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="index.html#onduty">On Duty</a>
+      <a href="custom-work.html">Custom Work</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="nav-right">
+      <form class="nav-search" role="search" action="shop.html" method="get">
+        <svg class="nav-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="search" name="q" placeholder="Search products…" autocomplete="off" aria-label="Search products" />
+        <div class="nav-search-dropdown" hidden></div>
+      </form>
+      <a href="contact.html" class="nav-cta">Start Order</a>
+      <button class="burger" id="burgerBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head"><strong>JP Custom</strong><button class="drawer-close" id="drawerClose">✕</button></div>
+  <div class="drawer-search">
+    <form class="nav-search" role="search" action="shop.html" method="get">
+      <svg class="nav-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="search" name="q" placeholder="Search products…" autocomplete="off" aria-label="Search products" />
+      <div class="nav-search-dropdown" hidden></div>
+    </form>
+  </div>
+  <nav class="drawer-nav">
+    <a href="index.html">Home →</a>
+    <a href="shop.html">Shop →</a>
+    <a href="index.html#onduty">On Duty →</a>
+    <a href="custom-work.html">Custom Work →</a>
+    <a href="services.html">Services →</a>
+    <a href="contact.html">Contact →</a>
+  </nav>
+  <div class="drawer-foot"><a href="contact.html">Start Your Order</a></div>
+</div>
+
+<section class="page-hero">
+  <div class="page-hero-grain"></div>
+  <div class="page-hero-inner">
+    <div class="breadcrumb"><a href="index.html">Home</a> <span>/</span> <a href="services.html">Services</a> <span>/</span> <span>Bulk Orders</span></div>
+    <div class="eyebrow">Volume Pricing</div>
+    <h1>Place a <em>Bulk Order</em></h1>
+    <p>Pick the products you need, set quantities, and upload your design. We'll reply with a digital proof and final pricing within 24 hours. Volume discounts on every product.</p>
+  </div>
+</section>
+
+<section class="customizer">
+  <div class="customizer-inner">
+
+    <!-- FORM SIDE -->
+    <form id="bulkForm" class="customizer-form" novalidate>
+
+      <div class="cz-section">
+        <div class="cz-section-num">01</div>
+        <div class="cz-section-head">
+          <h2>Select Your Products</h2>
+          <p>Check everything you'd like in your order. Quantity options appear when selected.</p>
+        </div>
+        <div class="bulk-grid" id="bulk-products"></div>
+        <div class="cz-design-error" id="bulk-products-error" style="display:none;">Select at least one product to continue.</div>
+        <p class="bulk-min-note">Minimum 12 per item to qualify for bulk pricing.</p>
+      </div>
+
+      <div class="cz-section">
+        <div class="cz-section-num">02</div>
+        <div class="cz-section-head">
+          <h2>Logo &amp; Branding</h2>
+          <p>Describe your design and/or upload artwork. We'll send a digital proof before production.</p>
+        </div>
+
+        <label class="form-label" for="bulk-design-desc">Design Description <small>(optional)</small></label>
+        <textarea class="form-textarea" id="bulk-design-desc" name="designDesc" rows="3" placeholder="e.g. Department logo in gold, badge number stitched, two-line text underneath"></textarea>
+
+        <label class="form-label" for="bulk-logo" style="margin-top:18px;">Upload Design <small>(optional · .png, .jpg, .pdf, .svg)</small></label>
+        <div class="cz-file-wrap">
+          <input class="cz-file-input" id="bulk-logo" name="logo" type="file" accept=".png,.jpg,.jpeg,.pdf,.svg" />
+          <label for="bulk-logo" class="cz-file-label">
+            <span class="cz-file-icon">📎</span>
+            <span class="cz-file-text" id="bulk-file-text">Choose file…</span>
+          </label>
+          <button type="button" class="cz-file-clear" id="bulk-file-clear" style="display:none;" aria-label="Remove file">✕</button>
+        </div>
+      </div>
+
+      <div class="cz-section">
+        <div class="cz-section-num">03</div>
+        <div class="cz-section-head">
+          <h2>Project Details</h2>
+          <p>Help us plan production around your timeline.</p>
+        </div>
+        <div class="cz-grid-2">
+          <div>
+            <label class="form-label" for="bulk-org">Organization or Event <small>(optional)</small></label>
+            <input class="form-input" id="bulk-org" name="organization" type="text" placeholder="e.g. Smith Farms, Lincoln PD, Smith–Jones Wedding" />
+          </div>
+          <div>
+            <label class="form-label" for="bulk-deadline">Need by <small>(optional)</small></label>
+            <input class="form-input" id="bulk-deadline" name="deadline" type="date" />
+          </div>
+        </div>
+        <label class="form-label" for="bulk-notes" style="margin-top:14px;">Notes <small>(optional)</small></label>
+        <textarea class="form-textarea" id="bulk-notes" name="notes" rows="3" placeholder="Sizes, colors, thread choices, anything else we should know."></textarea>
+      </div>
+
+      <div class="cz-section">
+        <div class="cz-section-num">04</div>
+        <div class="cz-section-head">
+          <h2>Your Info</h2>
+          <p>So we can send your proof and quote.</p>
+        </div>
+        <div class="cz-grid-2">
+          <div>
+            <label class="form-label" for="bulk-name">Name</label>
+            <input class="form-input" id="bulk-name" name="name" type="text" required />
+          </div>
+          <div>
+            <label class="form-label" for="bulk-phone">Phone <small>(optional)</small></label>
+            <input class="form-input" id="bulk-phone" name="phone" type="tel" />
+          </div>
+        </div>
+        <div class="cz-grid-2" style="margin-top:14px;">
+          <div>
+            <label class="form-label" for="bulk-email">Email</label>
+            <input class="form-input" id="bulk-email" name="email" type="email" required />
+          </div>
+          <div>
+            <label class="form-label" for="bulk-orgtype">Order Type</label>
+            <select class="form-select" id="bulk-orgtype" name="orgType">
+              <option value="Business">Business</option>
+              <option value="Agency">Agency (Police / Fire / EMS)</option>
+              <option value="Event">Event</option>
+              <option value="Team">Team / Group</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="cz-submit" id="bulk-submit">
+        <span class="cz-submit-text">Review &amp; Send Request</span>
+        <span class="cz-submit-arrow">→</span>
+      </button>
+
+      <p class="cz-fineprint">By submitting, you'll be taken to our contact page with your selections pre-filled. We'll reply with a digital proof and final pricing within 24 hours.</p>
+
+    </form>
+
+    <!-- PREVIEW SIDE -->
+    <aside class="customizer-preview">
+      <div class="cz-preview-sticky">
+        <div class="cz-summary">
+          <div class="cz-summary-head">
+            <strong>Your Bulk Order</strong>
+            <span>Live summary</span>
+          </div>
+          <ul class="cz-summary-list" id="bulk-summary-list">
+            <li class="bulk-summary-empty" id="bulk-summary-empty">No products selected yet.</li>
+          </ul>
+
+          <div class="cz-logo-thumb" id="bulk-logo-thumb" style="display:none;">
+            <span class="cz-logo-thumb-icon" id="bulk-logo-thumb-icon">📎</span>
+            <button type="button" class="cz-logo-thumb-imgbtn" id="bulk-logo-thumb-imgbtn" style="display:none;" aria-label="View uploaded image at full size">
+              <img class="cz-logo-thumb-img" id="bulk-logo-thumb-img" alt="" />
+              <span class="cz-logo-thumb-zoom" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6"/><path d="M8 11h6"/></svg>
+              </span>
+            </button>
+            <span class="cz-logo-thumb-name" id="bulk-logo-thumb-name"></span>
+          </div>
+
+          <div class="bulk-total-row" id="bulk-total-row" style="display:none;">
+            <span class="label">Total Items</span>
+            <span class="value" id="bulk-total-qty">0</span>
+          </div>
+          <small class="cz-price-note">Final quote within 24 hours · digital proof before production.</small>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+</section>
+
+<div class="footer-news">
+  <div class="footer-news-inner">
+    <div class="footer-news-copy"><strong>Stay in the loop.</strong><p>New collections, exclusive deals, and maker tips.</p></div>
+    <div class="footer-news-form">
+      <input class="footer-news-input" type="email" placeholder="your@email.com" />
+      <button class="footer-news-btn">Subscribe</button>
+    </div>
+  </div>
+</div>
+<footer class="footer-main">
+  <div class="footer-main-inner">
+    <div>
+      <div class="footer-brand-badge">
+        <img class="footer-logo-img" src="images/J.PATS.png" alt="JP Custom Gear logo" />
+        <div class="footer-brand-text"><strong>JP Custom</strong><small>Gear</small></div>
+      </div>
+      <p class="footer-brand-desc">Custom headwear built with care. From one hat to a hundred — made right.</p>
+      <div class="footer-socials">
+        <a href="#" class="footer-social" aria-label="Facebook"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.5l.5-3h-3V8.6c0-.9.3-1.5 1.6-1.5H17V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.7 1.4-3.7 3.9v2.2H8.5v3h2.5V21h2.5z"/></svg></a>
+        <a href="mailto:jpatscustom@gmail.com" class="footer-social">✉️</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Shop</div>
+      <ul>
+        <li><a href="shop.html">All Collections</a></li>
+        <li><a href="shop-woods-water.html">Woods &amp; Water</a></li>
+        <li><a href="shop-protectors-patriots.html">Protectors &amp; Patriots</a></li>
+        <li><a href="shop-infinity-her.html">Infinity Her</a></li>
+        <li><a href="shop-caution-may-offend.html">Caution: May Offend</a></li>
+        <li><a href="shop-foam-side.html">The Foam Side</a></li>
+        <li><a href="shop-forever-favorites.html">Forever Favorites</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Services</div>
+      <ul>
+        <li><a href="services.html">All Services</a></li>
+        <li><a href="bulk-orders.html">Bulk Orders</a></li>
+        <li><a href="customize.html">Custom Hats</a></li>
+        <li><a href="customize-tumblers.html">Custom Cups</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Company</div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="services.html">Services</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 JP Custom Gear. All rights reserved.</p>
+    <div class="footer-made">Handcrafted with <span class="footer-heart">♥</span> in the USA</div>
+  </div>
+</footer>
+
+<dialog class="cz-lightbox" id="bulk-lightbox" aria-label="Uploaded image preview">
+  <button type="button" class="cz-lightbox-close" id="bulk-lightbox-close" aria-label="Close preview">✕</button>
+  <div class="cz-lightbox-inner">
+    <img class="cz-lightbox-img" id="bulk-lightbox-img" alt="Uploaded design preview" />
+    <div class="cz-lightbox-meta">
+      <span class="cz-lightbox-filename" id="bulk-lightbox-filename"></span>
+      <div class="cz-lightbox-actions">
+        <button type="button" class="cz-lightbox-replace" id="bulk-lightbox-replace">Replace File</button>
+        <button type="button" class="cz-lightbox-confirm" id="bulk-lightbox-confirm">Looks Good</button>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<script src="js/products.js"></script>
+<script src="js/search.js"></script>
+<script src="js/site.js"></script>
+<script src="js/custom-select.js"></script>
+<script src="js/bulk-orders.js"></script>
+</body>
+</html>

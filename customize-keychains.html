@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/png" href="images/J.PATS.png" />
+<link rel="apple-touch-icon" href="images/J.PATS.png" />
+<title>Customize Your Keychain | JP Custom Gear</title>
+<meta name="description" content="Build your own custom keychain — pick material, shape, size, hardware, and add your logo or text. We'll send a digital proof and final quote within 24 hours." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/default.css" />
+<link rel="stylesheet" href="css/styles.css" />
+<link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+<div class="announce">Custom orders ship in 5–7 business days &nbsp;·&nbsp; Bulk discounts available — contact us</div>
+
+<header class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img class="nav-logo-img" src="images/J.PATS.png" alt="JP Custom Gear logo" />
+      <div class="nav-logo-text"><strong>JP</strong><small>Custom Gear</small></div>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="index.html#onduty">On Duty</a>
+      <a href="custom-work.html">Custom Work</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="nav-right">
+      <form class="nav-search" role="search" action="shop.html" method="get">
+        <svg class="nav-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="search" name="q" placeholder="Search products…" autocomplete="off" aria-label="Search products" />
+        <div class="nav-search-dropdown" hidden></div>
+      </form>
+      <a href="contact.html" class="nav-cta">Start Order</a>
+      <button class="burger" id="burgerBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head"><strong>JP Custom</strong><button class="drawer-close" id="drawerClose">✕</button></div>
+  <div class="drawer-search">
+    <form class="nav-search" role="search" action="shop.html" method="get">
+      <svg class="nav-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="search" name="q" placeholder="Search products…" autocomplete="off" aria-label="Search products" />
+      <div class="nav-search-dropdown" hidden></div>
+    </form>
+  </div>
+  <nav class="drawer-nav">
+    <a href="index.html">Home →</a>
+    <a href="shop.html">Shop →</a>
+    <a href="index.html#onduty">On Duty →</a>
+    <a href="custom-work.html">Custom Work →</a>
+    <a href="services.html">Services →</a>
+    <a href="contact.html">Contact →</a>
+  </nav>
+  <div class="drawer-foot"><a href="contact.html">Start Your Order</a></div>
+</div>
+
+<section class="page-hero">
+  <div class="page-hero-grain"></div>
+  <div class="page-hero-inner">
+    <div class="breadcrumb"><a href="index.html">Home</a> <span>/</span> <a href="custom-work.html">Custom Work</a> <span>/</span> <span>Custom Keychains</span></div>
+    <div class="eyebrow">Build It Your Way</div>
+    <h1>Customize Your <em>Keychain</em></h1>
+    <p>Pick your material, shape, size, and hardware. Add your logo or text. We'll send a digital proof and final quote within 24 hours.</p>
+  </div>
+</section>
+
+<section class="customizer">
+  <div class="customizer-inner">
+
+    <!-- FORM SIDE -->
+    <form id="czForm" class="customizer-form" novalidate>
+
+      <div class="cz-section">
+        <div class="cz-section-num">01</div>
+        <div class="cz-section-head">
+          <h2>Material</h2>
+          <p>What your keychain is made from.</p>
+        </div>
+        <div class="cz-static-pill" id="cz-type" data-value="Leatherette (Engraved)">
+          <svg class="cz-static-pill-check" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="cz-static-pill-text">Leatherette (Engraved)</span>
+        </div>
+      </div>
+
+      <!-- TEMP: sections 02–04 hidden. Uncomment to restore Shape, Size, Hardware.
+      <div class="cz-section">
+        <div class="cz-section-num">02</div>
+        <div class="cz-section-head">
+          <h2>Shape</h2>
+          <p>Pick a standard shape or request a custom die-cut.</p>
+        </div>
+        <select class="form-select" id="cz-shape" name="shape" required></select>
+      </div>
+
+      <div class="cz-section">
+        <div class="cz-section-num">03</div>
+        <div class="cz-section-head">
+          <h2>Size</h2>
+          <p>Measured at the longest dimension.</p>
+        </div>
+        <select class="form-select" id="cz-size" name="size" required></select>
+      </div>
+
+      <div class="cz-section">
+        <div class="cz-section-num">04</div>
+        <div class="cz-section-head">
+          <h2>Hardware</h2>
+          <p>How it attaches to your keys or bag.</p>
+        </div>
+        <div class="cz-radio-grid" id="cz-backing-grid"></div>
+      </div>
+      -->
+
+
+      <div class="cz-section">
+        <div class="cz-section-num">02</div>
+        <div class="cz-section-head">
+          <h2>Your Design</h2>
+          <p>Add custom text, upload a logo, or both.</p>
+        </div>
+
+        <label class="form-label" for="cz-text">Custom Text <small>(optional, up to 30 characters)</small></label>
+        <input class="form-input" id="cz-text" name="text" type="text" maxlength="30" placeholder="e.g. SMITH FARMS" />
+
+        <label class="form-label" for="cz-logo" style="margin-top:18px;">Upload Logo <small>(optional · .png, .jpg, .pdf, .svg)</small></label>
+        <div class="cz-file-wrap">
+          <input class="cz-file-input" id="cz-logo" name="logo" type="file" accept=".png,.jpg,.jpeg,.pdf,.svg" />
+          <label for="cz-logo" class="cz-file-label">
+            <span class="cz-file-icon">📎</span>
+            <span class="cz-file-text" id="cz-file-text">Choose file…</span>
+          </label>
+          <button type="button" class="cz-file-clear" id="cz-file-clear" style="display:none;" aria-label="Remove file">✕</button>
+        </div>
+        <div class="cz-design-error" id="cz-design-error" style="display:none;">Add custom text, upload a logo, or both.</div>
+      </div>
+
+      <div class="cz-section">
+        <div class="cz-section-num">03</div>
+        <div class="cz-section-head">
+          <h2>Quantity</h2>
+          <p>Bulk discounts kick in around 25+. Mention urgency in notes if needed.</p>
+        </div>
+        <div class="cz-qty-row">
+          <button type="button" class="cz-qty-btn" id="cz-qty-minus" aria-label="Decrease quantity">−</button>
+          <input class="form-input cz-qty-input" id="cz-qty" name="qty" type="number" min="1" max="9999" value="1" required />
+          <button type="button" class="cz-qty-btn" id="cz-qty-plus" aria-label="Increase quantity">+</button>
+        </div>
+      </div>
+
+      <div class="cz-section">
+        <div class="cz-section-num">04</div>
+        <div class="cz-section-head">
+          <h2>Notes <small style="font-weight:400;">(optional)</small></h2>
+          <p>Color/finish, deadline, anything else we should know.</p>
+        </div>
+        <textarea class="form-textarea" id="cz-notes" name="notes" rows="4" placeholder="e.g. Need by June 15. Prefer dark brown leather with cream stitching."></textarea>
+      </div>
+
+      <div class="cz-section">
+        <div class="cz-section-num">05</div>
+        <div class="cz-section-head">
+          <h2>Your Info</h2>
+          <p>So we can send your proof and quote.</p>
+        </div>
+        <div class="cz-grid-2">
+          <div>
+            <label class="form-label" for="cz-name">Name</label>
+            <input class="form-input" id="cz-name" name="name" type="text" required />
+          </div>
+          <div>
+            <label class="form-label" for="cz-phone">Phone <small>(optional)</small></label>
+            <input class="form-input" id="cz-phone" name="phone" type="tel" />
+          </div>
+        </div>
+        <label class="form-label" for="cz-email" style="margin-top:14px;">Email</label>
+        <input class="form-input" id="cz-email" name="email" type="email" required />
+      </div>
+
+      <button type="submit" class="cz-submit" id="cz-submit">
+        <span class="cz-submit-text">Review &amp; Send Request</span>
+        <span class="cz-submit-arrow">→</span>
+      </button>
+
+      <p class="cz-fineprint">By submitting, you'll be taken to our contact page with your selections pre-filled. We'll reply with a digital proof and final pricing within 24 hours.</p>
+
+    </form>
+
+    <!-- PREVIEW SIDE -->
+    <aside class="customizer-preview">
+      <div class="cz-preview-sticky">
+        <div class="cz-preview-image">
+          <img id="cz-preview-img" src="images/keychains/keychain-dad.webp" alt="Custom keychain preview" />
+        </div>
+        <div class="cz-preview-color-note" id="cz-preview-color-note">Reference image — your keychain will be built to your design.</div>
+
+        <div class="cz-summary">
+          <div class="cz-summary-head">
+            <strong id="cz-summary-name">Your Keychain</strong>
+            <span id="cz-summary-tagline">Built to your spec</span>
+          </div>
+          <ul class="cz-summary-list" id="cz-summary-list"></ul>
+
+          <div class="cz-logo-thumb" id="cz-logo-thumb" style="display:none;">
+            <span class="cz-logo-thumb-icon" id="cz-logo-thumb-icon">📎</span>
+            <button type="button" class="cz-logo-thumb-imgbtn" id="cz-logo-thumb-imgbtn" style="display:none;" aria-label="View uploaded image at full size">
+              <img class="cz-logo-thumb-img" id="cz-logo-thumb-img" alt="" />
+              <span class="cz-logo-thumb-zoom" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6"/><path d="M8 11h6"/></svg>
+              </span>
+            </button>
+            <span class="cz-logo-thumb-name" id="cz-logo-thumb-name"></span>
+          </div>
+
+          <div class="cz-price-row">
+            <span class="cz-price-label">Estimated</span>
+            <span class="cz-price-value" id="cz-price">$0+</span>
+          </div>
+          <small class="cz-price-note">Final quote within 24 hours · digital proof before production.</small>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+</section>
+
+<div class="footer-news">
+  <div class="footer-news-inner">
+    <div class="footer-news-copy"><strong>Stay in the loop.</strong><p>New collections, exclusive deals, and maker tips.</p></div>
+    <div class="footer-news-form">
+      <input class="footer-news-input" type="email" placeholder="your@email.com" />
+      <button class="footer-news-btn">Subscribe</button>
+    </div>
+  </div>
+</div>
+<footer class="footer-main">
+  <div class="footer-main-inner">
+    <div>
+      <div class="footer-brand-badge">
+        <img class="footer-logo-img" src="images/J.PATS.png" alt="JP Custom Gear logo" />
+        <div class="footer-brand-text"><strong>JP Custom</strong><small>Gear</small></div>
+      </div>
+      <p class="footer-brand-desc">Custom headwear built with care. From one hat to a hundred — made right.</p>
+      <div class="footer-socials">
+        <a href="#" class="footer-social" aria-label="Facebook"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.5l.5-3h-3V8.6c0-.9.3-1.5 1.6-1.5H17V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.7 1.4-3.7 3.9v2.2H8.5v3h2.5V21h2.5z"/></svg></a>
+        <a href="mailto:jpatscustom@gmail.com" class="footer-social">✉️</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Shop</div>
+      <ul>
+        <li><a href="shop.html">All Collections</a></li>
+        <li><a href="shop-woods-water.html">Woods &amp; Water</a></li>
+        <li><a href="shop-protectors-patriots.html">Protectors &amp; Patriots</a></li>
+        <li><a href="shop-infinity-her.html">Infinity Her</a></li>
+        <li><a href="shop-caution-may-offend.html">Caution: May Offend</a></li>
+        <li><a href="shop-foam-side.html">The Foam Side</a></li>
+        <li><a href="shop-forever-favorites.html">Forever Favorites</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Services</div>
+      <ul>
+        <li><a href="services.html">All Services</a></li>
+        <li><a href="custom-work.html">Custom Work</a></li>
+        <li><a href="contact.html">Bulk Orders</a></li>
+        <li><a href="contact.html">Laser Engraved Journals</a></li>
+        <li><a href="contact.html">Custom Cups</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Company</div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="services.html">Services</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 JP Custom Gear. All rights reserved.</p>
+    <div class="footer-made">Handcrafted with <span class="footer-heart">♥</span> in the USA</div>
+  </div>
+</footer>
+
+<dialog class="cz-lightbox" id="cz-lightbox" aria-label="Uploaded image preview">
+  <button type="button" class="cz-lightbox-close" id="cz-lightbox-close" aria-label="Close preview">✕</button>
+  <div class="cz-lightbox-inner">
+    <img class="cz-lightbox-img" id="cz-lightbox-img" alt="Uploaded design preview" />
+    <div class="cz-lightbox-meta">
+      <span class="cz-lightbox-filename" id="cz-lightbox-filename"></span>
+      <div class="cz-lightbox-actions">
+        <button type="button" class="cz-lightbox-replace" id="cz-lightbox-replace">Replace File</button>
+        <button type="button" class="cz-lightbox-confirm" id="cz-lightbox-confirm">Looks Good</button>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<script src="js/products.js"></script>
+<script src="js/search.js"></script>
+<script src="js/site.js"></script>
+<script src="js/custom-select.js"></script>
+<script src="js/customize-keychains.js"></script>
+</body>
+</html>
