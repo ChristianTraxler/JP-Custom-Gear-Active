@@ -32,7 +32,7 @@ document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
   toggle();
 })();
 
-// Subscribe form — posts to jpatscustom@gmail.com via FormSubmit.co
+// Subscribe form — posts to jpcustomgear@gmail.com via Web3Forms
 document.querySelectorAll('.footer-news-btn').forEach(btn => {
   btn.addEventListener('click', function(e) {
     e.preventDefault();
@@ -43,25 +43,35 @@ document.querySelectorAll('.footer-news-btn').forEach(btn => {
     const orig = btn.textContent;
     btn.disabled = true;
     btn.textContent = 'Subscribing…';
-    fetch('https://formsubmit.co/ajax/jpatscustom@gmail.com', {
+    fetch('https://api.web3forms.com/submit', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({
-        _subject: 'New newsletter subscriber',
+        access_key: 'b6457cd6-33e7-4d8f-9a91-68f30e66fd15',
+        subject: 'New Newsletter Subscriber',
+        from_name: 'JP Custom Gear Website',
         email: email,
         source: 'Footer subscribe — ' + location.pathname
       })
     })
-    .then(r => r.json())
+    .then(async r => {
+      const text = await r.text();
+      let data;
+      try { data = JSON.parse(text); }
+      catch (e) { throw new Error('Non-JSON response: ' + text.slice(0, 200)); }
+      if (!r.ok || !data.success) throw new Error(data.message || ('HTTP ' + r.status));
+      return data;
+    })
     .then(() => {
       input.value = '';
       btn.textContent = 'Subscribed ✓';
       setTimeout(() => { btn.disabled = false; btn.textContent = orig; }, 2500);
     })
-    .catch(() => {
+    .catch((err) => {
+      console.error('Web3Forms error:', err);
       btn.disabled = false;
       btn.textContent = orig;
-      alert('Sorry — there was a problem. Please try again or email jpatscustom@gmail.com.');
+      alert('Sorry — there was a problem. Please try again or email jpcustomgear@gmail.com.');
     });
   });
 });
