@@ -65,4 +65,17 @@
     setActiveChip(hatChips, 'data-hat', hatFilter);
     apply();
   });
+
+  const params = new URLSearchParams(window.location.search);
+  const initialType = params.get('type');
+  const initialHat = params.get('hat');
+  if (initialType && productChips.querySelector('[data-product="' + initialType + '"]')) {
+    productFilter = initialType;
+    setActiveChip(productChips, 'data-product', productFilter);
+    if (initialType === 'hat' && initialHat && hatChips.querySelector('[data-hat="' + initialHat + '"]')) {
+      hatFilter = initialHat;
+      setActiveChip(hatChips, 'data-hat', hatFilter);
+    }
+    apply();
+  }
 })();

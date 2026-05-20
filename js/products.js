@@ -783,6 +783,146 @@ const PRODUCTS = {
     ],
     colorsLabel: "Camo",
     colors: RICHARDSON_168P_COLORS
+  },
+
+  "my-wiener-does-tricks": {
+    name: "My Wiener Does Tricks – Flat Bill Snapback",
+    tag: "Hat",
+    price: 25,
+    image: "images/hats/IMG_1180.png",
+    imageFit: "cover",
+    category: "Hats",
+    categoryHref: "shop.html?type=hat",
+    hatType: "112PFP",
+    description: "Old-school duck-camo flat-bill snapback with a laser-engraved leather 'My Wiener Does Tricks' patch — skateboarding dachshund and all. For the dog-loving smartass who isn't easily embarrassed.",
+    features: [
+      "7-panel flat-bill snapback",
+      "Old-school duck-camo front, mesh back",
+      "Laser-engraved leather front patch",
+      "Snap-back adjustable, one size fits most"
+    ],
+    colorsLabel: "Camo",
+    colors: RICHARDSON_112PFP_COLORS
+  },
+
+  "gently-used-baby-mamas-112": {
+    name: "Now Accepting Gently Used Baby Mamas – Richardson 112",
+    tag: "Hat",
+    price: 25,
+    image: "images/hats/IMG_1181.png",
+    imageFit: "cover",
+    category: "Hats",
+    categoryHref: "shop.html?type=hat",
+    hatType: "112",
+    description: "Charcoal Richardson 112 trucker with a vintage-sign leather patch reading 'Now Accepting Gently Used Baby Mamas.' Built for the guy with a sense of humor and zero filter.",
+    features: [
+      "Richardson 112 — structured 6-panel trucker",
+      "Breathable mesh back, snap-back adjustable",
+      "Laser-engraved leather front patch",
+      "One size fits most"
+    ],
+    colorsLabel: "Color",
+    colors: RICHARDSON_112_COLORS
+  },
+
+  "wiener-rides-25-cents": {
+    name: "Wiener Rides – Only 25¢ Flat Bill Snapback",
+    tag: "Hat",
+    price: 25,
+    image: "images/hats/IMG_1193.png",
+    imageFit: "cover",
+    category: "Hats",
+    categoryHref: "shop.html?type=hat",
+    hatType: "112PFP",
+    description: "Light-tone duck-camo flat-bill snapback with a laser-engraved leather 'Wiener Rides – Only 25¢' patch. Western-saddle dachshund included, dignity not required.",
+    features: [
+      "7-panel flat-bill snapback",
+      "Light duck-camo front, mesh back",
+      "Laser-engraved leather front patch",
+      "Snap-back adjustable, one size fits most"
+    ],
+    colorsLabel: "Camo",
+    colors: RICHARDSON_112PFP_COLORS
+  },
+
+  "nc-flag-patriot-112-heather": {
+    name: "NC Flag Patriot Patch – Richardson 112 (Heather Grey)",
+    tag: "Hat",
+    price: 25,
+    image: "images/hats/IMG_1194.png",
+    imageFit: "cover",
+    category: "Hats",
+    categoryHref: "shop.html?type=hat",
+    hatType: "112",
+    description: "Heather grey Richardson 112 trucker with a leather NC-outline patch featuring the American flag inside. Home-state pride meets red-white-and-blue, raised and durable.",
+    features: [
+      "Richardson 112 — structured 6-panel trucker",
+      "Breathable mesh back, snap-back adjustable",
+      "Laser-engraved leather front patch",
+      "One size fits most"
+    ],
+    colorsLabel: "Color",
+    colors: RICHARDSON_112_COLORS
+  },
+
+  "nc-flag-patriot-112-loden": {
+    name: "NC Flag Patriot Patch – Richardson 112 (Loden)",
+    tag: "Hat",
+    price: 25,
+    image: "images/hats/IMG_1195.png",
+    imageFit: "cover",
+    category: "Hats",
+    categoryHref: "shop.html?type=hat",
+    hatType: "112",
+    description: "Loden green Richardson 112 trucker with a leather NC-outline patch featuring the American flag inside. An earthy take on Carolina patriot pride.",
+    features: [
+      "Richardson 112 — structured 6-panel trucker",
+      "Breathable mesh back, snap-back adjustable",
+      "Laser-engraved leather front patch",
+      "One size fits most"
+    ],
+    colorsLabel: "Color",
+    colors: RICHARDSON_112_COLORS
+  },
+
+  "nc-lighthouse-est-1789-112": {
+    name: "North Carolina Est. 1789 Lighthouse – Richardson 112",
+    tag: "Hat",
+    price: 25,
+    image: "images/hats/IMG_1196.png",
+    imageFit: "cover",
+    category: "Hats",
+    categoryHref: "shop.html?type=hat",
+    hatType: "112",
+    description: "Black Richardson 112 trucker with a hexagonal PVC patch — 'North Carolina · Est. 1789' framed by mountains and a coastal lighthouse. From the Blue Ridge to the Outer Banks on one hat.",
+    features: [
+      "Richardson 112 — structured 6-panel trucker",
+      "Breathable mesh back, snap-back adjustable",
+      "Raised PVC front patch",
+      "One size fits most"
+    ],
+    colorsLabel: "Color",
+    colors: RICHARDSON_112_COLORS
+  },
+
+  "nc-camo-outline-112": {
+    name: "NC Camo State Outline – Richardson 112",
+    tag: "Hat",
+    price: 25,
+    image: "images/hats/IMG_1197.png",
+    imageFit: "cover",
+    category: "Hats",
+    categoryHref: "shop.html?type=hat",
+    hatType: "112",
+    description: "Black Richardson 112 trucker with a leather NC-outline patch filled with old-school duck camo. Quiet pride for the Carolina hunter, fisherman, or backroads regular.",
+    features: [
+      "Richardson 112 — structured 6-panel trucker",
+      "Breathable mesh back, snap-back adjustable",
+      "Laser-engraved leather front patch with camo inlay",
+      "One size fits most"
+    ],
+    colorsLabel: "Color",
+    colors: RICHARDSON_112_COLORS
   }
 };
 

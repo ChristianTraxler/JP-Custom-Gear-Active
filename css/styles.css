@@ -707,12 +707,7 @@ h2.featured-build-title {
   position: static; margin: 0;
   width: 78%; height: 78%; object-fit: contain;
 }
-.product-tag {
-  position: absolute; top: 12px; left: 12px;
-  background: var(--tobacco); color: var(--amber);
-  font-size: 9px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
-  padding: 5px 10px;
-}
+.product-tag { display: none; }
 .product-info { padding: 18px 20px 22px; flex: 1; display: flex; flex-direction: column; }
 .product-name {
   font-family: 'Playfair Display'; font-weight: 700;
