@@ -782,13 +782,7 @@ h2.featured-build-title {
   .pdp-nav-prev { left: 8px; }
   .pdp-nav-next { right: 8px; }
 }
-.pdp-tag {
-  position: absolute; top: 16px; left: 16px; z-index: 4;
-  background: var(--tobacco); color: var(--amber);
-  font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
-  padding: 6px 12px;
-  pointer-events: none;
-}
+.pdp-tag { display: none; }
 
 .pdp-thumbs {
   display: flex; gap: 12px; margin-top: 14px; flex-wrap: wrap;
