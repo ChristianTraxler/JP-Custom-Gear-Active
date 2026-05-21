@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/default.css" />
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/styles.css?v=20260521" />
     <link rel="stylesheet" href="css/responsive.css" />
     <script>
       // When arriving with a hash from another page, jump instantly (skip smooth scroll).
@@ -511,16 +511,17 @@
 
         <div class="fade-in fade-in-delay-1">
           <div id="contactForm">
+            <p class="form-required-legend"><span class="required-mark" aria-hidden="true">*</span> indicates a required field</p>
             <div style="margin-bottom:16px;">
-              <label class="form-label">Your Name</label>
-              <input class="form-input" type="text" placeholder="John Smith" id="fname" />
+              <label class="form-label" for="fname">Your Name <span class="required-mark" aria-hidden="true">*</span></label>
+              <input class="form-input" type="text" placeholder="John Smith" id="fname" required aria-required="true" />
             </div>
             <div style="margin-bottom:16px;">
-              <label class="form-label">Email Address</label>
-              <input class="form-input" type="email" placeholder="john@example.com" id="femail" />
+              <label class="form-label" for="femail">Email Address <span class="required-mark" aria-hidden="true">*</span></label>
+              <input class="form-input" type="email" placeholder="john@example.com" id="femail" required aria-required="true" />
             </div>
             <div style="margin-bottom:16px;">
-              <label class="form-label">Order Type</label>
+              <label class="form-label" for="ftype">Order Type</label>
               <select class="form-select" id="ftype">
                 <option value="" disabled selected>Select a service…</option>
                 <option>Custom Hat</option>
@@ -532,8 +533,8 @@
               </select>
             </div>
             <div style="margin-bottom:16px;">
-              <label class="form-label">Message</label>
-              <textarea class="form-textarea" rows="4" placeholder="Tell us about your order — quantity, design ideas, deadline…" id="fmessage"></textarea>
+              <label class="form-label" for="fmessage">Message <span class="required-mark" aria-hidden="true">*</span></label>
+              <textarea class="form-textarea" rows="4" placeholder="Tell us about your order — quantity, design ideas, deadline…" id="fmessage" required aria-required="true"></textarea>
             </div>
             <button class="form-submit" onclick="submitForm()"><span style="font-size:1.5em;line-height:1;display:inline-flex;align-items:center;">✉️</span> Send Message</button>
           </div>
