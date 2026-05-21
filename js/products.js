@@ -76,6 +76,28 @@ const TEE_COLORS = [
   "White"
 ];
 
+const COMFORT_COLORS_COLORS = [
+  "Pepper",
+  "Black",
+  "Crunchberry",
+  "Blue Jean",
+  "Seafoam",
+  "Moss",
+  "Ivory",
+  "Granite",
+  "Violet",
+  "Lagoon"
+];
+
+const TEE_SIZES = [
+  { label: "S",  priceCents: 2500 },
+  { label: "M",  priceCents: 2500 },
+  { label: "L",  priceCents: 2500 },
+  { label: "XL", priceCents: 2500 },
+  { label: "2X", priceCents: 2700 },
+  { label: "3X", priceCents: 2700 }
+];
+
 const TUMBLER_COLORS = [
   "Stainless",
   "Matte Black",
@@ -97,67 +119,17 @@ const TUMBLER_SKINNY_COLORS = [
 
 // Product catalog — slug keys map to product.html?id=<slug>
 const PRODUCTS = {
-  "custom-hat": {
-    name: "Custom Hat",
-    tag: "Hat",
-    priceCents: 2500,
-    image: "images/hats/salt-water-camo.png",
-    category: "Custom",
-    categoryHref: "customize.html",
-    hatType: "custom",
-    description: "Custom hat built from the hat customizer.",
-    features: [],
-    colorsLabel: "Color",
-    colors: []
-  },
-
-  "custom-patch": {
-    name: "Custom Patch",
-    tag: "Patch",
-    priceCents: 500,
-    image: "images/patches/patch-shapes-card.png",
-    category: "Custom",
-    categoryHref: "customize-patches.html",
-    hatType: "none",
-    description: "Custom patch built from the patch customizer.",
-    features: [],
-    colorsLabel: "Color",
-    colors: []
-  },
-
-  "custom-keychain": {
-    name: "Custom Keychain",
-    tag: "Keychain",
-    priceCents: 1000,
-    image: "images/keychains/keychain-westward-farms.png",
-    category: "Custom",
-    categoryHref: "customize-keychains.html",
-    hatType: "none",
-    description: "Custom keychain built from the keychain customizer.",
-    features: [],
-    colorsLabel: "Color",
-    colors: []
-  },
-
-  "custom-tumbler": {
-    name: "Custom Tumbler",
-    tag: "Tumbler",
-    priceCents: 2000,
-    image: "images/tumblers/mama-tumbler.png",
-    category: "Custom",
-    categoryHref: "customize-tumblers.html",
-    hatType: "none",
-    description: "Custom tumbler built from the tumbler customizer.",
-    features: [],
-    colorsLabel: "Color",
-    colors: []
-  },
-
   "she-prayed-tee": {
     name: "She Prayed Until the Chains Fell Off Comfort Color Tee",
     tag: "Shirt",
     priceCents: 2500,
     image: "images/shirts/foam-side.png",
+    gallery: [
+      "images/shirts/foam-side.png",
+      "images/shirts/IMG_1297.png"
+    ],
+    galleryFit: "contain",
+    galleryBackgrounds: ["#ECE2CC", "#e1d3c4"],
     category: "The Foam Side",
     categoryHref: "shop-foam-side.html",
     hatType: "none",
@@ -169,7 +141,8 @@ const PRODUCTS = {
       "Pre-shrunk for minimal wash shrinkage"
     ],
     colorsLabel: "Color",
-    colors: TEE_COLORS
+    colors: COMFORT_COLORS_COLORS,
+    sizes: TEE_SIZES
   },
 
   "salt-water-camo-hat": {
@@ -197,23 +170,85 @@ const PRODUCTS = {
     ]
   },
 
-  "eagle-flag-tee": {
-    name: "JP Custom Gear 'Eagle Flag' T-Shirt",
+  "later-after-while-tee": {
+    name: "Later, After While Alligator Comfort Color Tee",
     tag: "Shirt",
-    priceCents: 2000,
-    image: "images/shirts/eagle-flag-tshirt.png",
+    priceCents: 2500,
+    image: "images/shirts/IMG_1288.png",
+    imageFit: "cover",
+    gallery: [
+      "images/shirts/IMG_1288.png",
+      "images/shirts/IMG_1297.png"
+    ],
+    galleryFit: "contain",
+    galleryBackgrounds: ["#f0e5d4", "#e1d3c4"],
     category: "The Foam Side",
     categoryHref: "shop-foam-side.html",
     hatType: "none",
-    description: "Stars, stripes, and an eagle that means it. A patriotic statement tee built for cookouts, flag days, and every day in between.",
+    description: "See you later, alligator — after while, crocodile. A Comfort Colors® garment-dyed tee with pink-star alligator art on the front and 'After While' on the back. Soft from the first wear, broken-in for life.",
     features: [
-      "Ring-spun cotton, pre-shrunk",
-      "Unisex crew neck — classic fit",
-      "Screen-printed in the USA",
-      "Holds its shape and color wash after wash"
+      "100% ring-spun cotton, garment-dyed",
+      "Relaxed unisex fit — true to size",
+      "Front-and-back screen print",
+      "Pre-shrunk for minimal wash shrinkage"
     ],
     colorsLabel: "Color",
-    colors: ["Black", "White", "Navy", "Charcoal", "Heather Grey", "Military Green", "Sand"]
+    colors: COMFORT_COLORS_COLORS,
+    sizes: TEE_SIZES
+  },
+
+  "nurse-tee": {
+    name: "Nurse Checkered Comfort Color Tee",
+    tag: "Shirt",
+    priceCents: 2500,
+    image: "images/shirts/IMG_1292.png",
+    imageFit: "cover",
+    gallery: [
+      "images/shirts/IMG_1292.png",
+      "images/shirts/IMG_1297.png"
+    ],
+    galleryFit: "contain",
+    galleryBackgrounds: ["#f4e8d4", "#e1d3c4"],
+    category: "The Foam Side",
+    categoryHref: "shop-foam-side.html",
+    hatType: "none",
+    description: "Big love for the ones who show up shift after shift. A Comfort Colors® garment-dyed tee with a bold multi-color checkered 'NURSE' graphic and a stethoscope line drawing on top. Soft, lived-in, built to last.",
+    features: [
+      "100% ring-spun cotton, garment-dyed",
+      "Relaxed unisex fit — true to size",
+      "Screen-printed in the USA",
+      "Pre-shrunk for minimal wash shrinkage"
+    ],
+    colorsLabel: "Color",
+    colors: COMFORT_COLORS_COLORS,
+    sizes: TEE_SIZES
+  },
+
+  "motherhood-tee": {
+    name: "Motherhood Checkered Comfort Color Tee",
+    tag: "Shirt",
+    priceCents: 2500,
+    image: "images/shirts/IMG_1293.png",
+    imageFit: "cover",
+    gallery: [
+      "images/shirts/IMG_1293.png",
+      "images/shirts/IMG_1297.png"
+    ],
+    galleryFit: "contain",
+    galleryBackgrounds: ["#f4e6d4", "#e1d3c4"],
+    category: "The Foam Side",
+    categoryHref: "shop-foam-side.html",
+    hatType: "none",
+    description: "Some sweet, some salty, some sassy — either way we're rockin' it. A Comfort Colors® garment-dyed tee with a checkered circle on the front pocket and a full checkered 'MOTHERHOOD' graphic across the back.",
+    features: [
+      "100% ring-spun cotton, garment-dyed",
+      "Relaxed unisex fit — true to size",
+      "Front pocket print + full back print",
+      "Pre-shrunk for minimal wash shrinkage"
+    ],
+    colorsLabel: "Color",
+    colors: COMFORT_COLORS_COLORS,
+    sizes: TEE_SIZES
   },
 
   "bottomland-camo-256p": {
@@ -395,7 +430,8 @@ const PRODUCTS = {
     name: "\"Milfin Ain't Easy\" Classic Trucker Hat",
     tag: "Hat",
     priceCents: 2500,
-    image: "images/hats/milfin.png",
+    image: "images/hats/IMG_1301.png",
+    imageFit: "cover",
     category: "Caution: May Offend",
     categoryHref: "shop-caution-may-offend.html",
     hatType: "112",
@@ -511,7 +547,8 @@ const PRODUCTS = {
     name: "Mama Tried – Richardson 168 7-Panel Trucker",
     tag: "Hat",
     priceCents: 2500,
-    image: "images/hats/mama-tried-168.png",
+    image: "images/hats/IMG_1303.png",
+    imageFit: "cover",
     category: "Forever Favorites",
     categoryHref: "shop-forever-favorites.html",
     hatType: "168P",
@@ -520,6 +557,46 @@ const PRODUCTS = {
       "Richardson 168 — 7-panel high-crown trucker",
       "Breathable mesh back, snap-back adjustable",
       "Leather or PVC front patch",
+      "One size fits most"
+    ],
+    colorsLabel: "Camo",
+    colors: RICHARDSON_168P_COLORS
+  },
+
+  "dont-be-a-cock-sucker-168": {
+    name: "Don't Be A Cock Sucker – Richardson 168 7-Panel Trucker",
+    tag: "Hat",
+    priceCents: 2500,
+    image: "images/hats/IMG_1192.png",
+    imageFit: "cover",
+    category: "Caution: May Offend",
+    categoryHref: "shop-caution-may-offend.html",
+    hatType: "168P",
+    description: "A patch that says it without saying it — a rooster and a sucker. Richardson 168 7-panel duck-camo trucker with a laser-engraved leather patch.",
+    features: [
+      "Richardson 168 — 7-panel high-crown trucker",
+      "Breathable mesh back, snap-back adjustable",
+      "Laser-engraved leather front patch",
+      "One size fits most"
+    ],
+    colorsLabel: "Camo",
+    colors: RICHARDSON_168P_COLORS
+  },
+
+  "guns-titties-beer-freedom-168": {
+    name: "Guns, Titties, Beer & Freedom – Richardson 168 7-Panel Trucker",
+    tag: "Hat",
+    priceCents: 2500,
+    image: "images/hats/IMG_1294.png",
+    imageFit: "cover",
+    category: "Caution: May Offend",
+    categoryHref: "shop-caution-may-offend.html",
+    hatType: "168P",
+    description: "The American starter pack on a Richardson 168 7-panel duck-camo trucker. Laser-engraved leather flag patch — built for the guy who knows what he likes.",
+    features: [
+      "Richardson 168 — 7-panel high-crown trucker",
+      "Breathable mesh back, snap-back adjustable",
+      "Laser-engraved leather front patch",
       "One size fits most"
     ],
     colorsLabel: "Camo",
@@ -746,7 +823,8 @@ const PRODUCTS = {
     name: "My Ol' Lady Will Kill You – Richardson 112PFP",
     tag: "Hat",
     priceCents: 2500,
-    image: "images/hats/my-ol-lady.png",
+    image: "images/hats/IMG_1302.png",
+    imageFit: "cover",
     category: "Caution: May Offend",
     categoryHref: "shop-caution-may-offend.html",
     hatType: "112PFP",
@@ -987,17 +1065,39 @@ function getProduct(slug) {
   return PRODUCTS[slug] || null;
 }
 
+const FEATURED_NEW_HATS = [
+  "milfin-aint-easy",
+  "mama-tried-168",
+  "dont-be-a-cock-sucker-168",
+  "guns-titties-beer-freedom-168",
+  "my-ol-lady-112pfp"
+];
+
 function getRelatedProducts(slug, limit = 4) {
   const current = PRODUCTS[slug];
   if (!current) return [];
   const sameCategory = Object.entries(PRODUCTS)
     .filter(([s, p]) => s !== slug && p.category === current.category)
     .map(([s, p]) => ({ slug: s, ...p }));
-  if (sameCategory.length >= limit) return sameCategory.slice(0, limit);
   const others = Object.entries(PRODUCTS)
     .filter(([s, p]) => s !== slug && p.category !== current.category)
     .map(([s, p]) => ({ slug: s, ...p }));
-  return [...sameCategory, ...others].slice(0, limit);
+  const result = [...sameCategory, ...others].slice(0, limit);
+
+  const alreadyHasNewHat = result.some(r => FEATURED_NEW_HATS.includes(r.slug));
+  if (result.length === limit && !alreadyHasNewHat) {
+    const pool = FEATURED_NEW_HATS.filter(
+      s => s !== slug && PRODUCTS[s] && !result.some(r => r.slug === s)
+    );
+    if (pool.length) {
+      const pick = pool[Math.floor(Math.random() * pool.length)];
+      const existingHatIdx = result.findIndex(r => r.tag === "Hat");
+      const replaceIdx = existingHatIdx >= 0 ? existingHatIdx : result.length - 1;
+      result[replaceIdx] = { slug: pick, ...PRODUCTS[pick] };
+    }
+  }
+
+  return result;
 }
 
 // CommonJS export for Node-side serverless functions.

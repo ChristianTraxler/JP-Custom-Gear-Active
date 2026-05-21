@@ -120,6 +120,11 @@
             <select class="pdp-select" id="pdp-color" required></select>
           </div>
 
+          <div class="pdp-field" id="pdp-size-field" style="display:none;">
+            <label class="pdp-label" for="pdp-size">Size — choose one</label>
+            <select class="pdp-select" id="pdp-size" required></select>
+          </div>
+
           <div class="pdp-field pdp-field-qty">
             <label class="pdp-label" for="pdp-qty">Quantity</label>
             <div class="pdp-qty-wrap">
@@ -294,6 +299,43 @@
 
     renderColors(originalColors);
 
+    const sizeField = document.getElementById('pdp-size-field');
+    const sizeSelect = document.getElementById('pdp-size');
+    const priceEl = document.getElementById('pdp-price');
+    const priceFromLabel = document.querySelector('.pdp-price small');
+    const hasSizes = Array.isArray(product.sizes) && product.sizes.length > 0;
+    if (hasSizes) {
+      sizeField.style.display = '';
+      sizeSelect.innerHTML = '';
+      product.sizes.forEach(s => {
+        const opt = document.createElement('option');
+        opt.value = s.label;
+        opt.textContent = s.label + ' — $' + (s.priceCents / 100).toFixed(0);
+        opt.dataset.priceCents = s.priceCents;
+        sizeSelect.appendChild(opt);
+      });
+    } else {
+      sizeSelect.required = false;
+    }
+
+    function getSelectedSize() {
+      if (!hasSizes) return null;
+      const opt = sizeSelect.options[sizeSelect.selectedIndex];
+      return opt ? { label: opt.value, priceCents: parseInt(opt.dataset.priceCents, 10) } : null;
+    }
+
+    function updatePrice() {
+      const sel = getSelectedSize();
+      const cents = sel ? sel.priceCents : product.priceCents;
+      priceEl.textContent = '$' + (cents / 100).toFixed(0);
+      if (priceFromLabel) priceFromLabel.style.display = sel ? 'none' : '';
+    }
+
+    if (hasSizes) {
+      sizeSelect.addEventListener('change', updatePrice);
+      updatePrice();
+    }
+
     const BARK_112_IMAGES = [
       'images/hats/product-showcase/web/IMG_0677.webp',
       'images/hats/product-showcase/web/IMG_0678.webp',
@@ -366,6 +408,37 @@
       ctx.drawImage(image, dx, dy, dw, dh);
     }
 
+    let galleryUseContain = false;
+    const bgSampleCanvas = document.createElement('canvas');
+    bgSampleCanvas.width = 4; bgSampleCanvas.height = 4;
+    const bgSampleCtx = bgSampleCanvas.getContext('2d', { willReadFrequently: true });
+    const bgCache = {};
+
+    function sampleBg(image, src) {
+      if (bgCache[src]) return bgCache[src];
+      try {
+        bgSampleCtx.clearRect(0, 0, 4, 4);
+        bgSampleCtx.drawImage(image, 8, 8, 4, 4, 0, 0, 4, 4);
+        const d = bgSampleCtx.getImageData(0, 0, 1, 1).data;
+        const color = 'rgb(' + d[0] + ',' + d[1] + ',' + d[2] + ')';
+        bgCache[src] = color;
+        return color;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function fadeSwap(target, applyChange) {
+      target.classList.add('is-fading');
+      const run = () => {
+        applyChange();
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => target.classList.remove('is-fading'));
+        });
+      };
+      setTimeout(run, 220);
+    }
+
     function setMainImage(index) {
       if (!galleryImages.length) return;
       galleryIndex = (index + galleryImages.length) % galleryImages.length;
@@ -375,9 +448,23 @@
       });
       preload(src).then((image) => {
         if (galleryImages[galleryIndex] !== src) return;
-        drawCover(image);
-        img.src = src;
-        img.alt = product.name;
+        const target = galleryUseContain ? img : canvas;
+        const bg = galleryUseContain
+          ? (Array.isArray(product.galleryBackgrounds) && product.galleryBackgrounds[galleryIndex]) || sampleBg(image, src)
+          : null;
+        // Start the background-color transition simultaneously with the fade-out
+        // so it's fully settled before the new image fades in.
+        if (galleryUseContain && bg) imageWrap.style.backgroundColor = bg;
+        fadeSwap(target, () => {
+          if (galleryUseContain) {
+            img.src = src;
+            img.alt = product.name;
+          } else {
+            drawCover(image);
+            img.src = src;
+            img.alt = product.name;
+          }
+        });
       });
     }
 
@@ -389,17 +476,22 @@
       canvas.hidden = true;
       img.hidden = false;
       imageWrap.classList.toggle('is-cover', product.imageFit === 'cover');
+      imageWrap.classList.remove('is-contain');
+      imageWrap.style.backgroundColor = '';
       galleryImages = [];
       galleryIndex = 0;
+      galleryUseContain = false;
       img.src = product.image;
       img.alt = product.name;
     }
 
     function showGallery(images) {
       galleryImages = images;
+      galleryUseContain = product.galleryFit === 'contain';
       images.forEach(preload);
 
       thumbsWrap.innerHTML = '';
+      const thumbBgs = Array.isArray(product.galleryBackgrounds) ? product.galleryBackgrounds : [];
       images.forEach((src, i) => {
         const btn = document.createElement('button');
         btn.type = 'button';
@@ -407,23 +499,38 @@
         btn.dataset.src = src;
         btn.setAttribute('aria-label', 'View image ' + (i + 1));
         btn.innerHTML = '<img src="' + src + '" alt="" />';
+        if (galleryUseContain && thumbBgs[i]) {
+          btn.style.backgroundColor = thumbBgs[i];
+          btn.classList.add('pdp-thumb--contain');
+        }
         btn.addEventListener('click', () => setMainImage(i));
         thumbsWrap.appendChild(btn);
       });
       thumbsWrap.hidden = false;
       navPrev.hidden = images.length < 2;
       navNext.hidden = images.length < 2;
-      imageWrap.classList.add('is-cover');
+      imageWrap.classList.toggle('is-cover', !galleryUseContain);
+      imageWrap.classList.toggle('is-contain', galleryUseContain);
       galleryIndex = 0;
       preload(images[0]).then((image) => {
-        drawCover(image);
-        canvas.hidden = false;
-        img.hidden = true;
         thumbsWrap.querySelectorAll('.pdp-thumb').forEach((t, i) => {
           t.classList.toggle('is-active', i === 0);
         });
-        img.src = images[0];
-        img.alt = product.name;
+        if (galleryUseContain) {
+          const bg = (Array.isArray(product.galleryBackgrounds) && product.galleryBackgrounds[0]) || sampleBg(image, images[0]);
+          if (bg) imageWrap.style.backgroundColor = bg;
+          canvas.hidden = true;
+          img.hidden = false;
+          img.src = images[0];
+          img.alt = product.name;
+        } else {
+          imageWrap.style.backgroundColor = '';
+          drawCover(image);
+          canvas.hidden = false;
+          img.hidden = true;
+          img.src = images[0];
+          img.alt = product.name;
+        }
       });
     }
 
@@ -431,6 +538,8 @@
       const is112Bark = currentStyle() === '112' && colorSelect.value === 'Bark';
       if (is112Bark) {
         showGallery(BARK_112_IMAGES);
+      } else if (Array.isArray(product.gallery) && product.gallery.length > 1) {
+        showGallery(product.gallery);
       } else {
         showSingleImage();
       }
@@ -520,6 +629,8 @@
         if (colorVal) customizations[product.colorsLabel || 'Color'] = colorVal;
         const styleVal = supportsStyleSwap && styleSelect && styleSelect.value;
         if (styleVal) customizations.Style = styleVal;
+        const sizeSel = getSelectedSize();
+        if (sizeSel) customizations.Size = sizeSel.label;
 
         const qtyInput = document.getElementById('pdp-qty');
         const qty = Math.max(1, Math.min(99, parseInt(qtyInput && qtyInput.value, 10) || 1));
@@ -527,7 +638,7 @@
         Cart.addItem({
           productId: slug,
           name: product.name,
-          unitPrice: product.priceCents,
+          unitPrice: sizeSel ? sizeSel.priceCents : product.priceCents,
           quantity: qty,
           customizations,
           thumbnail: product.image
@@ -595,9 +706,14 @@
     const style = (product.tag === 'Hat' && styleField && styleField.style.display !== 'none')
       ? document.getElementById('pdp-style').value
       : '';
+    const sizeField = document.getElementById('pdp-size-field');
+    const size = (sizeField && sizeField.style.display !== 'none')
+      ? document.getElementById('pdp-size').value
+      : '';
     const url = 'contact.html?product=' + encodeURIComponent(product.name) +
                 (style ? '&style=' + encodeURIComponent(style) : '') +
                 '&color=' + encodeURIComponent(color) +
+                (size ? '&size=' + encodeURIComponent(size) : '') +
                 '&qty=' + encodeURIComponent(qty);
     window.location.href = url;
     return false;

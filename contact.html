@@ -210,6 +210,7 @@
     const product = params.get('product');
     const style = params.get('style');
     const color = params.get('color');
+    const size = params.get('size');
     const qty = params.get('qty') || '1';
 
     // Bulk-order handoff — read structured payload from sessionStorage
@@ -293,6 +294,7 @@
     const metaParts = [];
     if (style) metaParts.push('Style: ' + style);
     if (color) metaParts.push('Color: ' + color);
+    if (size) metaParts.push('Size: ' + size);
     if (qty) metaParts.push('Qty: ' + qty);
     nameEl.textContent = product;
     metaEl.textContent = metaParts.join('  ·  ');
