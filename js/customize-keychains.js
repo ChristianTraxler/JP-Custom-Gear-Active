@@ -289,17 +289,32 @@
       console.warn('sessionStorage unavailable', err);
     }
 
-    if (FORM_ENDPOINT) {
-      submitDirect(s);
-    } else {
-      const q = new URLSearchParams({
-        source: 'customizer',
-        product: s.product,
-        type: s.type,
-        qty: String(s.qty)
-      });
-      window.location.href = 'contact.html?' + q.toString();
+    if (typeof Cart === 'undefined') {
+      // Fallback if cart not loaded — old behavior
+      window.location.href = 'contact.html';
+      return;
     }
+
+    const customizations = {};
+    // Map every field from getSelections() (`s`) into customizations.
+    // Iterate `s` keys so we don't drop any customizer-specific fields.
+    Object.entries(s).forEach(([k, v]) => {
+      if (v === '' || v == null) return;
+      // Pretty-print key: camelCase → "Camel Case"
+      const label = k.replace(/([A-Z])/g, ' $1').replace(/^./, c => c.toUpperCase());
+      customizations[label] = v;
+    });
+
+    Cart.addItem({
+      productId: 'custom-keychain',
+      name: 'Custom Keychain',
+      unitPrice: 1000,
+      quantity: Number(s.qty || s.quantity) || 1,
+      customizations,
+      thumbnail: 'images/keychains/keychain-westward-farms.png'
+    });
+
+    window.location.href = 'cart.html';
   });
 
   function formatSummary(s) {

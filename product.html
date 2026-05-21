@@ -131,6 +131,8 @@
 
           <button class="pdp-cta" type="submit">Start Your Order →</button>
           <p class="pdp-note">Click above to send your selection to JP — we'll confirm pricing, embroidery details, and ship date within 1 business day.</p>
+          <button id="pdp-add-to-cart" class="pdp-add-btn" type="button">Add to Cart</button>
+          <div id="pdp-add-msg" class="pdp-add-msg" hidden></div>
         </form>
       </div>
     </div>
@@ -214,6 +216,8 @@
 <script src="js/products.js"></script>
 <script src="js/search.js"></script>
 <script src="js/site.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/cart-badge.js"></script>
 <script src="js/custom-select.js"></script>
 <script>
   (function renderProduct() {
@@ -242,7 +246,16 @@
     document.getElementById('pdp-tag').textContent = product.tag;
     document.getElementById('pdp-eyebrow').textContent = product.category || product.tag;
     document.getElementById('pdp-title').textContent = product.name;
-    document.getElementById('pdp-price').textContent = '$' + product.price;
+    document.getElementById('pdp-price').textContent = '$' + (product.priceCents / 100).toFixed(0);
+
+    // "Start Your Order" routes to the contact form for manual verification.
+    // Only show it on Custom Work products, which need to be verified before payment.
+    // Standard catalog items use Add to Cart (further below).
+    const needsVerification = product.category === 'Custom Work';
+    const startOrderBtn = document.querySelector('form#pdp-form button.pdp-cta[type="submit"]');
+    const startOrderNote = document.querySelector('form#pdp-form .pdp-note');
+    if (startOrderBtn) startOrderBtn.hidden = !needsVerification;
+    if (startOrderNote) startOrderNote.hidden = !needsVerification;
 
     const img = document.getElementById('pdp-image');
     img.src = product.image;
@@ -491,10 +504,39 @@
             '<img class="product-image" src="' + r.image + '" alt="' + r.name.replace(/"/g, '&quot;') + '" loading="lazy" /></div>' +
           '<div class="product-info">' +
             '<div class="product-name">' + r.name + '</div>' +
-            '<div class="product-price-row"><div class="product-price"><small>From</small>$' + r.price + '</div><div class="product-cta">View →</div></div>' +
+            '<div class="product-price-row"><div class="product-price"><small>From</small>$' + (r.priceCents / 100).toFixed(0) + '</div><div class="product-cta">View →</div></div>' +
           '</div>' +
         '</a>'
       ).join('');
+    }
+
+    // Add to Cart
+    const addBtn = document.getElementById('pdp-add-to-cart');
+    const addMsg = document.getElementById('pdp-add-msg');
+    if (addBtn && typeof Cart !== 'undefined') {
+      addBtn.addEventListener('click', () => {
+        const customizations = {};
+        const colorVal = colorSelect && colorSelect.value;
+        if (colorVal) customizations[product.colorsLabel || 'Color'] = colorVal;
+        const styleVal = supportsStyleSwap && styleSelect && styleSelect.value;
+        if (styleVal) customizations.Style = styleVal;
+
+        const qtyInput = document.getElementById('pdp-qty');
+        const qty = Math.max(1, Math.min(99, parseInt(qtyInput && qtyInput.value, 10) || 1));
+
+        Cart.addItem({
+          productId: slug,
+          name: product.name,
+          unitPrice: product.priceCents,
+          quantity: qty,
+          customizations,
+          thumbnail: product.image
+        });
+
+        addMsg.innerHTML = 'Added to cart — <a href="cart.html">View cart →</a>';
+        addMsg.hidden = false;
+        setTimeout(() => { addMsg.hidden = true; }, 4000);
+      });
     }
   })();
 

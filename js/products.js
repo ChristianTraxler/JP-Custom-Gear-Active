@@ -97,10 +97,66 @@ const TUMBLER_SKINNY_COLORS = [
 
 // Product catalog — slug keys map to product.html?id=<slug>
 const PRODUCTS = {
+  "custom-hat": {
+    name: "Custom Hat",
+    tag: "Hat",
+    priceCents: 2500,
+    image: "images/hats/salt-water-camo.png",
+    category: "Custom",
+    categoryHref: "customize.html",
+    hatType: "custom",
+    description: "Custom hat built from the hat customizer.",
+    features: [],
+    colorsLabel: "Color",
+    colors: []
+  },
+
+  "custom-patch": {
+    name: "Custom Patch",
+    tag: "Patch",
+    priceCents: 500,
+    image: "images/patches/patch-shapes-card.png",
+    category: "Custom",
+    categoryHref: "customize-patches.html",
+    hatType: "none",
+    description: "Custom patch built from the patch customizer.",
+    features: [],
+    colorsLabel: "Color",
+    colors: []
+  },
+
+  "custom-keychain": {
+    name: "Custom Keychain",
+    tag: "Keychain",
+    priceCents: 1000,
+    image: "images/keychains/keychain-westward-farms.png",
+    category: "Custom",
+    categoryHref: "customize-keychains.html",
+    hatType: "none",
+    description: "Custom keychain built from the keychain customizer.",
+    features: [],
+    colorsLabel: "Color",
+    colors: []
+  },
+
+  "custom-tumbler": {
+    name: "Custom Tumbler",
+    tag: "Tumbler",
+    priceCents: 2000,
+    image: "images/tumblers/mama-tumbler.png",
+    category: "Custom",
+    categoryHref: "customize-tumblers.html",
+    hatType: "none",
+    description: "Custom tumbler built from the tumbler customizer.",
+    features: [],
+    colorsLabel: "Color",
+    colors: []
+  },
+
   "she-prayed-tee": {
     name: "She Prayed Until the Chains Fell Off Comfort Color Tee",
     tag: "Shirt",
-    price: 25,
+    priceCents: 2500,
     image: "images/shirts/foam-side.png",
     category: "The Foam Side",
     categoryHref: "shop-foam-side.html",
@@ -119,7 +175,7 @@ const PRODUCTS = {
   "salt-water-camo-hat": {
     name: "JP Salt Water Camo Custom Hat",
     tag: "Hat",
-    price: 25,
+    priceCents: 2500,
     image: "images/hats/salt-water-camo.png",
     category: "Woods & Water",
     categoryHref: "shop-woods-water.html",
@@ -144,7 +200,7 @@ const PRODUCTS = {
   "eagle-flag-tee": {
     name: "JP Custom Gear 'Eagle Flag' T-Shirt",
     tag: "Shirt",
-    price: 20,
+    priceCents: 2000,
     image: "images/shirts/eagle-flag-tshirt.png",
     category: "The Foam Side",
     categoryHref: "shop-foam-side.html",
@@ -163,7 +219,7 @@ const PRODUCTS = {
   "bottomland-camo-256p": {
     name: "JP Custom Bottomland Camo Hat - Richardson 256P",
     tag: "Hat",
-    price: 30,
+    priceCents: 3000,
     image: "images/hats/bottomland-camo.png",
     category: "Woods & Water",
     categoryHref: "shop-woods-water.html",
@@ -182,7 +238,7 @@ const PRODUCTS = {
   "mama-floral-tumbler": {
     name: "Mama 20oz Engraved Floral Tumbler",
     tag: "Tumbler",
-    price: 20,
+    priceCents: 2000,
     image: "images/tumblers/mama-tumbler.png",
     category: "Forever Favorites",
     categoryHref: "shop-forever-favorites.html",
@@ -201,7 +257,7 @@ const PRODUCTS = {
   "blossom-bliss-tumbler": {
     name: "Blossom Bliss 20oz Skinny Tumbler",
     tag: "Tumbler",
-    price: 20,
+    priceCents: 2000,
     image: "images/tumblers/blossom-tumbler.png",
     category: "Forever Favorites",
     categoryHref: "shop-forever-favorites.html",
@@ -220,7 +276,7 @@ const PRODUCTS = {
   "show-me-flat-bill": {
     name: "Show Me Richardson Flat Bill Hat",
     tag: "Hat",
-    price: 25,
+    priceCents: 2500,
     image: "images/hats/show-me.png",
     category: "Caution: May Offend",
     categoryHref: "shop-caution-may-offend.html",
@@ -239,7 +295,7 @@ const PRODUCTS = {
   "shit-show-flat-bill": {
     name: "Shit Show Richardson Flat Bill Snapback",
     tag: "Hat",
-    price: 25,
+    priceCents: 2500,
     image: "images/hats/shit-show.png",
     category: "Caution: May Offend",
     categoryHref: "shop-caution-may-offend.html",
@@ -258,7 +314,7 @@ const PRODUCTS = {
   "nc-state-flag-112": {
     name: "NC State Flag Richardson 112 Hat",
     tag: "Hat",
-    price: 25,
+    priceCents: 2500,
     image: "images/hats/nc-flag.png",
     imageFit: "cover",
     category: "Forever Favorites",
@@ -278,7 +334,7 @@ const PRODUCTS = {
   "nc-trucker-112": {
     name: "NC Richardson 112 Trucker Hat",
     tag: "Hat",
-    price: 25,
+    priceCents: 2500,
     image: "images/hats/nc-trucker.png",
     imageFit: "cover",
     category: "Forever Favorites",
@@ -298,7 +354,7 @@ const PRODUCTS = {
   "bass-fish-trucker-112": {
     name: "Bass Fish Trucker Hat - Richardson 112",
     tag: "Hat",
-    price: 25,
+    priceCents: 2500,
     image: "images/hats/bass-fish.png",
     category: "Woods & Water",
     categoryHref: "shop-woods-water.html",
@@ -318,7 +374,7 @@ const PRODUCTS = {
   "same-asshole-different-day": {
     name: "Same Asshole Different Day Trucker Cap - Richardson 112",
     tag: "Hat",
-    price: 25,
+    priceCents: 2500,
     image: "images/hats/same-asshole.png",
     imageFit: "cover",
     category: "Caution: May Offend",
@@ -338,7 +394,7 @@ const PRODUCTS = {
   "milfin-aint-easy": {
     name: "\"Milfin Ain't Easy\" Classic Trucker Hat",
     tag: "Hat",
-    price: 25,
+    priceCents: 2500,
     image: "images/hats/milfin.png",
     category: "Caution: May Offend",
     categoryHref: "shop-caution-may-offend.html",
@@ -357,7 +413,7 @@ const PRODUCTS = {
   "first-responder": {
     name: "Custom First Responder Hats",
     tag: "Hat",
-    price: 25,
+    priceCents: 2500,
     image: "images/hats/first-responder.png",
     category: "Protectors & Patriots",
     categoryHref: "shop-protectors-patriots.html",
@@ -376,7 +432,7 @@ const PRODUCTS = {
   "custom-bride-hat": {
     name: "Custom Bride Hat – Choose Your Hat, Patch & Name!",
     tag: "Hat",
-    price: 25,
+    priceCents: 2500,
     image: "images/hats/custom-bride.png",
     category: "Infinity Her",
     categoryHref: "shop-infinity-her.html",
@@ -395,7 +451,7 @@ const PRODUCTS = {
   "unsupervised-112": {
     name: "In My Defense, I Was Left Unsupervised – Richardson 112",
     tag: "Hat",
-    price: 25,
+    priceCents: 2500,
     image: "images/hats/in-my-defense.png",
     imageFit: "cover",
     category: "Caution: May Offend",
@@ -415,7 +471,7 @@ const PRODUCTS = {
   "mama-tried-112-v1": {
     name: "Mama Tried – Richardson 112 Trucker Hat",
     tag: "Hat",
-    price: 25,
+    priceCents: 2500,
     image: "images/hats/mama-tried.png",
     imageFit: "cover",
     category: "Forever Favorites",
@@ -435,7 +491,7 @@ const PRODUCTS = {
   "mama-tried-112-v2": {
     name: "Mama Tried – Richardson 112 Trucker (Variant)",
     tag: "Hat",
-    price: 25,
+    priceCents: 2500,
     image: "images/hats/mama-tried-variant.png",
     category: "Forever Favorites",
     categoryHref: "shop-forever-favorites.html",
@@ -454,7 +510,7 @@ const PRODUCTS = {
   "mama-tried-168": {
     name: "Mama Tried – Richardson 168 7-Panel Trucker",
     tag: "Hat",
-    price: 25,
+    priceCents: 2500,
     image: "images/hats/mama-tried-168.png",
     category: "Forever Favorites",
     categoryHref: "shop-forever-favorites.html",
@@ -473,7 +529,7 @@ const PRODUCTS = {
   "mimi-cheetah-infinity-her": {
     name: "Mimi – Infinity Her Cheetah Print Hat",
     tag: "Hat",
-    price: 25,
+    priceCents: 2500,
     image: "images/hats/mimi-her-cheetah.png",
     imageFit: "cover",
     category: "Infinity Her",
@@ -493,7 +549,7 @@ const PRODUCTS = {
   "ball-park-mama-cheetah": {
     name: "Ball Park Mama – Infinity Her Cheetah Print",
     tag: "Hat",
-    price: 25,
+    priceCents: 2500,
     image: "images/hats/ball-park-mama.png",
     category: "Infinity Her",
     categoryHref: "shop-infinity-her.html",
@@ -512,7 +568,7 @@ const PRODUCTS = {
   "mama-cow-infinity-her": {
     name: "Mama – Infinity Her Cow Print Hat",
     tag: "Hat",
-    price: 25,
+    priceCents: 2500,
     image: "images/hats/mama-her-cow.png",
     imageFit: "cover",
     category: "Infinity Her",
@@ -532,7 +588,7 @@ const PRODUCTS = {
   "police-wife-infinity-her": {
     name: "Police Wife – Infinity Her Cheetah Print Hat",
     tag: "Hat",
-    price: 25,
+    priceCents: 2500,
     image: "images/hats/infinity-her.png",
     category: "Protectors & Patriots",
     categoryHref: "shop-protectors-patriots.html",
@@ -551,7 +607,7 @@ const PRODUCTS = {
   "dad-trout-112": {
     name: "Dad Trout Richardson 112",
     tag: "Hat",
-    price: 25,
+    priceCents: 2500,
     image: "images/hats/dad-trout.png",
     imageFit: "cover",
     category: "Woods & Water",
@@ -571,7 +627,7 @@ const PRODUCTS = {
   "dad-bass-112": {
     name: "Dad Bass Richardson 112",
     tag: "Hat",
-    price: 25,
+    priceCents: 2500,
     image: "images/hats/dad-bass.png",
     imageFit: "cover",
     category: "Woods & Water",
@@ -591,7 +647,7 @@ const PRODUCTS = {
   "somebody-112": {
     name: "Somebody Richardson 112",
     tag: "Hat",
-    price: 25,
+    priceCents: 2500,
     image: "images/hats/somebody.png",
     imageFit: "cover",
     category: "Forever Favorites",
@@ -611,7 +667,7 @@ const PRODUCTS = {
   "somebodys-problem-infinity-her": {
     name: "Somebody's Problem Infinity Her Cow Print",
     tag: "Hat",
-    price: 25,
+    priceCents: 2500,
     image: "images/hats/somebodys-problem.png",
     imageFit: "cover",
     category: "Infinity Her",
@@ -631,7 +687,7 @@ const PRODUCTS = {
   "little-debbie-hunting-team": {
     name: "Little Debbie Hunting Team Richardson 112",
     tag: "Hat",
-    price: 25,
+    priceCents: 2500,
     image: "images/hats/little-debbie.png",
     category: "Forever Favorites",
     categoryHref: "shop-forever-favorites.html",
@@ -650,7 +706,7 @@ const PRODUCTS = {
   "liberty-or-death-112": {
     name: "Liberty or Death Richardson 112",
     tag: "Hat",
-    price: 25,
+    priceCents: 2500,
     image: "images/hats/protectors-patriots.png",
     category: "Protectors & Patriots",
     categoryHref: "shop-protectors-patriots.html",
@@ -669,7 +725,7 @@ const PRODUCTS = {
   "my-wife-is-psychotic-112pfp": {
     name: "My Wife Is psycHOTic – Richardson 112PFP",
     tag: "Hat",
-    price: 25,
+    priceCents: 2500,
     image: "images/hats/my-wife-is-psychotic.png",
     imageFit: "cover",
     category: "Caution: May Offend",
@@ -689,7 +745,7 @@ const PRODUCTS = {
   "my-ol-lady-112pfp": {
     name: "My Ol' Lady Will Kill You – Richardson 112PFP",
     tag: "Hat",
-    price: 25,
+    priceCents: 2500,
     image: "images/hats/my-ol-lady.png",
     category: "Caution: May Offend",
     categoryHref: "shop-caution-may-offend.html",
@@ -708,7 +764,7 @@ const PRODUCTS = {
   "let-me-ask-my-ol-lady-112pfp": {
     name: "Let Me Ask My Ol' Lady – Richardson 112PFP",
     tag: "Hat",
-    price: 25,
+    priceCents: 2500,
     image: "images/hats/ol-lady.png",
     category: "Caution: May Offend",
     categoryHref: "shop-caution-may-offend.html",
@@ -727,7 +783,7 @@ const PRODUCTS = {
   "little-pecker-club-112": {
     name: "Little Pecker Club – Richardson 112",
     tag: "Hat",
-    price: 25,
+    priceCents: 2500,
     image: "images/hats/little-pecker.png",
     imageFit: "cover",
     category: "Caution: May Offend",
@@ -747,7 +803,7 @@ const PRODUCTS = {
   "never-killed-mountain-lion-112": {
     name: "Never Killed A Mountain Lion But I've Choked A Cougar – Richardson 112",
     tag: "Hat",
-    price: 25,
+    priceCents: 2500,
     image: "images/hats/but-ive-killed-a-cougar.png",
     imageFit: "cover",
     category: "Caution: May Offend",
@@ -768,7 +824,7 @@ const PRODUCTS = {
   "support-your-local-hooker-168": {
     name: "Support Your Local Hooker Richardson 168",
     tag: "Hat",
-    price: 25,
+    priceCents: 2500,
     image: "images/hats/local-hooker.png",
     imageFit: "cover",
     category: "Woods & Water",
@@ -788,7 +844,7 @@ const PRODUCTS = {
   "my-wiener-does-tricks": {
     name: "My Wiener Does Tricks – Flat Bill Snapback",
     tag: "Hat",
-    price: 25,
+    priceCents: 2500,
     image: "images/hats/IMG_1180.png",
     imageFit: "cover",
     category: "Hats",
@@ -808,7 +864,7 @@ const PRODUCTS = {
   "gently-used-baby-mamas-112": {
     name: "Now Accepting Gently Used Baby Mamas – Richardson 112",
     tag: "Hat",
-    price: 25,
+    priceCents: 2500,
     image: "images/hats/IMG_1181.png",
     imageFit: "cover",
     category: "Hats",
@@ -828,7 +884,7 @@ const PRODUCTS = {
   "wiener-rides-25-cents": {
     name: "Wiener Rides – Only 25¢ Flat Bill Snapback",
     tag: "Hat",
-    price: 25,
+    priceCents: 2500,
     image: "images/hats/IMG_1193.png",
     imageFit: "cover",
     category: "Hats",
@@ -848,7 +904,7 @@ const PRODUCTS = {
   "nc-flag-patriot-112-heather": {
     name: "NC Flag Patriot Patch – Richardson 112 (Heather Grey)",
     tag: "Hat",
-    price: 25,
+    priceCents: 2500,
     image: "images/hats/IMG_1194.png",
     imageFit: "cover",
     category: "Hats",
@@ -868,7 +924,7 @@ const PRODUCTS = {
   "nc-flag-patriot-112-loden": {
     name: "NC Flag Patriot Patch – Richardson 112 (Loden)",
     tag: "Hat",
-    price: 25,
+    priceCents: 2500,
     image: "images/hats/IMG_1195.png",
     imageFit: "cover",
     category: "Hats",
@@ -888,7 +944,7 @@ const PRODUCTS = {
   "nc-lighthouse-est-1789-112": {
     name: "North Carolina Est. 1789 Lighthouse – Richardson 112",
     tag: "Hat",
-    price: 25,
+    priceCents: 2500,
     image: "images/hats/IMG_1196.png",
     imageFit: "cover",
     category: "Hats",
@@ -908,7 +964,7 @@ const PRODUCTS = {
   "nc-camo-outline-112": {
     name: "NC Camo State Outline – Richardson 112",
     tag: "Hat",
-    price: 25,
+    priceCents: 2500,
     image: "images/hats/IMG_1197.png",
     imageFit: "cover",
     category: "Hats",
@@ -942,4 +998,10 @@ function getRelatedProducts(slug, limit = 4) {
     .filter(([s, p]) => s !== slug && p.category !== current.category)
     .map(([s, p]) => ({ slug: s, ...p }));
   return [...sameCategory, ...others].slice(0, limit);
+}
+
+// CommonJS export for Node-side serverless functions.
+// Browsers don't have `module`, so this line is harmless there.
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { PRODUCTS, getProduct, getRelatedProducts };
 }

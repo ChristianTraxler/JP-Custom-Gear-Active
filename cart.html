@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="icon" type="image/png" href="images/J.PATS.png" />
 <link rel="apple-touch-icon" href="images/J.PATS.png" />
-<title>Infinity Her | JP Custom Gear</title>
-<meta name="description" content="Cheetah, cow print, and floral patch hats designed for women who hold it all together. Infinity Her collection." />
+<title>Cart | JP Custom Gear</title>
+<meta name="description" content="Review your JP Custom Gear cart and check out." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet" />
@@ -65,44 +65,27 @@
   <div class="drawer-foot"><a href="contact.html">Start Your Order</a></div>
 </div>
 
-<section class="page-hero">
-  <div class="page-hero-grain"></div>
-  <div class="page-hero-inner">
-    <div class="breadcrumb"><a href="index.html">Home</a> <span>/</span> <a href="shop.html">Shop</a> <span>/</span> <span>Infinity Her</span></div>
-    <div class="eyebrow">For The Women Who Run It All</div>
-    <h1>Infinity <em>Her</em></h1>
-    <p>Designed for the women who hold it all together — and look good doing it.</p>
-  </div>
-</section>
+<section class="cart-section">
+  <div class="cart-inner">
+    <h1 class="cart-title">Your Cart</h1>
 
-<section class="shop-section">
-  <div class="shop-inner">
-    <div class="product-grid">
+    <div id="cart-empty" class="cart-empty" hidden>
+      <p>Your cart is empty.</p>
+      <a class="cart-shop-link" href="shop.html">Continue shopping →</a>
+    </div>
 
-      <a href="product.html?id=mimi-cheetah-infinity-her" class="product-card fade-in">
-        <div class="product-image-wrap"><span class="product-tag">Hat</span><img class="product-image" src="images/hats/mimi-her-cheetah.png" alt="Mimi Cheetah Infinity Her" loading="lazy" /></div>
-        <div class="product-info">
-          <div class="product-name">Mimi – Infinity Her Cheetah Print Hat</div>
-          <div class="product-price-row"><div class="product-price"><small>From</small>$25</div><div class="product-cta">Order →</div></div>
-        </div>
-      </a>
+    <div id="cart-body" class="cart-body" hidden>
+      <ul id="cart-lines" class="cart-lines"></ul>
 
-      <a href="product.html?id=somebodys-problem-infinity-her" class="product-card fade-in">
-        <div class="product-image-wrap"><span class="product-tag">Hat</span><img class="product-image" src="images/hats/somebodys-problem.png" alt="Somebody's Problem Infinity Her Cow" loading="lazy" /></div>
-        <div class="product-info">
-          <div class="product-name">Somebody's Problem Infinity Her Cow Print</div>
-          <div class="product-price-row"><div class="product-price"><small>From</small>$25</div><div class="product-cta">Order →</div></div>
-        </div>
-      </a>
+      <div class="cart-summary">
+        <div class="cart-row"><span>Subtotal</span><span id="cart-subtotal">$0.00</span></div>
+        <div class="cart-row cart-row-muted"><span>Shipping</span><span>Flat rate at checkout</span></div>
+        <div class="cart-row cart-row-total"><span>Total</span><span id="cart-total">$0.00</span></div>
 
-      <a href="product.html?id=mama-cow-infinity-her" class="product-card fade-in">
-        <div class="product-image-wrap"><span class="product-tag">Hat</span><img class="product-image" src="images/hats/mama-her-cow.png" alt="Mama Cow Print Infinity Her" loading="lazy" /></div>
-        <div class="product-info">
-          <div class="product-name">Mama – Infinity Her Cow Print Hat</div>
-          <div class="product-price-row"><div class="product-price"><small>From</small>$25</div><div class="product-cta">Order →</div></div>
-        </div>
-      </a>
-
+        <button id="cart-checkout" class="cart-checkout-btn" type="button">Checkout</button>
+        <div id="cart-error" class="cart-error" hidden></div>
+        <a class="cart-continue-link" href="shop.html">← Continue shopping</a>
+      </div>
     </div>
   </div>
 </section>
@@ -172,5 +155,6 @@
 <script src="js/site.js"></script>
 <script src="js/cart.js"></script>
 <script src="js/cart-badge.js"></script>
+<script src="js/cart-page.js"></script>
 </body>
 </html>

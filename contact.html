@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="css/default.css" />
-<link rel="stylesheet" href="css/styles.css" />
+<link rel="stylesheet" href="css/styles.css?v=20260521" />
 <link rel="stylesheet" href="css/responsive.css" />
 </head>
 <body>
@@ -100,13 +100,14 @@
           <div class="cf-product-banner-meta" id="cf-product-banner-meta"></div>
         </div>
         <div class="contact-form">
+          <p class="form-required-legend"><span class="required-mark" aria-hidden="true">*</span> indicates a required field</p>
           <div>
-            <label class="form-label" for="cf-name">Your Name</label>
-            <input class="form-input" id="cf-name" type="text" placeholder="Full name" />
+            <label class="form-label" for="cf-name">Your Name <span class="required-mark" aria-hidden="true">*</span></label>
+            <input class="form-input" id="cf-name" type="text" placeholder="Full name" required aria-required="true" />
           </div>
           <div>
-            <label class="form-label" for="cf-email">Email</label>
-            <input class="form-input" id="cf-email" type="email" placeholder="you@email.com" />
+            <label class="form-label" for="cf-email">Email <span class="required-mark" aria-hidden="true">*</span></label>
+            <input class="form-input" id="cf-email" type="email" placeholder="you@email.com" required aria-required="true" />
           </div>
           <div>
             <label class="form-label" for="cf-type">What are you looking for?</label>
@@ -121,8 +122,8 @@
             </select>
           </div>
           <div>
-            <label class="form-label" for="cf-msg">Tell us about your project</label>
-            <textarea class="form-textarea" id="cf-msg" rows="5" placeholder="Quantity, design ideas, timeline, agency info..."></textarea>
+            <label class="form-label" for="cf-msg">Tell us about your project <span class="required-mark" aria-hidden="true">*</span></label>
+            <textarea class="form-textarea" id="cf-msg" rows="5" placeholder="Quantity, design ideas, timeline, agency info..." required aria-required="true"></textarea>
           </div>
           <button class="form-submit" onclick="submitContact()"><span style="font-size:1.5em;line-height:1;display:inline-flex;align-items:center;">✉️</span> Send Message</button>
         </div>
@@ -199,6 +200,8 @@
 <script src="js/products.js"></script>
 <script src="js/search.js"></script>
 <script src="js/site.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/cart-badge.js"></script>
 <script src="js/custom-select.js"></script>
 <script>
   (function prefillFromProduct() {

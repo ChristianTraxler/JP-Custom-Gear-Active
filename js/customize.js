@@ -268,30 +268,45 @@
       return;
     }
 
-    const summary = formatSummary(s);
     try {
       sessionStorage.setItem('customizer_order', JSON.stringify({
         ...s,
-        summary: summary,
+        summary: formatSummary(s),
         timestamp: Date.now()
       }));
     } catch (err) {
       console.warn('sessionStorage unavailable', err);
     }
 
-    if (FORM_ENDPOINT) {
-      // Future: direct submit
-      submitDirect(s);
-    } else {
-      // Handoff to contact page
-      const q = new URLSearchParams({
-        source: 'customizer',
-        product: s.style,
-        color: s.color,
-        qty: String(s.qty)
-      });
+    if (typeof Cart === 'undefined') {
+      // Fallback if cart not loaded — old behavior
+      const q = new URLSearchParams({ source: 'customizer', product: s.style, color: s.color, qty: String(s.qty) });
       window.location.href = 'contact.html?' + q.toString();
+      return;
     }
+
+    const customizations = {
+      Style: s.style,
+      Color: s.color
+    };
+    if (s.suboptionLabel && s.suboption) customizations[s.suboptionLabel] = s.suboption;
+    if (s.patch) customizations.Patch = s.patch;
+    if (s.text) customizations['Custom Text'] = s.text;
+    if (s.logoFilename) customizations['Logo File'] = s.logoFilename + ' (customer will email file)';
+    if (s.notes) customizations.Notes = s.notes;
+    if (s.name) customizations['Customer Name'] = s.name;
+    if (s.email) customizations['Customer Email'] = s.email;
+
+    Cart.addItem({
+      productId: 'custom-hat',
+      name: 'Custom Hat — ' + s.style,
+      unitPrice: 2500, // base $25 — matches the customizer's current "$25+" display
+      quantity: Number(s.qty) || 1,
+      customizations,
+      thumbnail: 'images/hats/salt-water-camo.png'
+    });
+
+    window.location.href = 'cart.html';
   });
 
   function formatSummary(s) {

@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="icon" type="image/png" href="images/J.PATS.png" />
 <link rel="apple-touch-icon" href="images/J.PATS.png" />
-<title>Infinity Her | JP Custom Gear</title>
-<meta name="description" content="Cheetah, cow print, and floral patch hats designed for women who hold it all together. Infinity Her collection." />
+<title>Thanks for your order | JP Custom Gear</title>
+<meta name="description" content="Your JP Custom Gear order is confirmed." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet" />
@@ -65,45 +65,12 @@
   <div class="drawer-foot"><a href="contact.html">Start Your Order</a></div>
 </div>
 
-<section class="page-hero">
-  <div class="page-hero-grain"></div>
-  <div class="page-hero-inner">
-    <div class="breadcrumb"><a href="index.html">Home</a> <span>/</span> <a href="shop.html">Shop</a> <span>/</span> <span>Infinity Her</span></div>
-    <div class="eyebrow">For The Women Who Run It All</div>
-    <h1>Infinity <em>Her</em></h1>
-    <p>Designed for the women who hold it all together — and look good doing it.</p>
-  </div>
-</section>
-
-<section class="shop-section">
-  <div class="shop-inner">
-    <div class="product-grid">
-
-      <a href="product.html?id=mimi-cheetah-infinity-her" class="product-card fade-in">
-        <div class="product-image-wrap"><span class="product-tag">Hat</span><img class="product-image" src="images/hats/mimi-her-cheetah.png" alt="Mimi Cheetah Infinity Her" loading="lazy" /></div>
-        <div class="product-info">
-          <div class="product-name">Mimi – Infinity Her Cheetah Print Hat</div>
-          <div class="product-price-row"><div class="product-price"><small>From</small>$25</div><div class="product-cta">Order →</div></div>
-        </div>
-      </a>
-
-      <a href="product.html?id=somebodys-problem-infinity-her" class="product-card fade-in">
-        <div class="product-image-wrap"><span class="product-tag">Hat</span><img class="product-image" src="images/hats/somebodys-problem.png" alt="Somebody's Problem Infinity Her Cow" loading="lazy" /></div>
-        <div class="product-info">
-          <div class="product-name">Somebody's Problem Infinity Her Cow Print</div>
-          <div class="product-price-row"><div class="product-price"><small>From</small>$25</div><div class="product-cta">Order →</div></div>
-        </div>
-      </a>
-
-      <a href="product.html?id=mama-cow-infinity-her" class="product-card fade-in">
-        <div class="product-image-wrap"><span class="product-tag">Hat</span><img class="product-image" src="images/hats/mama-her-cow.png" alt="Mama Cow Print Infinity Her" loading="lazy" /></div>
-        <div class="product-info">
-          <div class="product-name">Mama – Infinity Her Cow Print Hat</div>
-          <div class="product-price-row"><div class="product-price"><small>From</small>$25</div><div class="product-cta">Order →</div></div>
-        </div>
-      </a>
-
-    </div>
+<section class="thanks-section">
+  <div class="thanks-inner">
+    <h1 class="thanks-title">Thanks for your order!</h1>
+    <p class="thanks-body">Your order is confirmed. Check your email for a receipt and order details. We'll ship in 5–7 business days.</p>
+    <p class="thanks-order">Order reference: <code id="thanks-order-id">—</code></p>
+    <a class="thanks-shop-link" href="shop.html">Continue shopping →</a>
   </div>
 </section>
 
@@ -168,9 +135,18 @@
 </footer>
 
 <script src="js/products.js"></script>
-<script src="js/search.js"></script>
 <script src="js/site.js"></script>
 <script src="js/cart.js"></script>
 <script src="js/cart-badge.js"></script>
+<script>
+  (function () {
+    const params = new URLSearchParams(window.location.search);
+    const sid = params.get('session_id');
+    if (sid) {
+      document.getElementById('thanks-order-id').textContent = sid.slice(-8).toUpperCase();
+    }
+    if (typeof Cart !== 'undefined') Cart.clearCart();
+  })();
+</script>
 </body>
 </html>

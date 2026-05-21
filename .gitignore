@@ -1,0 +1,65 @@
+# Project-specific
+docs/
+
+# Editor / tooling
+.claude/
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Dependencies
+node_modules/
+bower_components/
+jspm_packages/
+
+# Build output
+dist/
+build/
+out/
+.cache/
+.parcel-cache/
+.next/
+.nuxt/
+.vite/
+
+# Package manager artifacts
+.npm
+.yarn/
+.pnp.*
+package-lock.json
+package-lock.json.bak
+
+# Coverage / test artifacts
+coverage/
+.nyc_output/
+
+# Misc
+*.bak
+*.tmp
+*.orig
+.vercel

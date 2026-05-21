@@ -7,7 +7,7 @@
     name: p.name,
     tag: p.tag,
     tagLower: p.tag.toLowerCase(),
-    price: p.price,
+    priceCents: p.priceCents,
     image: p.image,
     category: p.category,
     haystack: [p.name, p.tag, p.category, p.description, (p.features || []).join(' ')]
@@ -83,7 +83,7 @@
             '<div class="nav-search-name">' + escapeHtml(r.name) + '</div>' +
             '<div class="nav-search-sub"><span>' + escapeHtml(r.tag) + '</span> · <span>' + escapeHtml(r.category) + '</span></div>' +
           '</div>' +
-          '<div class="nav-search-price">$' + r.price + '</div>' +
+          '<div class="nav-search-price">$' + (r.priceCents / 100).toFixed(0) + '</div>' +
         '</a>'
       ).join('');
       dropdown.innerHTML = rows +
