@@ -13,6 +13,8 @@
   const totalEl = document.getElementById('cart-total');
   const checkoutBtn = document.getElementById('cart-checkout');
   const errorEl = document.getElementById('cart-error');
+  const pickupCheckbox = document.getElementById('cart-pickup-checkbox');
+  const shippingValueEl = document.getElementById('cart-shipping-value');
 
   if (!linesEl) return; // not on cart page
 
@@ -60,7 +62,12 @@
 
     const subtotal = Cart.getTotalCents();
     subtotalEl.textContent = fmt(subtotal);
-    totalEl.textContent = fmt(subtotal); // shipping added at Stripe Checkout
+    if (pickupCheckbox && pickupCheckbox.checked) {
+      shippingValueEl.textContent = 'Free — local pickup';
+    } else {
+      shippingValueEl.textContent = 'Flat rate at checkout';
+    }
+    totalEl.textContent = fmt(subtotal); // shipping (if any) is added at Stripe Checkout
   }
 
   linesEl.addEventListener('click', e => {
@@ -72,6 +79,8 @@
     const qtyId = e.target.getAttribute('data-line-qty');
     if (qtyId) Cart.updateQuantity(qtyId, parseInt(e.target.value, 10));
   });
+
+  if (pickupCheckbox) pickupCheckbox.addEventListener('change', render);
 
   checkoutBtn.addEventListener('click', async () => {
     const cart = Cart.getCart();
@@ -90,7 +99,8 @@
             productId: i.productId,
             quantity: i.quantity,
             customizations: i.customizations
-          }))
+          })),
+          localPickup: !!(pickupCheckbox && pickupCheckbox.checked)
         })
       });
 

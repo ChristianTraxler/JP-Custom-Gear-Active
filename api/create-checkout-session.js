@@ -25,33 +25,51 @@ module.exports = async function handler(req, res) {
   }
 
   const shippingCents = Number(process.env.SHIPPING_RATE_CENTS) || 800;
+  const shippingUpgradeAtCents = Number(process.env.SHIPPING_UPGRADE_AT_CENTS) || 10000;
+  const shippingUpgradeCents = Number(process.env.SHIPPING_UPGRADE_RATE_CENTS) || 1000;
   // SITE_URL pinned in env wins (e.g. https://www.jpcustomgear.com for prod).
   // Otherwise fall back to Vercel's auto-injected VERCEL_URL so preview deploys
   // get the right success_url/cancel_url without manual env edits.
   const siteUrl = process.env.SITE_URL
     || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000');
 
+  const localPickup = body.localPickup === true;
+
   let payload;
   try {
     payload = buildLineItems({
       items: body.items,
       catalog: PRODUCTS,
-      shippingCents
+      shippingCents,
+      shippingUpgradeAtCents,
+      shippingUpgradeCents,
+      localPickup
     });
   } catch (err) {
     return res.status(400).json({ error: err.message });
   }
 
+  // Filter out the shipping line if local pickup is selected (payload.shippingItem is null).
+  const lineItems = [...payload.lineItems, payload.shippingItem].filter(Boolean);
+
+  const sessionParams = {
+    mode: 'payment',
+    line_items: lineItems,
+    shipping_address_collection: { allowed_countries: ['US'] },
+    phone_number_collection: { enabled: true },
+    success_url: siteUrl + '/thank-you.html?session_id={CHECKOUT_SESSION_ID}',
+    cancel_url: siteUrl + '/cart.html',
+    metadata: payload.metadata
+  };
+
+  if (localPickup) {
+    sessionParams.custom_text = {
+      submit: { message: "Local pickup selected — we'll contact you to arrange a time and place. The address below is for billing only; no shipping will occur." }
+    };
+  }
+
   try {
-    const session = await getStripe().checkout.sessions.create({
-      mode: 'payment',
-      line_items: [...payload.lineItems, payload.shippingItem],
-      shipping_address_collection: { allowed_countries: ['US'] },
-      phone_number_collection: { enabled: true },
-      success_url: siteUrl + '/thank-you.html?session_id={CHECKOUT_SESSION_ID}',
-      cancel_url: siteUrl + '/cart.html',
-      metadata: payload.metadata
-    });
+    const session = await getStripe().checkout.sessions.create(sessionParams);
     return res.status(200).json({ url: session.url });
   } catch (err) {
     console.error('Stripe session create failed:', err);

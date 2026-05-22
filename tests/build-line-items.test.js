@@ -82,6 +82,30 @@ test('builds metadata with productId + customizations per item', () => {
   assert.deepEqual(decoded.customizations, { Color: 'Black' });
 });
 
+test('omits shipping item and tags metadata when localPickup is true', () => {
+  const { lineItems, shippingItem, metadata } = buildLineItems({
+    items: [{ productId: 'hat-a', quantity: 1, customizations: {} }],
+    catalog,
+    shippingCents: 800,
+    localPickup: true
+  });
+  assert.equal(lineItems.length, 1);
+  assert.equal(shippingItem, null, 'shippingItem should be null for local pickup');
+  assert.equal(metadata.local_pickup, '1');
+});
+
+test('still includes shipping item when localPickup is omitted or false', () => {
+  const result = buildLineItems({
+    items: [{ productId: 'hat-a', quantity: 1, customizations: {} }],
+    catalog,
+    shippingCents: 800,
+    localPickup: false
+  });
+  assert.ok(result.shippingItem, 'shippingItem should be present when not local pickup');
+  assert.equal(result.shippingItem.price_data.unit_amount, 800);
+  assert.equal(result.metadata.local_pickup, undefined);
+});
+
 test('truncates per-item metadata that would exceed 500 chars', () => {
   const longNotes = 'a'.repeat(800);
   const { metadata } = buildLineItems({
@@ -91,4 +115,40 @@ test('truncates per-item metadata that would exceed 500 chars', () => {
   });
   assert.ok(metadata.item_0.length <= 500);
   assert.ok(metadata.item_0.includes('…'));
+});
+
+test('uses base shipping when subtotal is below the upgrade threshold', () => {
+  const { shippingItem } = buildLineItems({
+    items: [{ productId: 'hat-a', quantity: 1, customizations: {} }], // $25
+    catalog,
+    shippingCents: 800,
+    shippingUpgradeAtCents: 10000,
+    shippingUpgradeCents: 1000
+  });
+  assert.equal(shippingItem.price_data.unit_amount, 800);
+});
+
+test('uses upgraded shipping when subtotal meets the $100 threshold', () => {
+  const { shippingItem } = buildLineItems({
+    items: [{ productId: 'hat-a', quantity: 4, customizations: {} }], // 4 × $25 = $100
+    catalog,
+    shippingCents: 800,
+    shippingUpgradeAtCents: 10000,
+    shippingUpgradeCents: 1000
+  });
+  assert.equal(shippingItem.price_data.unit_amount, 1000);
+});
+
+test('uses upgraded shipping when subtotal exceeds the threshold across multiple items', () => {
+  const { shippingItem } = buildLineItems({
+    items: [
+      { productId: 'hat-a', quantity: 4, customizations: {} }, // $100
+      { productId: 'tumbler-b', quantity: 1, customizations: {} } // $20
+    ],
+    catalog,
+    shippingCents: 800,
+    shippingUpgradeAtCents: 10000,
+    shippingUpgradeCents: 1000
+  });
+  assert.equal(shippingItem.price_data.unit_amount, 1000);
 });

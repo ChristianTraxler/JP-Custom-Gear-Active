@@ -1769,6 +1769,13 @@ h2.featured-build-title {
 .cart-row { display: flex; justify-content: space-between; padding: 8px 0; font-family: "DM Sans", sans-serif; }
 .cart-row-muted { color: #666; font-size: 0.875rem; }
 .cart-row-total { padding-top: 16px; border-top: 1px solid #d6d2c8; font-size: 1.25rem; font-weight: 700; }
+.cart-pickup { display: flex; gap: 12px; align-items: flex-start; margin: 16px 0; padding: 12px 14px; background: #fff; border: 1px solid #d6d2c8; border-radius: 8px; cursor: pointer; font-family: "DM Sans", sans-serif; transition: border-color 0.15s, box-shadow 0.15s; }
+.cart-pickup:hover { border-color: #1a1a1a; }
+.cart-pickup:focus-within { border-color: #1a1a1a; box-shadow: 0 0 0 3px rgba(26,26,26,0.12); }
+.cart-pickup input[type="checkbox"] { margin-top: 3px; width: 18px; height: 18px; accent-color: #1a1a1a; cursor: pointer; flex-shrink: 0; }
+.cart-pickup-text { display: flex; flex-direction: column; gap: 2px; line-height: 1.35; }
+.cart-pickup-text strong { font-weight: 600; color: #1a1a1a; }
+.cart-pickup-text small { color: #666; font-size: 0.8125rem; }
 .cart-checkout-btn { width: 100%; padding: 14px; margin-top: 16px; background: #1a1a1a; color: #fff; border: none; border-radius: 8px; font: 600 1rem "DM Sans", sans-serif; cursor: pointer; }
 .cart-checkout-btn:hover:not(:disabled) { background: #000; }
 .cart-checkout-btn:disabled { opacity: 0.5; cursor: not-allowed; }

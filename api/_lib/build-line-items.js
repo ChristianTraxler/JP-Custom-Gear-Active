@@ -5,11 +5,12 @@
 const MAX_LINES = 50;
 const MAX_METADATA_VALUE = 500;
 
-function buildLineItems({ items, catalog, shippingCents }) {
+function buildLineItems({ items, catalog, shippingCents, shippingUpgradeAtCents, shippingUpgradeCents, localPickup }) {
   if (!Array.isArray(items)) throw new Error('items must be an array');
   if (items.length === 0) throw new Error('empty cart');
   if (items.length > MAX_LINES) throw new Error('too many line items (max 50)');
 
+  let subtotalCents = 0;
   const lineItems = items.map((item, idx) => {
     const product = catalog[item.productId];
     if (!product) throw new Error('unknown product: ' + item.productId);
@@ -17,6 +18,7 @@ function buildLineItems({ items, catalog, shippingCents }) {
     if (!Number.isFinite(qty) || qty < 1 || qty > 99) {
       throw new Error('invalid quantity for item ' + idx + ' (must be 1..99)');
     }
+    subtotalCents += product.priceCents * qty;
     return {
       price_data: {
         currency: 'usd',
@@ -27,10 +29,16 @@ function buildLineItems({ items, catalog, shippingCents }) {
     };
   });
 
-  const shippingItem = {
+  const threshold = Number(shippingUpgradeAtCents);
+  const upgraded = Number(shippingUpgradeCents);
+  const useUpgraded = Number.isFinite(threshold) && Number.isFinite(upgraded) && subtotalCents >= threshold;
+  const resolvedShippingCents = useUpgraded ? upgraded : (Number(shippingCents) || 0);
+
+  // Local pickup omits the shipping line entirely so the customer is not charged.
+  const shippingItem = localPickup ? null : {
     price_data: {
       currency: 'usd',
-      unit_amount: Number(shippingCents) || 0,
+      unit_amount: resolvedShippingCents,
       product_data: { name: 'Shipping' }
     },
     quantity: 1
@@ -47,6 +55,7 @@ function buildLineItems({ items, catalog, shippingCents }) {
       ? payload.slice(0, MAX_METADATA_VALUE - 1) + '…'
       : payload;
   });
+  if (localPickup) metadata.local_pickup = '1';
 
   return { lineItems, shippingItem, metadata };
 }

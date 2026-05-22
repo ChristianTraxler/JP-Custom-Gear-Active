@@ -79,7 +79,16 @@
 
       <div class="cart-summary">
         <div class="cart-row"><span>Subtotal</span><span id="cart-subtotal">$0.00</span></div>
-        <div class="cart-row cart-row-muted"><span>Shipping</span><span>Flat rate at checkout</span></div>
+        <div class="cart-row cart-row-muted" id="cart-shipping-row"><span>Shipping</span><span id="cart-shipping-value">Flat rate at checkout</span></div>
+
+        <label class="cart-pickup">
+          <input type="checkbox" id="cart-pickup-checkbox" />
+          <span class="cart-pickup-text">
+            <strong>Pick up locally</strong>
+            <small>Skip shipping — we'll contact you to arrange pickup.</small>
+          </span>
+        </label>
+
         <div class="cart-row cart-row-total"><span>Total</span><span id="cart-total">$0.00</span></div>
 
         <button id="cart-checkout" class="cart-checkout-btn" type="button">Checkout</button>
