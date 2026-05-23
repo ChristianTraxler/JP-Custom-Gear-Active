@@ -294,7 +294,7 @@
     Cart.addItem({
       productId: 'custom-tumbler',
       name: 'Custom Tumbler',
-      unitPrice: 2000,
+      unitPrice: Math.round(calcUnitPrice(s) * 100), // exact price for this config; checkout recomputes (js/custom-pricing.js)
       quantity: Number(s.qty || s.quantity) || 1,
       customizations,
       thumbnail: 'images/tumblers/mama-tumbler.png'

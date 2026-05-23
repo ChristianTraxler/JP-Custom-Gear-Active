@@ -2,7 +2,7 @@
 (function () {
   if (typeof PRODUCTS === 'undefined') return;
 
-  const INDEX = Object.entries(PRODUCTS).map(([slug, p]) => ({
+  const INDEX = Object.entries(PRODUCTS).filter(([, p]) => !p.hidden).map(([slug, p]) => ({
     slug,
     name: p.name,
     tag: p.tag,

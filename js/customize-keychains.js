@@ -308,7 +308,7 @@
     Cart.addItem({
       productId: 'custom-keychain',
       name: 'Custom Keychain',
-      unitPrice: 1000,
+      unitPrice: Math.round(calcUnitPrice(s) * 100), // exact price for this config; checkout recomputes (js/custom-pricing.js)
       quantity: Number(s.qty || s.quantity) || 1,
       customizations,
       thumbnail: 'images/keychains/keychain-westward-farms.png'

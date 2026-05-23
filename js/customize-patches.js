@@ -312,7 +312,7 @@
     Cart.addItem({
       productId: 'custom-patch',
       name: 'Custom Patch',
-      unitPrice: 500,
+      unitPrice: Math.round(calcUnitPrice(s) * 100), // exact price for this config; checkout recomputes (js/custom-pricing.js)
       quantity: Number(s.qty || s.quantity) || 1,
       customizations,
       thumbnail: 'images/patches/patch-shapes-card.png'

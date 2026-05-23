@@ -308,6 +308,88 @@ const PRODUCTS = {
     colors: TUMBLER_SKINNY_COLORS
   },
 
+  // ── Custom builders (tumbler / keychain / patch / hat) ──────────────────────────
+  // These productIds are added by the customizer pages (js/customize-*.js). Their
+  // CHECKOUT price is computed per-selection by js/custom-pricing.js, not from
+  // `priceCents` below (which is only a starting-price fallback for display). Each
+  // MUST exist here so checkout can resolve a name and order emails can show a thumb.
+  // `hidden` keeps them out of site search/shop listings (they have their own pages).
+  "custom-tumbler": {
+    name: "Custom Tumbler",
+    tag: "Tumbler",
+    priceCents: 1400,
+    image: "images/tumblers/mama-tumbler.png",
+    category: "Forever Favorites",
+    categoryHref: "shop-forever-favorites.html",
+    hatType: "none",
+    hidden: true,
+    description: "A made-to-order 20oz engraved tumbler built from your selections on the customizer.",
+    features: [
+      "20oz stainless steel, double-wall vacuum insulated",
+      "Custom laser engraving — your text or logo",
+      "Sliding lid + straw included"
+    ],
+    colorsLabel: "Color",
+    colors: TUMBLER_COLORS
+  },
+
+  "custom-hat": {
+    name: "Custom Hat",
+    tag: "Hat",
+    priceCents: 2500,
+    image: "images/hats/salt-water-camo.png",
+    category: "Forever Favorites",
+    categoryHref: "shop-forever-favorites.html",
+    hatType: "none",
+    hidden: true,
+    description: "A made-to-order embroidered or patch hat built from your selections on the customizer.",
+    features: [
+      "Choose your hat style and color",
+      "Custom embroidery, leather, or PVC patch",
+      "Your text or logo"
+    ],
+    colorsLabel: "Color",
+    colors: []
+  },
+
+  "custom-keychain": {
+    name: "Custom Keychain",
+    tag: "Keychain",
+    priceCents: 600,
+    image: "images/keychains/keychain-westward-farms.png",
+    category: "Forever Favorites",
+    categoryHref: "shop-forever-favorites.html",
+    hatType: "none",
+    hidden: true,
+    description: "A made-to-order engraved leatherette keychain built from your selections on the customizer.",
+    features: [
+      "Leatherette, laser engraved",
+      "Choose shape, size, and hardware",
+      "Your text or logo"
+    ],
+    colorsLabel: "Color",
+    colors: []
+  },
+
+  "custom-patch": {
+    name: "Custom Patch",
+    tag: "Patch",
+    priceCents: 400,
+    image: "images/patches/patch-shapes-card.png",
+    category: "Forever Favorites",
+    categoryHref: "shop-forever-favorites.html",
+    hatType: "none",
+    hidden: true,
+    description: "A made-to-order engraved leatherette patch built from your selections on the customizer.",
+    features: [
+      "Leatherette, laser engraved",
+      "Choose shape and size",
+      "Your text or logo"
+    ],
+    colorsLabel: "Color",
+    colors: []
+  },
+
   "show-me-flat-bill": {
     name: "Show Me Richardson Flat Bill Hat",
     tag: "Hat",

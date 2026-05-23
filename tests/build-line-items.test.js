@@ -1,11 +1,55 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const { buildLineItems } = require('../api/_lib/build-line-items.js');
+const { PRODUCTS } = require('../js/products.js');
 
 const catalog = {
   'hat-a': { name: 'Hat A', priceCents: 2500 },
   'tumbler-b': { name: 'Tumbler B', priceCents: 2000 }
 };
+
+// Regression: the tumbler customizer adds productId 'custom-tumbler' to the cart
+// (js/customize-tumblers.js). The REAL catalog must contain it or checkout throws
+// "unknown product: custom-tumbler" and the order can never complete.
+test('real catalog prices a custom-tumbler cart item (regression for unknown product)', () => {
+  const { lineItems } = buildLineItems({
+    items: [{ productId: 'custom-tumbler', quantity: 1, customizations: { Text: 'Hello' } }],
+    catalog: PRODUCTS,
+    shippingCents: 800
+  });
+  assert.equal(lineItems.length, 1);
+  assert.equal(lineItems[0].price_data.product_data.name, 'Custom Tumbler');
+  assert.equal(lineItems[0].price_data.unit_amount, 1400, 'base custom tumbler is $14');
+});
+
+test('checkout computes each custom builder price from its selections', () => {
+  const cases = [
+    [{ productId: 'custom-tumbler', quantity: 1, customizations: { Backing: 'Wraparound (360°)' } }, 2000],
+    [{ productId: 'custom-tumbler', quantity: 1, customizations: { Backing: 'Front + Back' } }, 1700],
+    [{ productId: 'custom-keychain', quantity: 1, customizations: { Size: '3"' } }, 800],
+    [{ productId: 'custom-keychain', quantity: 1, customizations: { Size: '1.5"' } }, 500],
+    [{ productId: 'custom-patch', quantity: 1, customizations: { Size: '2"' } }, 400],
+    [{ productId: 'custom-patch', quantity: 1, customizations: { Size: '5"' } }, 900],
+    [{ productId: 'custom-hat', quantity: 1, customizations: { Style: 'Trucker Hat' } }, 2500]
+  ];
+  for (const [item, expected] of cases) {
+    const { lineItems } = buildLineItems({ items: [item], catalog: PRODUCTS, shippingCents: 800 });
+    assert.equal(lineItems[0].price_data.unit_amount, expected,
+      `${item.productId} ${JSON.stringify(item.customizations)} should be ${expected} cents`);
+  }
+});
+
+test('subtotal uses the computed custom price for shipping-threshold logic', () => {
+  // 5 wraparound tumblers = 5 × $20 = $100 → upgraded shipping kicks in.
+  const { shippingItem } = buildLineItems({
+    items: [{ productId: 'custom-tumbler', quantity: 5, customizations: { Backing: 'Wraparound (360°)' } }],
+    catalog: PRODUCTS,
+    shippingCents: 800,
+    shippingUpgradeAtCents: 10000,
+    shippingUpgradeCents: 1000
+  });
+  assert.equal(shippingItem.price_data.unit_amount, 1000);
+});
 
 test('builds Stripe line_items from a valid cart', () => {
   const { lineItems, shippingItem } = buildLineItems({

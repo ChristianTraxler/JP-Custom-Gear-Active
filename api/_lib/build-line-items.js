@@ -2,6 +2,8 @@
 // Throws Error with a user-safe message on validation failure.
 'use strict';
 
+const { isCustomProduct, unitPriceCents, selectionFromCustomizations } = require('../../js/custom-pricing.js');
+
 const MAX_LINES = 50;
 const MAX_METADATA_VALUE = 500;
 
@@ -18,11 +20,17 @@ function buildLineItems({ items, catalog, shippingCents, shippingUpgradeAtCents,
     if (!Number.isFinite(qty) || qty < 1 || qty > 99) {
       throw new Error('invalid quantity for item ' + idx + ' (must be 1..99)');
     }
-    subtotalCents += product.priceCents * qty;
+    // Custom builders (tumbler/keychain/patch/hat) are priced from the customer's
+    // selections via the shared pricing module — never from a client-supplied price.
+    // Everything else uses the fixed catalog price.
+    const unitAmount = isCustomProduct(item.productId)
+      ? unitPriceCents(item.productId, selectionFromCustomizations(item.customizations))
+      : product.priceCents;
+    subtotalCents += unitAmount * qty;
     return {
       price_data: {
         currency: 'usd',
-        unit_amount: product.priceCents,
+        unit_amount: unitAmount,
         product_data: { name: product.name }
       },
       quantity: qty
