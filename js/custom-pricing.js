@@ -5,10 +5,11 @@
 // SEES always equals what they're CHARGED. The server recomputes the price from the customer's
 // selections — the browser-supplied price is never trusted.
 //
-// Pricing model (matches the original customizer formulas):
-//   dollars = max(floor, round(base * product of the selected option multipliers))
-//   cents   = dollars * 100
-// Unknown / unselected options default to a x1.0 multiplier.
+// Pricing model — two modes per product:
+//   1. priceCentsByOption: explicit cents looked up by one option (e.g. tumbler engraving),
+//      used when prices aren't whole dollars ($22.50). Falls back to `default`.
+//   2. base + multipliers + floor: cents = max(floor, round(base * Π multipliers)) * 100,
+//      used by keychain/patch/hat. Unknown/unselected options default to a x1.0 multiplier.
 //
 // KEEP IN SYNC: the base/floor/multiplier numbers below mirror the *_CONFIG tables in
 // js/customize-tumblers.js, js/customize-keychains.js and js/customize-patches.js, which
@@ -20,12 +21,16 @@
   const CUSTOM_PRICING = {
     'custom-tumbler': {
       name: 'Custom Tumbler',
-      base: 14,
-      floor: 8,
-      multipliers: {
-        type:    { 'Stainless Steel': 1.0 },
-        shape:   { '20 oz': 1.0 },
-        backing: { 'Front Only': 1.0, 'Front + Back': 1.2, 'Wraparound (360°)': 1.4 }
+      // Explicit price (in cents) per engraving area — these aren't whole dollars,
+      // so they're listed directly rather than computed via base × multiplier.
+      priceCentsByOption: {
+        dim: 'backing',
+        default: 2000, // Front Only / nothing selected = $20.00
+        prices: {
+          'Front Only': 2000,        // $20.00
+          'Front + Back': 2250,      // $22.50
+          'Wraparound (360°)': 2500  // $25.00
+        }
       }
     },
     'custom-keychain': {
@@ -61,11 +66,18 @@
     return Object.prototype.hasOwnProperty.call(CUSTOM_PRICING, productId);
   }
 
-  // sel: { type, shape, size, backing } — any subset; missing/unknown values are x1.0.
-  function unitPriceDollars(productId, sel) {
+  // sel: { type, shape, size, backing } — any subset; missing/unknown values default.
+  function unitPriceCents(productId, sel) {
     const cfg = CUSTOM_PRICING[productId];
     if (!cfg) throw new Error('not a custom product: ' + productId);
     sel = sel || {};
+    // Mode 1: explicit per-option cents (e.g. tumbler — supports non-whole-dollar prices).
+    if (cfg.priceCentsByOption) {
+      const { dim, prices, default: def } = cfg.priceCentsByOption;
+      const chosen = sel[dim];
+      return (chosen != null && prices[chosen] != null) ? prices[chosen] : def;
+    }
+    // Mode 2: whole-dollar base × option multipliers, rounded to the nearest dollar.
     let factor = 1;
     const mults = cfg.multipliers || {};
     for (const dim of Object.keys(mults)) {
@@ -73,11 +85,11 @@
       const chosen = sel[dim];
       factor *= (chosen != null && table[chosen] != null) ? table[chosen] : 1.0;
     }
-    return Math.max(cfg.floor, Math.round(cfg.base * factor));
+    return Math.max(cfg.floor, Math.round(cfg.base * factor)) * 100;
   }
 
-  function unitPriceCents(productId, sel) {
-    return unitPriceDollars(productId, sel) * 100;
+  function unitPriceDollars(productId, sel) {
+    return unitPriceCents(productId, sel) / 100;
   }
 
   // Server helper: rebuild a pricing selection from a cart item's `customizations` object,

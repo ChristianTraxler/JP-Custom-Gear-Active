@@ -27,17 +27,11 @@
       "Front + Back",
       "Wraparound (360°)"
     ],
-    basePrice: 14,
-    typeMultiplier: {
-      "Stainless Steel": 1.0
-    },
-    sizeMultiplier: {
-      '20 oz': 1.0
-    },
-    backingMultiplier: {
-      "Front Only": 1.0,
-      "Front + Back": 1.2,
-      "Wraparound (360°)": 1.4
+    // Engraving price in cents — keep in sync with js/custom-pricing.js (the checkout authority).
+    backingPriceCents: {
+      "Front Only": 2000,        // $20.00
+      "Front + Back": 2250,      // $22.50
+      "Wraparound (360°)": 2500  // $25.00
     }
   };
 
@@ -219,10 +213,8 @@
   }
 
   function calcUnitPrice(s) {
-    const tMult = TUMBLER_CONFIG.typeMultiplier[s.type] || 1.0;
-    const cMult = TUMBLER_CONFIG.sizeMultiplier[s.shape] || 1.0; // capacity
-    const eMult = TUMBLER_CONFIG.backingMultiplier[s.backing] || 1.0;
-    return Math.max(8, Math.round(TUMBLER_CONFIG.basePrice * tMult * cMult * eMult));
+    const cents = TUMBLER_CONFIG.backingPriceCents[s.backing];
+    return (cents != null ? cents : 2000) / 100; // dollars (may be fractional, e.g. 22.5)
   }
 
   function updateSummary() {
@@ -240,7 +232,9 @@
 
     const unit = calcUnitPrice(s);
     const price = unit * s.qty;
-    document.getElementById('cz-price').textContent = '$' + price.toLocaleString() + '+';
+    // Show cents when the price isn't a whole dollar (e.g. $22.50), else a plain dollar amount.
+    const priceStr = Number.isInteger(price) ? price.toLocaleString() : price.toFixed(2);
+    document.getElementById('cz-price').textContent = '$' + priceStr + '+';
   }
 
   // Submit

@@ -317,7 +317,7 @@ const PRODUCTS = {
   "custom-tumbler": {
     name: "Custom Tumbler",
     tag: "Tumbler",
-    priceCents: 1400,
+    priceCents: 2000,
     image: "images/tumblers/mama-tumbler.png",
     category: "Forever Favorites",
     categoryHref: "shop-forever-favorites.html",

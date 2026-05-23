@@ -19,13 +19,13 @@ test('real catalog prices a custom-tumbler cart item (regression for unknown pro
   });
   assert.equal(lineItems.length, 1);
   assert.equal(lineItems[0].price_data.product_data.name, 'Custom Tumbler');
-  assert.equal(lineItems[0].price_data.unit_amount, 1400, 'base custom tumbler is $14');
+  assert.equal(lineItems[0].price_data.unit_amount, 2000, 'base custom tumbler is $20');
 });
 
 test('checkout computes each custom builder price from its selections', () => {
   const cases = [
-    [{ productId: 'custom-tumbler', quantity: 1, customizations: { Backing: 'Wraparound (360°)' } }, 2000],
-    [{ productId: 'custom-tumbler', quantity: 1, customizations: { Backing: 'Front + Back' } }, 1700],
+    [{ productId: 'custom-tumbler', quantity: 1, customizations: { Backing: 'Wraparound (360°)' } }, 2500],
+    [{ productId: 'custom-tumbler', quantity: 1, customizations: { Backing: 'Front + Back' } }, 2250],
     [{ productId: 'custom-keychain', quantity: 1, customizations: { Size: '3"' } }, 800],
     [{ productId: 'custom-keychain', quantity: 1, customizations: { Size: '1.5"' } }, 500],
     [{ productId: 'custom-patch', quantity: 1, customizations: { Size: '2"' } }, 400],
@@ -40,7 +40,7 @@ test('checkout computes each custom builder price from its selections', () => {
 });
 
 test('subtotal uses the computed custom price for shipping-threshold logic', () => {
-  // 5 wraparound tumblers = 5 × $20 = $100 → upgraded shipping kicks in.
+  // 5 wraparound tumblers = 5 × $25 = $125 → over the $100 threshold → upgraded shipping.
   const { shippingItem } = buildLineItems({
     items: [{ productId: 'custom-tumbler', quantity: 5, customizations: { Backing: 'Wraparound (360°)' } }],
     catalog: PRODUCTS,

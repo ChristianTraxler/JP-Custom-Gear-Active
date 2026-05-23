@@ -15,15 +15,16 @@ test('isCustomProduct recognizes the four custom builders only', () => {
 });
 
 test('tumbler priced by engraving area', () => {
-  assert.equal(unitPriceDollars('custom-tumbler', { backing: 'Front Only' }), 14);
-  assert.equal(unitPriceDollars('custom-tumbler', { backing: 'Front + Back' }), 17); // round(14*1.2)=17
-  assert.equal(unitPriceDollars('custom-tumbler', { backing: 'Wraparound (360°)' }), 20); // round(14*1.4)=20
-  assert.equal(unitPriceCents('custom-tumbler', { backing: 'Wraparound (360°)' }), 2000);
+  assert.equal(unitPriceDollars('custom-tumbler', { backing: 'Front Only' }), 20);     // $20.00
+  assert.equal(unitPriceDollars('custom-tumbler', { backing: 'Front + Back' }), 22.5); // $22.50
+  assert.equal(unitPriceDollars('custom-tumbler', { backing: 'Wraparound (360°)' }), 25); // $25.00
+  assert.equal(unitPriceCents('custom-tumbler', { backing: 'Front + Back' }), 2250);
+  assert.equal(unitPriceCents('custom-tumbler', { backing: 'Wraparound (360°)' }), 2500);
 });
 
 test('tumbler defaults to base when no engraving selected (and color/shape do not change price)', () => {
-  assert.equal(unitPriceDollars('custom-tumbler', {}), 14);
-  assert.equal(unitPriceDollars('custom-tumbler', { size: 'Black/Copper', shape: '20 oz' }), 14);
+  assert.equal(unitPriceDollars('custom-tumbler', {}), 20);
+  assert.equal(unitPriceDollars('custom-tumbler', { size: 'Black/Copper', shape: '20 oz' }), 20);
 });
 
 test('keychain priced by size', () => {
@@ -54,7 +55,7 @@ test('floor prevents nonsensical sub-floor prices', () => {
 test('selectionFromCustomizations maps Title-cased cart labels back to pricing fields', () => {
   const sel = selectionFromCustomizations({ Backing: 'Wraparound (360°)', Size: '3"', Type: 'Stainless Steel', Text: 'Hi' });
   assert.deepEqual(sel, { type: 'Stainless Steel', shape: undefined, size: '3"', backing: 'Wraparound (360°)' });
-  assert.equal(unitPriceCents('custom-tumbler', sel), 2000);
+  assert.equal(unitPriceCents('custom-tumbler', sel), 2500);
 });
 
 test('throws for non-custom product ids', () => {
