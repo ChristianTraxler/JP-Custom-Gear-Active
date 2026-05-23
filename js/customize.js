@@ -306,7 +306,9 @@
       unitPrice: 2500, // base $25 — matches the customizer's current "$25+" display
       quantity: Number(s.qty) || 1,
       customizations,
-      thumbnail: 'images/hats/salt-water-camo.png'
+      // Use the image for the chosen hat body style (same one shown in the customizer
+      // preview), falling back to the style's default image — not a fixed hat.
+      thumbnail: imageForSubOption(s.suboption)
     });
 
     window.location.href = 'cart.html';
