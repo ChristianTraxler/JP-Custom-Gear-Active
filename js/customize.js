@@ -198,6 +198,9 @@
   subSel.addEventListener('change', () => {
     previewImg.src = imageForSubOption(subSel.value);
     populateColors(colorsForSubOption(subSel.value));
+    // When colors depend on the body style, reset to that style's default color
+    // (e.g. switching 256 → 112/168 returns to Black) instead of carrying the old pick over.
+    if (config.subOptionColors) colorSel.selectedIndex = 0;
     updateSwatch();
     updateSummary();
   });

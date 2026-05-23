@@ -7,7 +7,7 @@ window.HAT_STYLES = {
     subOptions: { label: "Hat Body Style", values: ["Richardson 112", "Richardson 168", "Richardson 256"] },
     subOptionImages: {
       "Richardson 112": "images/hats/IMG_0684.png",
-      "Richardson 168": "images/hats/mama-tried-168.png",
+      "Richardson 168": "images/hats/IMG_1303.png",
       "Richardson 256": "images/hats/richardson256.png"
     },
     subOptionColors: {
