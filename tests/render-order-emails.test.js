@@ -74,6 +74,39 @@ test('customer email does NOT include internal-only fields', () => {
   assert.ok(out.customerHtml.includes('$58.00'));
 });
 
+test('customer email includes customization details so the buyer sees their custom spec', () => {
+  const out = renderOrderEmails(fakeSession, fakeOpts);
+  assert.ok(out.customerHtml.includes('Color'), 'customer HTML should label customizations');
+  assert.ok(out.customerHtml.includes('Salt Water Camo / White'), 'customer HTML should list customization values');
+  assert.ok(out.customerText.includes('Salt Water Camo / White'), 'customer text should list customization values');
+});
+
+test('customer email omits the redundant Customer Name / Customer Email echo; owner keeps it', () => {
+  const session = {
+    ...fakeSession,
+    metadata: {
+      item_0: JSON.stringify({
+        productId: 'salt-water-camo-hat',
+        customizations: {
+          Color: 'Salt Water Camo / White',
+          'Customer Name': 'Jane Customer',
+          'Customer Email': 'jane.unique@example.com'
+        }
+      })
+    }
+  };
+  const out = renderOrderEmails(session, fakeOpts);
+  // Owner copy keeps the contact echo in the order details.
+  assert.ok(out.ownerHtml.includes('jane.unique@example.com'), 'owner keeps echoed email');
+  assert.ok(out.ownerText.includes('Customer Name'), 'owner keeps the Customer Name label');
+  // Customer copy drops it (already greeted by name + sent to their address).
+  assert.ok(!out.customerHtml.includes('jane.unique@example.com'), 'customer HTML omits echoed email');
+  assert.ok(!out.customerText.includes('jane.unique@example.com'), 'customer text omits echoed email');
+  assert.ok(!out.customerText.includes('Customer Email'), 'customer text omits the Customer Email label');
+  // …but still shows the real custom spec.
+  assert.ok(out.customerText.includes('Salt Water Camo / White'), 'customer copy still shows the spec');
+});
+
 test('order reference is last 8 chars of session id, uppercased', () => {
   const out = renderOrderEmails(fakeSession, fakeOpts);
   assert.ok(out.ownerSubject.includes('12345XYZ'));

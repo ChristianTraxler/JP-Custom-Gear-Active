@@ -48,6 +48,10 @@ function productImageFor(catalog, productId) {
   return p && p.image ? p.image : '';
 }
 
+// The buyer's own name/email are echoed in the greeting and the To: address, so
+// they're filtered out of the customer's order-detail list (the owner copy keeps them).
+const CUSTOMER_HIDDEN_CUSTOM_KEYS = new Set(['Customer Name', 'Customer Email']);
+
 function renderOrderEmails(session, opts) {
   const ref = orderRef(session.id);
   const customer = session.customer_details || {};
@@ -156,10 +160,23 @@ function renderOrderEmails(session, opts) {
       const imgHtml = imgUrl
         ? `<img src="${escapeHtml(imgUrl)}" alt="${escapeHtml(li.description)}" width="80" height="80" style="display:block;border-radius:6px;object-fit:cover;background:#f0ede5">`
         : '';
+      // Show the buyer the exact custom spec they ordered, minus contact fields they
+      // already see in the greeting / To: address (the owner copy keeps everything).
+      const customs = customizationsList[idx] && customizationsList[idx].customizations;
+      const customEntries = customs
+        ? Object.entries(customs).filter(([k]) => !CUSTOMER_HIDDEN_CUSTOM_KEYS.has(k))
+        : [];
+      const customsHtml = customEntries.length
+        ? '<ul style="margin:4px 0 0 16px;color:#555;font-size:14px">' +
+          customEntries.map(([k, v]) =>
+            `<li><strong>${escapeHtml(k)}:</strong> ${escapeHtml(v)}</li>`
+          ).join('') +
+          '</ul>'
+        : '';
       return `<li style="margin-bottom:16px;list-style:none">
         <table cellpadding="0" cellspacing="0" border="0"><tr>
           <td style="vertical-align:top;padding-right:12px">${imgHtml}</td>
-          <td style="vertical-align:top">${escapeHtml(li.description)} — qty ${escapeHtml(li.quantity)} — ${fmt(li.amount_total)}</td>
+          <td style="vertical-align:top">${escapeHtml(li.description)} — qty ${escapeHtml(li.quantity)} — ${fmt(li.amount_total)}${customsHtml}</td>
         </tr></table>
       </li>`;
     })
@@ -196,8 +213,19 @@ function renderOrderEmails(session, opts) {
     customerIntroText,
     ``,
     `Order summary:`,
-    ...lineItems.filter(li => li.description !== 'Shipping')
-      .map(li => `- ${li.description} — qty ${li.quantity} — ${fmt(li.amount_total)}`),
+    ...lineItems
+      .map((li, idx) => ({ li, idx }))
+      .filter(({ li }) => li.description !== 'Shipping')
+      .map(({ li, idx }) => {
+        const customs = customizationsList[idx] && customizationsList[idx].customizations;
+        const customEntries = customs
+          ? Object.entries(customs).filter(([k]) => !CUSTOMER_HIDDEN_CUSTOM_KEYS.has(k))
+          : [];
+        const customsTxt = customEntries.length
+          ? '\n' + customEntries.map(([k, v]) => `    - ${k}: ${v}`).join('\n')
+          : '';
+        return `- ${li.description} — qty ${li.quantity} — ${fmt(li.amount_total)}${customsTxt}`;
+      }),
     ``,
     `Subtotal: ${subtotal}`,
     `Shipping: ${shipping}`,
