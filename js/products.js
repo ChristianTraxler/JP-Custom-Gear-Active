@@ -123,13 +123,13 @@ const PRODUCTS = {
     name: "She Prayed Until the Chains Fell Off Comfort Color Tee",
     tag: "Shirt",
     priceCents: 2500,
-    image: "images/shirts/foam-side.png",
+    image: "images/shirts/IMG_1385.png",
     gallery: [
-      "images/shirts/foam-side.png",
+      "images/shirts/IMG_1385.png",
       "images/shirts/IMG_1297.png"
     ],
     galleryFit: "contain",
-    galleryBackgrounds: ["#ECE2CC", "#e1d3c4"],
+    galleryBackgrounds: ["#F3DFC8", "#e1d3c4"],
     category: "The Foam Side",
     categoryHref: "shop-foam-side.html",
     hatType: "none",
@@ -244,6 +244,60 @@ const PRODUCTS = {
       "100% ring-spun cotton, garment-dyed",
       "Relaxed unisex fit — true to size",
       "Front pocket print + full back print",
+      "Pre-shrunk for minimal wash shrinkage"
+    ],
+    colorsLabel: "Color",
+    colors: COMFORT_COLORS_COLORS,
+    sizes: TEE_SIZES
+  },
+
+  "mama-floral-tee": {
+    name: "Mama Floral Comfort Color Tee",
+    tag: "Shirt",
+    priceCents: 2500,
+    image: "images/shirts/IMG_1384.png",
+    imageFit: "cover",
+    gallery: [
+      "images/shirts/IMG_1384.png",
+      "images/shirts/IMG_1297.png"
+    ],
+    galleryFit: "contain",
+    galleryBackgrounds: ["#f4e1cd", "#e1d3c4"],
+    category: "The Foam Side",
+    categoryHref: "shop-foam-side.html",
+    hatType: "none",
+    description: "For the mama who keeps it all blooming. A Comfort Colors® garment-dyed tee with a ditsy-floral 'MAMA' graphic on a soft sage canvas. Broken-in feel from the first wear, built to last wash after wash.",
+    features: [
+      "100% ring-spun cotton, garment-dyed",
+      "Relaxed unisex fit — true to size",
+      "Screen-printed in the USA",
+      "Pre-shrunk for minimal wash shrinkage"
+    ],
+    colorsLabel: "Color",
+    colors: COMFORT_COLORS_COLORS,
+    sizes: TEE_SIZES
+  },
+
+  "nurse-rainbow-tee": {
+    name: "Nurse Rainbow Comfort Color Tee",
+    tag: "Shirt",
+    priceCents: 2500,
+    image: "images/shirts/IMG_1379.png",
+    imageFit: "cover",
+    gallery: [
+      "images/shirts/IMG_1379.png",
+      "images/shirts/IMG_1297.png"
+    ],
+    galleryFit: "contain",
+    galleryBackgrounds: ["#f3e4d1", "#e1d3c4"],
+    category: "The Foam Side",
+    categoryHref: "shop-foam-side.html",
+    hatType: "none",
+    description: "Big color for the ones who show up shift after shift. A Comfort Colors® garment-dyed tee with an arched, rainbow-gingham 'NURSE' varsity graphic. Soft, lived-in, and built to last.",
+    features: [
+      "100% ring-spun cotton, garment-dyed",
+      "Relaxed unisex fit — true to size",
+      "Screen-printed in the USA",
       "Pre-shrunk for minimal wash shrinkage"
     ],
     colorsLabel: "Color",
@@ -797,6 +851,26 @@ const PRODUCTS = {
       "Richardson 112 — structured 6-panel trucker",
       "Breathable mesh back, snap-back adjustable",
       "Leather or PVC bass patch",
+      "One size fits most"
+    ],
+    colorsLabel: "Color",
+    colors: RICHARDSON_112_COLORS
+  },
+
+  "whitetail-deer-112": {
+    name: "Whitetail Deer Leather Patch – Richardson 112",
+    tag: "Hat",
+    priceCents: 2500,
+    image: "images/hats/IMG_1382.png",
+    imageFit: "cover",
+    category: "Woods & Water",
+    categoryHref: "shop-woods-water.html",
+    hatType: "112",
+    description: "For the hunter who lives for first light. Heather-grey Richardson 112 trucker with a laser-engraved leather whitetail buck patch — built for the stand, the truck, and everywhere in between.",
+    features: [
+      "Richardson 112 — structured 6-panel trucker",
+      "Breathable mesh back, snap-back adjustable",
+      "Laser-engraved leather whitetail patch",
       "One size fits most"
     ],
     colorsLabel: "Color",

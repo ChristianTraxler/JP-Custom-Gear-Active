@@ -7,6 +7,19 @@ const { isCustomProduct, unitPriceCents, selectionFromCustomizations } = require
 const MAX_LINES = 50;
 const MAX_METADATA_VALUE = 500;
 
+// For sized apparel (e.g. tees), the unit price depends on the chosen size
+// (2X/3X cost more). The price always comes from the catalog's `sizes` table —
+// the client only supplies the size label, never a price. Falls back to the base
+// price when the product isn't sized or the label is missing/unrecognized.
+function catalogUnitPrice(product, customizations) {
+  if (Array.isArray(product.sizes) && product.sizes.length) {
+    const label = customizations && customizations.Size;
+    const match = label && product.sizes.find(s => s.label === label);
+    if (match) return match.priceCents;
+  }
+  return product.priceCents;
+}
+
 function buildLineItems({ items, catalog, shippingCents, shippingUpgradeAtCents, shippingUpgradeCents, localPickup }) {
   if (!Array.isArray(items)) throw new Error('items must be an array');
   if (items.length === 0) throw new Error('empty cart');
@@ -25,7 +38,7 @@ function buildLineItems({ items, catalog, shippingCents, shippingUpgradeAtCents,
     // Everything else uses the fixed catalog price.
     const unitAmount = isCustomProduct(item.productId)
       ? unitPriceCents(item.productId, selectionFromCustomizations(item.customizations))
-      : product.priceCents;
+      : catalogUnitPrice(product, item.customizations);
     subtotalCents += unitAmount * qty;
     return {
       price_data: {

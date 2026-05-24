@@ -39,6 +39,50 @@ test('checkout computes each custom builder price from its selections', () => {
   }
 });
 
+// Sized apparel: 2X/3X tees cost more than the base S–XL price. The server must
+// charge the size-specific price from the catalog (TEE_SIZES), not the flat
+// product.priceCents, or 2X/3X buyers are undercharged $2.
+test('charges the size-specific price for 2X / 3X tees', () => {
+  const base = buildLineItems({
+    items: [{ productId: 'mama-floral-tee', quantity: 1, customizations: { Size: 'L' } }],
+    catalog: PRODUCTS, shippingCents: 800
+  });
+  assert.equal(base.lineItems[0].price_data.unit_amount, 2500, 'S–XL tee is $25');
+
+  for (const big of ['2X', '3X']) {
+    const { lineItems } = buildLineItems({
+      items: [{ productId: 'mama-floral-tee', quantity: 1, customizations: { Size: big } }],
+      catalog: PRODUCTS, shippingCents: 800
+    });
+    assert.equal(lineItems[0].price_data.unit_amount, 2700, `${big} tee is $27`);
+  }
+});
+
+test('falls back to base price when a sized product has no/unknown size', () => {
+  for (const customizations of [{}, { Size: 'XXXXL' }]) {
+    const { lineItems } = buildLineItems({
+      items: [{ productId: 'mama-floral-tee', quantity: 1, customizations }],
+      catalog: PRODUCTS, shippingCents: 800
+    });
+    assert.equal(lineItems[0].price_data.unit_amount, 2500,
+      `missing/unknown size should fall back to base $25 (${JSON.stringify(customizations)})`);
+  }
+});
+
+test('size-based price feeds the shipping-threshold subtotal', () => {
+  // 3 × 3X tees: size price = 3 × $27 = $81 (≥ $80 → upgraded), but the buggy
+  // flat price = 3 × $25 = $75 (< $80 → base). Threshold chosen so only correct
+  // size pricing crosses it, making this test fail under the bug.
+  const { shippingItem } = buildLineItems({
+    items: [{ productId: 'mama-floral-tee', quantity: 3, customizations: { Size: '3X' } }],
+    catalog: PRODUCTS,
+    shippingCents: 800,
+    shippingUpgradeAtCents: 8000,
+    shippingUpgradeCents: 1000
+  });
+  assert.equal(shippingItem.price_data.unit_amount, 1000);
+});
+
 test('subtotal uses the computed custom price for shipping-threshold logic', () => {
   // 5 wraparound tumblers = 5 × $25 = $125 → over the $100 threshold → upgraded shipping.
   const { shippingItem } = buildLineItems({
