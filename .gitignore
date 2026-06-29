@@ -64,3 +64,6 @@ coverage/
 *.orig
 .vercel
 .env*.local
+
+# DOC Tracker link (local only)
+.doc-tracker.json
