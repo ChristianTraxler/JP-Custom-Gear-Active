@@ -92,7 +92,7 @@
 
     <!-- HERO -->
     <section class="hero" id="hero">
-      <video class="hero-video" autoplay muted loop playsinline preload="auto" src="hero-bg.mp4"></video>
+      <video class="hero-video" autoplay muted playsinline preload="auto" poster="images/hero-bg-poster.jpg" src="hero-bg.mp4"></video>
       <div class="hero-video-overlay"></div>
       <div class="hero-grain"></div>
       <div class="hero-glow"></div>
@@ -764,6 +764,16 @@
           });
         });
       });
+    </script>
+    <script>
+      // Some browsers skip the autoplay attribute; start the hero video once on load.
+      (function () {
+        var v = document.querySelector('.hero-video');
+        if (!v) return;
+        v.muted = true;
+        var p = v.play();
+        if (p && p.catch) p.catch(function () {});
+      })();
     </script>
   </body>
 </html>
