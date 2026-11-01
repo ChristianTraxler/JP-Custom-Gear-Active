@@ -146,11 +146,23 @@ function renderOrderEmails(session, opts) {
   const customizationsList = parseCustomizations(session.metadata);
   const lineItems = (session.line_items && session.line_items.data) || [];
   const total = fmt(session.amount_total);
-  const subtotal = fmt(session.amount_subtotal);
   const isLocalPickup = !!(session.metadata && session.metadata.local_pickup === '1');
-  const shipping = isLocalPickup
-    ? 'Local pickup (free)'
-    : fmt(session.shipping_cost && session.shipping_cost.amount_total);
+  // Shipping is charged as a Stripe line item named "Shipping", so Stripe's own
+  // shipping_cost / total_details.amount_shipping are empty. Prefer the line item,
+  // then fall back to those fields.
+  const shippingLine = lineItems.find((li) => li.description === 'Shipping');
+  const shippingCents = isLocalPickup
+    ? 0
+    : shippingLine
+      ? Number(shippingLine.amount_total) || 0
+      : Number(
+          (session.shipping_cost && session.shipping_cost.amount_total) ||
+          (session.total_details && session.total_details.amount_shipping) || 0
+        );
+  const shipping = isLocalPickup ? 'Free (local pickup)' : fmt(shippingCents);
+  // Stripe's amount_subtotal includes the shipping line item, so derive the
+  // product subtotal from the total to keep subtotal + shipping = total.
+  const subtotal = fmt((Number(session.amount_total) || 0) - shippingCents);
   const catalog = (opts && opts.catalog) || {};
   const siteUrl = (opts && opts.siteUrl) || '';
 
@@ -166,7 +178,11 @@ function renderOrderEmails(session, opts) {
   // ---- Owner email ----
   const ownerSubject = `New order #${ref} — ${customer.name || 'Customer'} — ${total}`;
 
-  const itemsListHtml = lineItems.map((li, idx) => {
+  const productLineItems = lineItems
+    .map((li, idx) => ({ li, idx }))
+    .filter(({ li }) => li.description !== 'Shipping');
+
+  const itemsListHtml = productLineItems.map(({ li, idx }) => {
     const customs = customizationsList[idx] && customizationsList[idx].customizations;
     const customsHtml = customs && Object.keys(customs).length
       ? '<ul style="margin:4px 0 0 16px;color:#555;font-size:14px">' +
@@ -220,7 +236,7 @@ function renderOrderEmails(session, opts) {
     renderAddress(customer.address),
     ``,
     `Items:`,
-    ...lineItems.map((li, idx) => {
+    ...productLineItems.map(({ li, idx }) => {
       const customs = customizationsList[idx] && customizationsList[idx].customizations;
       const customsTxt = customs && Object.keys(customs).length
         ? Object.entries(customs).map(([k, v]) => `    - ${k}: ${v}`).join('\n')

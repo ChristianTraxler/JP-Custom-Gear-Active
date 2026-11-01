@@ -220,3 +220,57 @@ test('camo beanie emails pick the per-color email image', () => {
     assert.ok(out.customerHtml.includes(expected), color + ' customer');
   }
 });
+
+// Real Stripe sessions carry shipping as a line item; shipping_cost is empty and
+// amount_subtotal includes the shipping line.
+const shippedSession = {
+  ...fakeSession,
+  amount_total: 5800,
+  amount_subtotal: 5800,
+  shipping_cost: null
+};
+
+test('shipping order: shows the $8.00 shipping from the line item and hides it from the item lists', () => {
+  const out = renderOrderEmails(shippedSession, fakeOpts);
+  for (const body of [out.ownerHtml, out.ownerText, out.customerHtml, out.customerText]) {
+    assert.ok(body.includes('Shipping: $8.00'));
+    assert.ok(!body.includes('Shipping — qty'));
+    assert.ok(!body.includes('<strong>Shipping</strong>'));
+  }
+  assert.ok(!out.ownerText.includes('- Shipping'));
+});
+
+test('shipping order: subtotal + shipping = total', () => {
+  const out = renderOrderEmails(shippedSession, fakeOpts);
+  assert.ok(out.ownerText.includes('Subtotal: $50.00'));
+  assert.ok(out.ownerText.includes('Shipping: $8.00'));
+  assert.ok(out.ownerText.includes('Total: $58.00'));
+  assert.ok(out.customerText.includes('Subtotal: $50.00'));
+});
+
+test('shipping falls back to total_details.amount_shipping when there is no shipping line', () => {
+  const s = {
+    ...shippedSession,
+    total_details: { amount_shipping: 800 },
+    line_items: { data: [shippedSession.line_items.data[0]] }
+  };
+  const out = renderOrderEmails(s, fakeOpts);
+  assert.ok(out.ownerText.includes('Shipping: $8.00'));
+  assert.ok(out.ownerText.includes('Subtotal: $50.00'));
+});
+
+test('local pickup order: Shipping is Free (local pickup) and total equals subtotal', () => {
+  const s = {
+    ...shippedSession,
+    amount_total: 5000,
+    amount_subtotal: 5000,
+    metadata: { ...shippedSession.metadata, local_pickup: '1' },
+    line_items: { data: [shippedSession.line_items.data[0]] }
+  };
+  const out = renderOrderEmails(s, fakeOpts);
+  for (const body of [out.ownerHtml, out.ownerText, out.customerHtml, out.customerText]) {
+    assert.ok(body.includes('Shipping: Free (local pickup)'));
+  }
+  assert.ok(out.ownerText.includes('Subtotal: $50.00'));
+  assert.ok(out.ownerText.includes('Total: $50.00'));
+});
