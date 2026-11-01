@@ -5178,3 +5178,19 @@
   font-size: 0.8rem;
   color: var(--jp-leather);
 }
+
+/* ---------- Step numbers follow the visible sections (hidden sections do not count) ---------- */
+.jp-cz,
+.jp-bulk {
+  counter-reset: cz-step;
+}
+.jp-cz .cz-section > .cz-section-num,
+.jp-bulk .cz-section > .cz-section-num {
+  font-size: 0; /* hides the typed number; ::before draws the counted one */
+  counter-increment: cz-step;
+}
+.jp-cz .cz-section > .cz-section-num::before,
+.jp-bulk .cz-section > .cz-section-num::before {
+  content: counter(cz-step, decimal-leading-zero);
+  font-size: 0.7rem;
+}
