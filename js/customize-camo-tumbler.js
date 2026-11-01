@@ -65,6 +65,10 @@
 
   // Blank toggle: hides the design fields and drops the price to the blank rate
   const blankBox = document.getElementById('cz-blank');
+  // Tile prices read from the same config as the totals.
+  const money = (cents) => '$' + (cents % 100 === 0 ? String(cents / 100) : (cents / 100).toFixed(2));
+  document.getElementById('cz-blank-price').textContent = money(TUMBLER_CONFIG.blankPriceCents);
+  document.getElementById('cz-custom-price').textContent = money(TUMBLER_CONFIG.customPriceCents);
   const designSection = document.getElementById('cz-design-section');
 
   function applyBlankState() {
@@ -185,7 +189,7 @@
 
   // Other inputs
   document.getElementById('cz-text').addEventListener('input', updateSummary);
-  blankBox.addEventListener('change', () => { applyBlankState(); updateSummary(); });
+  document.querySelectorAll('input[name="blank"]').forEach(r => r.addEventListener('change', () => { applyBlankState(); updateSummary(); }));
 
   document.getElementById('cz-text').addEventListener('input', () => {
     if (document.getElementById('cz-text').value.trim()) hideDesignError();

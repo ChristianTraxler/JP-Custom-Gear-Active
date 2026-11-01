@@ -5155,3 +5155,26 @@
     transition: none;
   }
 }
+
+/* ---------- Blank or Customize choice tiles (customizer pages): always two across ---------- */
+.jp-cz .cz-choice-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.jp-cz .cz-choice-grid .cz-radio-box {
+  min-height: 64px;
+}
+.jp-cz .cz-choice-grid .cz-radio-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.jp-cz .cz-choice-name {
+  font-weight: 600;
+}
+.jp-cz .cz-choice-price {
+  font-size: 0.8rem;
+  color: var(--jp-leather);
+}

@@ -132,15 +132,23 @@
         <div class="cz-section-num">03</div>
         <div class="cz-section-head">
           <h2>Blank or Custom</h2>
-          <p id="cz-blank-note">Blank beanies are $20. Customized beanies are $25.</p>
         </div>
-        <label class="cz-radio">
-          <input type="checkbox" id="cz-blank" name="blank" />
-          <span class="cz-radio-box">
-            <span class="cz-radio-dot"></span>
-            <span class="cz-radio-text">Order blank (no customization)</span>
-          </span>
-        </label>
+        <div class="cz-choice-grid" role="radiogroup" aria-label="Blank or customized">
+          <label class="cz-radio">
+            <input type="radio" id="cz-blank" name="blank" value="blank" />
+            <span class="cz-radio-box">
+              <span class="cz-radio-dot"></span>
+              <span class="cz-radio-text"><span class="cz-choice-name">Blank</span><span class="cz-choice-price" id="cz-blank-price"></span></span>
+            </span>
+          </label>
+          <label class="cz-radio">
+            <input type="radio" id="cz-custom" name="blank" value="custom" checked />
+            <span class="cz-radio-box">
+              <span class="cz-radio-dot"></span>
+              <span class="cz-radio-text"><span class="cz-choice-name">Customize</span><span class="cz-choice-price" id="cz-custom-price"></span></span>
+            </span>
+          </label>
+        </div>
       </div>
 
       <div class="cz-section" id="cz-design-section">

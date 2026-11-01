@@ -16,8 +16,8 @@
 
   // Single design, so no pattern picker. Price copy reads from the same config as the totals.
   const money = (cents) => '$' + (cents % 100 === 0 ? String(cents / 100) : (cents / 100).toFixed(2));
-  document.getElementById('cz-blank-note').textContent =
-    `Blank tees are ${money(TEE_CONFIG.blankPriceCents)}. Customized tees are ${money(TEE_CONFIG.customPriceCents)}.`;
+  document.getElementById('cz-blank-price').textContent = money(TEE_CONFIG.blankPriceCents);
+  document.getElementById('cz-custom-price').textContent = money(TEE_CONFIG.customPriceCents);
 
   // Populate Size dropdown (required, starts unselected)
   const sizeSel = document.getElementById('cz-size');
@@ -175,7 +175,7 @@
   document.getElementById('cz-text').addEventListener('input', updateSummary);
   sizeSel.addEventListener('change', () => { hideSizeError(); updateSummary(); });
   backingGrid.addEventListener('change', updateSummary);
-  blankBox.addEventListener('change', () => { applyBlankState(); updateSummary(); });
+  document.querySelectorAll('input[name="blank"]').forEach(r => r.addEventListener('change', () => { applyBlankState(); updateSummary(); }));
 
   document.getElementById('cz-text').addEventListener('input', () => {
     if (document.getElementById('cz-text').value.trim()) hideDesignError();

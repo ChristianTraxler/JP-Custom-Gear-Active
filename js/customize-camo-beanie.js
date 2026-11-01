@@ -91,10 +91,10 @@
   const blankBox = document.getElementById('cz-blank');
   const designSection = document.getElementById('cz-design-section');
 
-  // Price copy under "Blank or Custom" reads from the same config as the totals.
+  // Tile prices under "Blank or Custom" read from the same config as the totals.
   const money = (cents) => '$' + (cents % 100 === 0 ? String(cents / 100) : (cents / 100).toFixed(2));
-  document.getElementById('cz-blank-note').textContent =
-    `Blank beanies are ${money(BEANIE_CONFIG.blankPriceCents)}. Customized beanies are ${money(BEANIE_CONFIG.customPriceCents)}.`;
+  document.getElementById('cz-blank-price').textContent = money(BEANIE_CONFIG.blankPriceCents);
+  document.getElementById('cz-custom-price').textContent = money(BEANIE_CONFIG.customPriceCents);
 
   function applyBlankState() {
     const blank = blankBox.checked;
@@ -235,7 +235,7 @@
 
   // Other inputs
   document.getElementById('cz-text').addEventListener('input', updateSummary);
-  blankBox.addEventListener('change', () => { applyBlankState(); updateSummary(); });
+  document.querySelectorAll('input[name="blank"]').forEach(r => r.addEventListener('change', () => { applyBlankState(); updateSummary(); }));
 
   document.getElementById('cz-text').addEventListener('input', () => {
     if (document.getElementById('cz-text').value.trim()) hideDesignError();
