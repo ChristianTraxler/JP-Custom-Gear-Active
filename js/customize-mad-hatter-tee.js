@@ -1,7 +1,6 @@
 (function () {
   // Pricing mirrors js/custom-pricing.js ('custom-mad-hatter-tee'), which is the checkout authority.
-  // PLACEHOLDER PRICE: confirm with client. Change the two prices below and the matching
-  // entry in js/custom-pricing.js.
+  // Change these together with the matching entry in js/custom-pricing.js.
   // Every price shown on this page reads from blankPriceCents / customPriceCents below.
   const TEE_CONFIG = {
     name: "Custom Mad Hatter Fog Camo Short Sleeve T-Shirt",
@@ -9,8 +8,8 @@
     image: "images/camo-collection/short-sleeve/mad-hatter-fog-camo-tee.webp",
     sizes: ["S", "M", "L", "XL", "2XL"],
     placements: ["Front chest design", "Full back design", "Front and back combination"],
-    blankPriceCents: 2800,   // $28.00
-    customPriceCents: 3300   // $33.00 (all placements)
+    blankPriceCents: 3000,   // $30.00
+    customPriceCents: 3500   // $35.00 (all placements)
   };
 
   const form = document.getElementById('czForm');

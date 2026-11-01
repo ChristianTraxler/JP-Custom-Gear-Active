@@ -492,7 +492,7 @@ const PRODUCTS = {
   "custom-mad-hatter-tee": {
     name: "Custom Mad Hatter Fog Camo Short Sleeve T-Shirt",
     tag: "Shirt",
-    priceCents: 3300, // PLACEHOLDER PRICE: confirm with client (charged price comes from js/custom-pricing.js)
+    priceCents: 3000, // From price (blank). Charged price comes from js/custom-pricing.js
     image: "images/camo-collection/short-sleeve/mad-hatter-fog-camo-tee.webp",
     imageFit: "cover",
     category: "The Camo Reserve",

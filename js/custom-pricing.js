@@ -96,15 +96,14 @@
     },
     'custom-mad-hatter-tee': {
       name: 'Custom Mad Hatter Fog Camo Short Sleeve T-Shirt',
-      // PLACEHOLDER PRICE: confirm with client. Change the two numbers below and the matching
-      // blankPriceCents / customPriceCents in js/customize-mad-hatter-tee.js.
-      // Priced by the "Blank" cart field: 'Yes' = ordered blank ($28), anything else = $33.
+      // Keep in sync with blankPriceCents / customPriceCents in js/customize-mad-hatter-tee.js.
+      // Priced by the "Blank" cart field: 'Yes' = ordered blank ($30), anything else = $35.
       // Size and placement carry no upcharge.
       priceCentsByOption: {
         dim: 'blank',
-        default: 3300, // Customized = $33.00 (placeholder)
+        default: 3500, // Customized = $35.00
         prices: {
-          'Yes': 2800 // Blank (no customization) = $28.00 (placeholder)
+          'Yes': 3000 // Blank (no customization) = $30.00
         }
       }
     },

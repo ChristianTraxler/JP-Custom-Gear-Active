@@ -67,7 +67,7 @@ test('mossy oak long sleeve line item: price and name', () => {
 });
 
 test('mad hatter tee line item: price and name', () => {
-  const cases = [[{ Size: 'L', Blank: 'Yes' }, 2800], [{ Size: 'L', Placement: 'Front chest design', Text: 'SMITH' }, 3300]];
+  const cases = [[{ Size: 'L', Blank: 'Yes' }, 3000], [{ Size: 'L', Placement: 'Front chest design', Text: 'SMITH' }, 3500]];
   for (const [customizations, cents] of cases) {
     const { lineItems } = buildLineItems({
       items: [{ productId: 'custom-mad-hatter-tee', quantity: 1, customizations }],

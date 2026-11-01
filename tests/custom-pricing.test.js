@@ -79,8 +79,8 @@ test('mossy oak long sleeve: $33 blank, $38 customized', () => {
 
 test('mad hatter tee: $28 blank, $33 customized (placeholder price)', () => {
   assert.equal(isCustomProduct('custom-mad-hatter-tee'), true);
-  assert.equal(unitPriceCents('custom-mad-hatter-tee', selectionFromCustomizations({ Blank: 'Yes', Size: 'XL' })), 2800);
-  assert.equal(unitPriceCents('custom-mad-hatter-tee', selectionFromCustomizations({ Size: '2XL', Placement: 'Full back design', Text: 'X' })), 3300);
+  assert.equal(unitPriceCents('custom-mad-hatter-tee', selectionFromCustomizations({ Blank: 'Yes', Size: 'XL' })), 3000);
+  assert.equal(unitPriceCents('custom-mad-hatter-tee', selectionFromCustomizations({ Size: '2XL', Placement: 'Full back design', Text: 'X' })), 3500);
 });
 
 test('mad hatter vintage duck tee: $30 blank, $35 customized', () => {
