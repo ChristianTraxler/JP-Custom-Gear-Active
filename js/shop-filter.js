@@ -36,7 +36,10 @@
 
     let visible = totalCount;
     if (productFilter !== 'all') {
-      visible = cards.filter(c => c.getAttribute('data-product-type') === productFilter).length;
+      const isCollection = productFilter === 'camo-reserve' || productFilter === 'camo';
+      visible = cards.filter(c => isCollection
+        ? (c.getAttribute('data-collections') || '').split(/\s+/).includes(productFilter)
+        : c.getAttribute('data-product-type') === productFilter).length;
       if (productFilter === 'hat' && hatFilter !== 'all') {
         visible = cards.filter(c => {
           if (c.getAttribute('data-product-type') !== 'hat') return false;

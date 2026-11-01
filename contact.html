@@ -3,26 +3,25 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="icon" type="image/png" href="images/J.PATS.png" />
-<link rel="apple-touch-icon" href="images/J.PATS.png" />
+<link rel="icon" type="image/png" href="images/jp-custom-gear-icon-64.png" />
+<link rel="apple-touch-icon" href="images/jp-custom-gear-icon-180.png" />
 <title>Contact | JP Custom Gear</title>
 <meta name="description" content="Questions? Custom orders? Reach out to JP Custom Gear at jpcustomgear@gmail.com." />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="css/default.css" />
 <link rel="stylesheet" href="css/styles.css?v=20260521" />
 <link rel="stylesheet" href="css/responsive.css" />
+<link rel="stylesheet" href="css/jp-redesign.css" />
+<link rel="stylesheet" href="css/jp-pages.css" />
 </head>
-<body>
+<body class="jp-shop jp-contact">
 
 <div class="announce">Custom orders ship in 5–7 business days &nbsp;·&nbsp; Bulk discounts available — contact us</div>
 
 <header class="navbar">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">
-      <img class="nav-logo-img" src="images/J.PATS.png" alt="JP Custom Gear logo" />
-      <div class="nav-logo-text"><strong>JP</strong><small>Custom Gear</small></div>
+      <img class="nav-logo-img" src="images/jp-custom-gear-logo-256.webp" alt="JP Custom Gear logo" />
+      <div class="nav-logo-text"><strong>JP Custom</strong><small>Gear · Est. 2024</small></div>
     </a>
     <nav class="nav-links">
       <a href="index.html">Home</a>
@@ -30,7 +29,7 @@
       <a href="index.html#onduty">On Duty</a>
       <a href="custom-work.html">Custom Work</a>
       <a href="services.html">Services</a>
-      <a href="contact.html">Contact</a>
+      <a href="contact.html" aria-current="page">Contact</a>
     </nav>
     <div class="nav-right">
       <form class="nav-search" role="search" action="shop.html" method="get">
@@ -60,25 +59,25 @@
     <a href="index.html#onduty">On Duty →</a>
     <a href="custom-work.html">Custom Work →</a>
     <a href="services.html">Services →</a>
-    <a href="contact.html">Contact →</a>
+    <a href="contact.html" aria-current="page">Contact →</a>
   </nav>
   <div class="drawer-foot"><a href="contact.html">Start Your Order</a></div>
 </div>
 
-<section class="contact" style="padding:100px 0 110px;">
+<section class="contact">
   <div class="contact-grain"></div>
   <div class="contact-glow"></div>
   <div class="contact-inner">
     <div class="fade-in">
-      <div class="eyebrow" style="font-family:'Bebas Neue';color:var(--brass);font-size:20px;letter-spacing:0.2em;margin-bottom:10px;">Get In Touch</div>
-      <h2 class="font-display" style="font-family:'Playfair Display';font-weight:900;color:var(--cream);font-size:clamp(34px,4.5vw,54px);line-height:1.05;margin-bottom:20px;">Questions? Custom Orders?<br><em style="font-style:normal;color:var(--amber)">We're Here to Help.</em></h2>
-      <p style="color:rgba(237,229,208,0.6);font-size:15px;line-height:1.7;margin-bottom:28px;max-width:380px;">Ready to start your custom order? Have a question about bulk pricing? We're here — reach out and we'll get back to you fast.</p>
+      <div class="eyebrow jp-label">Get In Touch</div>
+      <h2 class="font-display jp-d-l">Questions? Custom Orders?<br><em>We're Here to Help.</em></h2>
+      <p class="contact-intro jp-lede">Ready to start your custom order? Have a question about bulk pricing? We're here — reach out and we'll get back to you fast.</p>
       <div class="contact-email">
         <div class="contact-email-icon">✉️</div>
         <a href="mailto:jpcustomgear@gmail.com">jpcustomgear@gmail.com</a>
       </div>
       <div class="contact-tags">
-        <p>We handle:</p>
+        <p class="jp-label">We handle:</p>
         <div class="contact-tags-wrap">
           <span class="contact-tag">Custom Hats</span>
           <span class="contact-tag">Bulk Orders</span>
@@ -125,7 +124,7 @@
             <label class="form-label" for="cf-msg">Tell us about your project <span class="required-mark" aria-hidden="true">*</span></label>
             <textarea class="form-textarea" id="cf-msg" rows="5" placeholder="Quantity, design ideas, timeline, agency info..." required aria-required="true"></textarea>
           </div>
-          <button class="form-submit" onclick="submitContact()"><span style="font-size:1.5em;line-height:1;display:inline-flex;align-items:center;">✉️</span> Send Message</button>
+          <button class="form-submit jp-btn jp-btn-patch" onclick="submitContact()"><span class="form-submit-icon">✉️</span> Send Message</button>
         </div>
       </div>
       <div id="contactSuccess" class="form-success" style="display:none;">
@@ -150,8 +149,9 @@
   <div class="footer-main-inner">
     <div>
       <div class="footer-brand-badge">
-        <img class="footer-logo-img" src="images/J.PATS.png" alt="JP Custom Gear logo" />
+        <img class="footer-logo-img" src="images/jp-custom-gear-logo-512.webp" alt="JP Custom Gear logo" />
         <div class="footer-brand-text"><strong>JP Custom</strong><small>Gear</small></div>
+        <p class="footer-built jp-d-l">Built for <em>you.</em></p>
       </div>
       <p class="footer-brand-desc">Custom headwear built with care. From one hat to a hundred — made right.</p>
       <div class="footer-socials">
@@ -169,6 +169,7 @@
         <li><a href="shop-caution-may-offend.html">Caution: May Offend</a></li>
         <li><a href="shop-foam-side.html">The Foam Side</a></li>
         <li><a href="shop-forever-favorites.html">Forever Favorites</a></li>
+        <li><a href="shop-camo-reserve.html">The Camo Reserve</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -210,6 +211,7 @@
     const product = params.get('product');
     const style = params.get('style');
     const color = params.get('color');
+    const patchColor = params.get('patchColor');
     const size = params.get('size');
     const qty = params.get('qty') || '1';
 
@@ -294,6 +296,7 @@
     const metaParts = [];
     if (style) metaParts.push('Style: ' + style);
     if (color) metaParts.push('Color: ' + color);
+    if (patchColor) metaParts.push('Patch Color: ' + patchColor);
     if (size) metaParts.push('Size: ' + size);
     if (qty) metaParts.push('Qty: ' + qty);
     nameEl.textContent = product;
@@ -317,6 +320,7 @@
       "Product: " + product + "\n" +
       (style ? "Style: " + style + "\n" : "") +
       (color ? "Color: " + color + "\n" : "") +
+      (patchColor ? "Patch Color: " + patchColor + "\n" : "") +
       "Quantity: " + qty + "\n\n" +
       "Additional details:\n";
   })();

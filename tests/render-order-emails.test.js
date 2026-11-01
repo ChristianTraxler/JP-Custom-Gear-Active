@@ -141,3 +141,82 @@ test('omits image when product not in catalog', () => {
   const out = renderOrderEmails(fakeSession, { catalog: {}, siteUrl: 'https://example.com' });
   assert.ok(!out.ownerHtml.includes('<img'), 'no img tag when product not in catalog');
 });
+
+test('camo koozie emails pick the per-pattern email image', () => {
+  const cases = [
+    ['Ghost Marsh Camo', 'images/camo-collection/steel-can-koozies/ghost-marsh-camo-koozie-email.jpg'],
+    ['Timber Bark Camo', 'images/camo-collection/steel-can-koozies/timber-bark-camo-koozie-email.jpg']
+  ];
+  for (const [pattern, path] of cases) {
+    const session = {
+      ...fakeSession,
+      line_items: { data: [{ description: pattern + ' Can Koozie', amount_total: 2000, quantity: 1 }] },
+      metadata: { item_0: JSON.stringify({ productId: 'custom-camo-koozie', customizations: { Pattern: pattern, Blank: 'Yes' } }) }
+    };
+    const out = renderOrderEmails(session, { catalog: { 'custom-camo-koozie': { name: 'Koozie', image: 'x.webp' } }, siteUrl: 'https://example.com' });
+    assert.ok(out.ownerHtml.includes('https://example.com/' + path), pattern + ' owner image');
+    assert.ok(out.customerHtml.includes('https://example.com/' + path), pattern + ' customer image');
+  }
+});
+
+test('mossy oak hoodie email uses its email image', () => {
+  const session = {
+    ...fakeSession,
+    line_items: { data: [{ description: 'Custom Mossy Oak Washed Bottomland Camo Hoodie', amount_total: 5500, quantity: 1 }] },
+    metadata: { item_0: JSON.stringify({ productId: 'custom-mossy-oak-hoodie', customizations: { Size: 'L', Blank: 'Yes' } }) }
+  };
+  const out = renderOrderEmails(session, { catalog: { 'custom-mossy-oak-hoodie': { name: 'Hoodie', image: 'x.webp' } }, siteUrl: 'https://example.com' });
+  const expected = 'https://example.com/images/camo-collection/hoodies/mossy-oak-bottomland-hoodie-email.jpg';
+  assert.ok(out.ownerHtml.includes(expected));
+  assert.ok(out.customerHtml.includes(expected));
+});
+
+test('mossy oak long sleeve email uses its email image', () => {
+  const session = {
+    ...fakeSession,
+    line_items: { data: [{ description: 'Custom Mossy Oak Washed Bottomland Camo Long Sleeve T-Shirt', amount_total: 3300, quantity: 1 }] },
+    metadata: { item_0: JSON.stringify({ productId: 'custom-mossy-oak-longsleeve', customizations: { Size: 'L', Blank: 'Yes' } }) }
+  };
+  const out = renderOrderEmails(session, { catalog: { 'custom-mossy-oak-longsleeve': { name: 'Tee', image: 'x.webp' } }, siteUrl: 'https://example.com' });
+  const expected = 'https://example.com/images/camo-collection/long-sleeve/mossy-oak-bottomland-longsleeve-email.jpg';
+  assert.ok(out.ownerHtml.includes(expected));
+  assert.ok(out.customerHtml.includes(expected));
+});
+
+test('mad hatter tee email uses its email image', () => {
+  const session = {
+    ...fakeSession,
+    line_items: { data: [{ description: 'Custom Mad Hatter Fog Camo Short Sleeve T-Shirt', amount_total: 2800, quantity: 1 }] },
+    metadata: { item_0: JSON.stringify({ productId: 'custom-mad-hatter-tee', customizations: { Size: 'L', Blank: 'Yes' } }) }
+  };
+  const out = renderOrderEmails(session, { catalog: { 'custom-mad-hatter-tee': { name: 'Tee', image: 'x.webp' } }, siteUrl: 'https://example.com' });
+  const expected = 'https://example.com/images/camo-collection/short-sleeve/mad-hatter-fog-camo-tee-email.jpg';
+  assert.ok(out.ownerHtml.includes(expected));
+  assert.ok(out.customerHtml.includes(expected));
+});
+
+test('mad hatter vintage duck tee email uses its email image', () => {
+  const session = {
+    ...fakeSession,
+    line_items: { data: [{ description: 'Custom Mad Hatter Vintage Duck Camo Short Sleeve T-Shirt', amount_total: 3000, quantity: 1 }] },
+    metadata: { item_0: JSON.stringify({ productId: 'custom-mad-hatter-vintage-duck-tee', customizations: { Size: 'L', Blank: 'Yes' } }) }
+  };
+  const out = renderOrderEmails(session, { catalog: { 'custom-mad-hatter-vintage-duck-tee': { name: 'Tee', image: 'x.webp' } }, siteUrl: 'https://example.com' });
+  const expected = 'https://example.com/images/camo-collection/short-sleeve/mad-hatter-vintage-duck-camo-tee-email.jpg';
+  assert.ok(out.ownerHtml.includes(expected));
+  assert.ok(out.customerHtml.includes(expected));
+});
+
+test('camo beanie emails pick the per-color email image', () => {
+  for (const color of ['Americana', 'Bark', 'Blaze', 'Blizzard', 'Harvest', 'Marsh', 'Sable']) {
+    const session = {
+      ...fakeSession,
+      line_items: { data: [{ description: 'Richardson Duck Camo Beanie - ' + color, amount_total: 2000, quantity: 1 }] },
+      metadata: { item_0: JSON.stringify({ productId: 'custom-camo-beanie', customizations: { Pattern: color, Blank: 'Yes' } }) }
+    };
+    const out = renderOrderEmails(session, { catalog: { 'custom-camo-beanie': { name: 'Beanie', image: 'x.webp' } }, siteUrl: 'https://example.com' });
+    const expected = 'https://example.com/images/camo-collection/Beanies/beanie-' + color.toLowerCase() + '-email.jpg';
+    assert.ok(out.ownerHtml.includes(expected), color + ' owner');
+    assert.ok(out.customerHtml.includes(expected), color + ' customer');
+  }
+});

@@ -3,30 +3,29 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="icon" type="image/png" href="images/J.PATS.png" />
-<link rel="apple-touch-icon" href="images/J.PATS.png" />
+<link rel="icon" type="image/png" href="images/jp-custom-gear-icon-64.png" />
+<link rel="apple-touch-icon" href="images/jp-custom-gear-icon-180.png" />
 <title>Product | JP Custom Gear</title>
 <meta name="description" content="Custom hats, shirts, and engraved drinkware from JP Custom Gear. Made in the USA." />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="css/default.css" />
 <link rel="stylesheet" href="css/styles.css" />
 <link rel="stylesheet" href="css/responsive.css" />
+<link rel="stylesheet" href="css/jp-redesign.css" />
+<link rel="stylesheet" href="css/jp-pages.css" />
 </head>
-<body>
+<body class="jp-pdp">
 
 <div class="announce">Custom orders ship in 5–7 business days &nbsp;·&nbsp; Bulk discounts available — contact us</div>
 
 <header class="navbar">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">
-      <img class="nav-logo-img" src="images/J.PATS.png" alt="JP Custom Gear logo" />
-      <div class="nav-logo-text"><strong>JP</strong><small>Custom Gear</small></div>
+      <img class="nav-logo-img" src="images/jp-custom-gear-logo-256.webp" alt="JP Custom Gear logo" />
+      <div class="nav-logo-text"><strong>JP Custom</strong><small>Gear · Est. 2024</small></div>
     </a>
     <nav class="nav-links">
       <a href="index.html">Home</a>
-      <a href="shop.html">Shop</a>
+      <a href="shop.html" aria-current="page">Shop</a>
       <a href="index.html#onduty">On Duty</a>
       <a href="custom-work.html">Custom Work</a>
       <a href="services.html">Services</a>
@@ -56,7 +55,7 @@
   </div>
   <nav class="drawer-nav">
     <a href="index.html">Home →</a>
-    <a href="shop.html">Shop →</a>
+    <a href="shop.html" aria-current="page">Shop →</a>
     <a href="index.html#onduty">On Duty →</a>
     <a href="custom-work.html">Custom Work →</a>
     <a href="services.html">Services →</a>
@@ -120,10 +119,17 @@
             <select class="pdp-select" id="pdp-color" required></select>
           </div>
 
+          <div class="pdp-field" id="pdp-patch-field" style="display:none;">
+            <label class="pdp-label" for="pdp-patch">Patch Color — choose one</label>
+            <select class="pdp-select" id="pdp-patch" required></select>
+          </div>
+
           <div class="pdp-field" id="pdp-size-field" style="display:none;">
             <label class="pdp-label" for="pdp-size">Size — choose one</label>
             <select class="pdp-select" id="pdp-size" required></select>
           </div>
+
+          <div class="rcc-slot" id="pdp-chart-slot" hidden></div>
 
           <div class="pdp-field pdp-field-qty">
             <label class="pdp-label" for="pdp-qty">Quantity</label>
@@ -171,8 +177,9 @@
   <div class="footer-main-inner">
     <div>
       <div class="footer-brand-badge">
-        <img class="footer-logo-img" src="images/J.PATS.png" alt="JP Custom Gear logo" />
+        <img class="footer-logo-img" src="images/jp-custom-gear-logo-512.webp" alt="JP Custom Gear logo" />
         <div class="footer-brand-text"><strong>JP Custom</strong><small>Gear</small></div>
+        <p class="footer-built jp-d-l">Built for <em>you.</em></p>
       </div>
       <p class="footer-brand-desc">Custom headwear built with care. From one hat to a hundred — made right.</p>
       <div class="footer-socials">
@@ -190,6 +197,7 @@
         <li><a href="shop-caution-may-offend.html">Caution: May Offend</a></li>
         <li><a href="shop-foam-side.html">The Foam Side</a></li>
         <li><a href="shop-forever-favorites.html">Forever Favorites</a></li>
+        <li><a href="shop-camo-reserve.html">The Camo Reserve</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -224,6 +232,7 @@
 <script src="js/cart.js"></script>
 <script src="js/cart-badge.js"></script>
 <script src="js/custom-select.js"></script>
+<script src="js/richardson-chart.js"></script>
 <script>
   (function renderProduct() {
     const params = new URLSearchParams(window.location.search);
@@ -279,6 +288,9 @@
     const styleField = document.getElementById('pdp-style-field');
     const styleSelect = document.getElementById('pdp-style');
     const isHat = product.tag === 'Hat';
+    if (isHat && window.RichardsonChart && RichardsonChart.isRichardson(product) && RichardsonChart.fitsChart(product.hatType)) {
+      RichardsonChart.mount(document.getElementById('pdp-chart-slot'));
+    }
     const supportsStyleSwap = isHat && ['112', '112PFP', '168', '168P'].includes(product.hatType);
     styleField.style.display = supportsStyleSwap ? '' : 'none';
 
@@ -298,6 +310,15 @@
     }
 
     renderColors(originalColors);
+
+    const colorField = colorSelect.closest('.pdp-field');
+    if (originalColors.length === 0) {
+      colorField.style.display = 'none';
+      colorSelect.required = false;
+    } else {
+      colorField.style.display = '';
+      colorSelect.required = true;
+    }
 
     const sizeField = document.getElementById('pdp-size-field');
     const sizeSelect = document.getElementById('pdp-size');
@@ -334,6 +355,26 @@
     if (hasSizes) {
       sizeSelect.addEventListener('change', updatePrice);
       updatePrice();
+    }
+
+    const patchField = document.getElementById('pdp-patch-field');
+    const patchSelect = document.getElementById('pdp-patch');
+    const hasPatchColors = Array.isArray(product.patchColors) && product.patchColors.length > 0;
+    if (hasPatchColors) {
+      patchField.style.display = '';
+      patchSelect.innerHTML = '';
+      product.patchColors.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c;
+        opt.textContent = c;
+        patchSelect.appendChild(opt);
+      });
+    } else {
+      patchSelect.required = false;
+    }
+
+    function getSelectedPatch() {
+      return hasPatchColors ? patchSelect.value : null;
     }
 
     const BARK_112_IMAGES = [
@@ -439,28 +480,50 @@
       setTimeout(run, 220);
     }
 
+    function isChartImage(src) {
+      return typeof src === 'string' && src.indexOf('leatherette_colos') !== -1;
+    }
+
     function setMainImage(index) {
       if (!galleryImages.length) return;
       galleryIndex = (index + galleryImages.length) % galleryImages.length;
       const src = galleryImages[galleryIndex];
+      const isChart = isChartImage(src);
+      const useContain = galleryUseContain || isChart;
       thumbsWrap.querySelectorAll('.pdp-thumb').forEach((t, i) => {
         t.classList.toggle('is-active', i === galleryIndex);
       });
       preload(src).then((image) => {
         if (galleryImages[galleryIndex] !== src) return;
-        const target = galleryUseContain ? img : canvas;
-        const bg = galleryUseContain
-          ? (Array.isArray(product.galleryBackgrounds) && product.galleryBackgrounds[galleryIndex]) || sampleBg(image, src)
-          : null;
+        const target = useContain ? img : canvas;
+        const bg = isChart
+          ? '#e9e9e9'
+          : (useContain
+            ? (Array.isArray(product.galleryBackgrounds) && product.galleryBackgrounds[galleryIndex]) || sampleBg(image, src)
+            : null);
         // Start the background-color transition simultaneously with the fade-out
         // so it's fully settled before the new image fades in.
-        if (galleryUseContain && bg) imageWrap.style.backgroundColor = bg;
+        if (useContain && bg) imageWrap.style.backgroundColor = bg;
         fadeSwap(target, () => {
-          if (galleryUseContain) {
+          imageWrap.classList.toggle('is-cover', !useContain);
+          imageWrap.classList.toggle('is-contain', useContain);
+          if (useContain) {
+            // Author CSS forces .pdp-canvas { display:block }, so the [hidden]
+            // attribute alone won't hide an opaque cover-canvas. Set inline
+            // display so the contain <img> beneath is actually revealed.
+            canvas.hidden = true;
+            canvas.style.display = 'none';
+            img.hidden = false;
+            img.style.display = '';
             img.src = src;
             img.alt = product.name;
           } else {
+            imageWrap.style.backgroundColor = '';
             drawCover(image);
+            canvas.hidden = false;
+            canvas.style.display = '';
+            img.hidden = true;
+            img.style.display = 'none';
             img.src = src;
             img.alt = product.name;
           }
@@ -474,7 +537,9 @@
       navPrev.hidden = true;
       navNext.hidden = true;
       canvas.hidden = true;
+      canvas.style.display = 'none';
       img.hidden = false;
+      img.style.display = '';
       imageWrap.classList.toggle('is-cover', product.imageFit === 'cover');
       imageWrap.classList.remove('is-contain');
       imageWrap.style.backgroundColor = '';
@@ -499,8 +564,9 @@
         btn.dataset.src = src;
         btn.setAttribute('aria-label', 'View image ' + (i + 1));
         btn.innerHTML = '<img src="' + src + '" alt="" />';
-        if (galleryUseContain && thumbBgs[i]) {
-          btn.style.backgroundColor = thumbBgs[i];
+        const thumbIsChart = isChartImage(src);
+        if ((galleryUseContain || thumbIsChart) && (thumbBgs[i] || thumbIsChart)) {
+          btn.style.backgroundColor = thumbIsChart ? '#e9e9e9' : thumbBgs[i];
           btn.classList.add('pdp-thumb--contain');
         }
         btn.addEventListener('click', () => setMainImage(i));
@@ -509,25 +575,33 @@
       thumbsWrap.hidden = false;
       navPrev.hidden = images.length < 2;
       navNext.hidden = images.length < 2;
-      imageWrap.classList.toggle('is-cover', !galleryUseContain);
-      imageWrap.classList.toggle('is-contain', galleryUseContain);
       galleryIndex = 0;
+      const firstIsChart = isChartImage(images[0]);
+      const firstUseContain = galleryUseContain || firstIsChart;
+      imageWrap.classList.toggle('is-cover', !firstUseContain);
+      imageWrap.classList.toggle('is-contain', firstUseContain);
       preload(images[0]).then((image) => {
         thumbsWrap.querySelectorAll('.pdp-thumb').forEach((t, i) => {
           t.classList.toggle('is-active', i === 0);
         });
-        if (galleryUseContain) {
-          const bg = (Array.isArray(product.galleryBackgrounds) && product.galleryBackgrounds[0]) || sampleBg(image, images[0]);
+        if (firstUseContain) {
+          const bg = firstIsChart
+            ? '#e9e9e9'
+            : (Array.isArray(product.galleryBackgrounds) && product.galleryBackgrounds[0]) || sampleBg(image, images[0]);
           if (bg) imageWrap.style.backgroundColor = bg;
           canvas.hidden = true;
+          canvas.style.display = 'none';
           img.hidden = false;
+          img.style.display = '';
           img.src = images[0];
           img.alt = product.name;
         } else {
           imageWrap.style.backgroundColor = '';
           drawCover(image);
           canvas.hidden = false;
+          canvas.style.display = '';
           img.hidden = true;
+          img.style.display = 'none';
           img.src = images[0];
           img.alt = product.name;
         }
@@ -631,6 +705,8 @@
         if (styleVal) customizations.Style = styleVal;
         const sizeSel = getSelectedSize();
         if (sizeSel) customizations.Size = sizeSel.label;
+        const patchVal = getSelectedPatch();
+        if (patchVal) customizations['Patch Color'] = patchVal;
 
         const qtyInput = document.getElementById('pdp-qty');
         const qty = Math.max(1, Math.min(99, parseInt(qtyInput && qtyInput.value, 10) || 1));
@@ -706,6 +782,10 @@
     const style = (product.tag === 'Hat' && styleField && styleField.style.display !== 'none')
       ? document.getElementById('pdp-style').value
       : '';
+    const patchField = document.getElementById('pdp-patch-field');
+    const patchVal = (patchField && patchField.style.display !== 'none')
+      ? document.getElementById('pdp-patch').value
+      : '';
     const sizeField = document.getElementById('pdp-size-field');
     const size = (sizeField && sizeField.style.display !== 'none')
       ? document.getElementById('pdp-size').value
@@ -713,6 +793,7 @@
     const url = 'contact.html?product=' + encodeURIComponent(product.name) +
                 (style ? '&style=' + encodeURIComponent(style) : '') +
                 '&color=' + encodeURIComponent(color) +
+                (patchVal ? '&patchColor=' + encodeURIComponent(patchVal) : '') +
                 (size ? '&size=' + encodeURIComponent(size) : '') +
                 '&qty=' + encodeURIComponent(qty);
     window.location.href = url;

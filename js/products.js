@@ -30,6 +30,15 @@ const RICHARDSON_112PFP_COLORS = [
   "Salt Water"
 ];
 
+const RICHARDSON_112P_COLORS = [
+  "Bottomland",
+  "Harvest",
+  "Blaze",
+  "Bark",
+  "Marsh",
+  "Salt Water"
+];
+
 const RICHARDSON_168P_COLORS = [
   "Black",
   "Charcoal/Black",
@@ -96,6 +105,12 @@ const TEE_SIZES = [
   { label: "XL", priceCents: 2500 },
   { label: "2X", priceCents: 2700 },
   { label: "3X", priceCents: 2700 }
+];
+
+const LEATHERETTE_PATCH_COLORS = [
+  "Buckskin to Black", "Walnut to Black", "Rawhide to Black", "Black to Black",
+  "Bright White to Black", "Charcoal to Black", "Olive to Black", "Primrose to Black",
+  "Black to Silver", "Black to Copper", "Black to Gold", "Indigo to Black"
 ];
 
 const TUMBLER_COLORS = [
@@ -310,6 +325,7 @@ const PRODUCTS = {
     tag: "Hat",
     priceCents: 3000,
     image: "images/hats/bottomland-camo.png",
+    gallery: ["images/hats/bottomland-camo.png", "images/patches/leatherette_colos.png"],
     category: "Woods & Water",
     categoryHref: "shop-woods-water.html",
     hatType: "256P",
@@ -321,7 +337,8 @@ const PRODUCTS = {
       "One size fits most"
     ],
     colorsLabel: "Camo",
-    colors: RICHARDSON_256P_COLORS
+    colors: RICHARDSON_256P_COLORS,
+    patchColors: LEATHERETTE_PATCH_COLORS,
   },
 
   "mama-floral-tumbler": {
@@ -385,6 +402,176 @@ const PRODUCTS = {
     ],
     colorsLabel: "Color",
     colors: TUMBLER_COLORS
+  },
+
+  "custom-camo-tumbler": {
+    name: "The Camo Reserve 20 oz Stainless Steel Tumbler",
+    tag: "Tumbler",
+    priceCents: 2500,
+    image: "images/camo-collection/tumblers/blackwater-camo-tumbler.webp",
+    imageFit: "cover",
+    category: "The Camo Reserve",
+    categoryHref: "shop-camo-reserve.html",
+    hatType: "none",
+    hidden: true,
+    description: "A 20 oz double-wall stainless steel camo tumbler in Bone Yard, Blackwater, or Timber Bark Camo, blank or personalized from your selections on the customizer.",
+    features: [
+      "20 oz stainless steel tumbler",
+      "Double-wall insulated design",
+      "Bone Yard, Blackwater, or Timber Bark Camo",
+      "Clear lid included",
+      "Available blank or customized"
+    ],
+    colorsLabel: "Color",
+    colors: []
+  },
+
+  "custom-camo-koozie": {
+    name: "The Camo Reserve Stainless Steel Can Koozie",
+    tag: "Koozie",
+    priceCents: 2500, // PLACEHOLDER PRICE: confirm with client (charged price comes from js/custom-pricing.js)
+    image: "images/camo-collection/steel-can-koozies/ghost-marsh-camo-koozie.webp",
+    imageFit: "cover",
+    category: "The Camo Reserve",
+    categoryHref: "shop-camo-reserve.html",
+    hatType: "none",
+    hidden: true,
+    description: "A stainless steel camo can koozie in Ghost Marsh or Timber Bark Camo, blank or personalized from your selections on the customizer.",
+    features: [
+      "Durable stainless steel construction",
+      "Insulated design to help keep drinks colder longer",
+      "Ghost Marsh or Timber Bark Camo",
+      "Available blank or customized"
+    ],
+    colorsLabel: "Color",
+    colors: []
+  },
+
+  "custom-mossy-oak-hoodie": {
+    name: "Custom Mossy Oak Washed Bottomland Camo Hoodie",
+    tag: "Hoodie",
+    priceCents: 6000,
+    image: "images/camo-collection/hoodies/mossy-oak-bottomland-hoodie.webp",
+    imageFit: "cover",
+    category: "The Camo Reserve",
+    categoryHref: "shop-camo-reserve.html",
+    hatType: "none",
+    hidden: true,
+    description: "A made-to-order Mossy Oak Washed Bottomland Camo pullover hoodie, blank or customized front and back from your selections on the customizer.",
+    features: [
+      "Authentic Mossy Oak Washed Bottomland camo pattern",
+      "Comfortable pullover hoodie with drawstring hood",
+      "Front and back customization available",
+      "Available blank or customized"
+    ],
+    colorsLabel: "Color",
+    colors: []
+  },
+
+  "custom-mossy-oak-longsleeve": {
+    name: "Custom Mossy Oak Washed Bottomland Camo Long Sleeve T-Shirt",
+    tag: "Shirt",
+    priceCents: 3800,
+    image: "images/camo-collection/long-sleeve/mossy-oak-bottomland-longsleeve.webp",
+    imageFit: "cover",
+    category: "The Camo Reserve",
+    categoryHref: "shop-camo-reserve.html",
+    hatType: "none",
+    hidden: true,
+    description: "A made-to-order Mossy Oak Washed Bottomland Camo long sleeve t-shirt, blank or customized front and back from your selections on the customizer.",
+    features: [
+      "Authentic Mossy Oak Washed Bottomland camo pattern",
+      "Comfortable long sleeve design",
+      "Front and back customization available",
+      "Available blank or customized"
+    ],
+    colorsLabel: "Color",
+    colors: []
+  },
+
+  "custom-mad-hatter-tee": {
+    name: "Custom Mad Hatter Fog Camo Short Sleeve T-Shirt",
+    tag: "Shirt",
+    priceCents: 3300, // PLACEHOLDER PRICE: confirm with client (charged price comes from js/custom-pricing.js)
+    image: "images/camo-collection/short-sleeve/mad-hatter-fog-camo-tee.webp",
+    imageFit: "cover",
+    category: "The Camo Reserve",
+    categoryHref: "shop-camo-reserve.html",
+    hatType: "none",
+    hidden: true,
+    description: "A made-to-order Mad Hatter Fog Camo short sleeve t-shirt, blank or customized front and back from your selections on the customizer.",
+    features: [
+      "Mad Hatter Fog Camo pattern",
+      "Comfortable short sleeve style",
+      "Front and back customization available",
+      "Available blank or customized"
+    ],
+    colorsLabel: "Color",
+    colors: []
+  },
+
+  "custom-mad-hatter-vintage-duck-tee": {
+    name: "Custom Mad Hatter Vintage Duck Camo Short Sleeve T-Shirt",
+    tag: "Shirt",
+    priceCents: 3500,
+    image: "images/camo-collection/short-sleeve/mad-hatter-vintage-duck-camo-tee.webp",
+    imageFit: "cover",
+    category: "The Camo Reserve",
+    categoryHref: "shop-camo-reserve.html",
+    hatType: "none",
+    hidden: true,
+    description: "A made-to-order Mad Hatter Vintage Duck Camo short sleeve t-shirt, blank or customized front and back from your selections on the customizer.",
+    features: [
+      "Mad Hatter Vintage Duck Camo pattern",
+      "Comfortable short sleeve style",
+      "Front and back customization available",
+      "Available blank or customized"
+    ],
+    colorsLabel: "Color",
+    colors: []
+  },
+
+  "custom-camo-beanie": {
+    name: "Custom Richardson Duck Camo Beanies",
+    tag: "Beanie",
+    priceCents: 2500,
+    image: "images/camo-collection/Beanies/beanie-americana.webp",
+    imageFit: "cover",
+    category: "The Camo Reserve",
+    categoryHref: "shop-camo-reserve.html",
+    hatType: "none",
+    hidden: true,
+    description: "Richardson duck camo cuffed knit beanies in seven colors, blank or customized with a leather patch, business logo, lettering, or custom artwork from your selections on the customizer.",
+    features: [
+      "Richardson brand beanies",
+      "Warm knit construction",
+      "Classic cuffed design",
+      "Seven duck camo colors",
+      "Available blank or customized"
+    ],
+    colorsLabel: "Color",
+    colors: []
+  },
+
+  "custom-hoodie": {
+    name: "Custom Independent Trading Co. Camo Hoodie",
+    tag: "Hoodie",
+    priceCents: 4500,
+    image: "images/camo-reserve/hoodies/duck-camo-hoodie.webp",
+    imageFit: "cover",
+    category: "The Camo Reserve",
+    categoryHref: "shop-camo-reserve.html",
+    hatType: "none",
+    hidden: true,
+    description: "A made-to-order Independent Trading Co. camo pullover hoodie (Duck Camo or Washed Camo), blank or customized front and back from your selections on the customizer.",
+    features: [
+      "Independent Trading Co. pullover hoodie",
+      "Duck Camo or Washed Camo pattern",
+      "Front and back customization available",
+      "Available blank or customized"
+    ],
+    colorsLabel: "Color",
+    colors: []
   },
 
   "custom-hat": {
@@ -487,6 +674,7 @@ const PRODUCTS = {
     tag: "Hat",
     priceCents: 2500,
     image: "images/hats/nc-flag.png",
+    gallery: ["images/hats/nc-flag.png", "images/patches/leatherette_colos.png"],
     imageFit: "cover",
     category: "Forever Favorites",
     categoryHref: "shop-forever-favorites.html",
@@ -499,7 +687,8 @@ const PRODUCTS = {
       "One size fits most"
     ],
     colorsLabel: "Color",
-    colors: RICHARDSON_112_COLORS
+    colors: RICHARDSON_112_COLORS,
+    patchColors: LEATHERETTE_PATCH_COLORS,
   },
 
   "nc-trucker-112": {
@@ -587,6 +776,7 @@ const PRODUCTS = {
     tag: "Hat",
     priceCents: 2500,
     image: "images/hats/first-responder.png",
+    gallery: ["images/hats/first-responder.png", "images/patches/leatherette_colos.png"],
     category: "Protectors & Patriots",
     categoryHref: "shop-protectors-patriots.html",
     hatType: "112",
@@ -598,7 +788,8 @@ const PRODUCTS = {
       "Bulk pricing available for departments"
     ],
     colorsLabel: "Color",
-    colors: RICHARDSON_112_COLORS
+    colors: RICHARDSON_112_COLORS,
+    patchColors: LEATHERETTE_PATCH_COLORS,
   },
 
   "custom-bride-hat": {
@@ -625,6 +816,7 @@ const PRODUCTS = {
     tag: "Hat",
     priceCents: 2500,
     image: "images/hats/in-my-defense.png",
+    gallery: ["images/hats/in-my-defense.png", "images/patches/leatherette_colos.png"],
     imageFit: "cover",
     category: "Caution: May Offend",
     categoryHref: "shop-caution-may-offend.html",
@@ -637,7 +829,8 @@ const PRODUCTS = {
       "One size fits most"
     ],
     colorsLabel: "Color",
-    colors: RICHARDSON_112_COLORS
+    colors: RICHARDSON_112_COLORS,
+    patchColors: LEATHERETTE_PATCH_COLORS,
   },
 
   "mama-tried-112-v1": {
@@ -645,6 +838,7 @@ const PRODUCTS = {
     tag: "Hat",
     priceCents: 2500,
     image: "images/hats/mama-tried.png",
+    gallery: ["images/hats/mama-tried.png", "images/patches/leatherette_colos.png"],
     imageFit: "cover",
     category: "Forever Favorites",
     categoryHref: "shop-forever-favorites.html",
@@ -657,7 +851,8 @@ const PRODUCTS = {
       "One size fits most"
     ],
     colorsLabel: "Color",
-    colors: RICHARDSON_112_COLORS
+    colors: RICHARDSON_112_COLORS,
+    patchColors: LEATHERETTE_PATCH_COLORS,
   },
 
   "mama-tried-112-v2": {
@@ -665,6 +860,7 @@ const PRODUCTS = {
     tag: "Hat",
     priceCents: 2500,
     image: "images/hats/mama-tried-variant.png",
+    gallery: ["images/hats/mama-tried-variant.png", "images/patches/leatherette_colos.png"],
     category: "Forever Favorites",
     categoryHref: "shop-forever-favorites.html",
     hatType: "112",
@@ -676,7 +872,8 @@ const PRODUCTS = {
       "One size fits most"
     ],
     colorsLabel: "Color",
-    colors: RICHARDSON_112_COLORS
+    colors: RICHARDSON_112_COLORS,
+    patchColors: LEATHERETTE_PATCH_COLORS,
   },
 
   "mama-tried-168": {
@@ -684,6 +881,7 @@ const PRODUCTS = {
     tag: "Hat",
     priceCents: 2500,
     image: "images/hats/IMG_1303.png",
+    gallery: ["images/hats/IMG_1303.png", "images/patches/leatherette_colos.png"],
     imageFit: "cover",
     category: "Forever Favorites",
     categoryHref: "shop-forever-favorites.html",
@@ -696,7 +894,8 @@ const PRODUCTS = {
       "One size fits most"
     ],
     colorsLabel: "Camo",
-    colors: RICHARDSON_168P_COLORS
+    colors: RICHARDSON_168P_COLORS,
+    patchColors: LEATHERETTE_PATCH_COLORS,
   },
 
   "dont-be-a-cock-sucker-168": {
@@ -704,6 +903,7 @@ const PRODUCTS = {
     tag: "Hat",
     priceCents: 2500,
     image: "images/hats/IMG_1192.png",
+    gallery: ["images/hats/IMG_1192.png", "images/patches/leatherette_colos.png"],
     imageFit: "cover",
     category: "Caution: May Offend",
     categoryHref: "shop-caution-may-offend.html",
@@ -716,7 +916,8 @@ const PRODUCTS = {
       "One size fits most"
     ],
     colorsLabel: "Camo",
-    colors: RICHARDSON_168P_COLORS
+    colors: RICHARDSON_168P_COLORS,
+    patchColors: LEATHERETTE_PATCH_COLORS,
   },
 
   "guns-titties-beer-freedom-168": {
@@ -724,6 +925,7 @@ const PRODUCTS = {
     tag: "Hat",
     priceCents: 2500,
     image: "images/hats/IMG_1294.png",
+    gallery: ["images/hats/IMG_1294.png", "images/patches/leatherette_colos.png"],
     imageFit: "cover",
     category: "Caution: May Offend",
     categoryHref: "shop-caution-may-offend.html",
@@ -736,7 +938,8 @@ const PRODUCTS = {
       "One size fits most"
     ],
     colorsLabel: "Camo",
-    colors: RICHARDSON_168P_COLORS
+    colors: RICHARDSON_168P_COLORS,
+    patchColors: LEATHERETTE_PATCH_COLORS,
   },
 
   "mimi-cheetah-infinity-her": {
@@ -822,6 +1025,7 @@ const PRODUCTS = {
     tag: "Hat",
     priceCents: 2500,
     image: "images/hats/dad-trout.png",
+    gallery: ["images/hats/dad-trout.png", "images/patches/leatherette_colos.png"],
     imageFit: "cover",
     category: "Woods & Water",
     categoryHref: "shop-woods-water.html",
@@ -834,7 +1038,8 @@ const PRODUCTS = {
       "One size fits most"
     ],
     colorsLabel: "Color",
-    colors: RICHARDSON_112_COLORS
+    colors: RICHARDSON_112_COLORS,
+    patchColors: LEATHERETTE_PATCH_COLORS,
   },
 
   "dad-bass-112": {
@@ -842,6 +1047,7 @@ const PRODUCTS = {
     tag: "Hat",
     priceCents: 2500,
     image: "images/hats/dad-bass.png",
+    gallery: ["images/hats/dad-bass.png", "images/patches/leatherette_colos.png"],
     imageFit: "cover",
     category: "Woods & Water",
     categoryHref: "shop-woods-water.html",
@@ -854,7 +1060,8 @@ const PRODUCTS = {
       "One size fits most"
     ],
     colorsLabel: "Color",
-    colors: RICHARDSON_112_COLORS
+    colors: RICHARDSON_112_COLORS,
+    patchColors: LEATHERETTE_PATCH_COLORS,
   },
 
   "whitetail-deer-112": {
@@ -862,6 +1069,7 @@ const PRODUCTS = {
     tag: "Hat",
     priceCents: 2500,
     image: "images/hats/IMG_1382.png",
+    gallery: ["images/hats/IMG_1382.png", "images/patches/leatherette_colos.png"],
     imageFit: "cover",
     category: "Woods & Water",
     categoryHref: "shop-woods-water.html",
@@ -874,7 +1082,8 @@ const PRODUCTS = {
       "One size fits most"
     ],
     colorsLabel: "Color",
-    colors: RICHARDSON_112_COLORS
+    colors: RICHARDSON_112_COLORS,
+    patchColors: LEATHERETTE_PATCH_COLORS,
   },
 
   "somebody-112": {
@@ -882,6 +1091,7 @@ const PRODUCTS = {
     tag: "Hat",
     priceCents: 2500,
     image: "images/hats/somebody.png",
+    gallery: ["images/hats/somebody.png", "images/patches/leatherette_colos.png"],
     imageFit: "cover",
     category: "Forever Favorites",
     categoryHref: "shop-forever-favorites.html",
@@ -894,7 +1104,8 @@ const PRODUCTS = {
       "One size fits most"
     ],
     colorsLabel: "Color",
-    colors: RICHARDSON_112_COLORS
+    colors: RICHARDSON_112_COLORS,
+    patchColors: LEATHERETTE_PATCH_COLORS,
   },
 
   "somebodys-problem-infinity-her": {
@@ -922,6 +1133,7 @@ const PRODUCTS = {
     tag: "Hat",
     priceCents: 2500,
     image: "images/hats/little-debbie.png",
+    gallery: ["images/hats/little-debbie.png", "images/patches/leatherette_colos.png"],
     category: "Forever Favorites",
     categoryHref: "shop-forever-favorites.html",
     hatType: "112",
@@ -933,7 +1145,8 @@ const PRODUCTS = {
       "One size fits most"
     ],
     colorsLabel: "Color",
-    colors: RICHARDSON_112_COLORS
+    colors: RICHARDSON_112_COLORS,
+    patchColors: LEATHERETTE_PATCH_COLORS,
   },
 
   "liberty-or-death-112": {
@@ -941,6 +1154,7 @@ const PRODUCTS = {
     tag: "Hat",
     priceCents: 2500,
     image: "images/hats/protectors-patriots.png",
+    gallery: ["images/hats/protectors-patriots.png", "images/patches/leatherette_colos.png"],
     category: "Protectors & Patriots",
     categoryHref: "shop-protectors-patriots.html",
     hatType: "112",
@@ -952,7 +1166,8 @@ const PRODUCTS = {
       "One size fits most"
     ],
     colorsLabel: "Color",
-    colors: RICHARDSON_112_COLORS
+    colors: RICHARDSON_112_COLORS,
+    patchColors: LEATHERETTE_PATCH_COLORS,
   },
 
   "my-wife-is-psychotic-112pfp": {
@@ -960,6 +1175,7 @@ const PRODUCTS = {
     tag: "Hat",
     priceCents: 2500,
     image: "images/hats/my-wife-is-psychotic.png",
+    gallery: ["images/hats/my-wife-is-psychotic.png", "images/patches/leatherette_colos.png"],
     imageFit: "cover",
     category: "Caution: May Offend",
     categoryHref: "shop-caution-may-offend.html",
@@ -972,7 +1188,8 @@ const PRODUCTS = {
       "One size fits most"
     ],
     colorsLabel: "Camo",
-    colors: RICHARDSON_112PFP_COLORS
+    colors: RICHARDSON_112PFP_COLORS,
+    patchColors: LEATHERETTE_PATCH_COLORS,
   },
 
   "my-ol-lady-112pfp": {
@@ -980,6 +1197,7 @@ const PRODUCTS = {
     tag: "Hat",
     priceCents: 2500,
     image: "images/hats/IMG_1302.png",
+    gallery: ["images/hats/IMG_1302.png", "images/patches/leatherette_colos.png"],
     imageFit: "cover",
     category: "Caution: May Offend",
     categoryHref: "shop-caution-may-offend.html",
@@ -992,7 +1210,8 @@ const PRODUCTS = {
       "One size fits most"
     ],
     colorsLabel: "Camo",
-    colors: RICHARDSON_112PFP_COLORS
+    colors: RICHARDSON_112PFP_COLORS,
+    patchColors: LEATHERETTE_PATCH_COLORS,
   },
 
   "let-me-ask-my-ol-lady-112pfp": {
@@ -1000,6 +1219,7 @@ const PRODUCTS = {
     tag: "Hat",
     priceCents: 2500,
     image: "images/hats/ol-lady.png",
+    gallery: ["images/hats/ol-lady.png", "images/patches/leatherette_colos.png"],
     category: "Caution: May Offend",
     categoryHref: "shop-caution-may-offend.html",
     hatType: "112PFP",
@@ -1011,7 +1231,8 @@ const PRODUCTS = {
       "One size fits most"
     ],
     colorsLabel: "Camo",
-    colors: RICHARDSON_112PFP_COLORS
+    colors: RICHARDSON_112PFP_COLORS,
+    patchColors: LEATHERETTE_PATCH_COLORS,
   },
 
   "little-pecker-club-112": {
@@ -1019,6 +1240,7 @@ const PRODUCTS = {
     tag: "Hat",
     priceCents: 2500,
     image: "images/hats/little-pecker.png",
+    gallery: ["images/hats/little-pecker.png", "images/patches/leatherette_colos.png"],
     imageFit: "cover",
     category: "Caution: May Offend",
     categoryHref: "shop-caution-may-offend.html",
@@ -1031,7 +1253,8 @@ const PRODUCTS = {
       "One size fits most"
     ],
     colorsLabel: "Color",
-    colors: RICHARDSON_112_COLORS
+    colors: RICHARDSON_112_COLORS,
+    patchColors: LEATHERETTE_PATCH_COLORS,
   },
 
   "never-killed-mountain-lion-112": {
@@ -1039,6 +1262,7 @@ const PRODUCTS = {
     tag: "Hat",
     priceCents: 2500,
     image: "images/hats/but-ive-killed-a-cougar.png",
+    gallery: ["images/hats/but-ive-killed-a-cougar.png", "images/patches/leatherette_colos.png"],
     imageFit: "cover",
     category: "Caution: May Offend",
     categoryHref: "shop-caution-may-offend.html",
@@ -1052,7 +1276,8 @@ const PRODUCTS = {
       "One size fits most"
     ],
     colorsLabel: "Color",
-    colors: RICHARDSON_112_COLORS
+    colors: RICHARDSON_112_COLORS,
+    patchColors: LEATHERETTE_PATCH_COLORS,
   },
 
   "support-your-local-hooker-168": {
@@ -1060,6 +1285,7 @@ const PRODUCTS = {
     tag: "Hat",
     priceCents: 2500,
     image: "images/hats/local-hooker.png",
+    gallery: ["images/hats/local-hooker.png", "images/patches/leatherette_colos.png"],
     imageFit: "cover",
     category: "Woods & Water",
     categoryHref: "shop-woods-water.html",
@@ -1072,7 +1298,8 @@ const PRODUCTS = {
       "One size fits most"
     ],
     colorsLabel: "Camo",
-    colors: RICHARDSON_168P_COLORS
+    colors: RICHARDSON_168P_COLORS,
+    patchColors: LEATHERETTE_PATCH_COLORS,
   },
 
   "my-wiener-does-tricks": {
@@ -1080,6 +1307,7 @@ const PRODUCTS = {
     tag: "Hat",
     priceCents: 2500,
     image: "images/hats/IMG_1180.png",
+    gallery: ["images/hats/IMG_1180.png", "images/patches/leatherette_colos.png"],
     imageFit: "cover",
     category: "Hats",
     categoryHref: "shop.html?type=hat",
@@ -1092,7 +1320,8 @@ const PRODUCTS = {
       "Snap-back adjustable, one size fits most"
     ],
     colorsLabel: "Camo",
-    colors: RICHARDSON_112PFP_COLORS
+    colors: RICHARDSON_112PFP_COLORS,
+    patchColors: LEATHERETTE_PATCH_COLORS,
   },
 
   "gently-used-baby-mamas-112": {
@@ -1100,6 +1329,7 @@ const PRODUCTS = {
     tag: "Hat",
     priceCents: 2500,
     image: "images/hats/IMG_1181.png",
+    gallery: ["images/hats/IMG_1181.png", "images/patches/leatherette_colos.png"],
     imageFit: "cover",
     category: "Hats",
     categoryHref: "shop.html?type=hat",
@@ -1112,7 +1342,8 @@ const PRODUCTS = {
       "One size fits most"
     ],
     colorsLabel: "Color",
-    colors: RICHARDSON_112_COLORS
+    colors: RICHARDSON_112_COLORS,
+    patchColors: LEATHERETTE_PATCH_COLORS,
   },
 
   "wiener-rides-25-cents": {
@@ -1120,6 +1351,7 @@ const PRODUCTS = {
     tag: "Hat",
     priceCents: 2500,
     image: "images/hats/IMG_1193.png",
+    gallery: ["images/hats/IMG_1193.png", "images/patches/leatherette_colos.png"],
     imageFit: "cover",
     category: "Hats",
     categoryHref: "shop.html?type=hat",
@@ -1132,7 +1364,8 @@ const PRODUCTS = {
       "Snap-back adjustable, one size fits most"
     ],
     colorsLabel: "Camo",
-    colors: RICHARDSON_112PFP_COLORS
+    colors: RICHARDSON_112PFP_COLORS,
+    patchColors: LEATHERETTE_PATCH_COLORS,
   },
 
   "nc-flag-patriot-112-heather": {
@@ -1140,6 +1373,7 @@ const PRODUCTS = {
     tag: "Hat",
     priceCents: 2500,
     image: "images/hats/IMG_1194.png",
+    gallery: ["images/hats/IMG_1194.png", "images/patches/leatherette_colos.png"],
     imageFit: "cover",
     category: "Hats",
     categoryHref: "shop.html?type=hat",
@@ -1152,7 +1386,8 @@ const PRODUCTS = {
       "One size fits most"
     ],
     colorsLabel: "Color",
-    colors: RICHARDSON_112_COLORS
+    colors: RICHARDSON_112_COLORS,
+    patchColors: LEATHERETTE_PATCH_COLORS,
   },
 
   "nc-flag-patriot-112-loden": {
@@ -1160,6 +1395,7 @@ const PRODUCTS = {
     tag: "Hat",
     priceCents: 2500,
     image: "images/hats/IMG_1195.png",
+    gallery: ["images/hats/IMG_1195.png", "images/patches/leatherette_colos.png"],
     imageFit: "cover",
     category: "Hats",
     categoryHref: "shop.html?type=hat",
@@ -1172,7 +1408,8 @@ const PRODUCTS = {
       "One size fits most"
     ],
     colorsLabel: "Color",
-    colors: RICHARDSON_112_COLORS
+    colors: RICHARDSON_112_COLORS,
+    patchColors: LEATHERETTE_PATCH_COLORS,
   },
 
   "nc-lighthouse-est-1789-112": {
@@ -1200,6 +1437,7 @@ const PRODUCTS = {
     tag: "Hat",
     priceCents: 2500,
     image: "images/hats/IMG_1197.png",
+    gallery: ["images/hats/IMG_1197.png", "images/patches/leatherette_colos.png"],
     imageFit: "cover",
     category: "Hats",
     categoryHref: "shop.html?type=hat",
@@ -1212,7 +1450,490 @@ const PRODUCTS = {
       "One size fits most"
     ],
     colorsLabel: "Color",
+    colors: RICHARDSON_112_COLORS,
+    patchColors: LEATHERETTE_PATCH_COLORS,
+  },
+
+  "dad-leather-patch-112p": {
+    name: "Dad Leather Patch – Richardson 112P Camo Trucker",
+    tag: "Hat",
+    priceCents: 2500,
+    image: "images/hats/IMG_2259.png",
+    gallery: ["images/hats/IMG_2259.png", "images/patches/leatherette_colos.png"],
+    imageFit: "cover",
+    category: "Hats",
+    categoryHref: "shop.html?type=hat",
+    hatType: "112P",
+    description: "Simple, bold, and built to last. The Richardson 112P printed trucker in Mossy Oak Bottomland camo with a laser-engraved leather 'DAD' patch — the everyday cap for the man who earned the title.",
+    features: [
+      "Richardson 112P — printed camo trucker",
+      "Breathable mesh back, snap-back adjustable",
+      "Laser-engraved leather front patch",
+      "One size fits most"
+    ],
+    colorsLabel: "Camo",
+    colors: RICHARDSON_112P_COLORS,
+    patchColors: LEATHERETTE_PATCH_COLORS,
+  },
+
+  "fish-flag-112": {
+    name: "Fish American Flag Leather Patch – Richardson 112",
+    tag: "Hat",
+    priceCents: 2500,
+    image: "images/hats/IMG_2260.png",
+    gallery: ["images/hats/IMG_2260.png", "images/patches/leatherette_colos.png"],
+    imageFit: "cover",
+    category: "Hats",
+    categoryHref: "shop.html?type=hat",
+    hatType: "112",
+    description: "Old Glory, rendered in bass, trout, and catfish. Black Richardson 112 trucker with a laser-engraved leather American-flag patch built entirely from fish silhouettes — for the angler who runs red, white, and blue.",
+    features: [
+      "Richardson 112 — structured 6-panel trucker",
+      "Breathable mesh back, snap-back adjustable",
+      "Laser-engraved leather front patch",
+      "One size fits most"
+    ],
+    colorsLabel: "Color",
+    colors: RICHARDSON_112_COLORS,
+    patchColors: LEATHERETTE_PATCH_COLORS,
+  },
+
+  "ar15-rifle-112pfp": {
+    name: "AR-15 Rifle Leather Patch – Richardson 112PFP",
+    tag: "Hat",
+    priceCents: 2500,
+    image: "images/hats/IMG_2261.png",
+    gallery: ["images/hats/IMG_2261.png", "images/patches/leatherette_colos.png"],
+    imageFit: "cover",
+    category: "Hats",
+    categoryHref: "shop.html?type=hat",
+    hatType: "112PFP",
+    description: "For the shooter who appreciates a clean build. The Richardson 112PFP printed 5-panel in old-school camo with a laser-engraved leather AR-15 patch — optic, rail, and all.",
+    features: [
+      "Richardson 112PFP — printed 5-panel trucker",
+      "Breathable mesh back, snap-back adjustable",
+      "Laser-engraved leather front patch",
+      "One size fits most"
+    ],
+    colorsLabel: "Camo",
+    colors: RICHARDSON_112PFP_COLORS,
+    patchColors: LEATHERETTE_PATCH_COLORS,
+  },
+
+  "will-dance-for-diesel-112": {
+    name: "Will Dance For Diesel Leather Patch – Richardson 112",
+    tag: "Hat",
+    priceCents: 2500,
+    image: "images/hats/IMG_2262.png",
+    gallery: ["images/hats/IMG_2262.png", "images/patches/leatherette_colos.png"],
+    imageFit: "cover",
+    category: "Hats",
+    categoryHref: "shop.html?type=hat",
+    hatType: "112",
+    description: "A little diesel-powered humor for the truck crowd. Charcoal-and-white Richardson 112 trucker with a laser-engraved leather 'Will Dance For Diesel' patch — for the diesel lover who doesn't take themselves too seriously.",
+    features: [
+      "Richardson 112 — structured 6-panel trucker",
+      "Breathable mesh back, snap-back adjustable",
+      "Laser-engraved leather front patch",
+      "One size fits most"
+    ],
+    colorsLabel: "Color",
+    colors: RICHARDSON_112_COLORS,
+    patchColors: LEATHERETTE_PATCH_COLORS,
+  },
+
+  "tactical-skull-112": {
+    name: "Tactical Skull Rubber Patch – Richardson 112",
+    tag: "Hat",
+    priceCents: 2500,
+    image: "images/hats/IMG_2264.png",
+    imageFit: "cover",
+    category: "Hats",
+    categoryHref: "shop.html?type=hat",
+    hatType: "112",
+    description: "Blacked-out and battle-ready. Black Richardson 112 trucker with a raised rubber PVC patch — a night-vision-rigged operator skull with a subdued American flag. Low-key, high-speed.",
+    features: [
+      "Richardson 112 — structured 6-panel trucker",
+      "Breathable mesh back, snap-back adjustable",
+      "Raised rubber PVC front patch",
+      "One size fits most"
+    ],
+    colorsLabel: "Color",
     colors: RICHARDSON_112_COLORS
+  },
+
+  "let-me-ask-my-ol-lady-patch": {
+    name: "Let Me Ask My Ol' Lady Leatherette Patch",
+    tag: "Patch",
+    priceCents: 500,
+    image: "images/patches/IMG_2124.png",
+    imageFit: "cover",
+    category: "Laser Engraved Patches",
+    categoryHref: "shop.html?type=patch",
+    hatType: "none",
+    description: "Every married man's final answer. A laser-engraved leatherette patch for the guy who checks in before he commits to anything.",
+    features: [
+      "Laser-engraved leatherette patch",
+      "Iron-on / sew-on backing",
+      "Made in the USA"
+    ]
+  },
+
+  "well-sheeyit-patch": {
+    name: "Well Sheeyit Leatherette Patch",
+    tag: "Patch",
+    priceCents: 500,
+    image: "images/patches/IMG_2125.png",
+    imageFit: "cover",
+    category: "Laser Engraved Patches",
+    categoryHref: "shop.html?type=patch",
+    hatType: "none",
+    description: "The universal Southern response to bad news. A laser-engraved leatherette patch in a bold hexagon script.",
+    features: [
+      "Laser-engraved leatherette patch",
+      "Iron-on / sew-on backing",
+      "Made in the USA"
+    ]
+  },
+
+  "fun-fact-i-dont-care-patch": {
+    name: "Fun Fact I Don't Care Leatherette Patch",
+    tag: "Patch",
+    priceCents: 500,
+    image: "images/patches/IMG_2126.png",
+    imageFit: "cover",
+    category: "Laser Engraved Patches",
+    categoryHref: "shop.html?type=patch",
+    hatType: "none",
+    description: "A backwards-cap skull in sunglasses backs up the attitude. A laser-engraved leatherette patch that says what everyone's thinking.",
+    features: [
+      "Laser-engraved leatherette patch",
+      "Iron-on / sew-on backing",
+      "Made in the USA"
+    ]
+  },
+
+  "mama-tried-patch": {
+    name: "Mama Tried Leatherette Patch",
+    tag: "Patch",
+    priceCents: 500,
+    image: "images/patches/IMG_2127.png",
+    imageFit: "cover",
+    category: "Laser Engraved Patches",
+    categoryHref: "shop.html?type=patch",
+    hatType: "none",
+    description: "A floral-engraved hexagon patch with classic Western scrollwork framing the Mama Tried script.",
+    features: [
+      "Laser-engraved leatherette patch",
+      "Iron-on / sew-on backing",
+      "Made in the USA"
+    ]
+  },
+
+  "shit-show-patch": {
+    name: "Shit Show Leatherette Patch",
+    tag: "Patch",
+    priceCents: 500,
+    image: "images/patches/IMG_2128.png",
+    imageFit: "cover",
+    category: "Laser Engraved Patches",
+    categoryHref: "shop.html?type=patch",
+    hatType: "none",
+    description: "Admit One to whatever's going on around here. A laser-engraved leatherette patch shaped like a vintage ticket stub.",
+    features: [
+      "Laser-engraved leatherette patch",
+      "Iron-on / sew-on backing",
+      "Made in the USA"
+    ]
+  },
+
+  "little-pecker-club-patch": {
+    name: "Little Pecker Club Leatherette Patch",
+    tag: "Patch",
+    priceCents: 500,
+    image: "images/patches/IMG_2136.png",
+    imageFit: "cover",
+    category: "Laser Engraved Patches",
+    categoryHref: "shop.html?type=patch",
+    hatType: "none",
+    description: "Lil' Gents Making Dents. A laser-engraved leatherette patch with a sunglasses-wearing bird for the little troublemaker in your life.",
+    features: [
+      "Laser-engraved leatherette patch",
+      "Iron-on / sew-on backing",
+      "Made in the USA"
+    ]
+  },
+
+  "pew-pew-madafakas-patch": {
+    name: "Pew Pew Madafakas Leatherette Patch",
+    tag: "Patch",
+    priceCents: 500,
+    image: "images/patches/IMG_2137.png",
+    imageFit: "cover",
+    category: "Laser Engraved Patches",
+    categoryHref: "shop.html?type=patch",
+    hatType: "none",
+    description: "A shades-wearing duck packing heat. A laser-engraved leatherette patch for the range bag or the ballcap.",
+    features: [
+      "Laser-engraved leatherette patch",
+      "Iron-on / sew-on backing",
+      "Made in the USA"
+    ]
+  },
+
+  "dad-in-the-streets-daddy-in-the-sheets-patch": {
+    name: "Dad in the Streets, Daddy in the Sheets Leatherette Patch",
+    tag: "Patch",
+    priceCents: 500,
+    image: "images/patches/IMG_2138.png",
+    imageFit: "cover",
+    category: "Laser Engraved Patches",
+    categoryHref: "shop.html?type=patch",
+    hatType: "none",
+    description: "Two very different reputations, one laser-engraved leatherette patch. Bold block type up top, script down below.",
+    features: [
+      "Laser-engraved leatherette patch",
+      "Iron-on / sew-on backing",
+      "Made in the USA"
+    ]
+  },
+
+  "choked-a-cougar-patch": {
+    name: "Never Killed a Mountain Lion But I've Choked a Cougar Leatherette Patch",
+    tag: "Patch",
+    priceCents: 500,
+    image: "images/patches/IMG_2139.png",
+    imageFit: "cover",
+    category: "Laser Engraved Patches",
+    categoryHref: "shop.html?type=patch",
+    hatType: "none",
+    description: "A mountain lion engraving next to a punchline you saw coming. A laser-engraved leatherette patch with attitude.",
+    features: [
+      "Laser-engraved leatherette patch",
+      "Iron-on / sew-on backing",
+      "Made in the USA"
+    ]
+  },
+
+  "anatomy-of-a-pew-patch": {
+    name: "Anatomy of a Pew Leatherette Patch",
+    tag: "Patch",
+    priceCents: 500,
+    image: "images/patches/IMG_2240.png",
+    imageFit: "cover",
+    category: "Laser Engraved Patches",
+    categoryHref: "shop.html?type=patch",
+    hatType: "none",
+    description: "A tongue-in-cheek diagram breaking down the 'bang button,' 'fire dust,' and 'freedom seed.' A laser-engraved leatherette patch for gun-range humor.",
+    features: [
+      "Laser-engraved leatherette patch",
+      "Iron-on / sew-on backing",
+      "Made in the USA"
+    ]
+  },
+
+  "blue-collar-degenerate-patch": {
+    name: "Blue Collar Degenerate Leatherette Patch",
+    tag: "Patch",
+    priceCents: 500,
+    image: "images/patches/IMG_2241.png",
+    imageFit: "cover",
+    category: "Laser Engraved Patches",
+    categoryHref: "shop.html?type=patch",
+    hatType: "none",
+    description: "Dirty Hands, Still Broke — Proudly Made in America. A laser-engraved leatherette patch for the working man who tells it straight.",
+    features: [
+      "Laser-engraved leatherette patch",
+      "Iron-on / sew-on backing",
+      "Made in the USA"
+    ]
+  },
+
+  "statue-of-liberty-flag-patch": {
+    name: "Statue of Liberty American Flag Leatherette Patch",
+    tag: "Patch",
+    priceCents: 500,
+    image: "images/patches/IMG_2242.png",
+    imageFit: "cover",
+    category: "Laser Engraved Patches",
+    categoryHref: "shop.html?type=patch",
+    hatType: "none",
+    description: "Lady Liberty rendered skull-faced over the Stars and Stripes. A bold, laser-engraved leatherette patch.",
+    features: [
+      "Laser-engraved leatherette patch",
+      "Iron-on / sew-on backing",
+      "Made in the USA"
+    ]
+  },
+
+  "american-flag-patch": {
+    name: "American Flag Leatherette Patch",
+    tag: "Patch",
+    priceCents: 500,
+    image: "images/patches/IMG_2243.png",
+    imageFit: "cover",
+    category: "Laser Engraved Patches",
+    categoryHref: "shop.html?type=patch",
+    hatType: "none",
+    description: "A classic Stars and Stripes, laser-engraved into leatherette. Simple, bold, and proud.",
+    features: [
+      "Laser-engraved leatherette patch",
+      "Iron-on / sew-on backing",
+      "Made in the USA"
+    ]
+  },
+
+  "whiskey-bent-hell-bound-patch": {
+    name: "Whiskey Bent & Hell Bound Leatherette Patch",
+    tag: "Patch",
+    priceCents: 500,
+    image: "images/patches/IMG_2244.png",
+    imageFit: "cover",
+    category: "Laser Engraved Patches",
+    categoryHref: "shop.html?type=patch",
+    hatType: "none",
+    description: "Bold Western type with a rope-stitched border. A laser-engraved leatherette patch for the honky-tonk crowd.",
+    features: [
+      "Laser-engraved leatherette patch",
+      "Iron-on / sew-on backing",
+      "Made in the USA"
+    ]
+  },
+
+  "excuse-me-you-look-like-you-love-me-patch": {
+    name: "Excuse Me, You Look Like You Love Me Leatherette Patch",
+    tag: "Patch",
+    priceCents: 500,
+    image: "images/patches/IMG_2251.png",
+    imageFit: "cover",
+    category: "Laser Engraved Patches",
+    categoryHref: "shop.html?type=patch",
+    hatType: "none",
+    description: "A cheesy pickup line done up in Western script with a braided border. A laser-engraved leatherette patch.",
+    features: [
+      "Laser-engraved leatherette patch",
+      "Iron-on / sew-on backing",
+      "Made in the USA"
+    ]
+  },
+
+  "sorry-about-my-husband-patch": {
+    name: "Sorry About My Husband Leatherette Patch",
+    tag: "Patch",
+    priceCents: 500,
+    image: "images/patches/IMG_2252.png",
+    imageFit: "cover",
+    category: "Laser Engraved Patches",
+    categoryHref: "shop.html?type=patch",
+    hatType: "none",
+    description: "The apology every wife has made at least once. A laser-engraved leatherette patch in clean script.",
+    features: [
+      "Laser-engraved leatherette patch",
+      "Iron-on / sew-on backing",
+      "Made in the USA"
+    ]
+  },
+
+  "mama-floral-letters-patch": {
+    name: "Mama Floral Leatherette Patch",
+    tag: "Patch",
+    priceCents: 500,
+    image: "images/patches/IMG_2253.png",
+    imageFit: "cover",
+    category: "Laser Engraved Patches",
+    categoryHref: "shop.html?type=patch",
+    hatType: "none",
+    description: "MAMA in bold Western letters filled with hand-drawn floral engraving. A laser-engraved leatherette patch.",
+    features: [
+      "Laser-engraved leatherette patch",
+      "Iron-on / sew-on backing",
+      "Made in the USA"
+    ]
+  },
+
+  "deer-duck-bass-patch": {
+    name: "Deer, Duck & Bass Leatherette Patch",
+    tag: "Patch",
+    priceCents: 500,
+    image: "images/patches/IMG_2254.png",
+    imageFit: "cover",
+    category: "Laser Engraved Patches",
+    categoryHref: "shop.html?type=patch",
+    hatType: "none",
+    description: "A whitetail buck, a flushing duck, and a jumping bass over a star-camo backdrop. A laser-engraved leatherette patch for the all-season outdoorsman.",
+    features: [
+      "Laser-engraved leatherette patch",
+      "Iron-on / sew-on backing",
+      "Made in the USA"
+    ]
+  },
+
+  "deer-turkey-bass-patch": {
+    name: "Deer, Turkey & Bass Leatherette Patch",
+    tag: "Patch",
+    priceCents: 500,
+    image: "images/patches/IMG_2257.png",
+    imageFit: "cover",
+    category: "Laser Engraved Patches",
+    categoryHref: "shop.html?type=patch",
+    hatType: "none",
+    description: "A whitetail buck, a strutting tom, and a bass over a bark-camo backdrop. A laser-engraved leatherette patch for the all-season outdoorsman.",
+    features: [
+      "Laser-engraved leatherette patch",
+      "Iron-on / sew-on backing",
+      "Made in the USA"
+    ]
+  },
+
+  "wiener-rides-25-cents-patch": {
+    name: "Wiener Rides – Only 25¢ Leatherette Patch",
+    tag: "Patch",
+    priceCents: 500,
+    image: "images/patches/IMG_2130.png",
+    imageFit: "cover",
+    category: "Laser Engraved Patches",
+    categoryHref: "shop.html?type=patch",
+    hatType: "none",
+    description: "A saddled-up dachshund in a cowboy hat spells out the offer: wiener rides, only 25¢. A laser-engraved leatherette patch with a whole lot of attitude.",
+    features: [
+      "Laser-engraved leatherette patch",
+      "Iron-on / sew-on backing",
+      "Made in the USA"
+    ]
+  },
+
+  "dont-be-a-cock-sucker-patch": {
+    name: "Don't Be A Cock Sucker Leatherette Patch",
+    tag: "Patch",
+    priceCents: 500,
+    image: "images/patches/IMG_2132.png",
+    imageFit: "cover",
+    category: "Laser Engraved Patches",
+    categoryHref: "shop.html?type=patch",
+    hatType: "none",
+    description: "A rooster and a sucker spell out the advice everybody needs. A laser-engraved leatherette patch with a cheeky rebus.",
+    features: [
+      "Laser-engraved leatherette patch",
+      "Iron-on / sew-on backing",
+      "Made in the USA"
+    ]
+  },
+
+  "guns-titties-beer-freedom-patch": {
+    name: "Guns, Titties, Beer & Freedom Leatherette Patch",
+    tag: "Patch",
+    priceCents: 500,
+    image: "images/patches/IMG_2133.png",
+    imageFit: "cover",
+    category: "Laser Engraved Patches",
+    categoryHref: "shop.html?type=patch",
+    hatType: "none",
+    description: "Guns, titties, beer & freedom stacked beside the stars and stripes. A laser-engraved leatherette patch for the red-blooded patriot.",
+    features: [
+      "Laser-engraved leatherette patch",
+      "Iron-on / sew-on backing",
+      "Made in the USA"
+    ]
   }
 };
 

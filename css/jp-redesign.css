@@ -1,0 +1,818 @@
+/* JP Custom Gear redesign: design tokens and building blocks.
+
+   Copy to css/jp-redesign.css and load it AFTER css/default.css, css/styles.css
+   and css/responsive.css on every page. Fonts load from /fonts (copy
+   assets/fonts/*.woff2 into a fonts/ folder at the site root).
+
+   Everything is prefixed jp- so nothing collides with existing class names.
+   Add these classes to existing elements; never remove or rename the
+   classes and ids that are already there (the site's scripts use them). */
+
+/* ---------- Fonts (self-hosted, SIL Open Font License) ---------- */
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url('../fonts/newsreader-latin-opsz-normal.woff2') format('woff2-variations'),
+    url('../fonts/newsreader-latin-opsz-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Newsreader';
+  font-style: italic;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url('../fonts/newsreader-latin-opsz-italic.woff2') format('woff2-variations'),
+    url('../fonts/newsreader-latin-opsz-italic.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  font-display: swap;
+  src: url('../fonts/archivo-latin-wdth-normal.woff2') format('woff2-variations'),
+    url('../fonts/archivo-latin-wdth-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Martian Mono';
+  font-style: normal;
+  font-weight: 100 800;
+  font-stretch: 75% 112.5%;
+  font-display: swap;
+  src: url('../fonts/martian-mono-latin-wdth-normal.woff2') format('woff2-variations'),
+    url('../fonts/martian-mono-latin-wdth-normal.woff2') format('woff2');
+}
+
+/* ---------- Tokens ---------- */
+:root {
+  /* Color: Richardson heather mesh, loden crown, leatherette patch, laser burn */
+  --jp-mist: #eceee8; /* light bands, page background */
+  --jp-heather: #dcdfd6; /* image frames, quiet fills */
+  --jp-loden: #1b2119; /* dark bands */
+  --jp-loden-2: #252d22; /* hover and secondary surface on dark */
+  --jp-night: #121610; /* deepest dark: footer, mobile menu, caution band */
+  --jp-ink: #161913; /* text on light */
+  --jp-bone: #e9e8df; /* text on dark */
+  --jp-leather: #b0713e; /* accent: patch buttons, step numbers, bullets */
+  --jp-leather-lt: #cf9160; /* accent on dark, hover */
+  --jp-burn: #2a1a10; /* text on leather */
+  --jp-ember: #ff8a3d; /* laser glow only */
+  --jp-moss: #5c6457; /* secondary text on light */
+  --jp-fog: #a3aa9b; /* secondary text on dark */
+  --jp-line: rgba(22, 25, 19, 0.14); /* hairlines on light */
+  --jp-line-dk: rgba(233, 232, 223, 0.14); /* hairlines on dark */
+  --jp-input-bg: #f7f8f3;
+
+  /* Type */
+  --jp-display: 'Newsreader', 'Iowan Old Style', Georgia, serif;
+  --jp-body: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --jp-mono: 'Martian Mono', ui-monospace, Menlo, monospace;
+
+  /* Layout */
+  --jp-max: 1440px;
+  --jp-gutter: clamp(16px, 4.4vw, 56px);
+  --jp-band: clamp(72px, 10vw, 152px);
+  --jp-band-tight: clamp(56px, 7vw, 104px);
+  --jp-header-h: 64px;
+}
+@media (min-width: 1024px) {
+  :root {
+    --jp-header-h: 76px;
+  }
+}
+
+/* ---------- Global re-skin ---------- */
+/* default.css already sets border-box on everything; this keeps jp- pieces safe if it ever changes */
+[class*='jp-'],
+[class*='jp-']::before,
+[class*='jp-']::after {
+  box-sizing: border-box;
+}
+body {
+  background: var(--jp-mist);
+  color: var(--jp-ink);
+  font-family: var(--jp-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+::selection {
+  background: var(--jp-leather);
+  color: var(--jp-burn);
+}
+:focus-visible {
+  outline: 2px solid var(--jp-leather);
+  outline-offset: 3px;
+}
+
+/* ---------- Layout ---------- */
+.jp-wrap {
+  width: 100%;
+  max-width: var(--jp-max);
+  margin-inline: auto;
+  padding-inline: var(--jp-gutter);
+}
+.jp-band {
+  padding-block: var(--jp-band);
+}
+.jp-band-tight {
+  padding-block: var(--jp-band-tight);
+}
+.jp-light {
+  background: var(--jp-mist);
+  color: var(--jp-ink);
+}
+.jp-dark {
+  background: var(--jp-loden);
+  color: var(--jp-bone);
+}
+.jp-darker {
+  background: var(--jp-night);
+  color: var(--jp-bone);
+}
+
+/* ---------- Type ---------- */
+.jp-d-xl,
+.jp-d-l,
+.jp-d-m,
+.jp-d-s {
+  margin: 0;
+  font-family: var(--jp-display);
+  font-weight: 300;
+  letter-spacing: -0.022em;
+  text-wrap: balance;
+}
+.jp-d-xl {
+  font-size: clamp(3.1rem, 10.4vw, 8.4rem);
+  line-height: 0.92;
+}
+.jp-d-l {
+  font-size: clamp(2.35rem, 5.8vw, 5rem);
+  line-height: 0.98;
+}
+.jp-d-m {
+  font-size: clamp(1.8rem, 3.4vw, 2.9rem);
+  line-height: 1.04;
+}
+.jp-d-s {
+  font-size: clamp(1.3rem, 2vw, 1.6rem);
+  line-height: 1.15;
+  letter-spacing: -0.012em;
+  font-weight: 400;
+}
+.jp-d-xl em,
+.jp-d-l em,
+.jp-d-m em,
+.jp-d-s em {
+  font-style: italic;
+  font-weight: 300;
+}
+/* Small uppercase eyebrow and nav labels (replaces Bebas Neue) */
+.jp-label {
+  font-family: var(--jp-body);
+  font-stretch: 125%;
+  font-weight: 600;
+  font-size: 0.7rem;
+  line-height: 1.2;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+/* Specs, prices, counts, step numbers, captions */
+.jp-spec {
+  font-family: var(--jp-mono);
+  font-stretch: 87.5%;
+  font-weight: 400;
+  font-size: 0.7rem;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+.jp-lede {
+  font-size: clamp(1.02rem, 1.25vw, 1.18rem);
+  line-height: 1.6;
+  max-width: 34em;
+}
+.jp-muted {
+  color: var(--jp-moss);
+}
+.jp-dark .jp-muted,
+.jp-darker .jp-muted {
+  color: var(--jp-fog);
+}
+.jp-accent {
+  color: var(--jp-leather);
+}
+.jp-dark .jp-accent,
+.jp-darker .jp-accent {
+  color: var(--jp-leather-lt);
+}
+.jp-tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Buttons: the primary button is a wide-hex leather patch ---------- */
+.jp-btn {
+  --jp-chamfer: 14px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
+  min-height: 52px;
+  padding: 0 calc(var(--jp-chamfer) + 18px);
+  font-family: var(--jp-body);
+  font-stretch: 125%;
+  font-weight: 700;
+  font-size: 0.74rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.jp-btn-patch,
+.jp-btn-ink {
+  clip-path: polygon(
+    var(--jp-chamfer) 0,
+    calc(100% - var(--jp-chamfer)) 0,
+    100% 50%,
+    calc(100% - var(--jp-chamfer)) 100%,
+    var(--jp-chamfer) 100%,
+    0 50%
+  );
+}
+.jp-btn-patch {
+  background-color: var(--jp-leather);
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.08));
+  color: var(--jp-burn);
+}
+.jp-btn-patch:hover {
+  background-color: var(--jp-leather-lt);
+  color: var(--jp-burn);
+}
+.jp-btn-patch:focus-visible {
+  outline: none;
+  background-color: var(--jp-burn);
+  color: var(--jp-leather-lt);
+}
+.jp-btn-ink {
+  background: var(--jp-ink);
+  color: var(--jp-bone);
+}
+.jp-btn-ink:hover {
+  background: var(--jp-loden-2);
+  color: var(--jp-bone);
+}
+.jp-btn-ink:focus-visible {
+  outline: none;
+  background: var(--jp-leather);
+  color: var(--jp-burn);
+}
+.jp-btn:active {
+  transform: translateY(1px);
+}
+.jp-btn:disabled,
+.jp-btn[aria-disabled='true'] {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+/* Secondary text button with an underline and a sliding arrow */
+.jp-btn-line {
+  min-height: 52px;
+  padding: 0 4px;
+  background: none;
+  color: inherit;
+  border-bottom: 1px solid currentColor;
+}
+.jp-arr {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+.jp-btn-line:hover .jp-arr {
+  transform: translateX(4px);
+}
+@media (max-width: 400px) {
+  .jp-btn {
+    --jp-chamfer: 12px;
+    padding: 0 calc(var(--jp-chamfer) + 12px);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+  }
+}
+.jp-link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  transition: text-decoration-color 0.2s;
+}
+.jp-link:hover {
+  text-decoration-color: currentColor;
+}
+
+/* ---------- Forms ---------- */
+.jp-field {
+  display: grid;
+  gap: 8px;
+}
+.jp-field-label {
+  font-family: var(--jp-body);
+  font-stretch: 125%;
+  font-weight: 600;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.jp-input {
+  width: 100%;
+  min-height: 52px;
+  padding: 14px 16px;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--jp-ink);
+  background: var(--jp-input-bg);
+  border: 1px solid var(--jp-line);
+  border-radius: 2px;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+.jp-input::placeholder {
+  color: #8a9183;
+}
+.jp-input:focus {
+  outline: none;
+  border-color: var(--jp-leather);
+  box-shadow: 0 0 0 3px rgba(176, 113, 62, 0.25);
+}
+textarea.jp-input {
+  min-height: 132px;
+  resize: vertical;
+  line-height: 1.5;
+}
+select.jp-input {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--jp-moss) 50%), linear-gradient(135deg, var(--jp-moss) 50%, transparent 50%);
+  background-position:
+    calc(100% - 20px) 50%,
+    calc(100% - 15px) 50%;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 40px;
+}
+.jp-dark .jp-input,
+.jp-darker .jp-input {
+  color: var(--jp-bone);
+  background-color: rgba(233, 232, 223, 0.05);
+  border-color: rgba(233, 232, 223, 0.18);
+}
+.jp-dark .jp-input::placeholder,
+.jp-darker .jp-input::placeholder {
+  color: #7f8778;
+}
+
+/* ---------- Chips (filters, choices). Active state works with the site's existing .is-active class ---------- */
+.jp-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 16px;
+  font-family: var(--jp-body);
+  font-stretch: 112%;
+  font-weight: 500;
+  font-size: 0.82rem;
+  white-space: nowrap;
+  color: inherit;
+  background: transparent;
+  border: 1px solid var(--jp-line);
+  border-radius: 999px;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    border-color 0.2s;
+}
+.jp-chip:hover {
+  border-color: var(--jp-ink);
+}
+.jp-chip.is-active,
+.jp-chip.is-selected,
+.jp-chip[aria-pressed='true'],
+.jp-chip[aria-checked='true'] {
+  background: var(--jp-ink);
+  color: var(--jp-bone);
+  border-color: var(--jp-ink);
+}
+.jp-dark .jp-chip,
+.jp-darker .jp-chip {
+  border-color: var(--jp-line-dk);
+}
+.jp-dark .jp-chip:hover,
+.jp-darker .jp-chip:hover {
+  border-color: var(--jp-bone);
+}
+.jp-dark .jp-chip.is-active,
+.jp-darker .jp-chip.is-active,
+.jp-dark .jp-chip[aria-pressed='true'],
+.jp-darker .jp-chip[aria-pressed='true'] {
+  background: var(--jp-bone);
+  color: var(--jp-ink);
+  border-color: var(--jp-bone);
+}
+
+/* ---------- Hairline rule ---------- */
+.jp-rule {
+  border: 0;
+  border-top: 1px solid var(--jp-line);
+}
+.jp-dark .jp-rule,
+.jp-darker .jp-rule {
+  border-color: var(--jp-line-dk);
+}
+
+/* ---------- Image frames ---------- */
+/* Photo: fills the frame. Cutout (transparent PNG): sits on a soft heather spotlight with padding. */
+.jp-frame {
+  position: relative;
+  overflow: hidden;
+  max-width: 100%;
+  background: var(--jp-heather);
+}
+.jp-frame > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.jp-frame.jp-cutout {
+  background: radial-gradient(120% 90% at 50% 38%, #f3f4ef 0%, var(--jp-heather) 70%);
+}
+.jp-frame.jp-cutout > img,
+.jp-frame.jp-contain > img {
+  object-fit: contain;
+  padding: 9%;
+}
+.jp-frame.jp-contain > img {
+  padding: 6%;
+}
+.jp-ratio-45 {
+  aspect-ratio: 4 / 5;
+}
+.jp-ratio-34 {
+  aspect-ratio: 3 / 4;
+}
+.jp-ratio-11 {
+  aspect-ratio: 1 / 1;
+}
+.jp-ratio-54 {
+  aspect-ratio: 5 / 4;
+}
+.jp-ratio-32 {
+  aspect-ratio: 3 / 2;
+}
+/* Put .jp-card on the link or element that wraps a .jp-frame for the slow zoom on hover */
+.jp-card {
+  display: block;
+  min-width: 0;
+  color: inherit;
+  text-decoration: none;
+}
+.jp-card:hover .jp-frame > img,
+.jp-card:focus-visible .jp-frame > img {
+  transform: scale(1.035);
+}
+/* Small tag pinned on an image (for example "Shirt", "May offend") */
+.jp-tag {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  z-index: 1;
+  padding: 4px 8px;
+  background: var(--jp-burn);
+  color: var(--jp-leather-lt);
+  font-family: var(--jp-mono);
+  font-stretch: 87.5%;
+  font-size: 0.6rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* ---------- Full-bleed photo bands with type set into the image ---------- */
+.jp-photo-band {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.jp-photo-band > .jp-photo,
+.jp-photo-band > picture > img {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.jp-shade-hero {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(18, 22, 16, 0.94) 0%, rgba(18, 22, 16, 0.72) 42%, rgba(18, 22, 16, 0.05) 72%, rgba(27, 33, 25, 0.85) 100%);
+}
+.jp-shade-duty {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(18, 22, 16, 0.25) 0%, rgba(18, 22, 16, 0.55) 55%, #1b2119 100%);
+}
+@media (min-width: 768px) {
+  .jp-shade-hero {
+    background: linear-gradient(90deg, rgba(18, 22, 16, 0.95) 0%, rgba(18, 22, 16, 0.78) 34%, rgba(18, 22, 16, 0.1) 64%, rgba(18, 22, 16, 0) 100%);
+  }
+  .jp-shade-duty {
+    background: linear-gradient(90deg, rgba(18, 22, 16, 0.92) 0%, rgba(18, 22, 16, 0.6) 42%, rgba(18, 22, 16, 0) 70%), linear-gradient(180deg, transparent 60%, #1b2119 100%);
+  }
+}
+/* Fine film grain over dark photography */
+.jp-grain {
+  position: relative;
+}
+.jp-grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.18;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
+}
+
+/* ---------- Caution tape (Caution: May Offend collection only) ---------- */
+.jp-tape {
+  position: absolute;
+  left: -20%;
+  right: -20%;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  pointer-events: none;
+  background: repeating-linear-gradient(-45deg, var(--jp-leather) 0 18px, var(--jp-burn) 18px 36px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+.jp-tape span {
+  margin-inline: auto;
+  padding: 3px 12px;
+  background: var(--jp-leather);
+  color: var(--jp-burn);
+  font-family: var(--jp-body);
+  font-stretch: 125%;
+  font-weight: 800;
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ---------- Cutting mat (customizer preview panel). Grid lines are 1/4 inch at 48px per inch ---------- */
+.jp-mat {
+  color: var(--jp-bone);
+  background-color: #263124;
+  background-image:
+    linear-gradient(rgba(233, 232, 223, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(233, 232, 223, 0.07) 1px, transparent 1px),
+    linear-gradient(rgba(233, 232, 223, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(233, 232, 223, 0.035) 1px, transparent 1px);
+  background-size:
+    48px 48px,
+    48px 48px,
+    12px 12px,
+    12px 12px;
+  background-position: -1px -1px;
+}
+
+/* ---------- Work-order ticket: label and value rows (featured build, customizer summary) ---------- */
+.jp-ticket {
+  border: 1px solid var(--jp-line);
+}
+.jp-dark .jp-ticket,
+.jp-darker .jp-ticket {
+  border-color: var(--jp-line-dk);
+}
+.jp-ticket-title {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--jp-line);
+  font-family: var(--jp-body);
+  font-stretch: 125%;
+  font-weight: 600;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.jp-ticket-row {
+  display: grid;
+  grid-template-columns: minmax(4.5rem, 7.5rem) minmax(0, 1fr);
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--jp-line);
+}
+.jp-dark .jp-ticket-title,
+.jp-dark .jp-ticket-row,
+.jp-darker .jp-ticket-title,
+.jp-darker .jp-ticket-row {
+  border-color: var(--jp-line-dk);
+}
+.jp-ticket-row:last-child {
+  border-bottom: 0;
+}
+.jp-ticket-row > :first-child {
+  font-family: var(--jp-mono);
+  font-stretch: 87.5%;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+.jp-ticket-row > :last-child {
+  font-size: 0.92rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+/* ---------- Dotted price leader (services list: "Custom hats ........ from $25") ---------- */
+.jp-leader {
+  flex: 1 1 auto;
+  min-width: 24px;
+  height: 1px;
+  margin-inline: 10px;
+  align-self: center;
+  opacity: 0.45;
+  background-image: radial-gradient(circle, currentColor 1px, transparent 1.2px);
+  background-size: 7px 2px;
+  background-repeat: repeat-x;
+}
+
+/* ---------- Hex bullet (replaces check marks and emoji icons) ---------- */
+.jp-hex-bullet {
+  display: inline-block;
+  width: 16px;
+  height: 18px;
+  flex-shrink: 0;
+  background: var(--jp-leather);
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+}
+
+/* ---------- Horizontal scroller on phones, grid on desktop ---------- */
+.jp-rail {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: min(64vw, 300px);
+  gap: 14px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  padding-inline: var(--jp-gutter);
+  margin-inline: calc(var(--jp-gutter) * -1);
+  scroll-padding-inline: var(--jp-gutter);
+}
+.jp-rail::-webkit-scrollbar {
+  display: none;
+}
+.jp-rail > * {
+  scroll-snap-align: start;
+  min-width: 0;
+}
+@media (min-width: 1024px) {
+  .jp-rail.jp-rail-grid {
+    grid-auto-flow: row;
+    grid-auto-columns: auto;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+    margin-inline: 0;
+    padding-inline: 0;
+    overflow: visible;
+  }
+}
+
+/* ---------- Motion: one orchestrated moment (the hero KEEP patch burns in) ---------- */
+@keyframes jp-rise {
+  from {
+    opacity: 0.001;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes jp-burn {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes jp-ember {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  92% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(var(--travel));
+    opacity: 0;
+  }
+}
+@keyframes jp-patch-in {
+  from {
+    opacity: 0.001;
+    transform: scale(0.94) rotate(-3deg);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(-2deg);
+  }
+}
+.jp-rise {
+  animation: jp-rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+/* The inline SVG from assets/svg/keep-patch.svg, placed inside the hero h1 */
+.jp-keep-patch {
+  display: inline-block;
+  height: 1.22em;
+  width: auto;
+  flex-shrink: 0;
+  margin-bottom: -0.1em;
+  vertical-align: bottom;
+  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.5));
+  animation: jp-patch-in 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) 0.35s both;
+}
+.jp-burn-mask {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: jp-burn 1.5s cubic-bezier(0.55, 0.1, 0.45, 0.95) 0.75s both;
+}
+.jp-ember {
+  animation: jp-ember 1.5s cubic-bezier(0.55, 0.1, 0.45, 0.95) 0.75s both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .jp-rise,
+  .jp-keep-patch,
+  .jp-burn-mask {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0ms !important;
+  }
+  .jp-ember {
+    display: none;
+  }
+  .jp-btn,
+  .jp-frame > img,
+  .jp-arr {
+    transition: none !important;
+  }
+}
+
+/* ---------- Existing back-to-top button (created by js/site.js) ----------
+   Reshaped as JP's No. 11 Mini Hex patch. Keep its existing position,
+   transition and .visible rules in styles.css: site.js still controls when it shows. */
+.scroll-top {
+  width: 56px;
+  height: 64px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  display: grid;
+  place-items: center;
+  color: var(--jp-leather-lt);
+  background: center / 100% 100% no-repeat
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 68'%3E%3Cpath d='M30 3 L55 17.5 L55 50.5 L30 65 L5 50.5 L5 17.5 Z' fill='%23121610' fill-opacity='.94' stroke='%23cf9160' stroke-width='2.6' stroke-linejoin='round'/%3E%3C/svg%3E");
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.35));
+}
+.scroll-top:hover,
+.scroll-top:focus-visible {
+  outline: none;
+  color: var(--jp-burn);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 68'%3E%3Cpath d='M30 3 L55 17.5 L55 50.5 L30 65 L5 50.5 L5 17.5 Z' fill='%23b0713e' stroke='%232a1a10' stroke-width='2.6' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+.scroll-top svg {
+  width: 22px;
+  height: 22px;
+}

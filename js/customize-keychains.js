@@ -119,6 +119,9 @@
   const lightboxFilename = document.getElementById('cz-lightbox-filename');
   let currentObjectURL = null;
 
+  // Uploads the chosen logo to Vercel Blob (js/logo-upload.js) and tracks its status.
+  const logoUpload = LogoUpload.attach({ input: fileInput, submitButton: document.getElementById('cz-submit') });
+
   function setThumbImage(file) {
     if (currentObjectURL) {
       URL.revokeObjectURL(currentObjectURL);
@@ -186,6 +189,7 @@
 
   function resetFile() {
     fileInput.value = '';
+    logoUpload.reset();
     fileText.textContent = 'Choose file…';
     fileClear.style.display = 'none';
     logoThumb.style.display = 'none';
@@ -262,6 +266,13 @@
     e.preventDefault();
     const s = getSelections();
 
+    // Hold the order while a logo is uploading or if its upload failed.
+    const logoBlock = logoUpload.blockReason();
+    if (logoBlock) {
+      fileInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
     let firstError = null;
     if (!s.name) firstError = firstError || document.getElementById('cz-name');
     if (!s.email) firstError = firstError || document.getElementById('cz-email');
@@ -304,6 +315,7 @@
       const label = k.replace(/([A-Z])/g, ' $1').replace(/^./, c => c.toUpperCase());
       customizations[label] = v;
     });
+    if (logoUpload.getUrl()) customizations['Logo URL'] = logoUpload.getUrl();
 
     Cart.addItem({
       productId: 'custom-keychain',
@@ -329,12 +341,12 @@
       ``,
       `── Design ──`,
       s.text ? `Custom Text: "${s.text}"` : `Custom Text: (none)`,
-      s.logoFilename ? `Logo File: ${s.logoFilename} (will be sent separately — see note below)` : `Logo File: (none)`
+      s.logoFilename ? `Logo File: ${s.logoFilename}` + (logoUpload.getUrl() ? ` (download: ${logoUpload.getUrl()})` : ' (will be sent separately — see note below)') : `Logo File: (none)`
     ].filter(Boolean);
     if (s.notes) {
       lines.push(``, `── Notes ──`, s.notes);
     }
-    if (s.logoFilename) {
+    if (s.logoFilename && !logoUpload.getUrl()) {
       lines.push(``, `── Important ──`, `Please reply to this email with the logo file (${s.logoFilename}) attached so we can build your proof.`);
     }
     return lines.join('\n');

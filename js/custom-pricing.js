@@ -1,4 +1,4 @@
-// Single source of truth for custom-product pricing (tumblers, keychains, patches, hats).
+// Single source of truth for custom-product pricing (tumblers, camo tumblers, camo koozies, hoodies, Mossy Oak hoodies and long sleeves, Mad Hatter tees, keychains, patches, hats).
 //
 // Loaded in the browser by the customizer pages (so the displayed price is correct) AND
 // require()d by the checkout function (api/_lib/build-line-items.js) so the price a customer
@@ -12,7 +12,7 @@
 //      used by keychain/patch/hat. Unknown/unselected options default to a x1.0 multiplier.
 //
 // KEEP IN SYNC: the base/floor/multiplier numbers below mirror the *_CONFIG tables in
-// js/customize-tumblers.js, js/customize-keychains.js and js/customize-patches.js, which
+// js/customize-tumblers.js, js/customize-camo-tumbler.js, js/customize-camo-koozie.js, js/customize-camo-beanie.js, js/customize-hoodie.js, js/customize-mossy-oak-hoodie.js, js/customize-mossy-oak-longsleeve.js, js/customize-mad-hatter-tee.js, js/customize-mad-hatter-vintage-duck-tee.js, js/customize-keychains.js and js/customize-patches.js, which
 // the customizer pages use to DISPLAY the price. If you change a price in one place,
 // change it in both. This module is the authority for what is actually CHARGED.
 (function (root) {
@@ -30,6 +30,105 @@
           'Front Only': 2000,        // $20.00
           'Front + Back': 2250,      // $22.50
           'Wraparound (360°)': 2500  // $25.00
+        }
+      }
+    },
+    'custom-camo-tumbler': {
+      name: 'Custom Camo Tumbler', // Bone Yard, Blackwater and Timber Bark Camo share one price
+      // Priced by the "Blank" cart field: 'Yes' = ordered blank ($20), anything else
+      // (customized with text and/or a logo) = $25.
+      priceCentsByOption: {
+        dim: 'blank',
+        default: 2500, // Customized = $25.00
+        prices: {
+          'Yes': 2000 // Blank (no customization) = $20.00
+        }
+      }
+    },
+    'custom-camo-koozie': {
+      name: 'Custom Camo Can Koozie', // Ghost Marsh and Timber Bark Camo share one price
+      // PLACEHOLDER PRICE: confirm with client. Change the two numbers below and the matching
+      // blankPriceCents / customPriceCents in js/customize-camo-koozie.js.
+      // Priced by the "Blank" cart field: 'Yes' = ordered blank ($20), anything else = $25.
+      priceCentsByOption: {
+        dim: 'blank',
+        default: 2500, // Customized = $25.00 (placeholder)
+        prices: {
+          'Yes': 2000 // Blank (no customization) = $20.00 (placeholder)
+        }
+      }
+    },
+    'custom-hoodie': {
+      name: 'Custom Independent Trading Co. Camo Hoodie', // Duck Camo and Washed Camo share one price
+      // Priced by the "Blank" cart field: 'Yes' = ordered blank ($40), anything else
+      // (customized front/back/both, no field) = $45. Size and placement carry no upcharge.
+      priceCentsByOption: {
+        dim: 'blank',
+        default: 4500, // Customized = $45.00
+        prices: {
+          'Yes': 4000 // Blank (no customization) = $40.00
+        }
+      }
+    },
+    'custom-mossy-oak-hoodie': {
+      name: 'Custom Mossy Oak Washed Bottomland Camo Hoodie',
+      // Priced by the "Blank" cart field: 'Yes' = ordered blank ($55), anything else
+      // (customized front/back/both) = $60. Size and placement carry no upcharge.
+      priceCentsByOption: {
+        dim: 'blank',
+        default: 6000, // Customized = $60.00
+        prices: {
+          'Yes': 5500 // Blank (no customization) = $55.00
+        }
+      }
+    },
+    'custom-mossy-oak-longsleeve': {
+      name: 'Custom Mossy Oak Washed Bottomland Camo Long Sleeve T-Shirt',
+      // Priced by the "Blank" cart field: 'Yes' = ordered blank ($33), anything else
+      // (customized front/back/both) = $38. Size and placement carry no upcharge.
+      priceCentsByOption: {
+        dim: 'blank',
+        default: 3800, // Customized = $38.00
+        prices: {
+          'Yes': 3300 // Blank (no customization) = $33.00
+        }
+      }
+    },
+    'custom-mad-hatter-tee': {
+      name: 'Custom Mad Hatter Fog Camo Short Sleeve T-Shirt',
+      // PLACEHOLDER PRICE: confirm with client. Change the two numbers below and the matching
+      // blankPriceCents / customPriceCents in js/customize-mad-hatter-tee.js.
+      // Priced by the "Blank" cart field: 'Yes' = ordered blank ($28), anything else = $33.
+      // Size and placement carry no upcharge.
+      priceCentsByOption: {
+        dim: 'blank',
+        default: 3300, // Customized = $33.00 (placeholder)
+        prices: {
+          'Yes': 2800 // Blank (no customization) = $28.00 (placeholder)
+        }
+      }
+    },
+    'custom-mad-hatter-vintage-duck-tee': {
+      name: 'Custom Mad Hatter Vintage Duck Camo Short Sleeve T-Shirt',
+      // Priced by the "Blank" cart field: 'Yes' = ordered blank ($30), anything else = $35.
+      // Size and placement carry no upcharge.
+      priceCentsByOption: {
+        dim: 'blank',
+        default: 3500, // Customized = $35.00
+        prices: {
+          'Yes': 3000 // Blank (no customization) = $30.00
+        }
+      }
+    },
+    'custom-camo-beanie': {
+      name: 'Custom Richardson Duck Camo Beanie', // all colors share one price
+      // Priced by the "Blank" cart field: 'Yes' = ordered blank ($20), anything else = $25.
+      // The "Customization type" choice carries no price difference.
+      priceCentsByOption: {
+        dim: 'blank',
+        default: 2500, // Customized = $25.00
+        prices: {
+          'Yes': 2000 // Blank (no customization) = $20.00
         }
       }
     },
@@ -96,7 +195,13 @@
   // whose keys are the customizer's Title-cased field labels (e.g. "Backing", "Size").
   function selectionFromCustomizations(c) {
     c = c || {};
-    return { type: c['Type'], shape: c['Shape'], size: c['Size'], backing: c['Backing'] };
+    // "Blank" comes from the browser, so it only counts when the item carries nothing a
+    // blank order wouldn't send (allowlist, not a denylist: any other key, or a non-string
+    // value, means the item is priced as customized).
+    const BLANK_KEYS = ['Blank', 'Pattern', 'Size', 'Notes'];
+    const onlyBlankKeys = Object.keys(c).every(k => BLANK_KEYS.includes(k) && typeof c[k] === 'string');
+    const blank = c['Blank'] === 'Yes' && onlyBlankKeys ? 'Yes' : undefined;
+    return { type: c['Type'], shape: c['Shape'], size: c['Size'], backing: c['Backing'], blank };
   }
 
   const api = {

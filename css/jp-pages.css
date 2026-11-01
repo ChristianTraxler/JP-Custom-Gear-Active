@@ -1,0 +1,5157 @@
+/* JP Custom Gear redesign: page styles.
+
+   Loads AFTER css/jp-redesign.css (tokens and jp- building blocks) on every
+   page. Cosmetic only: it restyles existing classes and never changes what
+   scripts find. Rules that carry behavior (see handoff Appendix B) are only
+   restyled here, never hidden or removed. Sections below are owned by
+   different steps of the redesign; keep your work inside your own section. */
+
+/* ==========================================================================
+   GLOBAL
+   Announcement bar, header, mobile drawer, footer, back to top, product
+   cards, forms, custom selects.
+   ========================================================================== */
+
+/* Shared hex patch button look (same as .jp-btn.jp-btn-patch) for existing buttons */
+.nav-cta,
+.drawer-foot a,
+.footer-news-btn,
+.form-submit,
+.cz-submit {
+  --jp-chamfer: 14px;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
+  min-height: 48px;
+  padding: 0 calc(var(--jp-chamfer) + 18px);
+  font-family: var(--jp-body);
+  font-stretch: 125%;
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  clip-path: polygon(var(--jp-chamfer) 0, calc(100% - var(--jp-chamfer)) 0, 100% 50%, calc(100% - var(--jp-chamfer)) 100%, var(--jp-chamfer) 100%, 0 50%);
+  background-color: var(--jp-leather);
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.08));
+  color: var(--jp-burn);
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+.nav-cta:hover,
+.drawer-foot a:hover,
+.footer-news-btn:hover,
+.form-submit:hover,
+.cz-submit:hover {
+  background-color: var(--jp-leather-lt);
+  color: var(--jp-burn);
+}
+.nav-cta:focus-visible,
+.drawer-foot a:focus-visible,
+.footer-news-btn:focus-visible,
+.form-submit:focus-visible,
+.cz-submit:focus-visible {
+  outline: none;
+  background-color: var(--jp-burn);
+  color: var(--jp-leather-lt);
+}
+.nav-cta:active,
+.drawer-foot a:active,
+.footer-news-btn:active,
+.form-submit:active,
+.cz-submit:active {
+  transform: translateY(1px);
+}
+.form-submit:disabled,
+.cz-submit:disabled,
+.footer-news-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.drawer-foot a,
+.form-submit,
+.cz-submit {
+  display: flex;
+}
+.footer-news-btn {
+  display: inline-flex;
+}
+/* responsive.css hides .nav-cta below 901px; only set its display above that */
+@media (min-width: 901px) {
+  .nav-cta {
+    display: inline-flex;
+  }
+}
+
+/* ---------- Announcement bar ---------- */
+.announce {
+  background: var(--jp-night);
+  color: var(--jp-bone);
+  padding: 9px var(--jp-gutter);
+  font-family: var(--jp-mono);
+  font-stretch: 87.5%;
+  font-size: 0.66rem;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ---------- Header ---------- */
+.navbar {
+  background: rgba(236, 238, 232, 0.94);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--jp-line);
+  box-shadow: none;
+}
+.nav-inner {
+  max-width: var(--jp-max);
+  height: var(--jp-header-h);
+  padding: 0 var(--jp-gutter);
+  gap: 20px;
+}
+.nav-logo {
+  gap: 12px;
+  min-width: 0;
+  flex-shrink: 0;
+  color: var(--jp-ink);
+}
+.nav-logo-img {
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  object-fit: contain;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: 0 1px 4px rgba(20, 16, 10, 0.25);
+}
+.nav-logo-text {
+  line-height: 1.2;
+}
+.nav-logo-text strong {
+  font-family: var(--jp-body);
+  font-stretch: 125%;
+  font-weight: 800;
+  font-size: 0.98rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--jp-ink);
+  white-space: nowrap;
+}
+.nav-logo-text small {
+  display: block;
+  font-family: var(--jp-mono);
+  font-stretch: 87.5%;
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--jp-moss);
+  white-space: nowrap;
+}
+.nav-links {
+  gap: clamp(14px, 1.9vw, 30px);
+}
+.nav-links a {
+  font-family: var(--jp-body);
+  font-stretch: 125%;
+  font-weight: 600;
+  font-size: 0.66rem;
+  line-height: 1.2;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--jp-ink);
+  white-space: nowrap;
+  padding: 6px 0;
+}
+.nav-links a::after {
+  bottom: 0;
+  height: 1px;
+  background: var(--jp-ink);
+}
+.nav-links a:hover {
+  color: var(--jp-ink);
+}
+.nav-links a:hover::after,
+.nav-links a[aria-current='page']::after {
+  width: 100%;
+}
+.nav-right {
+  gap: 10px;
+}
+
+/* Search: quiet input */
+.nav-search {
+  min-height: 44px;
+  width: clamp(150px, 15vw, 220px);
+  padding: 0 12px;
+  background: var(--jp-input-bg);
+  border: 1px solid var(--jp-line);
+  border-radius: 2px;
+}
+.nav-search:focus-within {
+  width: clamp(170px, 18vw, 260px);
+  background: var(--jp-input-bg);
+  border-color: var(--jp-leather);
+  box-shadow: 0 0 0 3px rgba(176, 113, 62, 0.22);
+}
+.nav-search-icon {
+  color: var(--jp-moss);
+}
+.nav-search input[type='search'] {
+  font-family: var(--jp-body);
+  font-size: 0.85rem;
+  color: var(--jp-ink);
+  min-width: 0;
+}
+.nav-search input[type='search']::placeholder {
+  color: var(--jp-moss);
+  opacity: 0.85;
+}
+.nav-search-dropdown {
+  background: var(--jp-mist);
+  border: 1px solid var(--jp-line);
+  border-radius: 2px;
+  box-shadow: 0 18px 40px rgba(18, 22, 16, 0.22);
+  padding: 4px;
+}
+.nav-search-row {
+  border-radius: 2px;
+  color: var(--jp-ink);
+}
+.nav-search-row:hover,
+.nav-search-row.active {
+  background: var(--jp-heather);
+}
+.nav-search-thumb {
+  border-radius: 2px;
+  background: var(--jp-heather);
+}
+.nav-search-name {
+  font-family: var(--jp-body);
+  font-size: 0.84rem;
+  color: var(--jp-ink);
+}
+.nav-search-sub {
+  font-family: var(--jp-mono);
+  font-stretch: 87.5%;
+  font-size: 0.6rem;
+  letter-spacing: 0.02em;
+  color: var(--jp-moss);
+}
+.nav-search-price {
+  font-family: var(--jp-mono);
+  font-weight: 500;
+  font-size: 0.78rem;
+  color: var(--jp-ink);
+}
+.nav-search-empty {
+  color: var(--jp-moss);
+}
+.nav-search-all {
+  border-radius: 0;
+  background: var(--jp-ink);
+  color: var(--jp-bone);
+  font-family: var(--jp-body);
+  font-stretch: 125%;
+  font-weight: 700;
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  min-height: 44px;
+}
+.nav-search-all:hover {
+  background: var(--jp-loden-2);
+}
+
+/* Cart icon and count (injected by cart-badge.js) */
+.nav-cart {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  color: var(--jp-ink);
+  border-radius: 2px;
+}
+.nav-cart:hover {
+  background: var(--jp-heather);
+}
+.nav-cart svg {
+  width: 21px;
+  height: 21px;
+  stroke-width: 1.6;
+}
+.nav-cart-count {
+  top: 3px;
+  right: 1px;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 4px;
+  border-radius: 9px;
+  background: var(--jp-leather);
+  color: var(--jp-burn);
+  font-family: var(--jp-mono);
+  font-size: 0.6rem;
+  font-weight: 600;
+  line-height: 17px;
+}
+
+/* Burger (shown below 901px by responsive.css) */
+.burger {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 10px;
+}
+.burger span {
+  width: 22px;
+  height: 1.5px;
+  background: var(--jp-ink);
+  border-radius: 0;
+}
+
+/* Tight desktop widths: keep one row without overflow */
+@media (min-width: 901px) and (max-width: 1299px) {
+  .nav-inner {
+    gap: 10px;
+  }
+  .nav-logo {
+    gap: 8px;
+  }
+  .nav-logo-text strong {
+    font-size: 0.82rem;
+  }
+  .nav-logo-text small {
+    display: none;
+  }
+  .nav-links {
+    gap: 12px;
+  }
+  .nav-links a {
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+  }
+  .nav-right {
+    gap: 6px;
+  }
+  .nav-search {
+    width: 44px;
+    padding: 0 12px;
+    overflow: hidden;
+  }
+  .nav-search:focus-within {
+    width: 190px;
+    overflow: visible;
+  }
+  .nav-right > .nav-search input[type='search'] {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    padding: 0 12px 0 36px;
+  }
+  .nav-cta {
+    --jp-chamfer: 10px;
+    padding: 0 calc(var(--jp-chamfer) + 8px);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+  }
+}
+
+/* ---------- Mobile drawer ---------- */
+.drawer-overlay {
+  background: rgba(18, 22, 16, 0.62);
+}
+.drawer {
+  width: min(88vw, 360px);
+  background: var(--jp-night);
+  color: var(--jp-bone);
+  box-shadow: -18px 0 48px rgba(0, 0, 0, 0.4);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+/* The closed drawer sits just off screen; keep its shadow from bleeding onto the page edge */
+.drawer:not(.open) {
+  box-shadow: none;
+}
+.drawer-head {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--jp-line-dk);
+}
+.drawer-head strong {
+  font-family: var(--jp-body);
+  font-stretch: 125%;
+  font-weight: 800;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--jp-bone);
+}
+.drawer-close {
+  min-width: 44px;
+  min-height: 44px;
+  margin-right: -10px;
+  color: var(--jp-bone);
+  font-size: 1.2rem;
+}
+.drawer-close:hover {
+  color: var(--jp-leather-lt);
+}
+.drawer-search {
+  padding: 16px 20px 4px;
+}
+.drawer .nav-search {
+  background: rgba(233, 232, 223, 0.05);
+  border-color: rgba(233, 232, 223, 0.18);
+}
+.drawer .nav-search:focus-within {
+  background: rgba(233, 232, 223, 0.08);
+}
+.drawer .nav-search-icon,
+.drawer .nav-search input[type='search']::placeholder {
+  color: var(--jp-fog);
+}
+.drawer .nav-search input[type='search'] {
+  color: var(--jp-bone);
+  font-size: 1rem;
+}
+.drawer .nav-search-dropdown {
+  background: var(--jp-loden);
+  border-color: var(--jp-line-dk);
+}
+.drawer .nav-search-row,
+.drawer .nav-search-name,
+.drawer .nav-search-price {
+  color: var(--jp-bone);
+}
+.drawer .nav-search-row:hover,
+.drawer .nav-search-row.active {
+  background: var(--jp-loden-2);
+}
+.drawer .nav-search-sub,
+.drawer .nav-search-empty {
+  color: var(--jp-fog);
+}
+.drawer .nav-search-all {
+  background: var(--jp-leather);
+  color: var(--jp-burn);
+}
+.drawer-nav {
+  padding: 8px 20px;
+}
+.drawer-nav a {
+  min-height: 56px;
+  padding: 12px 0;
+  font-family: var(--jp-display);
+  font-weight: 300;
+  font-size: clamp(1.5rem, 6.4vw, 1.8rem);
+  letter-spacing: -0.012em;
+  line-height: 1.1;
+  color: var(--jp-bone);
+  border-bottom: 1px solid var(--jp-line-dk);
+}
+.drawer-nav a:hover,
+.drawer-nav a[aria-current='page'] {
+  color: var(--jp-leather-lt);
+}
+.drawer-foot {
+  padding: 20px;
+  border-top: 1px solid var(--jp-line-dk);
+}
+.drawer-foot a {
+  width: 100%;
+  min-height: 52px;
+}
+
+/* ---------- Newsletter band and footer ---------- */
+.footer-news {
+  background: var(--jp-night);
+  color: var(--jp-bone);
+  padding: clamp(40px, 6vw, 72px) var(--jp-gutter) 0;
+}
+.footer-news-inner {
+  max-width: var(--jp-max);
+  padding-bottom: clamp(32px, 4vw, 48px);
+  border-bottom: 1px solid var(--jp-line-dk);
+  gap: 20px 40px;
+}
+.footer-news-copy strong {
+  font-family: var(--jp-display);
+  font-weight: 300;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+  color: var(--jp-bone);
+  margin-bottom: 6px;
+}
+.footer-news-copy p {
+  color: var(--jp-fog);
+  font-size: 0.95rem;
+}
+.footer-news-form {
+  gap: 8px;
+  align-items: stretch;
+}
+.footer-news-input {
+  min-height: 52px;
+  width: min(320px, 100%);
+  padding: 0 16px;
+  font-family: var(--jp-body);
+  font-size: 1rem;
+  color: var(--jp-bone);
+  background: rgba(233, 232, 223, 0.05);
+  border: 1px solid rgba(233, 232, 223, 0.18);
+  border-radius: 2px;
+}
+.footer-news-input::placeholder {
+  color: #7f8778;
+}
+.footer-news-input:focus {
+  border-color: var(--jp-leather-lt);
+  box-shadow: 0 0 0 3px rgba(207, 145, 96, 0.22);
+}
+.footer-news-btn {
+  min-height: 52px;
+}
+.footer-main {
+  background: var(--jp-night);
+  color: var(--jp-bone);
+  padding: clamp(40px, 5vw, 64px) var(--jp-gutter) 0;
+}
+.footer-main-inner {
+  max-width: var(--jp-max);
+  grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr));
+  gap: 40px clamp(24px, 4vw, 56px);
+  margin-bottom: clamp(40px, 5vw, 64px);
+}
+.footer-brand-badge {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas: 'img built' 'text text';
+  align-items: center;
+  gap: 14px 16px;
+  margin-bottom: 18px;
+}
+.footer-logo-img {
+  grid-area: img;
+  width: 84px;
+  height: 84px;
+  padding: 0;
+  object-fit: contain;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.14);
+}
+.footer-built {
+  grid-area: built;
+  font-size: clamp(2.35rem, 4.4vw, 3.6rem);
+  line-height: 0.96;
+  color: var(--jp-bone);
+}
+.footer-brand-text {
+  grid-area: text;
+}
+.footer-brand-text strong {
+  font-family: var(--jp-body);
+  font-stretch: 125%;
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  line-height: 1.3;
+  color: var(--jp-bone);
+}
+.footer-brand-text small {
+  font-family: var(--jp-mono);
+  font-stretch: 87.5%;
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+  color: var(--jp-fog);
+}
+.footer-brand-desc {
+  max-width: 28em;
+  color: var(--jp-fog);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+.footer-socials {
+  gap: 10px;
+}
+.footer-social {
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: 1px solid var(--jp-line-dk);
+  color: var(--jp-bone);
+  border-radius: 2px;
+}
+.footer-social:hover {
+  background: transparent;
+  border-color: var(--jp-leather-lt);
+  color: var(--jp-leather-lt);
+}
+.footer-col-title {
+  font-family: var(--jp-body);
+  font-stretch: 125%;
+  font-weight: 600;
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--jp-fog);
+  margin-bottom: 18px;
+}
+.footer-col ul {
+  gap: 8px;
+}
+.footer-col ul li a {
+  display: inline-block;
+  padding: 3px 0;
+  color: var(--jp-bone);
+  font-size: 0.95rem;
+  line-height: 1.4;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+  text-decoration-color: transparent;
+  transition: text-decoration-color 0.2s, color 0.2s;
+}
+.footer-col ul li a:hover,
+.footer-col ul li a:focus-visible {
+  color: var(--jp-bone);
+  text-decoration-color: currentColor;
+}
+.footer-bottom {
+  max-width: var(--jp-max);
+  padding: 22px 64px 28px 0;
+  border-top: 1px solid var(--jp-line-dk);
+}
+.footer-bottom p {
+  color: var(--jp-fog);
+  font-size: 0.82rem;
+}
+.footer-made {
+  font-family: var(--jp-mono);
+  font-stretch: 87.5%;
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
+  color: var(--jp-fog);
+}
+.footer-heart {
+  color: var(--jp-leather-lt);
+}
+@media (max-width: 900px) {
+  .footer-main-inner {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .footer-main-inner > :first-child {
+    grid-column: 1 / -1;
+  }
+}
+@media (max-width: 600px) {
+  .footer-news-form {
+    flex-wrap: wrap;
+  }
+  .footer-news-input {
+    width: 100%;
+    flex: 1 1 100%;
+  }
+  .footer-news-btn {
+    width: 100%;
+  }
+}
+
+/* ---------- Back to top ----------
+   jp-redesign.css reshapes it. Keep the old hover background from showing in the corners. */
+.scroll-top:hover,
+.scroll-top:focus-visible {
+  background-color: transparent;
+}
+
+/* ---------- Product cards ---------- */
+.product-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px 14px;
+}
+@media (min-width: 768px) {
+  .product-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 36px 20px;
+  }
+}
+@media (min-width: 1024px) {
+  .product-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 44px 24px;
+  }
+}
+.product-card {
+  min-width: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  overflow: visible;
+  color: var(--jp-ink);
+}
+.product-card:hover {
+  transform: none;
+  box-shadow: none;
+  border-color: transparent;
+}
+.product-card .product-image-wrap,
+.product-card .product-image-wrap:has(.product-image[src*='foam-side']) {
+  aspect-ratio: 4 / 5;
+  background: var(--jp-heather);
+}
+.product-image {
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.product-card:hover .product-image,
+.product-card:focus-visible .product-image {
+  transform: scale(1.035);
+}
+/* Portrait wood-backdrop photos: fill the frame like the other photos */
+.product-image.product-image--portrait {
+  object-fit: cover;
+  background: transparent;
+}
+/* Transparent PNG cut-outs sit on a heather spotlight instead of filling the frame */
+.product-card .product-image-wrap:has(.product-image[src*='salt-water-camo']),
+.product-card .product-image-wrap:has(.product-image[src*='bottomland-camo']),
+.product-card .product-image-wrap:has(.product-image[src*='show-me.png']),
+.product-card .product-image-wrap:has(.product-image[src*='shit-show']),
+.product-card .product-image-wrap:has(.product-image[src*='first-responder']),
+.product-card .product-image-wrap:has(.product-image[src*='-tumbler.png']),
+.product-card .product-image-wrap:has(.product-image[src*='foam-side']),
+.product-card .product-image-wrap:has(.product-image[src*='my-ol-lady']) {
+  background: radial-gradient(120% 90% at 50% 38%, #f3f4ef 0%, var(--jp-heather) 70%);
+}
+.product-image[src*='salt-water-camo'],
+.product-image[src*='bottomland-camo'],
+.product-image[src*='show-me.png'],
+.product-image[src*='shit-show'],
+.product-image[src*='first-responder'],
+.product-image[src*='-tumbler.png'] {
+  object-fit: contain;
+  padding: 7%;
+}
+/* Leather patch cards: images are pre-composed 4:5 cards (whole patch visible, uniform size), so cover never crops them */
+.product-card[data-product-type='patch'] .product-image {
+  object-fit: cover;
+  padding: 0;
+}
+.product-tag {
+  display: none; /* tags hidden on every product card */
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  z-index: 1;
+  padding: 4px 8px;
+  background: var(--jp-burn);
+  color: var(--jp-leather-lt);
+  font-family: var(--jp-mono);
+  font-stretch: 87.5%;
+  font-size: 0.6rem;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.product-info {
+  padding: 14px 0 0;
+}
+.product-name {
+  font-family: var(--jp-display);
+  font-weight: 400;
+  font-size: 1.08rem;
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+  color: var(--jp-ink);
+  margin-bottom: 8px;
+}
+.product-price-row {
+  gap: 8px;
+}
+.product-price {
+  font-family: var(--jp-mono);
+  font-stretch: 87.5%;
+  font-weight: 500;
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  color: var(--jp-ink);
+}
+.product-price small {
+  font-family: var(--jp-mono);
+  font-size: 0.62rem;
+  color: var(--jp-moss);
+}
+.product-cta {
+  font-family: var(--jp-body);
+  font-stretch: 125%;
+  font-weight: 600;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--jp-moss);
+}
+.product-card:hover .product-cta {
+  color: var(--jp-leather);
+}
+@media (max-width: 760px) {
+  .product-info {
+    padding: 12px 0 0;
+  }
+  .product-name {
+    font-size: 1.02rem;
+  }
+}
+
+/* ---------- Forms ---------- */
+.form-label {
+  font-family: var(--jp-body);
+  font-stretch: 125%;
+  font-weight: 600;
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  color: var(--jp-bone);
+}
+.form-input,
+.form-select,
+.form-textarea {
+  min-height: 52px;
+  padding: 14px 16px;
+  font-family: var(--jp-body);
+  font-size: 1rem;
+  color: var(--jp-bone);
+  background-color: rgba(233, 232, 223, 0.05);
+  border: 1px solid rgba(233, 232, 223, 0.18);
+  border-radius: 2px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.form-textarea {
+  min-height: 132px;
+  line-height: 1.5;
+  resize: vertical;
+}
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: #7f8778;
+}
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--jp-leather-lt);
+  box-shadow: 0 0 0 3px rgba(207, 145, 96, 0.25);
+}
+.form-select option {
+  background: var(--jp-loden);
+  color: var(--jp-bone);
+}
+.form-submit {
+  width: 100%;
+  min-height: 52px;
+}
+.form-success h3 {
+  font-weight: 300;
+}
+/* Light panels (customizer sections, product page) */
+.cz-section {
+  border-radius: 2px;
+}
+.cz-section .form-input,
+.cz-section .form-select,
+.cz-section .form-textarea,
+.pdp-select {
+  min-height: 52px;
+  padding: 14px 16px;
+  font-family: var(--jp-body);
+  font-size: 1rem;
+  color: var(--jp-ink);
+  background-color: var(--jp-input-bg);
+  border: 1px solid var(--jp-line);
+  border-radius: 2px;
+}
+.cz-section .form-textarea {
+  min-height: 132px;
+}
+.cz-section .form-input:focus,
+.cz-section .form-select:focus,
+.cz-section .form-textarea:focus,
+.pdp-select:focus {
+  outline: none;
+  border-color: var(--jp-leather);
+  box-shadow: 0 0 0 3px rgba(176, 113, 62, 0.25);
+}
+.cz-section .form-label,
+.pdp-label {
+  font-family: var(--jp-body);
+  font-stretch: 125%;
+  font-weight: 600;
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  color: var(--jp-ink);
+}
+.cz-section .form-select option {
+  background: var(--jp-input-bg);
+  color: var(--jp-ink);
+}
+
+/* ---------- Custom selects (js/custom-select.js keeps the native select as the trigger) ---------- */
+.cs.is-open > select.form-select,
+.cs.is-open > select.pdp-select {
+  outline: none;
+  border-color: var(--jp-leather);
+  box-shadow: 0 0 0 3px rgba(176, 113, 62, 0.25);
+}
+.cs--dark.is-open > select.form-select {
+  border-color: var(--jp-leather-lt);
+  box-shadow: 0 0 0 3px rgba(207, 145, 96, 0.25);
+}
+.cs-list {
+  background: var(--jp-input-bg);
+  border: 1px solid var(--jp-line);
+  border-radius: 2px;
+  box-shadow: 0 18px 40px rgba(18, 22, 16, 0.22);
+  font-family: var(--jp-body);
+  font-size: 0.95rem;
+}
+.cs-option {
+  min-height: 44px;
+  border-radius: 2px;
+  color: var(--jp-ink);
+}
+.cs-option.is-active {
+  background: var(--jp-heather);
+}
+.cs-option[aria-selected='true'] {
+  color: var(--jp-leather);
+  font-weight: 600;
+}
+.cs-option[aria-selected='true']::before {
+  width: 10px;
+  height: 11px;
+  border-radius: 0;
+  background: var(--jp-leather);
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+}
+.cs--pdp .cs-trigger,
+.cs--pdp .cs-list {
+  border-radius: 2px;
+}
+.cs--dark .cs-trigger {
+  background: rgba(233, 232, 223, 0.05);
+  border-color: rgba(233, 232, 223, 0.18);
+  color: var(--jp-bone);
+}
+.cs--dark.is-open > .cs-trigger,
+.cs--dark .cs-trigger:focus-visible {
+  border-color: var(--jp-leather-lt);
+  box-shadow: 0 0 0 3px rgba(207, 145, 96, 0.25);
+}
+.cs--dark .cs-arrow {
+  color: var(--jp-fog);
+}
+.cs--dark .cs-list {
+  background: var(--jp-loden);
+  border-color: var(--jp-line-dk);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+}
+.cs--dark .cs-option {
+  color: var(--jp-bone);
+}
+.cs--dark .cs-option.is-active {
+  background: var(--jp-loden-2);
+}
+.cs--dark .cs-option[aria-selected='true'] {
+  color: var(--jp-leather-lt);
+}
+.cs--dark .cs-option[aria-selected='true']::before {
+  background: var(--jp-leather-lt);
+}
+.cs-list::-webkit-scrollbar-thumb {
+  background: var(--jp-leather);
+  border-radius: 0;
+}
+.cs--dark .cs-list::-webkit-scrollbar-thumb {
+  background: var(--jp-leather-lt);
+}
+
+/* ==========================================================================
+   HOME
+   ========================================================================== */
+
+/* All selectors are prefixed .jp-home (class on index.html body) so the old home rules in styles.css lose cleanly. */
+
+/* ---------- Hero ---------- */
+.jp-home .hero {
+  display: block;
+  min-height: 0;
+  clip-path: none;
+  background: var(--jp-loden);
+  padding-top: clamp(56px, 9vw, 150px);
+}
+/* The old video element stays in the page (an inline script still looks it up); it is just not shown */
+.jp-home .hero-video,
+.jp-home .hero-video-overlay,
+.jp-home .hero-grain,
+.jp-home .hero-glow,
+.jp-home .hero-stars,
+.jp-home .hero-badge-wrap {
+  display: none;
+}
+.jp-home .hero-picture img {
+  object-position: 58% 100%;
+}
+@media (min-width: 768px) {
+  .jp-home .hero-picture img {
+    object-position: 68% 50%;
+  }
+}
+.jp-home .hero-inner {
+  display: block;
+  max-width: var(--jp-max);
+  margin: 0 auto;
+  padding: 0 var(--jp-gutter);
+}
+/* The hero uses one orchestrated rise instead of the scroll fade */
+.jp-home .hero .fade-in {
+  opacity: 1;
+  transform: none;
+}
+.jp-home .hero-eyebrow {
+  margin: 0;
+  color: var(--jp-leather-lt);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+}
+.jp-home .hero h1.hero-title {
+  max-width: 780px;
+  margin: 24px 0 0;
+  color: var(--jp-bone);
+  font-family: var(--jp-display);
+  font-weight: 300;
+  font-size: clamp(3.5rem, 11.6vw, 7.2rem);
+  line-height: 0.92;
+}
+.jp-home .hero-line {
+  display: block;
+}
+.jp-home .hero-line-2 {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.2em;
+}
+.jp-home .hero-line:nth-child(1) {
+  animation-delay: 60ms;
+}
+.jp-home .hero-line-2 {
+  animation-delay: 140ms;
+}
+.jp-home .hero-desc {
+  max-width: 34em;
+  margin: 32px 0 0;
+  color: rgba(233, 232, 223, 0.85);
+  font-size: clamp(1.02rem, 1.25vw, 1.18rem);
+  line-height: 1.6;
+  animation-delay: 260ms;
+}
+.jp-home .hero-btns {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 32px;
+  margin: 36px 0 clamp(220px, 62vw, 300px);
+  animation-delay: 340ms;
+}
+@media (min-width: 768px) {
+  .jp-home .hero-btns {
+    margin-bottom: clamp(110px, 10vw, 170px);
+  }
+}
+.jp-home .hero-btns .btn-outline {
+  color: var(--jp-bone);
+}
+.jp-home .hero-btns .btn-outline:hover,
+.jp-home .why-link:hover,
+.jp-home .collections-all:hover {
+  color: var(--jp-leather-lt);
+  border-color: currentColor;
+}
+.jp-home .collections-all:hover,
+.jp-home .why-link:hover {
+  color: var(--jp-leather);
+}
+.jp-home .hero-trust {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  padding: 0;
+  border-top: 1px solid var(--jp-line-dk);
+}
+.jp-home .hero-trust-item {
+  min-width: 0;
+  padding: 20px 12px 26px;
+  text-align: left;
+}
+.jp-home .hero-trust-item:first-child {
+  padding-left: 0;
+}
+.jp-home .hero-trust-item + .hero-trust-item {
+  border-left: 1px solid var(--jp-line-dk);
+  padding-left: 14px;
+}
+.jp-home .hero-trust-item strong {
+  display: block;
+  color: var(--jp-bone);
+  font-family: var(--jp-display);
+  font-weight: 300;
+  font-size: clamp(1.65rem, 3vw, 2rem);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.jp-home .hero-trust-item span {
+  display: block;
+  margin-top: 8px;
+  color: var(--jp-fog);
+  font-size: 0.68rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+@media (min-width: 768px) {
+  .jp-home .hero-trust-item {
+    padding: 28px 24px 34px;
+  }
+  .jp-home .hero-trust-item:first-child {
+    padding-left: 0;
+  }
+  .jp-home .hero-trust-item + .hero-trust-item {
+    padding-left: 24px;
+  }
+}
+
+/* ---------- Stats ---------- */
+.jp-home .stats {
+  background: var(--jp-mist);
+  color: var(--jp-ink);
+  padding: var(--jp-band-tight) 0;
+}
+.jp-home .stats-grain {
+  display: none;
+}
+.jp-home .stats-inner {
+  max-width: var(--jp-max);
+  padding-inline: var(--jp-gutter);
+}
+.jp-home .stats-head {
+  display: grid;
+  gap: 12px;
+  margin-bottom: clamp(32px, 5vw, 56px);
+  text-align: left;
+}
+.jp-home .stats-head .eyebrow {
+  margin: 0;
+  color: var(--jp-moss);
+  font-size: 0.7rem;
+}
+.jp-home .stats-head p {
+  max-width: 14em;
+  color: var(--jp-ink);
+  font-size: clamp(1.8rem, 3.4vw, 2.9rem);
+  letter-spacing: -0.022em;
+  text-transform: none;
+}
+.jp-home .stats-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 20px;
+  background: none;
+}
+@media (min-width: 900px) {
+  .jp-home .stats-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0 32px;
+  }
+}
+.jp-home .stat-cell {
+  padding: 18px 0 32px;
+  border-top: 1px solid var(--jp-ink);
+  background: none;
+  text-align: left;
+}
+.jp-home .stat-cell:hover {
+  background: none;
+}
+.jp-home .stat-num,
+.jp-home .stat-cell:hover .stat-num {
+  margin-bottom: 14px;
+  color: var(--jp-ink);
+  font-size: clamp(2.8rem, 6vw, 4.8rem);
+  font-weight: 300;
+  letter-spacing: -0.03em;
+}
+.jp-home .stat-label {
+  margin: 0;
+  color: var(--jp-ink);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+.jp-home .stat-sub {
+  margin-top: 4px;
+  color: var(--jp-moss);
+  font-size: 0.88rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* ---------- Shared home section heads ---------- */
+.jp-home .section-eyebrow {
+  justify-content: flex-start;
+  margin-bottom: 20px;
+  gap: 0;
+}
+.jp-home .section-eyebrow .line {
+  display: none;
+}
+.jp-home .section-eyebrow span {
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  color: var(--jp-moss);
+}
+.jp-home .jp-dark .section-eyebrow span,
+.jp-home .jp-darker .section-eyebrow span {
+  color: var(--jp-leather-lt);
+}
+.jp-home h2.section-title {
+  margin: 0;
+  color: inherit;
+  font-size: clamp(2.35rem, 5.8vw, 5rem);
+  line-height: 0.98;
+  text-align: left;
+}
+.jp-home h2.section-title em {
+  color: inherit;
+  font-style: italic;
+}
+.jp-home .section-desc {
+  max-width: 34em;
+  margin: 0;
+  text-align: left;
+  font-size: clamp(1.02rem, 1.25vw, 1.18rem);
+  line-height: 1.6;
+}
+.jp-home .jp-light .section-desc {
+  color: var(--jp-moss);
+}
+.jp-home .jp-dark .section-desc {
+  color: var(--jp-fog);
+}
+
+/* ---------- Featured build ---------- */
+.jp-home .featured-build {
+  padding: var(--jp-band) 0;
+  background: var(--jp-loden);
+  color: var(--jp-bone);
+}
+.jp-home .featured-build-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: none;
+  gap: 48px;
+  max-width: var(--jp-max);
+  padding-inline: var(--jp-gutter);
+  align-items: start;
+}
+.jp-home .featured-build-text,
+.jp-home .featured-build-gallery,
+.jp-home .featured-build-action {
+  grid-area: auto;
+}
+.jp-home .featured-build-text {
+  display: block;
+  min-width: 0;
+}
+.jp-home .featured-build-eyebrow {
+  margin-bottom: 20px;
+}
+.jp-home h2.featured-build-title {
+  max-width: none;
+  margin: 0;
+  font-size: clamp(2.35rem, 5.8vw, 5rem);
+  line-height: 0.98;
+}
+.jp-home .featured-build-story {
+  max-width: 34em;
+  margin: 24px 0 0;
+  color: var(--jp-fog);
+  font-size: clamp(1.02rem, 1.25vw, 1.18rem);
+  line-height: 1.6;
+}
+.jp-home .featured-build-ticket {
+  margin-top: 32px;
+}
+.jp-home .featured-build-action {
+  display: block;
+  margin-top: 32px;
+}
+/* The ticket already lists these facts; the badges stay in the page for reference but are not shown */
+.jp-home .featured-build-badges {
+  display: none;
+}
+.jp-home .featured-build-cta {
+  width: auto;
+  align-self: auto;
+}
+.jp-home .featured-build-gallery {
+  display: grid;
+  grid-auto-columns: min(78vw, 360px);
+  grid-template-columns: none;
+  grid-template-rows: none;
+  aspect-ratio: auto;
+  max-height: none;
+  gap: 14px;
+  min-width: 0;
+}
+.jp-home .fb-photo {
+  aspect-ratio: 4 / 5;
+  grid-column: auto;
+  grid-row: auto;
+  background: var(--jp-loden-2);
+}
+.jp-home .fb-photo:hover {
+  transform: none;
+}
+.jp-home .fb-photo picture {
+  position: absolute;
+  inset: 0;
+}
+.jp-home .fb-photo img {
+  transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.jp-home .fb-photo:hover img {
+  transform: scale(1.035);
+}
+.jp-home .fb-photo .coll-grain,
+.jp-home .fb-photo .coll-shine {
+  display: none;
+}
+@media (min-width: 1024px) {
+  .jp-home .featured-build-inner {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    column-gap: 40px;
+  }
+  .jp-home .featured-build-text {
+    position: sticky;
+    top: calc(var(--jp-header-h) + 40px);
+  }
+  .jp-home .featured-build-gallery {
+    grid-auto-flow: row;
+    grid-auto-columns: auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto auto;
+    gap: 24px;
+    padding-bottom: calc(96px + 7vw);
+    overflow: visible;
+    margin-inline: 0;
+    padding-inline: 0;
+  }
+  .jp-home .fb-photo-hero {
+    grid-column: 1;
+    grid-row: 1;
+    aspect-ratio: 4 / 5;
+  }
+  .jp-home .fb-photo-human {
+    grid-column: 1;
+    grid-row: 2;
+    aspect-ratio: 1 / 1;
+  }
+  .jp-home .fb-photo-action {
+    grid-column: 2;
+    grid-row: 1;
+    aspect-ratio: 3 / 4;
+    transform: translateY(96px);
+  }
+  .jp-home .fb-photo-mood {
+    grid-column: 2;
+    grid-row: 2;
+    aspect-ratio: 4 / 5;
+    transform: translateY(96px);
+  }
+}
+
+/* ---------- Collections ---------- */
+.jp-home .collections-featured {
+  padding: var(--jp-band) 0;
+  background: var(--jp-mist);
+  color: var(--jp-ink);
+}
+.jp-home .collections-inner {
+  max-width: var(--jp-max);
+  padding-inline: var(--jp-gutter);
+}
+.jp-home .collections-head {
+  display: grid;
+  gap: 24px;
+}
+.jp-home .collections-head-side {
+  display: grid;
+  gap: 20px;
+  justify-items: start;
+}
+@media (min-width: 1024px) {
+  .jp-home .collections-head {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-items: end;
+  }
+  .jp-home .collections-head-main {
+    grid-column: 1 / span 7;
+  }
+  .jp-home .collections-head-side {
+    grid-column: 9 / span 4;
+  }
+}
+.jp-home .coll-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 40px 12px;
+  margin-top: 48px;
+}
+.jp-home .coll-tile-lg,
+.jp-home .coll-tile-caution,
+.jp-home .coll-tile-md:nth-of-type(4) {
+  grid-column: span 2;
+}
+.jp-home .coll-tile {
+  display: block;
+  min-width: 0;
+  min-height: 0;
+  background: none;
+  overflow: visible;
+  color: inherit;
+}
+.jp-home .coll-tile:hover {
+  transform: none;
+}
+.jp-home .coll-frame {
+  aspect-ratio: 3 / 4;
+}
+.jp-home .coll-tile-lg .coll-frame,
+.jp-home .coll-tile-md:nth-of-type(4) .coll-frame {
+  aspect-ratio: 4 / 3;
+}
+.jp-home .coll-image {
+  position: static;
+  opacity: 1;
+  mix-blend-mode: normal;
+  transform: none;
+}
+.jp-home .coll-tile:hover .coll-image {
+  opacity: 1;
+  transform: scale(1.035);
+}
+.jp-home .coll-frame .coll-grain,
+.jp-home .coll-frame .coll-shine,
+.jp-home .coll-bottom-line {
+  display: none;
+}
+.jp-home .coll-content {
+  display: block;
+  padding: 16px 0 0;
+}
+.jp-home .coll-top {
+  margin: 0;
+}
+.jp-home .coll-tag {
+  display: inline;
+  padding: 0;
+  background: none;
+  color: var(--jp-moss);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+.jp-home .coll-body {
+  margin-top: 6px;
+}
+.jp-home .coll-name {
+  margin: 0;
+  color: var(--jp-ink);
+  font-size: clamp(1.3rem, 2vw, 1.6rem);
+  line-height: 1.15;
+}
+.jp-home .coll-tile:hover .coll-name {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+.jp-home .coll-desc {
+  display: none;
+  max-width: 32em;
+  margin: 8px 0 0;
+  color: var(--jp-moss);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+.jp-home .coll-cta {
+  display: flex;
+  gap: 6px;
+  margin-top: 12px;
+  color: var(--jp-leather);
+  font-size: 0.66rem;
+}
+@media (min-width: 640px) {
+  .jp-home .coll-desc {
+    display: block;
+  }
+}
+@media (min-width: 1024px) {
+  .jp-home .coll-card-grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 64px 24px;
+    margin-top: 80px;
+  }
+  .jp-home .coll-tile-lg:nth-of-type(1) {
+    grid-column: span 7;
+  }
+  .jp-home .coll-tile-md:nth-of-type(2) {
+    grid-column: span 5;
+  }
+  .jp-home .coll-tile-md,
+  .jp-home .coll-tile-md:nth-of-type(4) {
+    grid-column: span 6;
+  }
+  .jp-home .coll-tile-sm {
+    grid-column: span 6;
+  }
+  .jp-home .coll-tile-caution {
+    grid-column: 1 / -1;
+  }
+  .jp-home .coll-tile-lg .coll-frame {
+    aspect-ratio: auto;
+    height: clamp(440px, 40vw, 620px);
+  }
+  .jp-home .coll-tile-md:nth-of-type(2) .coll-frame {
+    aspect-ratio: auto;
+    height: clamp(440px, 40vw, 620px);
+  }
+  .jp-home .coll-tile-md .coll-frame,
+  .jp-home .coll-tile-md:nth-of-type(4) .coll-frame,
+  .jp-home .coll-tile-sm .coll-frame {
+    aspect-ratio: auto;
+    height: clamp(340px, 30vw, 460px);
+  }
+}
+/* Caution: May Offend, full width night tile with tape across its photos */
+.jp-home .coll-tile-caution {
+  position: relative;
+  display: grid;
+  gap: 32px;
+  padding: 24px;
+  overflow: hidden;
+  background: var(--jp-night);
+  color: var(--jp-bone);
+}
+.jp-home .coll-tile-caution .coll-content {
+  position: relative;
+  z-index: 2;
+  padding: 0;
+}
+.jp-home .coll-tile-caution .coll-tag {
+  color: var(--jp-leather-lt);
+}
+.jp-home .coll-tile-caution .coll-name {
+  color: var(--jp-bone);
+  font-size: clamp(1.8rem, 3.4vw, 2.9rem);
+  line-height: 1.04;
+}
+.jp-home .coll-tile-caution .coll-desc {
+  display: block;
+  color: var(--jp-fog);
+  font-size: 1rem;
+}
+.jp-home .coll-tile-caution .coll-cta {
+  color: var(--jp-bone);
+}
+.jp-home .coll-teasers {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  overflow: hidden;
+  padding: 0 0 40px;
+}
+.jp-home .coll-teasers .coll-frame {
+  aspect-ratio: 4 / 5;
+  height: auto;
+  background: var(--jp-loden);
+  opacity: 0.85;
+  transition: opacity 0.5s;
+}
+.jp-home .coll-teasers .coll-frame:nth-child(2) {
+  transform: translateY(24px);
+}
+.jp-home .coll-tile-caution:hover .coll-frame {
+  opacity: 1;
+}
+.jp-home .coll-teasers .jp-tape {
+  top: 44%;
+  transform: rotate(-7deg);
+}
+@media (min-width: 768px) {
+  .jp-home .coll-tile-caution {
+    padding: 40px;
+  }
+}
+@media (min-width: 1024px) {
+  .jp-home .coll-tile-caution {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: center;
+    padding: 56px;
+  }
+  .jp-home .coll-tile-caution .coll-desc {
+    max-width: 28em;
+  }
+}
+
+/* ---------- Why JP ---------- */
+.jp-home .nb {
+  white-space: nowrap;
+}
+.jp-home .why {
+  padding: var(--jp-band) 0;
+  background: var(--jp-mist);
+  color: var(--jp-ink);
+}
+.jp-home .why-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 48px;
+  max-width: var(--jp-max);
+  padding-inline: var(--jp-gutter);
+  align-items: start;
+}
+.jp-home .why-main .eyebrow {
+  margin: 0 0 20px;
+  color: var(--jp-ink);
+  font-size: 0.7rem;
+}
+.jp-home .why-left {
+  margin: 0;
+  color: var(--jp-ink);
+  font-size: clamp(2.35rem, 5.8vw, 5rem);
+  line-height: 0.98;
+}
+.jp-home .why-left em {
+  color: inherit;
+  font-style: italic;
+}
+.jp-home .why-intro {
+  max-width: 28em;
+  margin: 24px 0 28px;
+  color: var(--jp-moss);
+}
+.jp-home .why-badge {
+  padding: 7px 11px;
+  background: none;
+  border: 1px solid var(--jp-line);
+  color: var(--jp-ink);
+  font-family: var(--jp-mono);
+  font-stretch: 87.5%;
+  font-size: 0.64rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+.jp-home .comp-header {
+  grid-template-columns: minmax(0, 1fr) 76px 76px;
+  gap: 0;
+  margin-bottom: 0;
+}
+.jp-home .comp-header > div {
+  padding: 0 0 12px;
+  background: none;
+  text-align: center;
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--jp-moss);
+}
+.jp-home .comp-header .comp-header-jpats {
+  color: var(--jp-ink);
+}
+.jp-home .comp-table {
+  border: 0;
+  border-top: 1px solid var(--jp-ink);
+}
+.jp-home .comp-row,
+.jp-home .comp-row:nth-child(odd),
+.jp-home .comp-row:nth-child(even) {
+  grid-template-columns: minmax(0, 1fr) 76px 76px;
+  background: none;
+  border-bottom: 1px solid var(--jp-line);
+}
+.jp-home .comp-row:last-child {
+  border-bottom: 1px solid var(--jp-line);
+}
+.jp-home .comp-label {
+  padding: 16px 12px 16px 0;
+  color: var(--jp-ink);
+  font-size: 1rem;
+  font-weight: 400;
+}
+.jp-home .comp-cell,
+.jp-home .comp-cell.jpats,
+.jp-home .comp-cell.others {
+  padding: 12px 0;
+  border-left: 0;
+}
+.jp-home .comp-cell .check {
+  display: block;
+  width: 16px;
+  height: 18px;
+  overflow: hidden;
+  background: var(--jp-leather);
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  color: transparent;
+  font-size: 0;
+}
+.jp-home .comp-cell .check.is-dim {
+  opacity: 0.4;
+}
+.jp-home .comp-cell .cross {
+  color: var(--jp-moss);
+  font-family: var(--jp-mono);
+  font-stretch: 87.5%;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+.jp-home .why-link {
+  margin-top: 24px;
+  color: var(--jp-ink);
+}
+@media (min-width: 1024px) {
+  .jp-home .why-inner {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    column-gap: 80px;
+  }
+}
+
+/* ---------- On duty ---------- */
+.jp-home .onduty {
+  clip-path: none;
+  padding: 0;
+  overflow: visible;
+  background: var(--jp-loden);
+}
+.jp-home .onduty-photo {
+  padding: clamp(220px, 50vw, 300px) 0 64px;
+}
+.jp-home .onduty-photo > .jp-photo {
+  object-position: 78% 50%;
+}
+.jp-home .onduty-grain,
+.jp-home .onduty-glow {
+  display: none;
+}
+.jp-home .onduty-inner {
+  display: block;
+  max-width: var(--jp-max);
+  padding: 0 var(--jp-gutter);
+}
+.jp-home .onduty-tag {
+  display: block;
+  margin: 0;
+}
+.jp-home .onduty-tag .line {
+  display: none;
+}
+.jp-home .onduty-tag span {
+  color: var(--jp-leather-lt);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+}
+.jp-home .onduty h2 {
+  max-width: 10em;
+  margin: 20px 0 0;
+  color: var(--jp-bone);
+  font-size: clamp(2.35rem, 5.8vw, 5rem);
+  line-height: 0.98;
+}
+.jp-home .onduty h2 em {
+  color: inherit;
+  font-style: italic;
+}
+.jp-home .onduty-desc {
+  max-width: 30em;
+  margin: 24px 0 0;
+  color: rgba(233, 232, 223, 0.8);
+  font-size: clamp(1.02rem, 1.25vw, 1.18rem);
+  line-height: 1.6;
+}
+.jp-home .onduty-copy .btn-primary {
+  margin-top: 36px;
+}
+@media (min-width: 768px) {
+  .jp-home .onduty-photo {
+    padding: 144px 0 96px;
+  }
+}
+@media (min-width: 1024px) {
+  .jp-home .onduty-photo {
+    padding: 176px 0 128px;
+  }
+}
+.jp-home .onduty-lower {
+  padding-bottom: clamp(64px, 8vw, 112px);
+}
+.jp-home .dept-cards {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  margin: 0;
+  border-top: 1px solid var(--jp-line-dk);
+}
+.jp-home .dept-card {
+  display: block;
+  padding: 24px 16px 24px 0;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--jp-line-dk);
+}
+.jp-home .dept-card:hover {
+  border-color: var(--jp-line-dk);
+}
+.jp-home .dept-code {
+  display: block;
+  color: var(--jp-leather-lt);
+}
+.jp-home .dept-icon {
+  display: none;
+}
+.jp-home .dept-info strong {
+  margin-top: 8px;
+  color: var(--jp-bone);
+  font-family: var(--jp-display);
+  font-size: clamp(1.3rem, 2vw, 1.6rem);
+  font-weight: 400;
+  letter-spacing: -0.012em;
+  line-height: 1.15;
+}
+.jp-home .dept-info span {
+  display: block;
+  margin-top: 4px;
+  color: var(--jp-fog);
+  font-size: 0.88rem;
+}
+@media (min-width: 768px) {
+  .jp-home .dept-cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .jp-home .dept-card {
+    padding: 32px 20px 32px 0;
+    border-bottom: 0;
+  }
+  .jp-home .dept-card + .dept-card {
+    padding-left: 24px;
+    border-left: 1px solid var(--jp-line-dk);
+  }
+}
+.jp-home .onduty-orders {
+  margin-top: 56px;
+}
+.jp-home .badge-note {
+  margin: 0 0 24px;
+  color: var(--jp-fog);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-align: left;
+}
+.jp-home .badge-cards {
+  align-items: stretch;
+  gap: 14px;
+  grid-auto-columns: min(64vw, 300px);
+}
+.jp-home .badge-card {
+  position: static;
+  width: auto;
+  overflow: visible;
+  background: none;
+  border: 0;
+}
+.jp-home .badge-card:hover {
+  transform: none;
+}
+.jp-home .badge-frame {
+  aspect-ratio: 1 / 1;
+}
+.jp-home .badge-image {
+  position: static;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.jp-home .badge-frame .badge-grain {
+  display: none;
+}
+.jp-home .badge-inner {
+  display: block;
+  padding: 14px 0 0;
+}
+.jp-home .badge-num {
+  width: auto;
+  height: auto;
+  margin-bottom: 4px;
+  border: 0;
+  border-radius: 0;
+  justify-content: flex-start;
+}
+.jp-home .badge-num span {
+  color: var(--jp-leather-lt);
+  font-family: var(--jp-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+}
+.jp-home .badge-dept strong {
+  color: var(--jp-bone);
+  font-family: var(--jp-display);
+  font-stretch: 100%;
+  font-size: 1.08rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.2;
+  text-transform: none;
+}
+.jp-home .badge-dept small {
+  margin-top: 4px;
+  color: var(--jp-fog);
+  font-family: var(--jp-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.02em;
+}
+@media (min-width: 768px) {
+  .jp-home .badge-cards.jp-rail {
+    grid-auto-flow: row;
+    grid-auto-columns: auto;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    overflow: visible;
+    margin-inline: 0;
+    padding-inline: 0;
+  }
+}
+
+/* ---------- Services ---------- */
+.jp-home .services {
+  padding: var(--jp-band) 0 var(--jp-band-tight);
+  background: var(--jp-loden);
+  color: var(--jp-bone);
+}
+.jp-home .services-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 48px;
+  max-width: var(--jp-max);
+  padding-inline: var(--jp-gutter);
+  align-items: start;
+}
+.jp-home .services-head .section-desc {
+  margin-top: 24px;
+}
+.jp-home .svc-grid {
+  display: block;
+  border-top: 1px solid var(--jp-line-dk);
+}
+.jp-home .svc-card {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+  padding: 20px 0;
+  overflow: visible;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--jp-line-dk);
+  box-shadow: none;
+}
+.jp-home .svc-card:hover {
+  border-color: var(--jp-line-dk);
+  box-shadow: none;
+}
+.jp-home .svc-top-line {
+  display: none;
+}
+.jp-home .svc-image {
+  width: 56px;
+  height: 56px;
+  background: radial-gradient(120% 90% at 50% 38%, #f3f4ef 0%, var(--jp-heather) 70%);
+  border: 0;
+  object-fit: cover;
+}
+.jp-home .svc-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  min-width: 0;
+  padding: 0;
+}
+.jp-home .svc-price {
+  order: 1;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  gap: 6px;
+  margin: 0 0 4px;
+  color: var(--jp-bone);
+}
+.jp-home .svc-price strong {
+  font-family: var(--jp-mono);
+  font-stretch: 87.5%;
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: var(--jp-bone);
+  line-height: 1.5;
+}
+.jp-home .svc-price small {
+  color: var(--jp-fog);
+  font-size: 0.7rem;
+}
+.jp-home .svc-name {
+  order: 2;
+  margin: 0;
+  color: var(--jp-bone);
+  font-size: clamp(1.3rem, 2vw, 1.6rem);
+  line-height: 1.15;
+}
+.jp-home .svc-content .jp-leader {
+  display: none;
+}
+.jp-home .svc-desc {
+  order: 3;
+  max-width: 34em;
+  margin: 6px 0 0;
+  color: var(--jp-fog);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+.jp-home .svc-cta {
+  order: 4;
+  justify-self: start;
+  margin-top: 12px;
+  color: var(--jp-leather-lt);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+}
+.jp-home .svc-card:hover .svc-cta {
+  gap: 6px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.jp-home .svc-bottom {
+  margin-top: 32px;
+  padding-top: 0;
+  border-top: 0;
+  text-align: left;
+}
+.jp-home .svc-bottom p {
+  margin: 0 0 16px;
+  color: var(--jp-fog);
+  font-size: 1rem;
+}
+@media (min-width: 640px) {
+  .jp-home .svc-card {
+    grid-template-columns: 72px minmax(0, 1fr);
+    gap: 20px;
+    padding: 24px 0;
+  }
+  .jp-home .svc-image {
+    width: 72px;
+    height: 72px;
+  }
+  .jp-home .svc-content {
+    grid-template-columns: auto minmax(24px, 1fr) auto;
+    grid-template-areas:
+      'name leader price'
+      'desc desc desc'
+      'cta cta cta';
+    align-items: baseline;
+  }
+  .jp-home .svc-name {
+    grid-area: name;
+  }
+  .jp-home .svc-content .jp-leader {
+    display: block;
+    grid-area: leader;
+    color: var(--jp-fog);
+  }
+  .jp-home .svc-price {
+    grid-area: price;
+    margin: 0;
+  }
+  .jp-home .svc-desc {
+    grid-area: desc;
+  }
+  .jp-home .svc-cta {
+    grid-area: cta;
+  }
+}
+@media (min-width: 1024px) {
+  .jp-home .services-inner {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    column-gap: 10%;
+  }
+}
+
+/* ---------- Contact ---------- */
+.jp-home .contact {
+  padding: var(--jp-band) 0;
+  background: var(--jp-loden);
+  color: var(--jp-bone);
+}
+.jp-home .contact-grain,
+.jp-home .contact-glow {
+  display: none;
+}
+.jp-home .contact-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 48px;
+  max-width: var(--jp-max);
+  padding-inline: var(--jp-gutter);
+}
+.jp-home .contact-copy {
+  min-width: 0;
+}
+.jp-home .contact-copy .eyebrow {
+  margin: 0;
+  color: var(--jp-leather-lt);
+  font-size: 0.7rem;
+}
+.jp-home .contact h2 {
+  margin: 20px 0 0;
+  color: var(--jp-bone);
+  font-size: clamp(2.35rem, 5.8vw, 5rem);
+  line-height: 0.98;
+}
+.jp-home .contact h2 em {
+  color: inherit;
+  font-style: italic;
+}
+.jp-home .contact-intro {
+  max-width: 28em;
+  margin: 24px 0 0;
+}
+.jp-home .contact-email {
+  display: flex;
+  max-width: 100%;
+  margin-top: 36px;
+  padding: 14px 18px;
+  border: 1px solid var(--jp-line-dk);
+}
+.jp-home .contact-email-icon {
+  display: none;
+}
+.jp-home .contact-email a {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: var(--jp-bone);
+  font-family: var(--jp-display);
+  font-size: clamp(1.1rem, 4.4vw, 1.4rem);
+  letter-spacing: -0.01em;
+}
+.jp-home .contact-email a:hover {
+  color: var(--jp-leather-lt);
+}
+.jp-home .contact-tags {
+  margin-top: 28px;
+  padding-top: 0;
+  border-top: 0;
+}
+.jp-home .contact-tags p {
+  margin: 0 0 12px;
+  color: var(--jp-fog);
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+}
+.jp-home .contact-tag,
+.jp-home .contact-tag:hover {
+  padding: 8px 14px;
+  border: 1px solid var(--jp-line-dk);
+  border-radius: 999px;
+  color: var(--jp-bone);
+  font-size: 0.8rem;
+  letter-spacing: 0;
+}
+.jp-home .contact .form-required-legend {
+  color: var(--jp-fog);
+}
+.jp-home .form-submit-icon,
+.jp-home .contact-right .check-big {
+  display: none;
+}
+.jp-home .form-success {
+  padding: 8px 0;
+  text-align: left;
+}
+.jp-home .form-success h3 {
+  color: var(--jp-bone);
+  font-size: clamp(1.8rem, 3.4vw, 2.9rem);
+  line-height: 1.04;
+}
+.jp-home .form-success p {
+  margin-top: 12px;
+  color: var(--jp-fog);
+}
+@media (min-width: 1024px) {
+  .jp-home .contact-inner {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    column-gap: 10%;
+  }
+}
+
+/* Long button labels wrap on narrow phones instead of overflowing */
+@media (max-width: 420px) {
+  .jp-home .jp-btn-patch {
+    white-space: normal;
+    text-align: center;
+    line-height: 1.3;
+    padding-block: 10px;
+  }
+}
+
+/* Reduced motion: no hover zooms or lifts on the home page */
+@media (prefers-reduced-motion: reduce) {
+  .jp-home .fb-photo img,
+  .jp-home .coll-image,
+  .jp-home .coll-teasers .coll-frame,
+  .jp-home .badge-image {
+    transition: none;
+  }
+  .jp-home .fb-photo:hover img,
+  .jp-home .coll-tile:hover .coll-image {
+    transform: none;
+  }
+}
+
+/* Camo Reserve tile: square scene photo, show the whole hoodie (hood and sleeves) on a matching wood tone */
+.jp-home .coll-frame:has(.coll-image[src*='duck-camo-hoodie']) {
+  background: #2b1a10;
+}
+.jp-home .coll-frame:has(.coll-image[src*='duck-camo-hoodie']) .coll-image {
+  object-fit: contain;
+  object-position: center top;
+}
+.jp-home .coll-tile-lg:has(.coll-image[src*='duck-camo-hoodie']) .coll-frame {
+  aspect-ratio: 1 / 1;
+}
+@media (min-width: 1024px) {
+  /* Square frame sized to the row height, so the square photo fits with no side bars */
+  .jp-home .coll-tile-lg:has(.coll-image[src*='duck-camo-hoodie']) .coll-frame {
+    aspect-ratio: 1 / 1;
+    width: auto;
+    max-width: 100%;
+  }
+  .jp-home .coll-tile-lg:has(.coll-image[src*='duck-camo-hoodie']) .coll-image {
+    object-position: center;
+  }
+}
+/* ==========================================================================
+   SHOP AND PRODUCT
+   ========================================================================== */
+
+/* ---------- Page heading block (shop, collections) ---------- */
+.jp-shop .page-hero {
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+  color: var(--jp-ink);
+  text-align: left;
+  padding: clamp(40px, 6vw, 88px) var(--jp-gutter) clamp(32px, 5vw, 72px);
+}
+.jp-shop .page-hero-grain {
+  display: none;
+}
+.jp-shop .page-hero-inner {
+  max-width: var(--jp-max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+}
+.jp-shop .page-hero .breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin: 0 0 clamp(28px, 5vw, 64px);
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  color: var(--jp-ink);
+}
+.jp-shop .page-hero .breadcrumb a {
+  color: var(--jp-moss);
+  text-decoration: none;
+}
+.jp-shop .page-hero .breadcrumb a:hover {
+  color: var(--jp-ink);
+  text-decoration: underline;
+}
+.jp-shop .page-hero .eyebrow {
+  margin: 0 0 14px;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  color: var(--jp-moss);
+}
+.jp-shop .page-hero h1 {
+  margin: 0;
+  color: var(--jp-ink);
+  font-size: clamp(2.35rem, 5.8vw, 5rem);
+  line-height: 0.98;
+}
+.jp-shop .page-hero h1 em {
+  font-style: italic;
+  color: inherit;
+}
+.jp-shop .page-hero p {
+  margin: 24px 0 0;
+  max-width: 34em;
+  color: var(--jp-moss);
+  font-size: clamp(1.02rem, 1.25vw, 1.18rem);
+  line-height: 1.6;
+}
+@media (min-width: 1024px) {
+  .jp-shop .page-hero-inner {
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    column-gap: 56px;
+    align-items: end;
+  }
+  .jp-shop .page-hero .breadcrumb {
+    grid-column: 1 / -1;
+  }
+  .jp-shop .page-hero .eyebrow {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .jp-shop .page-hero h1 {
+    grid-column: 1;
+    grid-row: 3;
+  }
+  .jp-shop .page-hero p {
+    grid-column: 2;
+    grid-row: 2 / 4;
+    align-self: end;
+    margin: 0 0 6px;
+  }
+}
+
+/* ---------- Sticky filter bar ---------- */
+.jp-shop .shop-section {
+  background: transparent;
+  padding: 0 0 clamp(64px, 8vw, 120px);
+}
+.jp-shop .shop-inner {
+  max-width: none;
+  padding: 0;
+  --jp-edge: max(var(--jp-gutter), calc((100% - var(--jp-max)) / 2 + var(--jp-gutter)));
+}
+.jp-shop .shop-filter {
+  position: sticky;
+  top: calc(var(--jp-header-h) + 1px);
+  z-index: 20;
+  margin: 0 0 clamp(28px, 4vw, 48px);
+  padding: 12px var(--jp-edge);
+  background: var(--jp-mist);
+  border-top: 1px solid var(--jp-line);
+  border-bottom: 1px solid var(--jp-line);
+}
+.jp-shop .shop-filter-row {
+  gap: 8px 24px;
+  flex-wrap: wrap;
+}
+.jp-shop .shop-filter-chips,
+.jp-shop .shop-subfilter-chips {
+  gap: 8px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  max-width: 100%;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.jp-shop .shop-filter-chips::-webkit-scrollbar,
+.jp-shop .shop-subfilter-chips::-webkit-scrollbar {
+  display: none;
+}
+@media (min-width: 1024px) {
+  .jp-shop .shop-filter-chips,
+  .jp-shop .shop-subfilter-chips {
+    flex-wrap: wrap;
+    overflow: visible;
+  }
+}
+.jp-shop .shop-filter-chip {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 16px;
+  font-family: var(--jp-body);
+  font-stretch: 112%;
+  font-weight: 500;
+  font-size: 0.82rem;
+  letter-spacing: 0;
+  text-transform: none;
+  white-space: nowrap;
+  color: var(--jp-ink);
+  background: transparent;
+  border: 1px solid var(--jp-line);
+  border-radius: 999px;
+}
+.jp-shop .shop-filter-chip:hover {
+  border-color: var(--jp-ink);
+  color: var(--jp-ink);
+}
+.jp-shop .shop-filter-chip:focus-visible {
+  outline: 2px solid var(--jp-leather);
+  outline-offset: 2px;
+}
+.jp-shop .shop-filter-chip.is-active {
+  background: var(--jp-ink);
+  color: var(--jp-bone);
+  border-color: var(--jp-ink);
+}
+.jp-shop .shop-filter-count {
+  font-family: var(--jp-mono);
+  font-stretch: 87.5%;
+  font-size: 0.7rem;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--jp-moss);
+}
+.jp-shop .shop-filter[data-product-active='hat'] .shop-subfilter-chips {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--jp-line);
+}
+.jp-shop .product-grid {
+  padding-inline: var(--jp-edge);
+}
+
+/* ---------- Caution: May Offend ---------- */
+.jp-caution {
+  background: var(--jp-night);
+  color: var(--jp-bone);
+}
+.jp-caution .page-hero {
+  color: var(--jp-bone);
+  padding-top: clamp(96px, 12vw, 168px);
+}
+.jp-caution .jp-tape {
+  top: 28px;
+  transform: rotate(-2.2deg);
+}
+.jp-caution .page-hero .breadcrumb,
+.jp-caution .page-hero h1,
+.jp-caution .page-hero .breadcrumb span {
+  color: var(--jp-bone);
+}
+.jp-caution .page-hero .breadcrumb a {
+  color: var(--jp-fog);
+}
+.jp-caution .page-hero .breadcrumb a:hover {
+  color: var(--jp-bone);
+}
+.jp-caution .page-hero .eyebrow {
+  color: var(--jp-leather-lt);
+}
+.jp-caution .page-hero p {
+  color: var(--jp-fog);
+}
+.jp-caution .shop-filter {
+  background: var(--jp-night);
+  border-color: var(--jp-line-dk);
+}
+.jp-caution .shop-filter-chip {
+  color: var(--jp-bone);
+  border-color: var(--jp-line-dk);
+}
+.jp-caution .shop-filter-chip:hover {
+  border-color: var(--jp-bone);
+  color: var(--jp-bone);
+}
+.jp-caution .shop-filter-chip.is-active {
+  background: var(--jp-bone);
+  color: var(--jp-ink);
+  border-color: var(--jp-bone);
+}
+.jp-caution .shop-filter-count {
+  color: var(--jp-fog);
+}
+.jp-caution .shop-filter[data-product-active='hat'] .shop-subfilter-chips {
+  border-top-color: var(--jp-line-dk);
+}
+.jp-caution .product-card,
+.jp-caution .product-name,
+.jp-caution .product-price {
+  color: var(--jp-bone);
+}
+.jp-caution .product-price small,
+.jp-caution .product-cta {
+  color: var(--jp-fog);
+}
+.jp-caution .product-card:hover .product-cta {
+  color: var(--jp-leather-lt);
+}
+
+/* ---------- Product page ---------- */
+.jp-pdp .pdp-section {
+  background: transparent;
+  padding: clamp(20px, 3vw, 40px) 0 clamp(64px, 8vw, 120px);
+}
+.jp-pdp .pdp-inner {
+  max-width: var(--jp-max);
+  padding: 0 var(--jp-gutter);
+}
+.jp-pdp .pdp-breadcrumb {
+  font-family: var(--jp-mono);
+  font-stretch: 87.5%;
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--jp-ink);
+  margin-bottom: clamp(20px, 3vw, 40px);
+}
+.jp-pdp .pdp-breadcrumb a {
+  color: var(--jp-moss);
+}
+.jp-pdp .pdp-breadcrumb a:hover {
+  color: var(--jp-ink);
+}
+.jp-pdp .pdp-layout {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 32px;
+}
+@media (min-width: 1024px) {
+  .jp-pdp .pdp-layout {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 56px;
+  }
+  .jp-pdp .pdp-info {
+    position: sticky;
+    top: calc(var(--jp-header-h) + 24px);
+  }
+}
+.jp-pdp .pdp-gallery {
+  position: static;
+}
+.jp-pdp .pdp-image-wrap {
+  background: var(--jp-heather);
+  border: 0;
+  border-radius: 0;
+}
+.jp-pdp .pdp-image-wrap.is-contain {
+  background: radial-gradient(120% 90% at 50% 38%, #f3f4ef 0%, var(--jp-heather) 70%);
+}
+.jp-pdp .pdp-nav {
+  border-radius: 0;
+  background: var(--jp-ink);
+  color: var(--jp-bone);
+  border: 0;
+}
+.jp-pdp .pdp-nav:hover,
+.jp-pdp .pdp-nav:focus-visible {
+  background: var(--jp-leather);
+  color: var(--jp-burn);
+}
+.jp-pdp .pdp-thumbs {
+  gap: 10px;
+  margin-top: 12px;
+}
+.jp-pdp .pdp-thumb {
+  width: 80px;
+  height: 80px;
+  background: var(--jp-heather);
+  border: 1px solid var(--jp-line);
+  border-radius: 0;
+}
+.jp-pdp .pdp-thumb:hover {
+  border-color: var(--jp-ink);
+}
+.jp-pdp .pdp-thumb.is-active {
+  border: 2px solid var(--jp-ink);
+}
+.jp-pdp .pdp-thumb:focus-visible {
+  outline: 2px solid var(--jp-leather);
+  outline-offset: 2px;
+}
+.jp-pdp .pdp-eyebrow {
+  font-family: var(--jp-mono);
+  font-stretch: 87.5%;
+  font-weight: 400;
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  color: var(--jp-moss);
+  margin-bottom: 12px;
+}
+.jp-pdp .pdp-title {
+  font-family: var(--jp-display);
+  font-weight: 300;
+  font-size: clamp(1.8rem, 3.4vw, 2.9rem);
+  line-height: 1.04;
+  letter-spacing: -0.022em;
+  color: var(--jp-ink);
+  margin-bottom: 18px;
+}
+.jp-pdp .pdp-price-row {
+  gap: 12px;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--jp-line);
+}
+.jp-pdp .pdp-price {
+  font-family: var(--jp-display);
+  font-weight: 400;
+  font-size: 1.6rem;
+  letter-spacing: -0.005em;
+  color: var(--jp-ink);
+}
+.jp-pdp .pdp-price small {
+  font-family: var(--jp-mono);
+  font-stretch: 87.5%;
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  color: var(--jp-moss);
+  margin-right: 10px;
+}
+.jp-pdp .pdp-usa {
+  font-family: var(--jp-mono);
+  font-stretch: 87.5%;
+  font-weight: 400;
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  color: var(--jp-moss);
+  background: none;
+  padding: 0;
+}
+.jp-pdp .pdp-description {
+  color: var(--jp-moss);
+  font-size: 1rem;
+  line-height: 1.65;
+  margin-bottom: 20px;
+}
+.jp-pdp .pdp-features {
+  margin: 0 0 24px;
+  padding: 18px 0;
+  gap: 10px;
+  border-top: 1px solid var(--jp-line);
+  border-bottom: 1px solid var(--jp-line);
+}
+.jp-pdp .pdp-features li {
+  color: var(--jp-ink);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+.jp-pdp .pdp-features li::before {
+  width: 9px;
+  height: 10px;
+  transform: none;
+  background: var(--jp-leather);
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  margin-top: calc((1lh - 10px) / 2);
+}
+.jp-pdp .pdp-form {
+  gap: 20px;
+}
+.jp-pdp .pdp-qty-wrap {
+  border: 1px solid var(--jp-line);
+  border-radius: 0;
+  background: var(--jp-input-bg);
+}
+.jp-pdp .pdp-qty-btn {
+  width: 48px;
+  min-height: 52px;
+  color: var(--jp-ink);
+  border-radius: 0;
+}
+.jp-pdp .pdp-qty-btn:hover {
+  background: var(--jp-heather);
+}
+.jp-pdp .pdp-qty-input {
+  width: 64px;
+  font-family: var(--jp-mono);
+  font-size: 0.95rem;
+  color: var(--jp-ink);
+  border-left: 1px solid var(--jp-line);
+  border-right: 1px solid var(--jp-line);
+}
+.jp-pdp .pdp-cta,
+.jp-pdp .pdp-add-btn {
+  --jp-chamfer: 14px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 52px;
+  margin: 0;
+  padding: 0 calc(var(--jp-chamfer) + 18px);
+  font-family: var(--jp-body);
+  font-stretch: 125%;
+  font-weight: 700;
+  font-size: 0.74rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border: 0;
+  border-radius: 0;
+  cursor: pointer;
+  clip-path: polygon(
+    var(--jp-chamfer) 0,
+    calc(100% - var(--jp-chamfer)) 0,
+    100% 50%,
+    calc(100% - var(--jp-chamfer)) 100%,
+    var(--jp-chamfer) 100%,
+    0 50%
+  );
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+.jp-pdp .pdp-add-btn {
+  background-color: var(--jp-leather);
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.08));
+  color: var(--jp-burn);
+}
+.jp-pdp .pdp-add-btn:hover {
+  background-color: var(--jp-leather-lt);
+}
+.jp-pdp .pdp-add-btn:focus-visible {
+  outline: none;
+  background-color: var(--jp-burn);
+  color: var(--jp-leather-lt);
+}
+.jp-pdp .pdp-cta {
+  background: var(--jp-ink);
+  color: var(--jp-bone);
+  transform: none;
+}
+.jp-pdp .pdp-cta:hover {
+  background: var(--jp-loden-2);
+  transform: none;
+}
+.jp-pdp .pdp-cta:focus-visible {
+  outline: none;
+  background: var(--jp-leather);
+  color: var(--jp-burn);
+}
+/* The page script hides Start Your Order and its note on catalog items; keep that working */
+.jp-pdp [hidden] {
+  display: none !important;
+}
+.jp-pdp .pdp-note {
+  margin: 0;
+  padding: 14px 0;
+  border-top: 1px solid var(--jp-line);
+  border-bottom: 1px solid var(--jp-line);
+  color: var(--jp-moss);
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+.jp-pdp .pdp-add-msg {
+  margin: 0;
+  font-family: var(--jp-mono);
+  font-stretch: 87.5%;
+  font-size: 0.74rem;
+  letter-spacing: 0.02em;
+  color: var(--jp-ink);
+}
+.jp-pdp .pdp-add-msg a {
+  color: var(--jp-leather);
+}
+.jp-pdp .pdp-missing h1 {
+  font-weight: 300;
+  color: var(--jp-ink);
+}
+.jp-pdp .pdp-back-btn {
+  background: var(--jp-ink);
+  color: var(--jp-bone);
+  border-radius: 0;
+}
+.jp-pdp .pdp-back-btn:hover {
+  background: var(--jp-loden-2);
+}
+.jp-pdp .pdp-related {
+  margin-top: clamp(64px, 8vw, 120px);
+  padding-top: clamp(40px, 5vw, 72px);
+  border-top: 1px solid var(--jp-line);
+}
+.jp-pdp .pdp-related-head {
+  text-align: left;
+  margin-bottom: clamp(24px, 3vw, 40px);
+}
+.jp-pdp .pdp-related-head .eyebrow {
+  font-family: var(--jp-mono);
+  font-stretch: 87.5%;
+  font-weight: 400;
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  color: var(--jp-moss);
+}
+.jp-pdp .pdp-related-head h2 {
+  font-family: var(--jp-display);
+  font-weight: 300;
+  font-size: clamp(1.8rem, 3.4vw, 2.9rem);
+  line-height: 1.04;
+  letter-spacing: -0.022em;
+  color: var(--jp-ink);
+}
+
+/* Richardson color chart button and dialog (js/richardson-chart.js) */
+.jp-pdp .rcc-slot {
+  margin: 0;
+}
+.jp-pdp .rcc-btn {
+  min-height: 48px;
+  padding: 0 18px;
+  background: var(--jp-input-bg);
+  color: var(--jp-ink);
+  border: 1px solid var(--jp-line);
+  border-radius: 2px;
+  font-family: var(--jp-body);
+  font-stretch: 112%;
+  font-weight: 500;
+  font-size: 0.86rem;
+}
+.jp-pdp .rcc-btn:hover {
+  background: var(--jp-input-bg);
+  border-color: var(--jp-ink);
+}
+.jp-pdp .rcc-btn:focus-visible {
+  outline: 2px solid var(--jp-leather);
+  outline-offset: 2px;
+}
+.jp-pdp .rcc-btn-icon {
+  color: var(--jp-leather);
+}
+.rcc-dialog {
+  background: var(--jp-mist);
+  border-radius: 0;
+}
+.rcc-dialog::backdrop {
+  background: rgba(18, 22, 16, 0.86);
+}
+.rcc-close {
+  border-radius: 0;
+  background: var(--jp-ink);
+  color: var(--jp-bone);
+}
+.rcc-close:hover {
+  background: var(--jp-leather);
+  color: var(--jp-burn);
+}
+.rcc-close:focus-visible {
+  outline: 2px solid var(--jp-leather-lt);
+}
+@media (prefers-reduced-motion: reduce) {
+  .jp-shop .shop-filter-chip,
+  .jp-pdp .pdp-cta,
+  .jp-pdp .pdp-add-btn {
+    transition: none;
+  }
+}
+
+/* ==========================================================================
+   CUSTOMIZERS
+   ========================================================================== */
+
+/* Body classes: every page here also carries jp-shop, so the heading block (.page-hero) is the same one the shop uses.
+   jp-cz = the 13 customize pages, jp-bulk = bulk-orders.html, jp-custom-work = custom-work.html. */
+
+/* ---------- Page frame ---------- */
+.jp-cz .customizer,
+.jp-bulk .customizer {
+  background: transparent;
+  padding: 0 0 clamp(64px, 8vw, 120px);
+}
+.jp-cz .customizer-inner,
+.jp-bulk .customizer-inner {
+  max-width: var(--jp-max);
+  padding: 0 var(--jp-gutter);
+  gap: 0;
+}
+.jp-cz .cz-error-banner {
+  background: var(--jp-input-bg);
+  border: 1px solid var(--jp-ink);
+  border-radius: 0;
+  color: var(--jp-ink);
+}
+.jp-cz .cz-error-banner a {
+  color: var(--jp-ink);
+  text-decoration: underline;
+}
+
+/* ---------- Numbered sections: hairline above, number in mono leather, title in Newsreader ---------- */
+.jp-cz .cz-section,
+.jp-bulk .cz-section {
+  display: grid;
+  grid-template-columns: 2.4rem minmax(0, 1fr);
+  align-items: baseline;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--jp-line);
+  border-radius: 0;
+  padding: 28px 0 32px;
+}
+.jp-cz .cz-section > *,
+.jp-bulk .cz-section > * {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+.jp-cz .cz-section[hidden] {
+  display: none;
+}
+.jp-cz .cz-section > .cz-section-num,
+.jp-bulk .cz-section > .cz-section-num {
+  grid-column: 1;
+  grid-row: 1;
+  position: static;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  font-family: var(--jp-mono);
+  font-stretch: 87.5%;
+  font-weight: 400;
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  color: var(--jp-leather);
+}
+.jp-cz .cz-section > .cz-section-head,
+.jp-bulk .cz-section > .cz-section-head {
+  grid-column: 2;
+  grid-row: 1;
+  margin-bottom: 20px;
+}
+.jp-cz .cz-section-head h2,
+.jp-bulk .cz-section-head h2 {
+  font-family: var(--jp-display);
+  font-weight: 300;
+  font-size: clamp(1.45rem, 2.2vw, 1.85rem);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  color: var(--jp-ink);
+  margin: 0 0 6px;
+}
+.jp-cz .cz-section-head h2 small,
+.jp-bulk .cz-section-head h2 small {
+  font-family: var(--jp-body);
+  font-size: 0.8rem;
+  color: var(--jp-moss);
+}
+.jp-cz .cz-section-head p,
+.jp-bulk .cz-section-head p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--jp-moss);
+}
+.jp-cz .cz-section .form-label small,
+.jp-bulk .cz-section .form-label small {
+  color: var(--jp-moss);
+}
+.jp-cz .cz-feature-list li::marker {
+  color: var(--jp-leather);
+}
+
+/* ---------- Option tiles (patch type, pattern, backing, size): square, hairline, ink when chosen ---------- */
+.jp-cz .cz-radio-grid {
+  gap: 8px;
+}
+.jp-cz .cz-radio-box {
+  min-height: 52px;
+  background: transparent;
+  border: 1px solid var(--jp-line);
+  border-radius: 0;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+.jp-cz .cz-radio:hover .cz-radio-box {
+  border-color: var(--jp-moss);
+}
+.jp-cz .cz-radio input:checked + .cz-radio-box {
+  background: var(--jp-input-bg);
+  border-color: var(--jp-ink);
+  box-shadow: inset 0 0 0 1px var(--jp-ink);
+}
+.jp-cz .cz-radio input:focus-visible + .cz-radio-box {
+  outline: 2px solid var(--jp-leather);
+  outline-offset: 2px;
+}
+.jp-cz .cz-radio-dot {
+  width: 11px;
+  height: 12px;
+  border: 0;
+  border-radius: 0;
+  background: var(--jp-line);
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+}
+.jp-cz .cz-radio input:checked + .cz-radio-box .cz-radio-dot {
+  background: var(--jp-leather);
+}
+.jp-cz .cz-radio input:checked + .cz-radio-box .cz-radio-dot::after {
+  content: none;
+}
+.jp-cz .cz-radio-text {
+  font-family: var(--jp-body);
+  font-size: 0.86rem;
+  color: var(--jp-ink);
+}
+.jp-cz .cz-static-pill {
+  background: transparent;
+  border: 1px solid var(--jp-line);
+  border-radius: 0;
+  color: var(--jp-ink);
+}
+.jp-cz .cz-static-pill-check {
+  color: var(--jp-leather);
+}
+
+/* Color swatch: round, ink ring */
+.jp-cz .cz-swatch {
+  width: 44px;
+  height: 44px;
+  border: 2px solid var(--jp-mist);
+  box-shadow: 0 0 0 1.5px var(--jp-ink);
+}
+
+/* ---------- Logo upload: dashed hairline box ---------- */
+.jp-cz .cz-file-label,
+.jp-bulk .cz-file-label {
+  min-height: 56px;
+  background: transparent;
+  border: 1px dashed var(--jp-moss);
+  border-radius: 0;
+  color: var(--jp-ink);
+}
+.jp-cz .cz-file-label:hover,
+.jp-bulk .cz-file-label:hover {
+  background: var(--jp-input-bg);
+  border-color: var(--jp-ink);
+  border-style: dashed;
+}
+.jp-cz .cz-file-input:focus-visible + .cz-file-label,
+.jp-bulk .cz-file-input:focus-visible + .cz-file-label {
+  outline: 2px solid var(--jp-leather);
+  outline-offset: 2px;
+}
+.jp-cz .cz-file-clear,
+.jp-bulk .cz-file-clear {
+  width: 44px;
+  height: 44px;
+  border-radius: 0;
+  border-color: var(--jp-line);
+  background: transparent;
+  color: var(--jp-ink);
+}
+.jp-cz .cz-file-clear:hover,
+.jp-bulk .cz-file-clear:hover {
+  border-color: var(--jp-ink);
+  color: var(--jp-ink);
+}
+.jp-cz .cz-design-error,
+.jp-bulk .cz-design-error {
+  color: #9b3b22;
+}
+
+/* ---------- Quantity: square stepper ---------- */
+.jp-cz .cz-qty-row,
+.jp-bulk .cz-qty-row {
+  gap: 0;
+  max-width: 220px;
+}
+.jp-cz .cz-qty-btn {
+  width: 52px;
+  height: 52px;
+  background: var(--jp-input-bg);
+  border: 1px solid var(--jp-line);
+  border-radius: 0;
+  font-size: 1.1rem;
+  color: var(--jp-ink);
+}
+.jp-cz .cz-qty-btn:hover {
+  background: var(--jp-heather);
+  border-color: var(--jp-ink);
+}
+.jp-cz .cz-qty-btn:focus-visible {
+  outline: 2px solid var(--jp-leather);
+  outline-offset: 2px;
+}
+.jp-cz .cz-section .cz-qty-input {
+  max-width: 96px;
+  margin-inline: -1px;
+  border-radius: 0;
+  text-align: center;
+}
+
+/* ---------- Submit and fine print ---------- */
+.jp-cz .cz-submit,
+.jp-bulk .cz-submit {
+  width: 100%;
+  min-height: 56px;
+  margin-top: 8px;
+}
+.jp-cz .cz-fineprint,
+.jp-bulk .cz-fineprint {
+  margin-top: 4px;
+  padding: 0;
+  text-align: left;
+  font-size: 0.78rem;
+  color: var(--jp-moss);
+}
+
+/* ---------- Preview: cutting mat behind the product photo, then the work order ---------- */
+.jp-cz .cz-preview-image {
+  border: 0;
+  border-radius: 0;
+  box-shadow: 0 24px 48px -28px rgba(18, 22, 16, 0.55);
+}
+.jp-cz .cz-preview-image--shapes {
+  background-color: #263124;
+  border: 0;
+}
+.jp-cz .cz-preview-image--shapes img {
+  padding: 6%;
+}
+.jp-cz .cz-preview-color-note {
+  margin-top: 12px;
+  text-align: left;
+  font-family: var(--jp-mono);
+  font-stretch: 87.5%;
+  font-style: normal;
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--jp-moss);
+}
+.jp-cz .cz-summary,
+.jp-bulk .cz-summary {
+  margin-top: 20px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--jp-line);
+  border-radius: 0;
+}
+.jp-cz .cz-summary-head,
+.jp-bulk .cz-summary-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin: 0;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--jp-line);
+}
+.jp-cz .cz-summary-head strong,
+.jp-bulk .cz-summary-head strong {
+  display: block;
+  margin: 0;
+  font-family: var(--jp-body);
+  font-stretch: 125%;
+  font-weight: 600;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--jp-ink);
+}
+.jp-cz .cz-summary-head span,
+.jp-bulk .cz-summary-head span {
+  font-family: var(--jp-mono);
+  font-stretch: 87.5%;
+  font-weight: 400;
+  font-size: 0.66rem;
+  letter-spacing: 0.02em;
+  color: var(--jp-leather);
+  text-align: right;
+}
+.jp-cz .cz-summary-list,
+.jp-bulk .cz-summary-list {
+  gap: 0;
+}
+.jp-cz .cz-summary-list li,
+.jp-bulk .cz-summary-list li {
+  display: grid;
+  grid-template-columns: minmax(4.5rem, 7.5rem) minmax(0, 1fr);
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--jp-line);
+  font-size: 0.92rem;
+  line-height: 1.35;
+}
+.jp-cz .cz-sum-k {
+  font-family: var(--jp-mono);
+  font-stretch: 87.5%;
+  font-weight: 400;
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  color: var(--jp-moss);
+  padding-top: 3px;
+}
+.jp-cz .cz-sum-v {
+  max-width: none;
+  text-align: left;
+  font-weight: 400;
+  color: var(--jp-ink);
+  overflow-wrap: anywhere;
+}
+.jp-cz .cz-logo-thumb,
+.jp-bulk .cz-logo-thumb {
+  margin: 0;
+  padding: 12px 16px;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--jp-line);
+  border-radius: 0;
+}
+.jp-cz .cz-logo-thumb--has-image,
+.jp-bulk .cz-logo-thumb--has-image {
+  padding: 12px 16px;
+}
+.jp-cz .cz-logo-thumb-imgbtn,
+.jp-bulk .cz-logo-thumb-imgbtn {
+  border-radius: 0;
+}
+.jp-cz .cz-logo-thumb-img,
+.jp-bulk .cz-logo-thumb-img {
+  border-radius: 0;
+  border-color: var(--jp-line);
+}
+.jp-cz .cz-logo-thumb-zoom,
+.jp-bulk .cz-logo-thumb-zoom {
+  border-radius: 0;
+  background: var(--jp-ink);
+  color: var(--jp-bone);
+  border-color: var(--jp-mist);
+}
+.jp-cz .cz-logo-thumb-imgbtn:hover .cz-logo-thumb-zoom,
+.jp-bulk .cz-logo-thumb-imgbtn:hover .cz-logo-thumb-zoom {
+  background: var(--jp-leather);
+  color: var(--jp-burn);
+}
+.jp-cz .cz-logo-thumb-imgbtn:hover,
+.jp-bulk .cz-logo-thumb-imgbtn:hover {
+  box-shadow: none;
+}
+.jp-cz .cz-logo-thumb-imgbtn:focus-visible,
+.jp-bulk .cz-logo-thumb-imgbtn:focus-visible {
+  outline: 2px solid var(--jp-leather);
+}
+.jp-cz .cz-logo-thumb-name,
+.jp-bulk .cz-logo-thumb-name {
+  color: var(--jp-ink);
+  font-weight: 400;
+}
+.jp-cz .cz-price-row,
+.jp-bulk .cz-price-row {
+  margin: 0;
+  padding: 16px 16px 6px;
+  border-top: 0;
+  align-items: baseline;
+}
+.jp-cz .cz-price-label,
+.jp-bulk .cz-price-label {
+  font-family: var(--jp-mono);
+  font-stretch: 87.5%;
+  font-weight: 400;
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--jp-moss);
+}
+.jp-cz .cz-price-value,
+.jp-bulk .cz-price-value {
+  font-family: var(--jp-display);
+  font-weight: 300;
+  font-size: clamp(2rem, 3vw, 2.6rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--jp-ink);
+}
+.jp-cz .cz-price-note,
+.jp-bulk .cz-price-note {
+  margin: 0;
+  padding: 4px 16px 16px;
+  font-size: 0.74rem;
+  color: var(--jp-moss);
+}
+
+/* ---------- Two columns from 961px: mat and work order on the left, options on the right ---------- */
+@media (min-width: 961px) {
+  .jp-cz .customizer-inner {
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    column-gap: clamp(32px, 4.4vw, 64px);
+  }
+  .jp-cz .customizer-preview {
+    order: -1;
+  }
+  .jp-bulk .customizer-inner {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    column-gap: clamp(32px, 4.4vw, 64px);
+  }
+  .jp-cz .cz-preview-sticky,
+  .jp-bulk .cz-preview-sticky {
+    top: calc(var(--jp-header-h) + 24px);
+  }
+  .jp-cz .customizer-form,
+  .jp-bulk .customizer-form {
+    gap: 0;
+  }
+  .jp-cz .cz-section:first-of-type,
+  .jp-bulk .cz-section:first-of-type {
+    border-top: 0;
+    padding-top: 0;
+  }
+}
+/* Phones and tablets: the existing stacked order stays (photo, note, sections, summary, submit) */
+@media (max-width: 960px) {
+  .jp-cz .cz-preview-image {
+    margin-bottom: 4px;
+  }
+  .jp-cz .cz-summary,
+  .jp-bulk .cz-summary {
+    margin-block: 28px 16px;
+  }
+  .jp-cz .cz-submit,
+  .jp-bulk .cz-submit {
+    margin-top: 0;
+  }
+  .jp-cz .cz-fineprint,
+  .jp-bulk .cz-fineprint {
+    margin-top: 12px;
+  }
+  .jp-cz .cz-preview-color-note {
+    margin: 12px 0 8px;
+  }
+}
+@media (max-width: 560px) {
+  .jp-cz .customizer,
+  .jp-bulk .customizer {
+    padding-top: 0;
+  }
+  .jp-cz .customizer-inner,
+  .jp-bulk .customizer-inner {
+    padding: 0 var(--jp-gutter);
+  }
+  .jp-cz .cz-section,
+  .jp-bulk .cz-section {
+    padding: 24px 0 28px;
+  }
+  .jp-cz .cz-section-head h2,
+  .jp-bulk .cz-section-head h2 {
+    font-size: 1.45rem;
+  }
+  .jp-cz .cz-radio-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ---------- Richardson color chart button (js/richardson-chart.js, customize.html) ---------- */
+.jp-cz .rcc-slot {
+  margin: 14px 0 0;
+}
+.jp-cz .rcc-btn {
+  min-height: 48px;
+  padding: 0 18px;
+  background: var(--jp-input-bg);
+  color: var(--jp-ink);
+  border: 1px solid var(--jp-line);
+  border-radius: 2px;
+  font-family: var(--jp-body);
+  font-stretch: 112%;
+  font-weight: 500;
+  font-size: 0.86rem;
+}
+.jp-cz .rcc-btn:hover {
+  background: var(--jp-input-bg);
+  border-color: var(--jp-ink);
+}
+.jp-cz .rcc-btn:focus-visible {
+  outline: 2px solid var(--jp-leather);
+  outline-offset: 2px;
+}
+.jp-cz .rcc-btn-icon {
+  color: var(--jp-leather);
+}
+
+/* ---------- Uploaded image lightbox (dialog, built by the customizer scripts) ---------- */
+.cz-lightbox {
+  border-radius: 0;
+}
+.cz-lightbox::backdrop {
+  background: rgba(18, 22, 16, 0.86);
+}
+.cz-lightbox-inner {
+  background: var(--jp-mist);
+  border-radius: 0;
+}
+.cz-lightbox-meta {
+  border-top-color: var(--jp-line);
+}
+.cz-lightbox-filename {
+  color: var(--jp-ink);
+}
+.cz-lightbox-replace,
+.cz-lightbox-confirm {
+  min-height: 44px;
+  border-radius: 0;
+  font-weight: 700;
+}
+.cz-lightbox-replace {
+  color: var(--jp-ink);
+  border-color: var(--jp-line);
+}
+.cz-lightbox-replace:hover {
+  background: var(--jp-input-bg);
+  border-color: var(--jp-ink);
+  color: var(--jp-ink);
+}
+.cz-lightbox-confirm {
+  background: var(--jp-ink);
+  color: var(--jp-bone);
+}
+.cz-lightbox-confirm:hover {
+  background: var(--jp-leather);
+  color: var(--jp-burn);
+}
+.cz-lightbox-close {
+  width: 44px;
+  height: 44px;
+  border-radius: 0;
+  background: var(--jp-ink);
+  color: var(--jp-bone);
+}
+.cz-lightbox-close:hover {
+  background: var(--jp-leather);
+  color: var(--jp-burn);
+  transform: none;
+}
+.cz-lightbox-close:focus-visible,
+.cz-lightbox-replace:focus-visible,
+.cz-lightbox-confirm:focus-visible {
+  outline: 2px solid var(--jp-leather);
+  outline-offset: 2px;
+}
+
+/* ---------- Bulk orders: product picker tiles, same tile language (the page's inline <style> loads first) ---------- */
+.jp-bulk .bulk-grid {
+  gap: 8px;
+}
+.jp-bulk .bulk-product {
+  background: transparent;
+  border: 1px solid var(--jp-line);
+  border-radius: 0;
+  box-shadow: none;
+}
+.jp-bulk .bulk-product:hover {
+  border-color: var(--jp-moss);
+}
+.jp-bulk .bulk-product.is-selected {
+  background: var(--jp-input-bg);
+  border-color: var(--jp-ink);
+  box-shadow: inset 0 0 0 1px var(--jp-ink);
+}
+.jp-bulk .bulk-product-row {
+  min-height: 44px;
+}
+.jp-bulk .bulk-product input[type='checkbox'] {
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--jp-moss);
+  border-radius: 0;
+  background: transparent;
+}
+.jp-bulk .bulk-product input[type='checkbox']:checked {
+  background: var(--jp-ink);
+  border-color: var(--jp-ink);
+}
+.jp-bulk .bulk-product input[type='checkbox']:checked::after {
+  left: 6px;
+  top: 2px;
+  border-color: var(--jp-bone);
+}
+.jp-bulk .bulk-product input[type='checkbox']:focus-visible {
+  outline: 2px solid var(--jp-leather);
+  outline-offset: 2px;
+}
+.jp-bulk .bulk-product-name {
+  font-family: var(--jp-display);
+  font-weight: 400;
+  font-size: 1.05rem;
+  color: var(--jp-ink);
+}
+.jp-bulk .bulk-product-price {
+  font-family: var(--jp-mono);
+  font-stretch: 87.5%;
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--jp-moss);
+}
+.jp-bulk .bulk-product.is-selected .bulk-product-options {
+  border-top-color: var(--jp-line);
+}
+.jp-bulk .bulk-qty-row label {
+  font-family: var(--jp-mono);
+  font-stretch: 87.5%;
+  font-weight: 400;
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--jp-moss);
+}
+.jp-bulk .bulk-qty-input,
+.jp-bulk .bulk-variant-input {
+  min-height: 44px;
+  background: var(--jp-input-bg);
+  border: 1px solid var(--jp-line);
+  border-radius: 0;
+  font-family: var(--jp-body);
+  color: var(--jp-ink);
+}
+.jp-bulk .bulk-qty-input:focus,
+.jp-bulk .bulk-variant-input:focus {
+  outline: none;
+  border-color: var(--jp-leather);
+  box-shadow: 0 0 0 3px rgba(176, 113, 62, 0.25);
+}
+.jp-bulk .bulk-min-note {
+  font-family: var(--jp-body);
+  font-style: normal;
+  color: var(--jp-moss);
+}
+.jp-bulk .bulk-summary-empty {
+  padding: 14px 16px;
+  font-style: normal;
+  color: var(--jp-moss);
+}
+.jp-bulk .bulk-total-row {
+  margin: 0;
+  padding: 14px 16px 6px;
+  border-top: 0;
+}
+.jp-bulk .bulk-total-row .label {
+  font-family: var(--jp-mono);
+  font-stretch: 87.5%;
+  font-weight: 400;
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--jp-moss);
+}
+.jp-bulk .bulk-total-row .value {
+  font-family: var(--jp-display);
+  font-weight: 300;
+  font-size: clamp(2rem, 3vw, 2.6rem);
+  line-height: 1;
+  color: var(--jp-ink);
+}
+.jp-bulk .cz-summary-list li:not(.bulk-summary-empty) {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+.jp-bulk .cz-sum-k {
+  color: var(--jp-ink);
+  text-transform: none;
+  letter-spacing: 0;
+  font-family: var(--jp-body);
+  font-weight: 500;
+  font-size: 0.92rem;
+}
+.jp-bulk .cz-sum-v {
+  max-width: none;
+  text-align: right;
+  font-weight: 400;
+  color: var(--jp-ink);
+}
+
+/* ---------- Custom work: four Design Your Own tiles, then a dark closing band ---------- */
+.jp-custom-work .work-page {
+  background: transparent;
+  padding: 0;
+}
+.jp-custom-work .work-inner {
+  max-width: var(--jp-max);
+  padding: 0 var(--jp-gutter);
+}
+.jp-custom-work .work-cat {
+  margin-bottom: clamp(56px, 8vw, 112px);
+}
+.jp-custom-work .work-cat:last-of-type {
+  margin-bottom: clamp(56px, 8vw, 112px);
+}
+.jp-custom-work .work-cat-head {
+  display: grid;
+  gap: 14px 56px;
+  max-width: none;
+  margin: 0 0 clamp(28px, 4vw, 48px);
+  text-align: left;
+}
+.jp-custom-work .work-cat-eyebrow {
+  justify-self: start;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  margin: 0;
+  font-size: 0.7rem;
+  color: var(--jp-leather);
+}
+.jp-custom-work .work-cat-head h2 {
+  margin: 0;
+  font-weight: 300;
+  font-size: clamp(2rem, 4.2vw, 3.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.022em;
+  color: var(--jp-ink);
+}
+.jp-custom-work .work-cat-head h2 em {
+  font-style: italic;
+  color: inherit;
+}
+.jp-custom-work .work-cat-head p {
+  margin: 0;
+  max-width: 34em;
+  font-size: clamp(1rem, 1.2vw, 1.12rem);
+  color: var(--jp-moss);
+}
+@media (min-width: 1024px) {
+  .jp-custom-work .work-cat-head {
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    align-items: end;
+  }
+  .jp-custom-work .work-cat-eyebrow {
+    grid-column: 1;
+  }
+  .jp-custom-work .work-cat-head h2 {
+    grid-column: 1;
+  }
+  .jp-custom-work .work-cat-head p {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    align-self: end;
+  }
+}
+.jp-custom-work .work-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+@media (min-width: 900px) {
+  .jp-custom-work .work-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
+.jp-custom-work .work-card-link {
+  border-radius: 0;
+}
+.jp-custom-work .work-card-link:hover {
+  transform: none;
+}
+.jp-custom-work .work-card-link:hover .work-card {
+  box-shadow: none;
+  border-color: var(--jp-ink);
+}
+.jp-custom-work .work-card-link:focus-visible {
+  outline: 2px solid var(--jp-leather);
+  outline-offset: 3px;
+}
+.jp-custom-work .work-card {
+  height: 100%;
+  background: transparent;
+  border: 1px solid var(--jp-line);
+  border-radius: 0;
+}
+.jp-custom-work .work-card-image {
+  aspect-ratio: 4 / 5;
+  background-color: var(--jp-heather);
+  background-image: none;
+  border-bottom: 1px solid var(--jp-line);
+}
+.jp-custom-work .work-card-image:has(img) {
+  background-color: var(--jp-heather);
+}
+.jp-custom-work .work-card-image img {
+  padding: 8%;
+  transition: transform 0.5s ease;
+}
+.jp-custom-work .work-card-image--fill img {
+  padding: 0;
+}
+.jp-custom-work .work-card-link:hover .work-card-image img {
+  transform: scale(1.03);
+}
+.jp-custom-work .work-card-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 16px 18px;
+}
+.jp-custom-work .work-card-meta strong {
+  margin: 0;
+  font-family: var(--jp-display);
+  font-weight: 400;
+  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+  line-height: 1.15;
+  color: var(--jp-ink);
+}
+/* "Build Yours" reads as a small leather patch button; the whole tile is the link */
+.jp-custom-work .work-card-meta span {
+  --jp-chamfer: 10px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 calc(var(--jp-chamfer) + 12px);
+  background-color: var(--jp-leather);
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.08));
+  color: var(--jp-burn);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  clip-path: polygon(var(--jp-chamfer) 0, calc(100% - var(--jp-chamfer)) 0, 100% 50%, calc(100% - var(--jp-chamfer)) 100%, var(--jp-chamfer) 100%, 0 50%);
+  transition: background-color 0.2s ease;
+}
+.jp-custom-work .work-card-link:hover .work-card-meta span,
+.jp-custom-work .work-card-link:focus-visible .work-card-meta span {
+  background-color: var(--jp-leather-lt);
+}
+/* Closing call to action: dark loden band, full width (shadow and clip carry the colour to both edges without page overflow) */
+.jp-custom-work .work-cta {
+  display: grid;
+  gap: 20px 56px;
+  margin: 0;
+  padding: var(--jp-band-tight) 0;
+  text-align: left;
+  background: var(--jp-loden);
+  color: var(--jp-bone);
+  border-radius: 0;
+  box-shadow: 0 0 0 100vmax var(--jp-loden);
+  clip-path: inset(0 -100vmax);
+}
+.jp-custom-work .work-cta h3 {
+  margin: 0;
+  font-weight: 300;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  line-height: 1;
+  letter-spacing: -0.024em;
+  color: var(--jp-bone);
+}
+.jp-custom-work .work-cta h3 em {
+  font-style: italic;
+  color: var(--jp-leather-lt);
+}
+.jp-custom-work .work-cta p {
+  margin: 0;
+  max-width: 34em;
+  font-size: clamp(1rem, 1.2vw, 1.12rem);
+  line-height: 1.6;
+  color: var(--jp-fog);
+}
+.jp-custom-work .work-cta .btn-primary {
+  justify-self: start;
+  margin-top: 8px;
+  padding: 0 calc(var(--jp-chamfer) + 18px);
+  gap: 0.6em;
+  font-size: 0.74rem;
+  letter-spacing: 0.14em;
+  white-space: normal;
+  text-align: center;
+  background-color: var(--jp-leather);
+  color: var(--jp-burn);
+}
+.jp-custom-work .work-cta .btn-primary:hover {
+  background-color: var(--jp-leather-lt);
+}
+@media (min-width: 1024px) {
+  .jp-custom-work .work-cta {
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    align-items: end;
+  }
+  .jp-custom-work .work-cta h3 {
+    grid-row: 1 / 3;
+    align-self: center;
+  }
+  .jp-custom-work .work-cta p,
+  .jp-custom-work .work-cta .btn-primary {
+    grid-column: 2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jp-cz .cz-radio-box,
+  .jp-custom-work .work-card-image img,
+  .jp-custom-work .work-card-meta span {
+    transition: none;
+  }
+  .jp-custom-work .work-card-link:hover .work-card-image img {
+    transform: none;
+  }
+  .cz-lightbox[open] {
+    animation: none;
+  }
+}
+
+/* ==========================================================================
+   SERVICES CONTACT CART THANKS
+   ========================================================================== */
+
+/* Body classes: jp-shop jp-services / jp-contact / jp-cart / jp-thanks. jp-shop supplies the shared light heading block (.page-hero). */
+.jp-services [hidden],
+.jp-contact [hidden],
+.jp-cart [hidden],
+.jp-thanks [hidden] {
+  display: none !important;
+}
+
+/* ---------- Services: alternating rows ---------- */
+.jp-services .services {
+  background: transparent;
+  padding: 0 0 clamp(56px, 8vw, 120px);
+}
+.jp-services .services-inner {
+  max-width: var(--jp-max);
+  padding: 0 var(--jp-gutter);
+}
+.jp-services .svc-grid {
+  display: block;
+  border-top: 1px solid var(--jp-line);
+}
+.jp-services .svc-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+  align-items: center;
+  padding: clamp(32px, 5vw, 56px) 0;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--jp-line);
+  box-shadow: none;
+  overflow: visible;
+}
+.jp-services .svc-card:hover {
+  border-color: var(--jp-line);
+  box-shadow: none;
+}
+.jp-services .svc-top-line {
+  display: none;
+}
+.jp-services .svc-image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 5 / 4;
+  object-fit: cover;
+  border: 0;
+  background: var(--jp-heather);
+}
+.jp-services .svc-card-chart .svc-image {
+  object-fit: contain;
+  padding: 14px;
+  border: 1px solid var(--jp-line);
+  background: #f4f5f0;
+}
+.jp-services .svc-content {
+  padding: 0;
+  max-width: 34rem;
+}
+.jp-services .svc-price {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 0 0 10px;
+  color: var(--jp-moss);
+}
+.jp-services .svc-price small {
+  order: 1;
+  color: var(--jp-moss);
+  font-size: 0.7rem;
+}
+.jp-services .svc-price strong {
+  order: 2;
+  font-family: var(--jp-mono);
+  font-stretch: 87.5%;
+  font-weight: 500;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  color: var(--jp-ink);
+}
+.jp-services .svc-name {
+  margin: 0 0 14px;
+  color: var(--jp-ink);
+}
+.jp-services .svc-desc {
+  flex: none;
+  margin: 0 0 24px;
+  color: var(--jp-moss);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+.jp-services .svc-cta {
+  gap: 0.6em;
+  margin-top: 0;
+  color: var(--jp-burn);
+}
+.jp-services .svc-card:nth-child(even) .svc-cta {
+  background-color: var(--jp-ink);
+  background-image: none;
+  color: var(--jp-bone);
+}
+.jp-services .svc-card:nth-child(even) .svc-cta:hover {
+  background-color: var(--jp-loden-2);
+}
+.jp-services .svc-card:hover .svc-cta {
+  gap: 0.6em;
+}
+.jp-services .svc-cta:focus-visible,
+.jp-services .btn-primary:focus-visible {
+  outline: none;
+  background-color: var(--jp-leather);
+  color: var(--jp-burn);
+}
+@media (min-width: 768px) {
+  .jp-services .svc-card {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: clamp(32px, 6vw, 96px);
+  }
+  .jp-services .svc-card:has(> .svc-image) .svc-content {
+    justify-self: start;
+  }
+  .jp-services .svc-card:nth-child(even) .svc-image {
+    order: 2;
+  }
+  .jp-services .svc-card:nth-child(even) .svc-content {
+    justify-self: end;
+  }
+  .jp-services .svc-card:not(:has(> .svc-image)) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .jp-services .svc-card:not(:has(> .svc-image)) .svc-content {
+    justify-self: start;
+    padding-left: 0;
+  }
+}
+
+/* Agency and bulk band: dark panel with the bulk photo */
+.jp-services .svc-bottom {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  margin-top: clamp(48px, 7vw, 96px);
+  padding: clamp(40px, 7vw, 104px) clamp(24px, 5vw, 72px);
+  border: 0;
+  background: var(--jp-loden);
+  color: var(--jp-bone);
+  text-align: left;
+}
+.jp-services .svc-bottom-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.jp-services .svc-bottom::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, rgba(18, 22, 16, 0.94) 0%, rgba(18, 22, 16, 0.82) 55%, rgba(18, 22, 16, 0.5) 100%);
+}
+.jp-services .svc-bottom p.svc-bottom-points {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0 0 32px;
+  color: var(--jp-bone);
+  font-family: var(--jp-display);
+  font-weight: 300;
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  line-height: 1.15;
+}
+.jp-services .svc-bottom-points span {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.jp-services .svc-bottom .btn-primary {
+  min-height: 52px;
+  color: var(--jp-burn);
+}
+
+/* ---------- Contact ---------- */
+.jp-contact .contact {
+  background: transparent;
+  color: var(--jp-ink);
+  padding: clamp(32px, 5vw, 72px) 0 clamp(64px, 9vw, 128px);
+}
+.jp-contact .contact-grain,
+.jp-contact .contact-glow {
+  display: none;
+}
+.jp-contact .contact-inner {
+  max-width: var(--jp-max);
+  padding: 0 var(--jp-gutter);
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(40px, 6vw, 72px);
+  align-items: start;
+}
+@media (min-width: 901px) {
+  .jp-contact .contact-inner {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(40px, 5vw, 72px);
+  }
+}
+.jp-contact .contact .eyebrow {
+  margin: 0 0 14px;
+  color: var(--jp-moss);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+}
+.jp-contact .contact h2 {
+  margin: 0 0 22px;
+  color: var(--jp-ink);
+  font-size: clamp(2.35rem, 5.2vw, 4.4rem);
+  line-height: 1;
+}
+.jp-contact .contact h2 em {
+  font-style: italic;
+  color: inherit;
+}
+.jp-contact .contact-intro {
+  margin: 0 0 28px;
+  max-width: 28em;
+  color: var(--jp-moss);
+}
+.jp-contact .contact-email {
+  display: inline-flex;
+  max-width: 100%;
+  margin: 0 0 32px;
+  padding: 16px 20px;
+  border: 1px solid var(--jp-line);
+  background: var(--jp-input-bg);
+}
+.jp-contact .contact-email-icon {
+  display: none;
+}
+.jp-contact .contact-email a {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: var(--jp-ink);
+  font-family: var(--jp-display);
+  font-size: clamp(1.1rem, 2.2vw, 1.45rem);
+  text-decoration: none;
+}
+.jp-contact .contact-email a:hover,
+.jp-contact .contact-email a:focus-visible {
+  color: var(--jp-leather);
+}
+.jp-contact .contact-tags {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.jp-contact .contact-tags p {
+  margin: 0 0 16px;
+  color: var(--jp-moss);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+}
+.jp-contact .contact-tags-wrap {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 24px;
+  max-width: 28rem;
+}
+.jp-contact .contact-tag,
+.jp-contact .contact-tag:hover {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--jp-ink);
+  font-size: 0.95rem;
+}
+.jp-contact .contact-tag::before {
+  content: '';
+  display: inline-block;
+  width: 12px;
+  height: 14px;
+  flex-shrink: 0;
+  background: var(--jp-leather);
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+}
+
+/* Form panel */
+.jp-contact #contactForm,
+.jp-contact #contactSuccess {
+  padding: clamp(20px, 3.4vw, 36px);
+  border: 1px solid var(--jp-line);
+  background: #f4f5f0;
+}
+.jp-contact .contact-form {
+  gap: 20px;
+}
+.jp-contact .form-required-legend {
+  margin: 0;
+  color: var(--jp-moss);
+  font-family: var(--jp-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+}
+.jp-contact .required-mark {
+  color: #a63a2a;
+}
+.jp-contact .form-label {
+  margin-bottom: 8px;
+  color: var(--jp-ink);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+}
+.jp-contact .form-input,
+.jp-contact .form-select,
+.jp-contact .form-textarea {
+  width: 100%;
+  color: var(--jp-ink);
+  background-color: var(--jp-input-bg);
+  border: 1px solid var(--jp-line);
+  color-scheme: light;
+}
+.jp-contact .form-input::placeholder,
+.jp-contact .form-textarea::placeholder {
+  color: #8a9183;
+}
+.jp-contact .form-input:focus,
+.jp-contact .form-select:focus,
+.jp-contact .form-textarea:focus,
+.jp-contact .cs--dark.is-open > select.form-select {
+  border-color: var(--jp-leather);
+  box-shadow: 0 0 0 3px rgba(176, 113, 62, 0.25);
+}
+.jp-contact .form-select option {
+  background: var(--jp-input-bg);
+  color: var(--jp-ink);
+}
+.jp-contact .cs--dark .cs-trigger {
+  background: var(--jp-input-bg);
+  border-color: var(--jp-line);
+  color: var(--jp-ink);
+}
+.jp-contact .cs--dark.is-open > .cs-trigger,
+.jp-contact .cs--dark .cs-trigger:focus-visible {
+  border-color: var(--jp-leather);
+  box-shadow: 0 0 0 3px rgba(176, 113, 62, 0.25);
+}
+.jp-contact .cs--dark .cs-arrow {
+  color: var(--jp-moss);
+}
+.jp-contact .cs--dark .cs-list {
+  background: var(--jp-input-bg);
+  border-color: var(--jp-line);
+  box-shadow: 0 18px 40px rgba(18, 22, 16, 0.22);
+}
+.jp-contact .cs--dark .cs-option {
+  color: var(--jp-ink);
+}
+.jp-contact .cs--dark .cs-option.is-active {
+  background: var(--jp-heather);
+}
+.jp-contact .cs--dark .cs-option[aria-selected='true'] {
+  color: var(--jp-leather);
+}
+.jp-contact .cs--dark .cs-option[aria-selected='true']::before {
+  background: var(--jp-leather);
+}
+.jp-contact .form-submit {
+  width: 100%;
+}
+@media (min-width: 640px) {
+  .jp-contact .form-submit {
+    width: auto;
+    align-self: flex-start;
+  }
+}
+.jp-contact .form-submit-icon,
+.jp-contact .check-big {
+  display: none;
+}
+.jp-contact .form-success {
+  text-align: left;
+}
+.jp-contact .form-success h3 {
+  margin: 0 0 8px;
+  color: var(--jp-ink);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+}
+.jp-contact .form-success p {
+  color: var(--jp-moss);
+}
+
+/* Product banner and the customizer ink ticket */
+.jp-contact .cf-product-banner {
+  margin: 0 0 22px;
+  padding: 16px 20px;
+  background: var(--jp-input-bg);
+  border: 1px solid var(--jp-line);
+  border-left: 3px solid var(--jp-leather);
+  border-radius: 0;
+}
+.jp-contact .cf-product-banner-label {
+  margin-bottom: 8px;
+  color: var(--jp-leather);
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+}
+.jp-contact .cf-product-banner-name {
+  margin-bottom: 6px;
+  color: var(--jp-ink);
+  font-family: var(--jp-display);
+  font-size: 1.2rem;
+}
+.jp-contact .cf-product-banner-meta {
+  color: var(--jp-moss);
+  font-family: var(--jp-mono);
+  font-size: 0.7rem;
+  line-height: 1.6;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+.jp-contact .cf-customizer-banner {
+  background: var(--jp-ink);
+  color: var(--jp-bone);
+  border: 0;
+  border-left: 3px solid var(--jp-leather-lt);
+  border-radius: 0;
+  padding: 18px 22px;
+  margin: 0 0 22px;
+}
+.jp-contact .cf-customizer-banner .cf-product-banner-label {
+  color: var(--jp-leather-lt);
+}
+.jp-contact .cf-customizer-banner .cf-product-banner-name {
+  color: var(--jp-bone);
+}
+.jp-contact .cf-customizer-banner .cf-product-banner-meta {
+  color: var(--jp-fog);
+}
+
+/* ---------- Cart ---------- */
+.jp-cart .cart-section {
+  padding: clamp(32px, 5vw, 72px) var(--jp-gutter) clamp(64px, 9vw, 128px);
+}
+.jp-cart .cart-inner {
+  max-width: var(--jp-max);
+}
+.jp-cart .cart-title {
+  margin: 0 0 clamp(24px, 4vw, 48px);
+  color: var(--jp-ink);
+  font-size: clamp(2.35rem, 5.2vw, 4.4rem);
+  line-height: 1;
+}
+.jp-cart .cart-empty {
+  padding: clamp(40px, 7vw, 88px) 24px;
+  background: #f4f5f0;
+  border: 1px solid var(--jp-line);
+  border-radius: 0;
+  text-align: center;
+}
+.jp-cart .cart-empty p {
+  margin: 0 0 24px;
+  color: var(--jp-ink);
+  font-family: var(--jp-display);
+  font-weight: 300;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+}
+.jp-cart .cart-shop-link,
+.jp-cart .cart-shop-link:hover {
+  text-decoration: none;
+  color: var(--jp-burn);
+  font-weight: 700;
+}
+.jp-cart .cart-body {
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(32px, 5vw, 56px);
+}
+@media (min-width: 900px) {
+  .jp-cart .cart-body {
+    grid-template-columns: minmax(0, 1fr) 400px;
+  }
+  .jp-cart .cart-summary {
+    position: sticky;
+    top: calc(var(--jp-header-h) + 24px);
+  }
+}
+.jp-cart .cart-lines {
+  border-top: 1px solid var(--jp-line);
+}
+.jp-cart .cart-line {
+  grid-template-columns: 84px minmax(0, 1fr) auto;
+  gap: 16px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--jp-line);
+}
+@media (min-width: 640px) {
+  .jp-cart .cart-line {
+    grid-template-columns: 112px minmax(0, 1fr) auto;
+    gap: 24px;
+  }
+}
+.jp-cart .cart-line-thumb {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  border-radius: 0;
+  background: var(--jp-heather);
+  object-fit: cover;
+}
+.jp-cart .cart-line-body h3 {
+  margin: 0 0 8px;
+  color: var(--jp-ink);
+  font-family: var(--jp-display);
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 1.2;
+}
+.jp-cart .cart-line-customs {
+  margin: 0 0 14px;
+  color: var(--jp-moss);
+  font-family: var(--jp-mono);
+  font-stretch: 87.5%;
+  font-size: 0.7rem;
+  line-height: 1.6;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+.jp-cart .cart-line-customs strong {
+  color: var(--jp-ink);
+  font-weight: 500;
+}
+.jp-cart .cart-line-controls {
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.jp-cart .cart-line-controls label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--jp-body);
+  font-stretch: 125%;
+  font-weight: 600;
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--jp-ink);
+}
+.jp-cart .cart-qty-input {
+  width: 68px;
+  min-height: 44px;
+  padding: 0 8px;
+  color: var(--jp-ink);
+  background: var(--jp-input-bg);
+  border: 1px solid var(--jp-line);
+  border-radius: 0;
+  font-family: var(--jp-mono);
+  font-size: 0.9rem;
+}
+.jp-cart .cart-qty-input:focus,
+.jp-cart .cart-pickup input:focus-visible {
+  outline: none;
+  border-color: var(--jp-leather);
+  box-shadow: 0 0 0 3px rgba(176, 113, 62, 0.25);
+}
+.jp-cart .cart-remove-btn {
+  min-height: 44px;
+  padding: 0 4px;
+  color: var(--jp-moss);
+  font-family: var(--jp-body);
+  font-stretch: 125%;
+  font-weight: 600;
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+}
+.jp-cart .cart-remove-btn:hover,
+.jp-cart .cart-remove-btn:focus-visible {
+  color: var(--jp-ink);
+  text-decoration-color: currentColor;
+}
+.jp-cart .cart-remove-btn:focus-visible,
+.jp-cart .cart-continue-link:focus-visible {
+  outline: 2px solid var(--jp-leather);
+  outline-offset: 2px;
+}
+.jp-cart .cart-line-price {
+  color: var(--jp-ink);
+  font-family: var(--jp-display);
+  font-weight: 400;
+  font-size: 1.2rem;
+}
+.jp-cart .cart-summary {
+  padding: clamp(20px, 3vw, 32px);
+  background: #f4f5f0;
+  border: 1px solid var(--jp-line);
+  border-radius: 0;
+}
+.jp-cart .cart-row {
+  align-items: baseline;
+  padding: 10px 0;
+  color: var(--jp-ink);
+  font-family: var(--jp-body);
+  font-stretch: 125%;
+  font-weight: 600;
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.jp-cart .cart-row span:last-child {
+  font-family: var(--jp-mono);
+  font-stretch: 100%;
+  font-weight: 500;
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+}
+.jp-cart .cart-row-muted {
+  color: var(--jp-moss);
+}
+.jp-cart .cart-row-total {
+  margin-top: 8px;
+  padding-top: 18px;
+  border-top: 1px solid var(--jp-line);
+  font-size: 0.68rem;
+  font-weight: 600;
+}
+.jp-cart .cart-row-total span:last-child {
+  font-family: var(--jp-display);
+  font-weight: 300;
+  font-size: 2rem;
+  letter-spacing: 0;
+  line-height: 1;
+}
+.jp-cart .cart-pickup {
+  margin: 14px 0;
+  padding: 14px 16px;
+  background: var(--jp-input-bg);
+  border: 1px solid var(--jp-line);
+  border-radius: 0;
+}
+.jp-cart .cart-pickup:hover {
+  border-color: var(--jp-ink);
+}
+.jp-cart .cart-pickup:focus-within {
+  border-color: var(--jp-leather);
+  box-shadow: 0 0 0 3px rgba(176, 113, 62, 0.25);
+}
+.jp-cart .cart-pickup input[type='checkbox'] {
+  accent-color: var(--jp-leather);
+}
+.jp-cart .cart-pickup-text strong {
+  color: var(--jp-ink);
+}
+.jp-cart .cart-pickup-text small {
+  color: var(--jp-moss);
+}
+.jp-cart .cart-checkout-btn {
+  display: flex;
+  width: 100%;
+  min-height: 56px;
+  margin-top: 18px;
+  padding: 0 calc(var(--jp-chamfer) + 18px);
+  background-color: var(--jp-leather);
+  color: var(--jp-burn);
+  border-radius: 0;
+}
+.jp-cart .cart-checkout-btn:hover:not(:disabled) {
+  background-color: var(--jp-leather-lt);
+}
+.jp-cart .cart-checkout-btn:focus-visible {
+  outline: none;
+  background-color: var(--jp-burn);
+  color: var(--jp-leather-lt);
+}
+.jp-cart .cart-error {
+  margin-top: 14px;
+  padding: 12px 14px;
+  background: #f6e5e0;
+  color: #6d1d12;
+  border: 1px solid #d9a99d;
+  border-left: 3px solid #a63a2a;
+  border-radius: 0;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+.jp-cart .cart-continue-link {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8px;
+  color: var(--jp-moss);
+  text-decoration: none;
+}
+.jp-cart .cart-continue-link:hover {
+  color: var(--jp-ink);
+}
+
+/* ---------- Thank you ---------- */
+.jp-thanks .thanks-section {
+  padding: clamp(48px, 7vw, 104px) var(--jp-gutter) clamp(72px, 10vw, 152px);
+}
+.jp-thanks .thanks-inner {
+  max-width: var(--jp-max);
+  margin: 0 auto;
+  text-align: left;
+}
+.jp-thanks .thanks-title {
+  margin: 0 0 24px;
+  max-width: 14em;
+  color: var(--jp-ink);
+  font-size: clamp(2.35rem, 5.8vw, 5rem);
+  line-height: 0.98;
+}
+.jp-thanks .thanks-body {
+  margin: 0 0 32px;
+  max-width: 34em;
+  font-size: clamp(1.02rem, 1.25vw, 1.18rem);
+  line-height: 1.6;
+  color: var(--jp-moss);
+}
+.jp-thanks .thanks-order {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 40px;
+  padding: 12px 16px;
+  border: 1px solid var(--jp-line);
+  background: var(--jp-input-bg);
+  color: var(--jp-moss);
+}
+.jp-thanks .thanks-order code {
+  padding: 0;
+  background: none;
+  color: var(--jp-ink);
+  font-family: var(--jp-mono);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.jp-thanks .thanks-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.jp-thanks .thanks-shop-link,
+.jp-thanks .thanks-shop-link:hover {
+  border-radius: 0;
+  color: var(--jp-burn);
+  text-decoration: none;
+}
+.jp-thanks .thanks-shop-link:focus-visible {
+  outline: none;
+  background-color: var(--jp-burn);
+  color: var(--jp-leather-lt);
+}
+
+/* ==========================================================================
+   QA fixes: focus states and reduced motion
+   ========================================================================== */
+.jp-cart .cart-shop-link:focus-visible {
+  background-color: var(--jp-burn);
+  color: var(--jp-leather-lt);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.jp-pdp .pdp-qty-input:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--jp-leather), 0 0 0 3px rgba(176, 113, 62, 0.25);
+}
+.jp-cart .cart-qty-input:focus-visible,
+.jp-cz .cz-section .cz-qty-input:focus-visible,
+.jp-bulk .cz-section .cz-qty-input:focus-visible {
+  outline: none;
+  border-color: var(--jp-leather);
+  box-shadow: 0 0 0 3px rgba(176, 113, 62, 0.25);
+}
+@media (prefers-reduced-motion: reduce) {
+  .product-image,
+  .coll-image,
+  .jp-home .fb-photo img,
+  .jp-custom-work .work-card-image img,
+  .jp-frame > img {
+    transition: none !important;
+  }
+  .product-card:hover .product-image,
+  .product-card:focus-visible .product-image,
+  .jp-home .fb-photo:hover img,
+  .jp-home .coll-tile:hover .coll-image,
+  .jp-custom-work .work-card-link:hover .work-card-image img,
+  .jp-card:hover .jp-frame > img,
+  .jp-card:focus-visible .jp-frame > img {
+    transform: none !important;
+  }
+}
+
+/* ==========================================================================
+   BUILD HAT
+   build-hat.html: live hat drawing on the cutting mat, numbered option steps,
+   work order ticket, and a fixed buy bar on phones. Everything is scoped under
+   .jp-build. The shared pieces (jp-btn, jp-chip, jp-input, jp-ticket, jp-mat)
+   come from jp-redesign.css.
+   ========================================================================== */
+
+.jp-build .bh {
+  padding: 0 0 clamp(64px, 8vw, 120px);
+}
+.jp-build .bh-inner {
+  max-width: var(--jp-max);
+  margin-inline: auto;
+  padding-inline: var(--jp-gutter);
+}
+.jp-build .bh-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- Stage: sticky under the header on phones ---------- */
+.jp-build .bh-stage {
+  position: sticky;
+  top: var(--jp-header-h);
+  z-index: 20;
+  margin-inline: calc(var(--jp-gutter) * -1);
+}
+.jp-build .bh-mat {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 18px 40px -24px rgba(0, 0, 0, 0.6);
+}
+.jp-build .bh-ruler {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 24px;
+  display: flex;
+  align-items: flex-end;
+  padding-inline: 12px;
+  border-bottom: 1px solid rgba(233, 232, 223, 0.15);
+  pointer-events: none;
+}
+.jp-build .bh-tick {
+  position: relative;
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+.jp-build .bh-tick-l {
+  display: block;
+  width: 1px;
+  height: 12px;
+  background: rgba(233, 232, 223, 0.4);
+}
+.jp-build .bh-tick-s {
+  display: block;
+  width: 1px;
+  height: 6px;
+  margin-left: auto;
+  background: rgba(233, 232, 223, 0.25);
+}
+.jp-build .bh-tick-n {
+  position: absolute;
+  top: 2px;
+  left: 4px;
+  font-size: 0.55rem;
+  line-height: 1;
+  color: rgba(233, 232, 223, 0.45);
+}
+.jp-build .bh-draw {
+  padding: 32px 8px 8px;
+}
+.jp-build .bh-draw svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 640px;
+  max-height: 34vh;
+  margin-inline: auto;
+}
+.jp-build .bh-caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 16px;
+  border-top: 1px solid rgba(233, 232, 223, 0.15);
+}
+.jp-build .bh-caption p {
+  margin: 0;
+  min-width: 0;
+}
+.jp-build .bh-cap-l {
+  color: rgba(233, 232, 223, 0.75);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.jp-build .bh-cap-r {
+  flex-shrink: 0;
+  color: var(--jp-leather-lt);
+}
+.jp-build .bh-ticket--desk,
+.jp-build .bh-desk-actions {
+  display: none;
+}
+
+/* ---------- Options ---------- */
+.jp-build .bh-options {
+  margin-top: 32px;
+}
+.jp-build .bh-step {
+  padding: 32px 0;
+  border-top: 1px solid var(--jp-line);
+}
+.jp-build .bh-step:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+.jp-build .bh-step-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.jp-build .bh-step-head h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin: 0;
+}
+.jp-build .bh-num {
+  color: var(--jp-leather);
+}
+.jp-build .bh-title {
+  font-family: var(--jp-display);
+  font-weight: 400;
+  font-size: clamp(1.3rem, 2vw, 1.6rem);
+  line-height: 1.15;
+  letter-spacing: -0.012em;
+}
+.jp-build .bh-aside {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: right;
+  color: var(--jp-moss);
+}
+.jp-build .bh-help {
+  margin: 12px 0 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--jp-moss);
+}
+.jp-build .bh-help-flat {
+  margin: 0;
+  font-size: 0.9rem;
+}
+.jp-build .bh-stack {
+  display: grid;
+  gap: 16px;
+}
+.jp-build .bh-stack > * {
+  min-width: 0;
+}
+.jp-build .bh-stack .bh-help,
+.jp-build .bh-stack .bh-err {
+  margin: 0;
+}
+.jp-build .bh-grid-2 {
+  display: grid;
+  gap: 16px;
+}
+.jp-build .bh-err {
+  margin: 6px 0 0;
+  font-size: 0.85rem;
+  color: #9b3b22;
+}
+.jp-build .bh-err[hidden] {
+  display: none;
+}
+.jp-build .jp-input[aria-invalid='true'] {
+  border-color: #9b3b22;
+}
+
+/* Hat bodies */
+.jp-build .bh-bodies {
+  display: grid;
+  gap: 8px;
+}
+.jp-build .bh-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 4px 16px;
+  min-height: 44px;
+  padding: 14px 16px;
+  text-align: left;
+  font: inherit;
+  color: var(--jp-ink);
+  background: transparent;
+  border: 1px solid var(--jp-line);
+  border-radius: 0;
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+.jp-build .bh-body:hover {
+  border-color: rgba(22, 25, 19, 0.4);
+}
+.jp-build .bh-body[aria-pressed='true'] {
+  background: var(--jp-input-bg);
+  border-color: var(--jp-ink);
+  box-shadow: inset 0 0 0 1px var(--jp-ink);
+}
+.jp-build .bh-body-name {
+  display: block;
+  font-family: var(--jp-display);
+  font-size: 1.12rem;
+  line-height: 1.2;
+}
+.jp-build .bh-body-note {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--jp-moss);
+}
+.jp-build .bh-body-price {
+  color: var(--jp-moss);
+}
+
+/* Color dots */
+.jp-build .bh-colors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.jp-build .bh-color {
+  width: 44px;
+  height: 44px;
+  padding: 3px;
+  background: transparent;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.jp-build .bh-color:hover {
+  border-color: var(--jp-line);
+}
+.jp-build .bh-color[aria-pressed='true'] {
+  border-color: var(--jp-ink);
+}
+.jp-build .bh-color span {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  box-shadow: none;
+  isolation: isolate;
+}
+/* The fill is a layer larger than the round clip, so the circle edge cuts through
+   solid color. Nothing (border, backdrop, ring) sits between fill and edge. */
+.jp-build .bh-color span::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  background: var(--sw);
+}
+/* Thin ink border drawn over the fill (above it, inside the same round clip). */
+.jp-build .bh-color span::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border: 1.25px solid var(--jp-ink, #1f201d);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Patch type and tone chips */
+.jp-build .bh-types {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+.jp-build .bh-types .jp-chip {
+  justify-content: center;
+  min-height: 44px;
+}
+.jp-build .bh-tones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+.jp-build .bh-tones .jp-chip,
+.jp-build .bh-chips .jp-chip,
+.jp-build .bh-sizes .jp-chip {
+  min-height: 44px;
+}
+.jp-build .bh-dot {
+  width: 16px;
+  height: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 50%;
+}
+.jp-build .bh-chips,
+.jp-build .bh-sizes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.jp-build .bh-size {
+  min-width: 56px;
+  justify-content: center;
+}
+
+/* Shape picker: 7 across, patches drawn in the chosen material */
+.jp-build .bh-shapes {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 6px;
+}
+.jp-build .bh-shape {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  min-height: 44px;
+  padding: 8px 2px;
+  background: transparent;
+  border: 1px solid var(--jp-line);
+  border-radius: 0;
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+.jp-build .bh-shape:hover {
+  border-color: rgba(22, 25, 19, 0.4);
+}
+.jp-build .bh-shape[aria-pressed='true'] {
+  background: var(--jp-input-bg);
+  border-color: var(--jp-ink);
+  box-shadow: inset 0 0 0 1px var(--jp-ink);
+}
+.jp-build .bh-shape-art {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 32px;
+}
+.jp-build .bh-shape-art svg {
+  height: 100%;
+  max-height: 40px;
+  width: auto;
+  max-width: 90%;
+}
+.jp-build .bh-shape-no {
+  font-size: 0.56rem;
+  color: var(--jp-moss);
+}
+
+/* Logo upload: reuses the customizer's dashed file box and the shared uploader status */
+.jp-build .bh-file .cz-file-label {
+  min-height: 56px;
+}
+.jp-build .bh-file + .cz-logo-status {
+  margin-top: 10px;
+}
+
+/* Quantity */
+.jp-build .bh-qty-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+}
+.jp-build .bh-qty {
+  display: inline-flex;
+  align-items: stretch;
+  height: 52px;
+  border: 1px solid var(--jp-line);
+  background: var(--jp-input-bg);
+}
+.jp-build .bh-qty button {
+  width: 52px;
+  font: inherit;
+  font-size: 1.1rem;
+  color: var(--jp-ink);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+.jp-build .bh-qty button:hover {
+  background: var(--jp-heather);
+}
+.jp-build .bh-qty input {
+  width: 64px;
+  min-width: 0;
+  padding: 0;
+  text-align: center;
+  color: var(--jp-ink);
+  background: transparent;
+  border: 0;
+  border-inline: 1px solid var(--jp-line);
+  border-radius: 0;
+  font-size: 0.9rem;
+}
+.jp-build .bh-qty input:focus {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--jp-leather);
+}
+.jp-build .bh-notes {
+  position: relative;
+  margin-top: 20px;
+}
+.jp-build .bh-count {
+  justify-self: end;
+  color: var(--jp-moss);
+}
+
+.jp-build .bh-mobile-ticket {
+  padding-top: 32px;
+  border-top: 1px solid var(--jp-line);
+}
+
+/* ---------- Mobile buy bar ---------- */
+.jp-build .bh-bar {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 40;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  background: rgba(236, 238, 232, 0.95);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--jp-line);
+}
+.jp-build .bh-bar-in {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: var(--jp-max);
+  margin-inline: auto;
+  padding: 12px var(--jp-gutter);
+}
+.jp-build .bh-bar-price {
+  flex: 1;
+  min-width: 0;
+}
+.jp-build .bh-bar-price p {
+  margin: 0;
+}
+.jp-build .bh-bar-price .jp-spec {
+  color: var(--jp-moss);
+}
+.jp-build .bh-bar-est {
+  font-family: var(--jp-display);
+  font-size: 1.3rem;
+  line-height: 1.15;
+}
+.jp-build .bh-bar .jp-btn {
+  padding-inline: calc(var(--jp-chamfer) + 8px);
+}
+.jp-build .jp-btn:disabled {
+  opacity: 0.55;
+  cursor: progress;
+}
+
+/* Phones: leave room under the footer for the bar, and lift the back-to-top button above it */
+@media (max-width: 1023px) {
+  .jp-build {
+    padding-bottom: var(--bh-bar-h, 0px);
+  }
+  .jp-build .scroll-top {
+    bottom: calc(var(--bh-bar-h, 0px) + 12px);
+  }
+}
+
+@media (min-width: 640px) {
+  .jp-build .bh-stage {
+    margin-inline: 0;
+  }
+  .jp-build .bh-draw {
+    padding: 32px 24px 16px;
+  }
+  .jp-build .bh-draw svg {
+    max-height: none;
+  }
+  .jp-build .bh-types {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .jp-build .bh-grid-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .jp-build .bh-shape-art {
+    height: 40px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .jp-build .bh-inner {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: 48px;
+    align-items: start;
+  }
+  .jp-build .bh-stage {
+    position: sticky;
+    top: calc(var(--jp-header-h) + 24px);
+    grid-column: 1 / span 7;
+    z-index: 1;
+  }
+  .jp-build .bh-options {
+    grid-column: 8 / span 5;
+    margin-top: 0;
+  }
+  .jp-build .bh-ticket--desk {
+    display: block;
+    margin-top: 24px;
+  }
+  .jp-build .bh-desk-actions {
+    display: flex;
+    margin-top: 24px;
+  }
+  .jp-build .bh-desk-actions .jp-btn {
+    flex: 1;
+  }
+  .jp-build .bh-mobile-ticket,
+  .jp-build .bh-bar {
+    display: none;
+  }
+  .jp-build .bh-step {
+    padding: 40px 0;
+  }
+  .jp-build .bh-step:first-child {
+    padding-top: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jp-build .bh-body,
+  .jp-build .bh-shape,
+  .jp-build .bh-color {
+    transition: none;
+  }
+}

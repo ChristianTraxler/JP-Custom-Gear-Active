@@ -28,9 +28,11 @@
     if (!c || typeof c !== 'object') return '';
     const entries = Object.entries(c).filter(([, v]) => v !== '' && v != null);
     if (entries.length === 0) return '';
-    return entries.map(([k, v]) =>
-      `<span><strong>${escapeHtml(k)}:</strong> ${escapeHtml(String(v))}</span>`
-    ).join('');
+    return entries.map(([k, v]) => {
+      // Show a short note instead of the long upload link.
+      if (k === 'Logo URL') return '<span><strong>Logo:</strong> Uploaded</span>';
+      return `<span><strong>${escapeHtml(k)}:</strong> ${escapeHtml(String(v))}</span>`;
+    }).join('');
   }
 
   function render() {

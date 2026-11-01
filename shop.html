@@ -3,30 +3,29 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="icon" type="image/png" href="images/J.PATS.png" />
-<link rel="apple-touch-icon" href="images/J.PATS.png" />
+<link rel="icon" type="image/png" href="images/jp-custom-gear-icon-64.png" />
+<link rel="apple-touch-icon" href="images/jp-custom-gear-icon-180.png" />
 <title>Shop All | JP Custom Gear</title>
 <meta name="description" content="Shop all custom hats, shirts, and engraved drinkware from JP Custom Gear. Starting at $25. Made in the USA." />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="css/default.css" />
 <link rel="stylesheet" href="css/styles.css" />
 <link rel="stylesheet" href="css/responsive.css" />
+<link rel="stylesheet" href="css/jp-redesign.css" />
+<link rel="stylesheet" href="css/jp-pages.css" />
 </head>
-<body>
+<body class="jp-shop">
 
 <div class="announce">Custom orders ship in 5–7 business days &nbsp;·&nbsp; Bulk discounts available — contact us</div>
 
 <header class="navbar">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">
-      <img class="nav-logo-img" src="images/J.PATS.png" alt="JP Custom Gear logo" />
-      <div class="nav-logo-text"><strong>JP</strong><small>Custom Gear</small></div>
+      <img class="nav-logo-img" src="images/jp-custom-gear-logo-256.webp" alt="JP Custom Gear logo" />
+      <div class="nav-logo-text"><strong>JP Custom</strong><small>Gear · Est. 2024</small></div>
     </a>
     <nav class="nav-links">
       <a href="index.html">Home</a>
-      <a href="shop.html">Shop</a>
+      <a href="shop.html" aria-current="page">Shop</a>
       <a href="index.html#onduty">On Duty</a>
       <a href="custom-work.html">Custom Work</a>
       <a href="services.html">Services</a>
@@ -56,7 +55,7 @@
   </div>
   <nav class="drawer-nav">
     <a href="index.html">Home →</a>
-    <a href="shop.html">Shop →</a>
+    <a href="shop.html" aria-current="page">Shop →</a>
     <a href="index.html#onduty">On Duty →</a>
     <a href="custom-work.html">Custom Work →</a>
     <a href="services.html">Services →</a>
@@ -68,10 +67,10 @@
 <section class="page-hero">
   <div class="page-hero-grain"></div>
   <div class="page-hero-inner">
-    <div class="breadcrumb"><a href="index.html">Home</a> <span>/</span> <span>Shop</span></div>
-    <div class="eyebrow">The Full Lineup</div>
-    <h1>Shop <em>All</em></h1>
-    <p>Every hat, shirt, and engraved piece we make. One-offs, bulk orders, custom requests — pick your style and we'll handle the rest.</p>
+    <div class="breadcrumb jp-spec"><a href="index.html">Home</a> <span>/</span> <span>Shop</span></div>
+    <div class="eyebrow jp-label">Shop all</div>
+    <h1 class="jp-d-l">The full lineup</h1>
+    <p class="jp-lede jp-muted">Every hat, shirt, and engraved piece we make. One-offs, bulk orders, custom requests — pick your style and we'll handle the rest.</p>
   </div>
 </section>
 
@@ -84,10 +83,13 @@
           <button type="button" class="shop-filter-chip is-active" data-product="all">All</button>
           <button type="button" class="shop-filter-chip" data-product="hat">Hats</button>
           <button type="button" class="shop-filter-chip" data-product="shirt">Shirts</button>
+          <button type="button" class="shop-filter-chip" data-product="patch">Laser Engraved Patches</button>
+          <button type="button" class="shop-filter-chip" data-product="hoodie">Hoodies</button>
+          <button type="button" class="shop-filter-chip" data-product="camo-reserve">The Camo Reserve Collection</button>
           <!-- <button type="button" class="shop-filter-chip" data-product="tumbler">Tumblers</button> -->
 
         </div>
-        <div class="shop-filter-count" id="shopFilterCount" aria-live="polite">Showing 31 products</div>
+        <div class="shop-filter-count" id="shopFilterCount" aria-live="polite">Showing 78 products</div>
       </div>
       <div class="shop-subfilter-chips" role="group" aria-label="Filter by hat type">
         <button type="button" class="shop-filter-chip is-active" data-hat="all">All</button>
@@ -98,6 +100,110 @@
     </div>
 
     <div class="product-grid" id="productGrid">
+
+      <a href="customize-hoodie.html?style=duck" data-collections="camo-reserve" class="product-card fade-in" data-product-type="hoodie" data-hat-type="none">
+        <div class="product-image-wrap"><span class="product-tag">Hoodie</span><img class="product-image product-image--portrait" src="images/camo-reserve/hoodies/duck-camo-hoodie.webp" alt="Custom Independent Trading Co. Duck Camo Hoodie" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">Custom Independent Trading Co. Duck Camo Hoodie</div>
+          <div class="product-price-row"><div class="product-price"><small>From</small>$40</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
+
+      <a href="customize-hoodie.html?style=washed" data-collections="camo-reserve" class="product-card fade-in" data-product-type="hoodie" data-hat-type="none">
+        <div class="product-image-wrap"><span class="product-tag">Hoodie</span><img class="product-image product-image--portrait" src="images/camo-reserve/hoodies/washed-camo-hoodie.webp" alt="Custom Independent Trading Co. Washed Camo Hoodie" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">Custom Independent Trading Co. Washed Camo Hoodie</div>
+          <div class="product-price-row"><div class="product-price"><small>From</small>$40</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
+
+      <a href="customize-hoodie.html?style=desert" data-collections="camo-reserve" class="product-card fade-in" data-product-type="hoodie" data-hat-type="none">
+        <div class="product-image-wrap"><span class="product-tag">Hoodie</span><img class="product-image product-image--portrait" src="images/camo-reserve/hoodies/desert-duck-camo-hoodie.webp" alt="Custom Independent Trading Co. Desert Duck Camo Hoodie" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">Custom Independent Trading Co. Desert Duck Camo Hoodie</div>
+          <div class="product-price-row"><div class="product-price"><small>From</small>$40</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
+
+      <a href="customize-mossy-oak-hoodie.html" data-collections="camo-reserve" class="product-card fade-in" data-product-type="hoodie" data-hat-type="none">
+        <div class="product-image-wrap"><span class="product-tag">Hoodie</span><img class="product-image" src="images/camo-collection/hoodies/mossy-oak-bottomland-hoodie.webp" alt="Custom Mossy Oak Washed Bottomland Camo Hoodie" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">Custom Mossy Oak Washed Bottomland Camo Hoodie</div>
+          <div class="product-price-row"><div class="product-price"><small>From</small>$55</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
+
+      <a href="customize-mossy-oak-longsleeve.html" data-collections="camo-reserve" class="product-card fade-in" data-product-type="shirt" data-hat-type="none">
+        <div class="product-image-wrap"><span class="product-tag">Shirt</span><img class="product-image" src="images/camo-collection/long-sleeve/mossy-oak-bottomland-longsleeve.webp" alt="Custom Mossy Oak Washed Bottomland Camo Long Sleeve T-Shirt" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">Custom Mossy Oak Washed Bottomland Camo Long Sleeve T-Shirt</div>
+          <div class="product-price-row"><div class="product-price"><small>From</small>$33</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
+
+      <a href="customize-mad-hatter-tee.html" data-collections="camo-reserve" class="product-card fade-in" data-product-type="shirt" data-hat-type="none">
+        <div class="product-image-wrap"><span class="product-tag">Shirt</span><img class="product-image" src="images/camo-collection/short-sleeve/mad-hatter-fog-camo-tee.webp" alt="Custom Mad Hatter Fog Camo Short Sleeve T-Shirt" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">Custom Mad Hatter Fog Camo Short Sleeve T-Shirt</div>
+          <div class="product-price-row"><div class="product-price"><small>From</small>$28</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
+
+      <a href="customize-mad-hatter-vintage-duck-tee.html" data-collections="camo-reserve" class="product-card fade-in" data-product-type="shirt" data-hat-type="none">
+        <div class="product-image-wrap"><span class="product-tag">Shirt</span><img class="product-image" src="images/camo-collection/short-sleeve/mad-hatter-vintage-duck-camo-tee.webp" alt="Custom Mad Hatter Vintage Duck Camo Short Sleeve T-Shirt" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">Custom Mad Hatter Vintage Duck Camo Short Sleeve T-Shirt</div>
+          <div class="product-price-row"><div class="product-price"><small>From</small>$30</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
+
+      <a href="customize-camo-beanie.html" data-collections="camo-reserve" class="product-card fade-in" data-product-type="hat" data-hat-type="none">
+        <div class="product-image-wrap"><span class="product-tag">Beanie</span><img class="product-image" src="images/camo-collection/Beanies/richardson-camo-beanies-card.webp" alt="Richardson Duck Camo Beanies in seven colors" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">Richardson Duck Camo Beanies</div>
+          <div class="product-price-row"><div class="product-price"><small>From</small>$20</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
+
+      <a href="customize-camo-tumbler.html?style=boneyard" data-collections="camo-reserve" class="product-card fade-in" data-product-type="tumbler" data-hat-type="none">
+        <div class="product-image-wrap"><span class="product-tag">Tumbler</span><img class="product-image" src="images/camo-collection/tumblers/boneyard-camo-tumbler.webp" alt="Bone Yard Camo 20 oz Stainless Steel Tumbler" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">Bone Yard Camo 20 oz Tumbler</div>
+          <div class="product-price-row"><div class="product-price"><small>From</small>$20</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
+
+      <a href="customize-camo-tumbler.html?style=blackwater" data-collections="camo-reserve" class="product-card fade-in" data-product-type="tumbler" data-hat-type="none">
+        <div class="product-image-wrap"><span class="product-tag">Tumbler</span><img class="product-image" src="images/camo-collection/tumblers/blackwater-camo-tumbler.webp" alt="Blackwater Camo 20 oz Stainless Steel Tumbler" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">Blackwater Camo 20 oz Tumbler</div>
+          <div class="product-price-row"><div class="product-price"><small>From</small>$20</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
+
+      <a href="customize-camo-tumbler.html?style=timber" data-collections="camo-reserve" class="product-card fade-in" data-product-type="tumbler" data-hat-type="none">
+        <div class="product-image-wrap"><span class="product-tag">Tumbler</span><img class="product-image" src="images/camo-collection/tumblers/timber-bark-camo-tumbler.webp" alt="Timber Bark Camo 20 oz Stainless Steel Tumbler" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">Timber Bark Camo 20 oz Tumbler</div>
+          <div class="product-price-row"><div class="product-price"><small>From</small>$20</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
+
+      <a href="customize-camo-koozie.html?style=ghostmarsh" data-collections="camo-reserve" class="product-card fade-in" data-product-type="koozie" data-hat-type="none">
+        <div class="product-image-wrap"><span class="product-tag">Koozie</span><img class="product-image" src="images/camo-collection/steel-can-koozies/ghost-marsh-camo-koozie.webp" alt="Ghost Marsh Camo Can Koozie" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">Ghost Marsh Camo Can Koozie</div>
+          <div class="product-price-row"><div class="product-price"><small>From</small>$20</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
+
+      <a href="customize-camo-koozie.html?style=timber" data-collections="camo-reserve" class="product-card fade-in" data-product-type="koozie" data-hat-type="none">
+        <div class="product-image-wrap"><span class="product-tag">Koozie</span><img class="product-image" src="images/camo-collection/steel-can-koozies/timber-bark-camo-koozie.webp" alt="Timber Bark Camo Can Koozie" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">Timber Bark Camo Can Koozie</div>
+          <div class="product-price-row"><div class="product-price"><small>From</small>$20</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
 
       <a href="product.html?id=she-prayed-tee" class="product-card fade-in" data-product-type="shirt" data-hat-type="none">
         <div class="product-image-wrap"><span class="product-tag">Shirt</span><img class="product-image" src="images/shirts/IMG_1385.png" alt="She Prayed Until the Chains Fell Off tee" loading="lazy" /></div>
@@ -148,7 +254,7 @@
       </a>
 
       <!--
-      <a href="product.html?id=salt-water-camo-hat" class="product-card fade-in" data-product-type="hat" data-hat-type="112">
+      <a href="product.html?id=salt-water-camo-hat" data-collections="camo-reserve" class="product-card fade-in" data-product-type="hat" data-hat-type="112">
         <div class="product-image-wrap"><span class="product-tag">Hat</span><img class="product-image" src="images/hats/salt-water-camo.png" alt="JP Salt Water Camo Custom Hat" loading="lazy" /></div>
         <div class="product-info">
           <div class="product-name">JP Salt Water Camo Custom Hat</div>
@@ -156,7 +262,7 @@
         </div>
       </a>
 
-      <a href="product.html?id=bottomland-camo-256p" class="product-card fade-in" data-product-type="hat" data-hat-type="256P">
+      <a href="product.html?id=bottomland-camo-256p" data-collections="camo-reserve" class="product-card fade-in" data-product-type="hat" data-hat-type="256P">
         <div class="product-image-wrap"><span class="product-tag">Hat</span><img class="product-image" src="images/hats/bottomland-camo.png" alt="Bottomland Camo Richardson 256P" loading="lazy" /></div>
         <div class="product-info">
           <div class="product-name">JP Custom Bottomland Camo Hat - Richardson 256P</div>
@@ -451,11 +557,227 @@
         </div>
       </a>
 
-      <a href="product.html?id=nc-camo-outline-112" class="product-card fade-in" data-product-type="hat" data-hat-type="112">
+      <a href="product.html?id=nc-camo-outline-112" data-collections="camo-reserve" class="product-card fade-in" data-product-type="hat" data-hat-type="112">
         <div class="product-image-wrap"><span class="product-tag">Hat</span><img class="product-image" src="images/hats/IMG_1197.png" alt="NC Camo State Outline Richardson 112" loading="lazy" /></div>
         <div class="product-info">
           <div class="product-name">NC Camo State Outline – Richardson 112</div>
           <div class="product-price-row"><div class="product-price"><small>From</small>$25</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
+
+      <a href="product.html?id=dad-leather-patch-112p" data-collections="camo-reserve" class="product-card fade-in" data-product-type="hat" data-hat-type="112P">
+        <div class="product-image-wrap"><span class="product-tag">Hat</span><img class="product-image" src="images/hats/IMG_2259.png" alt="Dad leather patch Richardson 112P Bottomland camo trucker" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">Dad Leather Patch – Richardson 112P Camo Trucker</div>
+          <div class="product-price-row"><div class="product-price"><small>From</small>$25</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
+
+      <a href="product.html?id=fish-flag-112" class="product-card fade-in" data-product-type="hat" data-hat-type="112">
+        <div class="product-image-wrap"><span class="product-tag">Hat</span><img class="product-image" src="images/hats/IMG_2260.png" alt="Fish American flag leather patch Richardson 112" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">Fish American Flag Leather Patch – Richardson 112</div>
+          <div class="product-price-row"><div class="product-price"><small>From</small>$25</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
+
+      <a href="product.html?id=ar15-rifle-112pfp" class="product-card fade-in" data-product-type="hat" data-hat-type="112PFP">
+        <div class="product-image-wrap"><span class="product-tag">Hat</span><img class="product-image" src="images/hats/IMG_2261.png" alt="AR-15 rifle leather patch Richardson 112PFP camo" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">AR-15 Rifle Leather Patch – Richardson 112PFP</div>
+          <div class="product-price-row"><div class="product-price"><small>From</small>$25</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
+
+      <a href="product.html?id=will-dance-for-diesel-112" class="product-card fade-in" data-product-type="hat" data-hat-type="112">
+        <div class="product-image-wrap"><span class="product-tag">Hat</span><img class="product-image" src="images/hats/IMG_2262.png" alt="Will Dance For Diesel leather patch Richardson 112" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">Will Dance For Diesel Leather Patch – Richardson 112</div>
+          <div class="product-price-row"><div class="product-price"><small>From</small>$25</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
+
+      <a href="product.html?id=tactical-skull-112" class="product-card fade-in" data-product-type="hat" data-hat-type="112">
+        <div class="product-image-wrap"><span class="product-tag">Hat</span><img class="product-image" src="images/hats/IMG_2264.png" alt="Tactical skull rubber PVC patch Richardson 112" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">Tactical Skull Rubber Patch – Richardson 112</div>
+          <div class="product-price-row"><div class="product-price"><small>From</small>$25</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
+
+      <a href="product.html?id=let-me-ask-my-ol-lady-patch" class="product-card fade-in" data-product-type="patch" data-hat-type="none">
+        <div class="product-image-wrap"><img class="product-image" src="images/patches/cards/IMG_2124.webp" alt="Let Me Ask My Ol' Lady leatherette patch" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">Let Me Ask My Ol' Lady Leatherette Patch</div>
+          <div class="product-price-row"><div class="product-price">$5</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
+
+      <a href="product.html?id=well-sheeyit-patch" class="product-card fade-in" data-product-type="patch" data-hat-type="none">
+        <div class="product-image-wrap"><img class="product-image" src="images/patches/cards/IMG_2125.webp" alt="Well Sheeyit leatherette patch" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">Well Sheeyit Leatherette Patch</div>
+          <div class="product-price-row"><div class="product-price">$5</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
+
+      <a href="product.html?id=fun-fact-i-dont-care-patch" class="product-card fade-in" data-product-type="patch" data-hat-type="none">
+        <div class="product-image-wrap"><img class="product-image" src="images/patches/cards/IMG_2126.webp" alt="Fun Fact I Don't Care leatherette patch" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">Fun Fact I Don't Care Leatherette Patch</div>
+          <div class="product-price-row"><div class="product-price">$5</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
+
+      <a href="product.html?id=mama-tried-patch" class="product-card fade-in" data-product-type="patch" data-hat-type="none">
+        <div class="product-image-wrap"><img class="product-image" src="images/patches/cards/IMG_2127.webp" alt="Mama Tried leatherette patch" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">Mama Tried Leatherette Patch</div>
+          <div class="product-price-row"><div class="product-price">$5</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
+
+      <a href="product.html?id=shit-show-patch" class="product-card fade-in" data-product-type="patch" data-hat-type="none">
+        <div class="product-image-wrap"><img class="product-image" src="images/patches/cards/IMG_2128.webp" alt="Shit Show leatherette patch" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">Shit Show Leatherette Patch</div>
+          <div class="product-price-row"><div class="product-price">$5</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
+
+      <a href="product.html?id=little-pecker-club-patch" class="product-card fade-in" data-product-type="patch" data-hat-type="none">
+        <div class="product-image-wrap"><img class="product-image" src="images/patches/cards/IMG_2136.webp" alt="Little Pecker Club leatherette patch" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">Little Pecker Club Leatherette Patch</div>
+          <div class="product-price-row"><div class="product-price">$5</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
+
+      <a href="product.html?id=pew-pew-madafakas-patch" class="product-card fade-in" data-product-type="patch" data-hat-type="none">
+        <div class="product-image-wrap"><img class="product-image" src="images/patches/cards/IMG_2137.webp" alt="Pew Pew Madafakas leatherette patch" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">Pew Pew Madafakas Leatherette Patch</div>
+          <div class="product-price-row"><div class="product-price">$5</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
+
+      <a href="product.html?id=dad-in-the-streets-daddy-in-the-sheets-patch" class="product-card fade-in" data-product-type="patch" data-hat-type="none">
+        <div class="product-image-wrap"><img class="product-image" src="images/patches/cards/IMG_2138.webp" alt="Dad in the Streets, Daddy in the Sheets leatherette patch" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">Dad in the Streets, Daddy in the Sheets Leatherette Patch</div>
+          <div class="product-price-row"><div class="product-price">$5</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
+
+      <a href="product.html?id=choked-a-cougar-patch" class="product-card fade-in" data-product-type="patch" data-hat-type="none">
+        <div class="product-image-wrap"><img class="product-image" src="images/patches/cards/IMG_2139.webp" alt="Never Killed a Mountain Lion But I've Choked a Cougar leatherette patch" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">Never Killed a Mountain Lion But I've Choked a Cougar Leatherette Patch</div>
+          <div class="product-price-row"><div class="product-price">$5</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
+
+      <a href="product.html?id=anatomy-of-a-pew-patch" class="product-card fade-in" data-product-type="patch" data-hat-type="none">
+        <div class="product-image-wrap"><img class="product-image" src="images/patches/cards/IMG_2240.webp" alt="Anatomy of a Pew leatherette patch" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">Anatomy of a Pew Leatherette Patch</div>
+          <div class="product-price-row"><div class="product-price">$5</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
+
+      <a href="product.html?id=blue-collar-degenerate-patch" class="product-card fade-in" data-product-type="patch" data-hat-type="none">
+        <div class="product-image-wrap"><img class="product-image" src="images/patches/cards/IMG_2241.webp" alt="Blue Collar Degenerate leatherette patch" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">Blue Collar Degenerate Leatherette Patch</div>
+          <div class="product-price-row"><div class="product-price">$5</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
+
+      <a href="product.html?id=statue-of-liberty-flag-patch" class="product-card fade-in" data-product-type="patch" data-hat-type="none">
+        <div class="product-image-wrap"><img class="product-image" src="images/patches/cards/IMG_2242.webp" alt="Statue of Liberty American flag leatherette patch" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">Statue of Liberty American Flag Leatherette Patch</div>
+          <div class="product-price-row"><div class="product-price">$5</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
+
+      <a href="product.html?id=american-flag-patch" class="product-card fade-in" data-product-type="patch" data-hat-type="none">
+        <div class="product-image-wrap"><img class="product-image" src="images/patches/cards/IMG_2243.webp" alt="American flag leatherette patch" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">American Flag Leatherette Patch</div>
+          <div class="product-price-row"><div class="product-price">$5</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
+
+      <a href="product.html?id=whiskey-bent-hell-bound-patch" class="product-card fade-in" data-product-type="patch" data-hat-type="none">
+        <div class="product-image-wrap"><img class="product-image" src="images/patches/cards/IMG_2244.webp" alt="Whiskey Bent & Hell Bound leatherette patch" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">Whiskey Bent & Hell Bound Leatherette Patch</div>
+          <div class="product-price-row"><div class="product-price">$5</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
+
+      <a href="product.html?id=excuse-me-you-look-like-you-love-me-patch" class="product-card fade-in" data-product-type="patch" data-hat-type="none">
+        <div class="product-image-wrap"><img class="product-image" src="images/patches/cards/IMG_2251.webp" alt="Excuse Me, You Look Like You Love Me leatherette patch" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">Excuse Me, You Look Like You Love Me Leatherette Patch</div>
+          <div class="product-price-row"><div class="product-price">$5</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
+
+      <a href="product.html?id=sorry-about-my-husband-patch" class="product-card fade-in" data-product-type="patch" data-hat-type="none">
+        <div class="product-image-wrap"><img class="product-image" src="images/patches/cards/IMG_2252.webp" alt="Sorry About My Husband leatherette patch" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">Sorry About My Husband Leatherette Patch</div>
+          <div class="product-price-row"><div class="product-price">$5</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
+
+      <a href="product.html?id=mama-floral-letters-patch" class="product-card fade-in" data-product-type="patch" data-hat-type="none">
+        <div class="product-image-wrap"><img class="product-image" src="images/patches/cards/IMG_2253.webp" alt="Mama floral leatherette patch" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">Mama Floral Leatherette Patch</div>
+          <div class="product-price-row"><div class="product-price">$5</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
+
+      <a href="product.html?id=deer-duck-bass-patch" class="product-card fade-in" data-product-type="patch" data-hat-type="none">
+        <div class="product-image-wrap"><img class="product-image" src="images/patches/cards/IMG_2254.webp" alt="Deer, Duck & Bass leatherette patch" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">Deer, Duck & Bass Leatherette Patch</div>
+          <div class="product-price-row"><div class="product-price">$5</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
+
+      <a href="product.html?id=deer-turkey-bass-patch" class="product-card fade-in" data-product-type="patch" data-hat-type="none">
+        <div class="product-image-wrap"><img class="product-image" src="images/patches/cards/IMG_2257.webp" alt="Deer, Turkey & Bass leatherette patch" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">Deer, Turkey & Bass Leatherette Patch</div>
+          <div class="product-price-row"><div class="product-price">$5</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
+
+      <a href="product.html?id=wiener-rides-25-cents-patch" class="product-card fade-in" data-product-type="patch" data-hat-type="none">
+        <div class="product-image-wrap"><img class="product-image" src="images/patches/cards/IMG_2130.webp" alt="Wiener Rides – Only 25¢ leatherette patch" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">Wiener Rides – Only 25¢ Leatherette Patch</div>
+          <div class="product-price-row"><div class="product-price">$5</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
+
+      <a href="product.html?id=dont-be-a-cock-sucker-patch" class="product-card fade-in" data-product-type="patch" data-hat-type="none">
+        <div class="product-image-wrap"><img class="product-image" src="images/patches/cards/IMG_2132.webp" alt="Don't Be A Cock Sucker leatherette patch" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">Don't Be A Cock Sucker Leatherette Patch</div>
+          <div class="product-price-row"><div class="product-price">$5</div><div class="product-cta">Order →</div></div>
+        </div>
+      </a>
+
+      <a href="product.html?id=guns-titties-beer-freedom-patch" class="product-card fade-in" data-product-type="patch" data-hat-type="none">
+        <div class="product-image-wrap"><img class="product-image" src="images/patches/cards/IMG_2133.webp" alt="Guns, Titties, Beer & Freedom leatherette patch" loading="lazy" /></div>
+        <div class="product-info">
+          <div class="product-name">Guns, Titties, Beer & Freedom Leatherette Patch</div>
+          <div class="product-price-row"><div class="product-price">$5</div><div class="product-cta">Order →</div></div>
         </div>
       </a>
 
@@ -476,8 +798,9 @@
   <div class="footer-main-inner">
     <div>
       <div class="footer-brand-badge">
-        <img class="footer-logo-img" src="images/J.PATS.png" alt="JP Custom Gear logo" />
+        <img class="footer-logo-img" src="images/jp-custom-gear-logo-512.webp" alt="JP Custom Gear logo" />
         <div class="footer-brand-text"><strong>JP Custom</strong><small>Gear</small></div>
+        <p class="footer-built jp-d-l">Built for <em>you.</em></p>
       </div>
       <p class="footer-brand-desc">Custom headwear built with care. From one hat to a hundred — made right.</p>
       <div class="footer-socials">
@@ -495,6 +818,7 @@
         <li><a href="shop-caution-may-offend.html">Caution: May Offend</a></li>
         <li><a href="shop-foam-side.html">The Foam Side</a></li>
         <li><a href="shop-forever-favorites.html">Forever Favorites</a></li>
+        <li><a href="shop-camo-reserve.html">The Camo Reserve</a></li>
       </ul>
     </div>
     <div class="footer-col">

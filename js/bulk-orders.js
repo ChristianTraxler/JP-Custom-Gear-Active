@@ -202,6 +202,9 @@
 
   let currentObjectURL = null;
 
+  // Uploads the chosen file to Vercel Blob (js/logo-upload.js); the link goes in the request text.
+  const logoUpload = LogoUpload.attach({ input: fileInput, submitButton: document.getElementById('bulk-submit') });
+
   function setThumbImage(file) {
     if (currentObjectURL) { URL.revokeObjectURL(currentObjectURL); currentObjectURL = null; }
     const isImage = /^image\//.test(file.type) || /\.(png|jpe?g|svg)$/i.test(file.name);
@@ -262,6 +265,7 @@
 
   function resetFile() {
     fileInput.value = '';
+    logoUpload.reset();
     fileText.textContent = 'Choose file…';
     fileClear.style.display = 'none';
     logoThumb.style.display = 'none';
@@ -314,6 +318,12 @@
   const form = document.getElementById('bulkForm');
   form.addEventListener('submit', (e) => {
     e.preventDefault();
+
+    // Hold the request while the design file is uploading or if its upload failed.
+    if (logoUpload.blockReason()) {
+      fileInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
 
     // Read all field values into state
     state.designDesc = document.getElementById('bulk-design-desc').value.trim();
@@ -391,7 +401,8 @@
 
     lines.push('── Design ──');
     lines.push(state.designDesc ? `Description: ${state.designDesc}` : 'Description: (none)');
-    lines.push(state.logoFilename ? `Uploaded File: ${state.logoFilename} (will be sent separately — see note below)` : 'Uploaded File: (none)');
+    const logoUrl = logoUpload.getUrl();
+    lines.push(state.logoFilename ? `Uploaded File: ${state.logoFilename}` + (logoUrl ? `\nDownload: ${logoUrl}` : ' (will be sent separately — see note below)') : 'Uploaded File: (none)');
     lines.push('');
 
     if (state.org || state.deadline || state.orgType) {
@@ -406,7 +417,7 @@
       lines.push('── Notes ──', state.notes, '');
     }
 
-    if (state.logoFilename) {
+    if (state.logoFilename && !logoUrl) {
       lines.push('── Important ──',
         `Please reply to this email with the design file (${state.logoFilename}) attached so we can build your proof.`);
     }

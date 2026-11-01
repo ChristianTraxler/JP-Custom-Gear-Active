@@ -22,6 +22,93 @@ test('real catalog prices a custom-tumbler cart item (regression for unknown pro
   assert.equal(lineItems[0].price_data.unit_amount, 2000, 'base custom tumbler is $20');
 });
 
+test('camo koozie line items: price and name per pattern', () => {
+  const cases = [
+    ['Ghost Marsh Camo', { Blank: 'Yes' }, 2000, 'Ghost Marsh Camo Can Koozie'],
+    ['Ghost Marsh Camo', { Text: 'SMITH' }, 2500, 'Ghost Marsh Camo Can Koozie'],
+    ['Timber Bark Camo', { Blank: 'Yes' }, 2000, 'Timber Bark Camo Can Koozie'],
+    ['Timber Bark Camo', { 'Logo Filename': 'a.png' }, 2500, 'Timber Bark Camo Can Koozie']
+  ];
+  for (const [pattern, extra, cents, name] of cases) {
+    const { lineItems } = buildLineItems({
+      items: [{ productId: 'custom-camo-koozie', quantity: 1, customizations: Object.assign({ Pattern: pattern }, extra) }],
+      catalog: PRODUCTS,
+      shippingCents: 800
+    });
+    assert.equal(lineItems[0].price_data.unit_amount, cents);
+    assert.equal(lineItems[0].price_data.product_data.name, name);
+  }
+});
+
+test('mossy oak hoodie line item: price and name', () => {
+  const cases = [[{ Size: 'L', Blank: 'Yes' }, 5500], [{ Size: 'L', Placement: 'Back', Text: 'SMITH' }, 6000]];
+  for (const [customizations, cents] of cases) {
+    const { lineItems } = buildLineItems({
+      items: [{ productId: 'custom-mossy-oak-hoodie', quantity: 1, customizations }],
+      catalog: PRODUCTS,
+      shippingCents: 800
+    });
+    assert.equal(lineItems[0].price_data.unit_amount, cents);
+    assert.equal(lineItems[0].price_data.product_data.name, 'Custom Mossy Oak Washed Bottomland Camo Hoodie');
+  }
+});
+
+test('mossy oak long sleeve line item: price and name', () => {
+  const cases = [[{ Size: 'L', Blank: 'Yes' }, 3300], [{ Size: 'L', Placement: 'Back', Text: 'SMITH' }, 3800]];
+  for (const [customizations, cents] of cases) {
+    const { lineItems } = buildLineItems({
+      items: [{ productId: 'custom-mossy-oak-longsleeve', quantity: 1, customizations }],
+      catalog: PRODUCTS,
+      shippingCents: 800
+    });
+    assert.equal(lineItems[0].price_data.unit_amount, cents);
+    assert.equal(lineItems[0].price_data.product_data.name, 'Custom Mossy Oak Washed Bottomland Camo Long Sleeve T-Shirt');
+  }
+});
+
+test('mad hatter tee line item: price and name', () => {
+  const cases = [[{ Size: 'L', Blank: 'Yes' }, 2800], [{ Size: 'L', Placement: 'Front chest design', Text: 'SMITH' }, 3300]];
+  for (const [customizations, cents] of cases) {
+    const { lineItems } = buildLineItems({
+      items: [{ productId: 'custom-mad-hatter-tee', quantity: 1, customizations }],
+      catalog: PRODUCTS,
+      shippingCents: 800
+    });
+    assert.equal(lineItems[0].price_data.unit_amount, cents);
+    assert.equal(lineItems[0].price_data.product_data.name, 'Custom Mad Hatter Fog Camo Short Sleeve T-Shirt');
+  }
+});
+
+test('mad hatter vintage duck tee line item: price and name', () => {
+  const cases = [[{ Size: 'L', Blank: 'Yes' }, 3000], [{ Size: 'L', Placement: 'Front chest design', Text: 'SMITH' }, 3500]];
+  for (const [customizations, cents] of cases) {
+    const { lineItems } = buildLineItems({
+      items: [{ productId: 'custom-mad-hatter-vintage-duck-tee', quantity: 1, customizations }],
+      catalog: PRODUCTS,
+      shippingCents: 800
+    });
+    assert.equal(lineItems[0].price_data.unit_amount, cents);
+    assert.equal(lineItems[0].price_data.product_data.name, 'Custom Mad Hatter Vintage Duck Camo Short Sleeve T-Shirt');
+  }
+});
+
+test('camo beanie line items: price and name per color', () => {
+  const cases = [
+    ['Americana', { Blank: 'Yes' }, 2000],
+    ['Sable', { 'Customization type': 'Custom leather patch', Text: 'SMITH' }, 2500],
+    ['Blizzard', { 'Customization type': 'Business logo', 'Logo Filename': 'a.png' }, 2500]
+  ];
+  for (const [color, extra, cents] of cases) {
+    const { lineItems } = buildLineItems({
+      items: [{ productId: 'custom-camo-beanie', quantity: 1, customizations: Object.assign({ Pattern: color }, extra) }],
+      catalog: PRODUCTS,
+      shippingCents: 800
+    });
+    assert.equal(lineItems[0].price_data.unit_amount, cents);
+    assert.equal(lineItems[0].price_data.product_data.name, 'Richardson Duck Camo Beanie - ' + color);
+  }
+});
+
 test('checkout computes each custom builder price from its selections', () => {
   const cases = [
     [{ productId: 'custom-tumbler', quantity: 1, customizations: { Backing: 'Wraparound (360°)' } }, 2500],

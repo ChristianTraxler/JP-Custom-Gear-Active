@@ -3,13 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="images/J.PATS.png" />
-    <link rel="apple-touch-icon" href="images/J.PATS.png" />
+    <link rel="icon" type="image/png" href="images/jp-custom-gear-icon-64.png" />
+    <link rel="apple-touch-icon" href="images/jp-custom-gear-icon-180.png" />
     <title>JP Custom Gear | Built for You</title>
     <meta name="description" content="Custom hats for first responders, hunters, and everyday wear. Starting at $25. Bulk discounts available. Made in the USA." />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/default.css" />
     <link rel="stylesheet" href="css/styles.css?v=20260521" />
     <link rel="stylesheet" href="css/responsive.css" />
@@ -27,8 +24,10 @@
         });
       }
     </script>
-  </head>
-  <body>
+  <link rel="stylesheet" href="css/jp-redesign.css" />
+<link rel="stylesheet" href="css/jp-pages.css" />
+</head>
+  <body class="jp-home">
 
     <!-- ANNOUNCEMENT BAR -->
     <div class="announce">Custom orders ship in 5–7 business days &nbsp;·&nbsp; Bulk discounts available — contact us</div>
@@ -37,14 +36,14 @@
     <header class="navbar">
       <div class="nav-inner">
         <a href="#hero" class="nav-logo">
-          <img class="nav-logo-img" src="images/J.PATS.png" alt="JP Custom Gear logo" />
+          <img class="nav-logo-img" src="images/jp-custom-gear-logo-256.webp" alt="JP Custom Gear logo" />
           <div class="nav-logo-text">
-            <strong>JP</strong>
-            <small>Custom Gear</small>
+            <strong>JP Custom</strong>
+            <small>Gear · Est. 2024</small>
           </div>
         </a>
         <nav class="nav-links">
-          <a href="index.html">Home</a>
+          <a href="index.html" aria-current="page">Home</a>
           <a href="shop.html">Shop</a>
           <a href="#onduty">On Duty</a>
           <a href="custom-work.html">Custom Work</a>
@@ -80,7 +79,7 @@
         </form>
       </div>
       <nav class="drawer-nav">
-        <a href="index.html">Home →</a>
+        <a href="index.html" aria-current="page">Home →</a>
         <a href="shop.html">Shop →</a>
         <a href="#onduty">On Duty →</a>
         <a href="custom-work.html">Custom Work →</a>
@@ -91,13 +90,18 @@
     </div>
 
     <!-- HERO -->
-    <section class="hero" id="hero">
-      <video class="hero-video" autoplay muted playsinline preload="auto" src="hero-bg.mp4"></video>
+    <section class="hero jp-photo-band jp-dark jp-grain" id="hero">
+      <picture class="hero-picture">
+        <source media="(min-width: 768px)" srcset="images/redesign/hero-wide.webp" />
+        <img src="images/redesign/hero-tall.webp" alt="A laser engraver burning a design into a leatherette hex patch, trucker hats hanging on the shop wall behind it" width="730" height="1100" fetchpriority="high" />
+      </picture>
+      <div class="jp-shade-hero"></div>
+      <!-- Old hero video stays in the page (an inline script below still looks it up); CSS hides it. -->
       <div class="hero-video-overlay"></div>
       <div class="hero-grain"></div>
       <div class="hero-glow"></div>
-      <div class="hero-inner">
-        <div class="fade-in">
+      <div class="hero-inner jp-wrap">
+        <div class="hero-main fade-in">
           <div class="hero-stars">
             <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
             <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
@@ -106,17 +110,17 @@
             <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
             <span>Handcrafted in the USA</span>
           </div>
-          <div class="hero-eyebrow">JP Custom Gear</div>
-          <h1 class="font-display">Built for<br><em>You.</em></h1>
-          <p class="hero-desc">Custom hats for first responders, hunters, everyday wear, and everything in between. One hat or a hundred — we craft each one with care.</p>
-          <div class="hero-btns">
-            <a href="shop.html" class="btn-primary">Shop Collections →</a>
-            <a href="contact.html" class="btn-outline">Start Custom Order</a>
+          <div class="hero-eyebrow jp-label jp-rise">Leather · Laser · Made in the USA</div>
+          <h1 class="font-display jp-d-xl hero-title"><span class="hero-line jp-rise">Hats that earn</span> <span class="hero-line hero-line-2 jp-rise"><span>their</span> <svg class="jp-keep-patch" viewBox="-19.2 -19.2 358.4 221.25714285714287" role="img" aria-label="Keep"><g><defs><filter id="texR0" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="7" result="n"></feTurbulence><feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.22 0" result="a"></feColorMatrix><feComposite in="a" in2="SourceGraphic" operator="in" result="t"></feComposite><feMerge><feMergeNode in="SourceGraphic"></feMergeNode><feMergeNode in="t"></feMergeNode></feMerge></filter><radialGradient id="sheenR0" cx="38%" cy="28%" r="80%"><stop offset="0" stop-color="#fff" stop-opacity="0.2"></stop><stop offset="0.55" stop-color="#fff" stop-opacity="0"></stop><stop offset="1" stop-color="#000" stop-opacity="0.22"></stop></radialGradient><filter id="engR0" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -0.33 -0.33 -0.34 1 0" result="a"></feColorMatrix><feFlood flood-color="#2a1a10"></feFlood><feComposite in2="a" operator="in"></feComposite></filter><pattern id="weaveR0" width="4" height="4" patternUnits="userSpaceOnUse"><path d="M0 1 H4" stroke="#fff" stroke-opacity="0.1" stroke-width="0.8"></path></pattern><mask id="maskR0" maskUnits="userSpaceOnUse"><rect class="jp-burn-mask" x="0" y="0" width="320" height="182.85714285714286" fill="#fff"></rect></mask><filter id="glowR0" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="5.485714285714286"></feGaussianBlur></filter></defs><path d="M8.23,91.43 L68.94,8.23 L251.06,8.23 L311.77,91.43 L251.06,174.63 L68.94,174.63 Z" transform="translate(2.742857142857143 6.4)" fill="#000" fill-opacity="0.28" stroke="#000" stroke-opacity="0.28" stroke-width="16.457142857142856" stroke-linejoin="round"></path><path d="M8.23,91.43 L68.94,8.23 L251.06,8.23 L311.77,91.43 L251.06,174.63 L68.94,174.63 Z" fill="#b0713e" stroke="#b0713e" stroke-width="16.457142857142856" stroke-linejoin="round" filter="url(#texR0)"></path><path d="M8.23,91.43 L68.94,8.23 L251.06,8.23 L311.77,91.43 L251.06,174.63 L68.94,174.63 Z" fill="url(#sheenR0)" stroke="url(#sheenR0)" stroke-width="16.457142857142856" stroke-linejoin="round" opacity="0.75"></path><path d="M8.23,91.43 L68.94,8.23 L251.06,8.23 L311.77,91.43 L251.06,174.63 L68.94,174.63 Z" fill="none" stroke="#7a4a24" stroke-width="19.017142857142854" stroke-opacity="0.5" stroke-linejoin="round"></path><path d="M20.71,91.43 L76.43,20.71 L243.57,20.71 L299.29,91.43 L243.57,162.15 L76.43,162.15 Z" fill="none" stroke="#2a1a10" stroke-opacity="0.78" stroke-width="2.9257142857142857" stroke-linejoin="round"></path><g mask="url(#maskR0)"><g><g><text x="160" y="94.38241758241759" text-anchor="middle" dominant-baseline="central" font-size="65.64102564102565" style="font-family:&#x27;Archivo&#x27;, &#x27;Helvetica Neue&#x27;, Arial, sans-serif;font-weight:800;font-stretch:125%;letter-spacing:0.03em" fill="rgba(255,240,220,0.22)">KEEP</text><text x="160" y="91.42857142857143" text-anchor="middle" dominant-baseline="central" font-size="65.64102564102565" style="font-family:&#x27;Archivo&#x27;, &#x27;Helvetica Neue&#x27;, Arial, sans-serif;font-weight:800;font-stretch:125%;letter-spacing:0.03em" fill="#2a1a10" fill-opacity="0.9" stroke="none" stroke-width="0">KEEP</text></g></g></g><g class="jp-ember" style="--travel:268.8px"><circle cx="25.6" cy="91.42857142857143" r="12.8" fill="#ff8a3d" filter="url(#glowR0)"></circle><circle cx="25.6" cy="91.42857142857143" r="3.2914285714285714" fill="#fff4dc"></circle></g></g></svg></span></h1>
+          <p class="hero-desc jp-lede jp-rise">Laser-engraved leatherette patch hats and custom gear for crews, departments, hunters and everybody in between. One hat or a hundred, every one made to order.</p>
+          <div class="hero-btns jp-rise">
+            <a href="shop.html" class="btn-primary jp-btn jp-btn-patch">Shop Collections →</a>
+            <a href="contact.html" class="btn-outline jp-btn jp-btn-line">Start Custom Order</a>
           </div>
           <div class="hero-trust">
-            <div class="hero-trust-item"><strong>$25</strong><span>Starting price</span></div>
-            <div class="hero-trust-item"><strong>Bulk</strong><span>Discounts available</span></div>
-            <div class="hero-trust-item"><strong>USA</strong><span>Made here</span></div>
+            <div class="hero-trust-item"><strong>$25</strong><span class="jp-spec">Starting price</span></div>
+            <div class="hero-trust-item"><strong>Bulk</strong><span class="jp-spec">Discounts available</span></div>
+            <div class="hero-trust-item"><strong>USA</strong><span class="jp-spec">Made here</span></div>
           </div>
         </div>
         <div class="hero-badge-wrap fade-in fade-in-delay-2">
@@ -137,32 +141,32 @@
     </section>
 
     <!-- STATS -->
-    <section class="stats">
+    <section class="stats jp-light">
       <div class="stats-grain"></div>
-      <div class="stats-inner">
+      <div class="stats-inner jp-wrap">
         <div class="stats-head fade-in">
-          <div class="eyebrow">Forged with Pride</div>
-          <p>Numbers that speak for themselves</p>
+          <div class="eyebrow jp-label">Forged with Pride</div>
+          <p class="jp-d-m">Numbers that speak for themselves</p>
         </div>
         <div class="stats-grid">
           <div class="stat-cell fade-in">
             <div class="stat-num" data-target="500" data-suffix="+">0+</div>
-            <div class="stat-label">Custom Hats Made</div>
+            <div class="stat-label jp-spec">Custom Hats Made</div>
             <div class="stat-sub">and counting</div>
           </div>
           <div class="stat-cell fade-in fade-in-delay-1">
             <div class="stat-num" data-target="12" data-suffix="+">0+</div>
-            <div class="stat-label">Agency Partners</div>
+            <div class="stat-label jp-spec">Agency Partners</div>
             <div class="stat-sub">Law enforcement &amp; fire</div>
           </div>
           <div class="stat-cell fade-in fade-in-delay-2">
             <div class="stat-num" data-target="4" data-suffix="">0</div>
-            <div class="stat-label">Core Collections</div>
+            <div class="stat-label jp-spec">Core Collections</div>
             <div class="stat-sub">Something for everyone</div>
           </div>
           <div class="stat-cell fade-in fade-in-delay-3">
             <div class="stat-num" data-target="100" data-suffix="%">0%</div>
-            <div class="stat-label">USA Crafted</div>
+            <div class="stat-label jp-spec">USA Crafted</div>
             <div class="stat-sub">Proud of it</div>
           </div>
         </div>
@@ -170,21 +174,36 @@
     </section>
 
     <!-- FEATURED BUILD -->
-    <section class="featured-build" id="featured-build">
-      <div class="featured-build-inner">
+    <section class="featured-build jp-dark" id="featured-build">
+      <div class="featured-build-inner jp-wrap">
         <div class="featured-build-text fade-in">
-          <div class="section-eyebrow featured-build-eyebrow">
+          <div class="section-eyebrow featured-build-eyebrow jp-label">
             <div class="line"></div>
             <span>Featured Build</span>
           </div>
-          <h2 class="section-title featured-build-title">Built for <em>Evergreene</em> Excavation.</h2>
-          <p class="featured-build-story">
-            A working excavation crew needed gear that could earn its keep — long days in the cab, then straight into town without missing a beat. We built this run from the ground up: bark camo trucker, custom leatherette hex patch, every stitch dialed in. Real gear for real work.
+          <h2 class="section-title featured-build-title jp-d-l">Built for <em>Evergreene</em> Excavation.</h2>
+          <p class="featured-build-story jp-lede jp-muted">
+            A working excavation crew needed gear that could earn its keep: long days in the cab, then straight into town without missing a beat. We built this run from the ground up: bark camo trucker, custom leatherette hex patch, every stitch dialed in. Real gear for real work.
           </p>
+          <div class="featured-build-ticket jp-ticket">
+            <div class="jp-ticket-row"><span>Client</span><span>Evergreene Excavation</span></div>
+            <div class="jp-ticket-row"><span>Trade</span><span>Land Clearing &amp; Excavation</span></div>
+            <div class="jp-ticket-row"><span>Hat</span><span>Bark camo trucker</span></div>
+            <div class="jp-ticket-row"><span>Patch</span><span>Custom Leatherette Patch</span></div>
+            <div class="jp-ticket-row"><span>Status</span><span>Made to Order</span></div>
+          </div>
+          <div class="featured-build-action fade-in fade-in-delay-2">
+            <div class="why-badges featured-build-badges">
+              <span class="why-badge">Land Clearing &amp; Excavation</span>
+              <span class="why-badge">Custom Leatherette Patch</span>
+              <span class="why-badge">Made to Order</span>
+            </div>
+            <a href="custom-work.html" class="btn-primary featured-build-cta jp-btn jp-btn-patch">Start Your Custom Build →</a>
+          </div>
         </div>
 
-        <div class="featured-build-gallery fade-in fade-in-delay-1">
-          <div class="fb-photo fb-photo-hero">
+        <div class="featured-build-gallery jp-rail fade-in fade-in-delay-1">
+          <div class="fb-photo fb-photo-hero jp-frame">
             <picture>
               <source type="image/webp" srcset="images/hats/product-showcase/web/IMG_4757.webp" />
               <img src="images/hats/product-showcase/web/IMG_4757.jpg" alt="Evergreene Excavation bark camo trucker hat with leatherette hex patch, front view" width="1206" height="1378" loading="lazy" />
@@ -192,7 +211,7 @@
             <div class="coll-grain"></div>
             <div class="coll-shine"></div>
           </div>
-          <div class="fb-photo fb-photo-mood">
+          <div class="fb-photo fb-photo-mood jp-frame">
             <picture>
               <source type="image/webp" srcset="images/hats/product-showcase/web/IMG_0677.webp" />
               <img src="images/hats/product-showcase/web/IMG_0677.jpg" alt="Evergreene Excavation hat resting on excavator equipment at sunset in the woods" width="1206" height="1579" loading="lazy" />
@@ -200,7 +219,7 @@
             <div class="coll-grain"></div>
             <div class="coll-shine"></div>
           </div>
-          <div class="fb-photo fb-photo-action">
+          <div class="fb-photo fb-photo-action jp-frame">
             <picture>
               <source type="image/webp" srcset="images/hats/product-showcase/web/IMG_4754.webp" />
               <img src="images/hats/product-showcase/web/IMG_4754.jpg" alt="Crew member in the field clearing trees, wearing the Evergreene Excavation hat" width="1206" height="1378" loading="lazy" />
@@ -208,7 +227,7 @@
             <div class="coll-grain"></div>
             <div class="coll-shine"></div>
           </div>
-          <div class="fb-photo fb-photo-human">
+          <div class="fb-photo fb-photo-human jp-frame">
             <picture>
               <source type="image/webp" srcset="images/hats/product-showcase/web/IMG_4756.webp" />
               <img src="images/hats/product-showcase/web/IMG_4756.jpg" alt="Father and child in an excavator cab, dad wearing the Evergreene Excavation bark camo hat" width="1206" height="1378" loading="lazy" />
@@ -217,125 +236,162 @@
             <div class="coll-shine"></div>
           </div>
         </div>
-
-        <div class="featured-build-action fade-in fade-in-delay-2">
-          <div class="why-badges featured-build-badges">
-            <span class="why-badge">Land Clearing &amp; Excavation</span>
-            <span class="why-badge">Custom Leatherette Patch</span>
-            <span class="why-badge">Made to Order</span>
-          </div>
-          <a href="custom-work.html" class="btn-primary featured-build-cta">Start Your Custom Build →</a>
-        </div>
       </div>
     </section>
 
     <!-- FEATURED COLLECTIONS (styled cards) -->
-    <section class="collections-featured">
-      <div class="collections-inner">
-        <div class="section-eyebrow fade-in">
-          <div class="line"></div>
-          <span>Dive Deeper</span>
-          <div class="line line-r"></div>
+    <section class="collections-featured jp-light">
+      <div class="collections-inner jp-wrap">
+        <div class="collections-head">
+          <div class="collections-head-main">
+            <div class="section-eyebrow fade-in jp-label">
+              <div class="line"></div>
+              <span>Dive Deeper</span>
+              <div class="line line-r"></div>
+            </div>
+            <h2 class="section-title fade-in jp-d-l">Seven collections. <em>One standard of work.</em></h2>
+          </div>
+          <div class="collections-head-side fade-in">
+            <p class="section-desc jp-lede jp-muted">Every hat tells a story. Pick yours.</p>
+            <a href="shop.html" class="jp-btn jp-btn-line collections-all">Shop all collections <span class="jp-arr">→</span></a>
+          </div>
         </div>
-        <h2 class="section-title fade-in" style="color:var(--cream);">Featured <em style="color:var(--amber);">Picks</em></h2>
-        <p class="section-desc fade-in" style="color:rgba(237,229,208,0.6);">Every hat tells a story. Pick yours.</p>
 
         <div class="coll-card-grid">
 
-          <a href="shop-woods-water.html" class="coll-card fade-in" style="background:#3D4A35;">
-            <img class="coll-image" src="images/hats/local-hooker.png" alt="Woods & Water collection" loading="lazy" />
-            <div class="coll-grain"></div><div class="coll-shine"></div>
-            <div class="coll-bottom-line" style="background:#5C6B52;"></div>
+          <a href="shop-camo-reserve.html" class="coll-card coll-tile coll-tile-lg jp-card fade-in">
+            <div class="coll-frame jp-frame">
+              <img class="coll-image" src="images/camo-reserve/hoodies/duck-camo-hoodie.webp" alt="The Camo Reserve collection" loading="lazy" />
+              <div class="coll-grain"></div><div class="coll-shine"></div>
+            </div>
+            <div class="coll-bottom-line"></div>
             <div class="coll-content">
               <div class="coll-top">
-                <span class="coll-tag" style="background:#5C6B52;color:#3D4A35;">Outdoors</span>
+                <span class="coll-tag jp-spec">Camo</span>
               </div>
               <div class="coll-body">
-                <div class="coll-name">Woods &amp; Water</div>
+                <div class="coll-name jp-d-s">The Camo Reserve</div>
+                <div class="coll-desc">Camo gear for the field and every day.</div>
+                <div class="coll-cta jp-label">Shop Now →</div>
+              </div>
+            </div>
+          </a>
+
+          <a href="shop-woods-water.html" class="coll-card coll-tile coll-tile-md jp-card fade-in">
+            <div class="coll-frame jp-frame">
+              <img class="coll-image" src="images/hats/local-hooker.png" alt="Woods & Water collection" loading="lazy" />
+              <div class="coll-grain"></div><div class="coll-shine"></div>
+            </div>
+            <div class="coll-bottom-line"></div>
+            <div class="coll-content">
+              <div class="coll-top">
+                <span class="coll-tag jp-spec">Outdoors</span>
+              </div>
+              <div class="coll-body">
+                <div class="coll-name jp-d-s">Woods &amp; Water</div>
                 <div class="coll-desc">For the hunter, angler, and everyone who answers to the wild.</div>
-                <div class="coll-cta" style="color:#5C6B52;">Shop Now →</div>
+                <div class="coll-cta jp-label">Shop Now →</div>
               </div>
             </div>
           </a>
 
-          <a href="shop-protectors-patriots.html" class="coll-card fade-in fade-in-delay-1" style="background:#2C1A0E;">
-            <img class="coll-image" src="images/hats/protectors-patriots.png" alt="Protectors & Patriots collection" loading="lazy" />
-            <div class="coll-grain"></div><div class="coll-shine"></div>
-            <div class="coll-bottom-line" style="background:#B8862E;"></div>
+          <a href="shop-protectors-patriots.html" class="coll-card coll-tile coll-tile-md jp-card fade-in fade-in-delay-1">
+            <div class="coll-frame jp-frame jp-cutout">
+              <img class="coll-image" src="images/hats/protectors-patriots.png" alt="Protectors & Patriots collection" loading="lazy" />
+              <div class="coll-grain"></div><div class="coll-shine"></div>
+            </div>
+            <div class="coll-bottom-line"></div>
             <div class="coll-content">
               <div class="coll-top">
-                <span class="coll-tag" style="background:#B8862E;color:#2C1A0E;">Patriot</span>
+                <span class="coll-tag jp-spec">Patriot</span>
               </div>
               <div class="coll-body">
-                <div class="coll-name">Protectors &amp; Patriots</div>
+                <div class="coll-name jp-d-s">Protectors &amp; Patriots</div>
                 <div class="coll-desc">Hats that carry a message. Wear your values, not just your head.</div>
-                <div class="coll-cta" style="color:#B8862E;">Shop Now →</div>
+                <div class="coll-cta jp-label">Shop Now →</div>
               </div>
             </div>
           </a>
 
-          <a href="shop-infinity-her.html" class="coll-card fade-in fade-in-delay-2" style="background:#4A2410;">
-            <img class="coll-image" src="images/hats/mimi-her-cheetah.png" alt="Infinity Her collection" loading="lazy" />
-            <div class="coll-grain"></div><div class="coll-shine"></div>
-            <div class="coll-bottom-line" style="background:#C2622A;"></div>
+          <a href="shop-infinity-her.html" class="coll-card coll-tile coll-tile-md jp-card fade-in fade-in-delay-2">
+            <div class="coll-frame jp-frame">
+              <img class="coll-image" src="images/hats/mimi-her-cheetah.png" alt="Infinity Her collection" loading="lazy" />
+              <div class="coll-grain"></div><div class="coll-shine"></div>
+            </div>
+            <div class="coll-bottom-line"></div>
             <div class="coll-content">
               <div class="coll-top">
-                <span class="coll-tag" style="background:#C2622A;color:#4A2410;">Women's</span>
+                <span class="coll-tag jp-spec">Women's</span>
               </div>
               <div class="coll-body">
-                <div class="coll-name">Infinity Her</div>
-                <div class="coll-desc">Designed for the women who hold it all together — and look good doing it.</div>
-                <div class="coll-cta" style="color:#C2622A;">Shop Now →</div>
+                <div class="coll-name jp-d-s">Infinity Her</div>
+                <div class="coll-desc">Designed for the women who hold it all together, and look good doing it.</div>
+                <div class="coll-cta jp-label">Shop Now →</div>
               </div>
             </div>
           </a>
 
-          <a href="shop-caution-may-offend.html" class="coll-card fade-in" style="background:#3A2010;">
-            <img class="coll-image" src="images/hats/same-asshole.png" alt="Caution: May Offend collection" loading="lazy" />
-            <div class="coll-grain"></div><div class="coll-shine"></div>
-            <div class="coll-bottom-line" style="background:#D4A853;"></div>
-            <div class="coll-content">
-              <div class="coll-top">
-                <span class="coll-tag" style="background:#D4A853;color:#3A2010;">Bold</span>
-              </div>
-              <div class="coll-body">
-                <div class="coll-name">Caution: May Offend</div>
-                <div class="coll-desc">Unapologetic. Bold. Not for the faint of heart.</div>
-                <div class="coll-cta" style="color:#D4A853;">Shop Now →</div>
-              </div>
+          <a href="shop-foam-side.html" class="coll-card coll-tile coll-tile-sm jp-card fade-in fade-in-delay-1">
+            <div class="coll-frame jp-frame jp-cutout">
+              <img class="coll-image" src="images/shirts/foam-side.png" alt="JP Shirt Collection" loading="lazy" />
+              <div class="coll-grain"></div><div class="coll-shine"></div>
             </div>
-          </a>
-
-          <a href="shop-foam-side.html" class="coll-card fade-in fade-in-delay-1" style="background:#354530;">
-            <img class="coll-image" src="images/shirts/foam-side.png" alt="JP Shirt Collection" loading="lazy" />
-            <div class="coll-grain"></div><div class="coll-shine"></div>
-            <div class="coll-bottom-line" style="background:#8B9E7E;"></div>
+            <div class="coll-bottom-line"></div>
             <div class="coll-content">
               <div class="coll-top">
-                <span class="coll-tag" style="background:#8B9E7E;color:#354530;">Shirts</span>
+                <span class="coll-tag jp-spec">Shirts</span>
               </div>
               <div class="coll-body">
-                <div class="coll-name">JP Shirt Collection</div>
+                <div class="coll-name jp-d-s">JP Shirt Collection</div>
                 <div class="coll-desc">Comfort-color tees with statement graphics. Everyday wear that says something.</div>
-                <div class="coll-cta" style="color:#8B9E7E;">Shop Now →</div>
+                <div class="coll-cta jp-label">Shop Now →</div>
               </div>
             </div>
           </a>
 
-          <a href="shop-forever-favorites.html" class="coll-card fade-in fade-in-delay-2" style="background:#2C1A0E;">
-            <img class="coll-image" src="images/hats/little-debbie.png" alt="Forever Favorites collection" loading="lazy" />
-            <div class="coll-grain"></div><div class="coll-shine"></div>
-            <div class="coll-bottom-line" style="background:#B8862E;"></div>
+          <a href="shop-forever-favorites.html" class="coll-card coll-tile coll-tile-sm jp-card fade-in fade-in-delay-2">
+            <div class="coll-frame jp-frame">
+              <img class="coll-image" src="images/hats/little-debbie.png" alt="Forever Favorites collection" loading="lazy" />
+              <div class="coll-grain"></div><div class="coll-shine"></div>
+            </div>
+            <div class="coll-bottom-line"></div>
             <div class="coll-content">
               <div class="coll-top">
-                <span class="coll-tag" style="background:#B8862E;color:#2C1A0E;">Essentials</span>
+                <span class="coll-tag jp-spec">Essentials</span>
               </div>
               <div class="coll-body">
-                <div class="coll-name">Forever Favorites</div>
+                <div class="coll-name jp-d-s">Forever Favorites</div>
                 <div class="coll-desc">The classics that never quit. Fan favorites you keep coming back to.</div>
-                <div class="coll-cta" style="color:#B8862E;">Shop Now →</div>
+                <div class="coll-cta jp-label">Shop Now →</div>
               </div>
             </div>
+          </a>
+
+          <a href="shop-caution-may-offend.html" class="coll-card coll-tile coll-tile-caution jp-darker jp-card fade-in">
+            <div class="coll-content">
+              <div class="coll-top">
+                <span class="coll-tag jp-spec">Bold</span>
+              </div>
+              <div class="coll-body">
+                <div class="coll-name jp-d-m">Caution: May Offend</div>
+                <div class="coll-desc">Unapologetic. Bold. Not for the faint of heart.</div>
+                <div class="coll-cta jp-label">Shop Now →</div>
+              </div>
+            </div>
+            <div class="coll-teasers">
+              <div class="coll-frame jp-frame">
+                <img class="coll-image" src="images/hats/same-asshole.png" alt="Caution: May Offend collection" loading="lazy" />
+                <div class="coll-grain"></div><div class="coll-shine"></div>
+              </div>
+              <div class="coll-frame jp-frame">
+                <img class="coll-image" src="images/hats/little-pecker.png" alt="" loading="lazy" />
+              </div>
+              <div class="coll-frame jp-frame">
+                <img class="coll-image" src="images/hats/my-wife-is-psychotic.png" alt="" loading="lazy" />
+              </div>
+              <div class="jp-tape" aria-hidden="true"><span>Caution · May offend · Caution · May offend</span></div>
+            </div>
+            <div class="coll-bottom-line"></div>
           </a>
 
         </div>
@@ -343,162 +399,186 @@
     </section>
 
     <!-- WHY US -->
-    <section class="why">
-      <div class="why-inner">
-        <div class="fade-in">
-          <div class="eyebrow" style="font-family:'Bebas Neue';color:var(--brass);font-size:20px;letter-spacing:0.2em;margin-bottom:10px;">Why JP?</div>
-          <h2 class="why-left" style="font-family:'Playfair Display';font-weight:900;font-size:clamp(30px,4vw,46px);color:var(--tobacco);line-height:1.15;margin-bottom:20px;">JP <em style="font-style:normal;color:var(--walnut)">vs.</em><br>Everyone Else</h2>
-          <p style="color:rgba(107,63,34,0.65);font-size:15px;line-height:1.7;max-width:360px;margin-bottom:28px;">We're not a big-box print shop. We're a maker who cares about every single hat that leaves the workshop — from the first stitch to the final patch.</p>
+    <section class="why jp-light">
+      <div class="why-inner jp-wrap">
+        <div class="why-main fade-in">
+          <div class="eyebrow jp-label">Why JP?</div>
+          <h2 class="why-left jp-d-l">Not a <span class="nb">big-box</span> print shop. <em>A maker.</em></h2>
+          <p class="why-intro jp-lede jp-muted">We're not a big-box print shop. We're a maker who cares about every single hat that leaves the workshop, from the first stitch to the final patch.</p>
           <div class="why-badges">
             <span class="why-badge">Made in USA</span>
             <span class="why-badge">Veteran Friendly</span>
             <span class="why-badge">First Responder Proud</span>
           </div>
         </div>
-        <div class="fade-in fade-in-delay-1">
+        <div class="why-table fade-in fade-in-delay-1">
           <div class="comp-header">
             <div></div>
-            <div class="comp-header-jpats">JP</div>
-            <div class="comp-header-others">Others</div>
+            <div class="comp-header-jpats jp-spec">JP</div>
+            <div class="comp-header-others jp-spec">Others</div>
           </div>
           <div class="comp-table">
-            <div class="comp-row"><div class="comp-label">Fast Turnaround</div><div class="comp-cell jpats"><span class="check">✓</span></div><div class="comp-cell others"><span class="cross">✗</span></div></div>
-            <div class="comp-row"><div class="comp-label">No Minimum Orders</div><div class="comp-cell jpats"><span class="check">✓</span></div><div class="comp-cell others"><span class="cross">✗</span></div></div>
-            <div class="comp-row"><div class="comp-label">Custom Patch Options</div><div class="comp-cell jpats"><span class="check">✓</span></div><div class="comp-cell others"><span class="check" style="opacity:0.5">✓</span></div></div>
-            <div class="comp-row"><div class="comp-label">First Responder Designs</div><div class="comp-cell jpats"><span class="check">✓</span></div><div class="comp-cell others"><span class="cross">✗</span></div></div>
-            <div class="comp-row"><div class="comp-label">Bulk Discounts</div><div class="comp-cell jpats"><span class="check">✓</span></div><div class="comp-cell others"><span class="cross">✗</span></div></div>
-            <div class="comp-row"><div class="comp-label">Personalized Service</div><div class="comp-cell jpats"><span class="check">✓</span></div><div class="comp-cell others"><span class="cross">✗</span></div></div>
-            <div class="comp-row"><div class="comp-label">Laser Engraved Add-ons</div><div class="comp-cell jpats"><span class="check">✓</span></div><div class="comp-cell others"><span class="cross">✗</span></div></div>
+            <div class="comp-row"><div class="comp-label">Fast Turnaround</div><div class="comp-cell jpats"><span class="check">✓</span></div><div class="comp-cell others"><span class="cross">No</span></div></div>
+            <div class="comp-row"><div class="comp-label">No Minimum Orders</div><div class="comp-cell jpats"><span class="check">✓</span></div><div class="comp-cell others"><span class="cross">No</span></div></div>
+            <div class="comp-row"><div class="comp-label">Custom Patch Options</div><div class="comp-cell jpats"><span class="check">✓</span></div><div class="comp-cell others"><span class="check is-dim">✓</span></div></div>
+            <div class="comp-row"><div class="comp-label">First Responder Designs</div><div class="comp-cell jpats"><span class="check">✓</span></div><div class="comp-cell others"><span class="cross">No</span></div></div>
+            <div class="comp-row"><div class="comp-label">Bulk Discounts</div><div class="comp-cell jpats"><span class="check">✓</span></div><div class="comp-cell others"><span class="cross">No</span></div></div>
+            <div class="comp-row"><div class="comp-label">Personalized Service</div><div class="comp-cell jpats"><span class="check">✓</span></div><div class="comp-cell others"><span class="cross">No</span></div></div>
+            <div class="comp-row"><div class="comp-label">Laser Engraved Add-ons</div><div class="comp-cell jpats"><span class="check">✓</span></div><div class="comp-cell others"><span class="cross">No</span></div></div>
           </div>
-          <a href="#contact" class="why-link">Get started — contact us →</a>
+          <a href="#contact" class="why-link jp-btn jp-btn-line">Get started, contact us →</a>
         </div>
       </div>
     </section>
 
     <!-- ON DUTY -->
-    <section class="onduty" id="onduty">
-      <div class="onduty-grain"></div>
-      <div class="onduty-glow"></div>
-      <div class="onduty-inner">
-        <div class="fade-in">
-          <div class="onduty-tag">
-            <div class="line"></div>
-            <span>On Duty Lineup</span>
+    <section class="onduty jp-dark" id="onduty">
+      <div class="onduty-photo jp-photo-band jp-grain">
+        <img class="jp-photo" src="images/redesign/duty.webp" alt="A trucker hat with a leather patch resting on the dashboard of an emergency vehicle at night, red and blue lights blurred through the windshield" width="2200" height="1244" loading="lazy" decoding="async" />
+        <div class="jp-shade-duty"></div>
+        <div class="onduty-grain"></div>
+        <div class="onduty-glow"></div>
+        <div class="onduty-inner jp-wrap">
+          <div class="onduty-copy fade-in">
+            <div class="onduty-tag jp-label">
+              <div class="line"></div>
+              <span>On Duty Lineup</span>
+            </div>
+            <h2 class="jp-d-l">Designed for<br><em>Duty.</em><br>Made to Serve.</h2>
+            <p class="onduty-desc jp-lede">We specialize in custom hats for Police, Fire, EMS, and Public Safety Agencies. Built for performance, comfort, and everyday wear, with custom patch options for your department.</p>
+            <a href="#contact" class="btn-primary jp-btn jp-btn-patch">Contact Us to Start Your Order →</a>
           </div>
-          <h2>Designed for<br><em>Duty.</em><br>Made to Serve.</h2>
-          <p class="onduty-desc">We specialize in custom hats for Police, Fire, EMS, and Public Safety Agencies. Built for performance, comfort, and everyday wear — with custom patch options for your department.</p>
-          <div class="dept-cards">
-            <div class="dept-card">
-              <div class="dept-icon">🛡️</div>
-              <div class="dept-info"><strong>Law Enforcement</strong><span>Police &amp; Sheriff departments</span></div>
-            </div>
-            <div class="dept-card">
-              <div class="dept-icon">🔥</div>
-              <div class="dept-info"><strong>Fire Departments</strong><span>Custom firefighter gear</span></div>
-            </div>
-            <div class="dept-card">
-              <div class="dept-icon"><svg viewBox="0 0 64 64" width="32" height="32" aria-hidden="true"><g fill="#D94A4A"><rect x="27" y="8" width="10" height="48" rx="1"/><rect x="8" y="27" width="48" height="10" rx="1"/><rect x="27" y="8" width="10" height="48" rx="1" transform="rotate(60 32 32)"/><rect x="27" y="8" width="10" height="48" rx="1" transform="rotate(-60 32 32)"/></g><circle cx="32" cy="32" r="6" fill="#FFF"/><path d="M32 24 V40 M24 32 H40" stroke="#D94A4A" stroke-width="2.5" stroke-linecap="round"/></svg></div>
-              <div class="dept-info"><strong>EMS &amp; Medical</strong><span>Emergency medical services</span></div>
-            </div>
-          </div>
-          <a href="#contact" class="btn-primary">Contact Us to Start Your Order →</a>
         </div>
-        <div class="badge-cards fade-in fade-in-delay-2">
-          <div class="badge-card" style="background:#1E3A5F;">
-            <img class="badge-image" src="images/hats/duty-lexington-pd.png" alt="Lexington PD custom hat" loading="lazy" />
-            <div class="badge-grain"></div>
-            <div class="badge-inner">
-              <div class="badge-num"><span>001</span></div>
-              <div class="badge-dept"><strong>LEXINGTON PD</strong><small>North Carolina</small></div>
+      </div>
+      <div class="onduty-lower jp-wrap">
+        <div class="dept-cards fade-in">
+          <div class="dept-card">
+            <span class="dept-code jp-spec" aria-hidden="true">PD</span>
+            <div class="dept-icon">🛡️</div>
+            <div class="dept-info"><strong>Law Enforcement</strong><span>Police &amp; Sheriff departments</span></div>
+          </div>
+          <div class="dept-card">
+            <span class="dept-code jp-spec" aria-hidden="true">FD</span>
+            <div class="dept-icon">🔥</div>
+            <div class="dept-info"><strong>Fire Departments</strong><span>Custom firefighter gear</span></div>
+          </div>
+          <div class="dept-card">
+            <span class="dept-code jp-spec" aria-hidden="true">EMS</span>
+            <div class="dept-icon"><svg viewBox="0 0 64 64" width="32" height="32" aria-hidden="true"><g fill="#D94A4A"><rect x="27" y="8" width="10" height="48" rx="1"/><rect x="8" y="27" width="48" height="10" rx="1"/><rect x="27" y="8" width="10" height="48" rx="1" transform="rotate(60 32 32)"/><rect x="27" y="8" width="10" height="48" rx="1" transform="rotate(-60 32 32)"/></g><circle cx="32" cy="32" r="6" fill="#FFF"/><path d="M32 24 V40 M24 32 H40" stroke="#D94A4A" stroke-width="2.5" stroke-linecap="round"/></svg></div>
+            <div class="dept-info"><strong>EMS &amp; Medical</strong><span>Emergency medical services</span></div>
+          </div>
+        </div>
+        <div class="onduty-orders">
+          <div class="badge-note jp-label">Real department orders</div>
+          <div class="badge-cards jp-rail fade-in fade-in-delay-2">
+            <div class="badge-card">
+              <div class="badge-frame jp-frame jp-cutout">
+                <img class="badge-image" src="images/hats/duty-lexington-pd.png" alt="Lexington PD custom hat" loading="lazy" />
+                <div class="badge-grain"></div>
+              </div>
+              <div class="badge-inner">
+                <div class="badge-num jp-spec"><span>001</span></div>
+                <div class="badge-dept"><strong>LEXINGTON PD</strong><small>North Carolina</small></div>
+              </div>
+            </div>
+            <div class="badge-card">
+              <div class="badge-frame jp-frame jp-cutout">
+                <img class="badge-image" src="images/shirts/duty-deputy-tshirt.png" alt="Deputy Sheriff Caldwell NC custom shirt" loading="lazy" />
+                <div class="badge-grain"></div>
+              </div>
+              <div class="badge-inner">
+                <div class="badge-num jp-spec"><span>012</span></div>
+                <div class="badge-dept"><strong>CALDWELL CO</strong><small>Deputy Sheriff</small></div>
+              </div>
+            </div>
+            <div class="badge-card">
+              <div class="badge-frame jp-frame jp-cutout">
+                <img class="badge-image" src="images/hats/duty-sheriff-knit.png" alt="Sheriff's badge knit hat" loading="lazy" />
+                <div class="badge-grain"></div>
+              </div>
+              <div class="badge-inner">
+                <div class="badge-num jp-spec"><span>047</span></div>
+                <div class="badge-dept"><strong>SHERIFF KNIT</strong><small>Custom Badge Hat</small></div>
+              </div>
             </div>
           </div>
-          <div class="badge-card" style="background:#8B1A1A;">
-            <img class="badge-image" src="images/shirts/duty-deputy-tshirt.png" alt="Deputy Sheriff Caldwell NC custom shirt" loading="lazy" />
-            <div class="badge-grain"></div>
-            <div class="badge-inner">
-              <div class="badge-num"><span>012</span></div>
-              <div class="badge-dept"><strong>CALDWELL CO</strong><small>Deputy Sheriff</small></div>
-            </div>
-          </div>
-          <div class="badge-card" style="background:#2D5A3D;">
-            <img class="badge-image" src="images/hats/duty-sheriff-knit.png" alt="Sheriff's badge knit hat" loading="lazy" />
-            <div class="badge-grain"></div>
-            <div class="badge-inner">
-              <div class="badge-num"><span>047</span></div>
-              <div class="badge-dept"><strong>SHERIFF KNIT</strong><small>Custom Badge Hat</small></div>
-            </div>
-          </div>
-          <div class="badge-note">Real department orders</div>
         </div>
       </div>
     </section>
 
     <!-- SERVICES -->
-    <section class="services" id="services">
-      <div class="services-inner">
-        <div class="section-eyebrow fade-in">
-          <div class="line"></div>
-          <span>What We Make</span>
-          <div class="line line-r"></div>
-        </div>
-        <h2 class="section-title fade-in">Our <em>Services</em></h2>
-        <p class="section-desc fade-in">From headwear to handcrafted keepsakes — we bring your custom vision to life.</p>
-
-        <div class="svc-grid">
-          <div class="svc-card fade-in">
-            <div class="svc-top-line" style="background:var(--brass);"></div>
-            <img class="svc-image" src="images/services/service-custom-hats.png" alt="Custom hats example" loading="lazy" />
-            <div class="svc-content">
-              <div class="svc-price"><strong style="color:var(--brass);">$25</strong><small>starting at</small></div>
-              <div class="svc-name">Custom Hats</div>
-              <p class="svc-desc">Custom hats for your business, event, school, or personal style. One hat or a bulk order — high-quality designs at great prices. Bulk discounts available.</p>
-              <a href="#contact" class="svc-cta" style="color:var(--brass);">Start Your Order →</a>
-            </div>
+    <section class="services jp-dark" id="services">
+      <div class="services-inner jp-wrap">
+        <div class="services-head">
+          <div class="section-eyebrow fade-in jp-label">
+            <div class="line"></div>
+            <span>What We Make</span>
+            <div class="line line-r"></div>
           </div>
-          <div class="svc-card fade-in fade-in-delay-1">
-            <div class="svc-top-line" style="background:var(--copper);"></div>
-            <img class="svc-image" src="images/services/service-journals.png" alt="Laser engraved journal example" loading="lazy" />
-            <div class="svc-content">
-              <div class="svc-price"><strong style="color:var(--copper);">$20</strong><small>starting at</small></div>
-              <div class="svc-name">Laser Engraved Journals</div>
-              <p class="svc-desc">Personalized for your business, department, or event. High-quality laser engraving with your logo, name, or design. Clean, professional finish that stands out.</p>
-              <a href="#contact" class="svc-cta" style="color:var(--copper);">Get a Quote →</a>
-            </div>
-          </div>
-          <div class="svc-card fade-in fade-in-delay-2">
-            <div class="svc-top-line" style="background:var(--walnut);"></div>
-            <img class="svc-image" src="images/tumblers/IMG_0685.png" alt="Custom engraved cups example" loading="lazy" />
-            <div class="svc-content">
-              <div class="svc-price"><strong style="color:var(--walnut);">$20</strong><small>starting at</small></div>
-              <div class="svc-name">Custom Engraved Cups</div>
-              <p class="svc-desc">Your logo, your way. Perfect for business branding, departments, and events. Custom engraved cups that make a lasting impression wherever they go.</p>
-              <a href="#contact" class="svc-cta" style="color:var(--walnut);">Order Now →</a>
-            </div>
-          </div>
+          <h2 class="section-title fade-in jp-d-l">Same laser. <em>Whatever you need it on.</em></h2>
+          <p class="section-desc fade-in jp-lede jp-muted">From headwear to handcrafted keepsakes, we bring your custom vision to life.</p>
         </div>
 
-        <div class="svc-bottom fade-in">
-          <p>Need something custom? We love a good challenge.</p>
-          <a href="#contact" class="btn-primary">Contact Us To Start Your Order</a>
+        <div class="services-list">
+          <div class="svc-grid">
+            <div class="svc-card fade-in">
+              <div class="svc-top-line"></div>
+              <img class="svc-image" src="images/services/service-custom-hats.png" alt="Custom hats example" loading="lazy" />
+              <div class="svc-content">
+                <div class="svc-price jp-spec"><strong>$25</strong><small>starting at</small></div>
+                <div class="svc-name jp-d-s">Custom Hats</div>
+                <span class="jp-leader" aria-hidden="true"></span>
+                <p class="svc-desc">Custom hats for your business, event, school, or personal style. One hat or a bulk order, high-quality designs at great prices. Bulk discounts available.</p>
+                <a href="#contact" class="svc-cta jp-label">Start Your Order →</a>
+              </div>
+            </div>
+            <div class="svc-card fade-in fade-in-delay-1">
+              <div class="svc-top-line"></div>
+              <img class="svc-image" src="images/services/service-journals.png" alt="Laser engraved journal example" loading="lazy" />
+              <div class="svc-content">
+                <div class="svc-price jp-spec"><strong>$20</strong><small>starting at</small></div>
+                <div class="svc-name jp-d-s">Laser Engraved Journals</div>
+                <span class="jp-leader" aria-hidden="true"></span>
+                <p class="svc-desc">Personalized for your business, department, or event. High-quality laser engraving with your logo, name, or design. Clean, professional finish that stands out.</p>
+                <a href="#contact" class="svc-cta jp-label">Get a Quote →</a>
+              </div>
+            </div>
+            <div class="svc-card fade-in fade-in-delay-2">
+              <div class="svc-top-line"></div>
+              <img class="svc-image" src="images/tumblers/IMG_0685.png" alt="Custom engraved cups example" loading="lazy" />
+              <div class="svc-content">
+                <div class="svc-price jp-spec"><strong>$20</strong><small>starting at</small></div>
+                <div class="svc-name jp-d-s">Custom Engraved Cups</div>
+                <span class="jp-leader" aria-hidden="true"></span>
+                <p class="svc-desc">Your logo, your way. Perfect for business branding, departments, and events. Custom engraved cups that make a lasting impression wherever they go.</p>
+                <a href="#contact" class="svc-cta jp-label">Order Now →</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="svc-bottom fade-in">
+            <p>Need something custom? We love a good challenge.</p>
+            <a href="#contact" class="btn-primary jp-btn jp-btn-patch">Contact Us To Start Your Order</a>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- CONTACT -->
-    <section class="contact" id="contact">
+    <section class="contact jp-dark" id="contact">
       <div class="contact-grain"></div>
       <div class="contact-glow"></div>
-      <div class="contact-inner">
-        <div class="fade-in">
-          <div class="eyebrow" style="font-family:'Bebas Neue';color:var(--brass);font-size:20px;letter-spacing:0.2em;margin-bottom:10px;">Get In Touch</div>
-          <h2 class="font-display" style="font-family:'Playfair Display';font-weight:900;color:var(--cream);font-size:clamp(30px,4vw,46px);line-height:1.1;margin-bottom:20px;">Let's Build<br><em style="font-style:normal;color:var(--amber)">Something.</em></h2>
-          <p style="color:rgba(237,229,208,0.6);font-size:15px;line-height:1.7;margin-bottom:28px;max-width:340px;">Ready to start your custom order? Have a question about bulk pricing? We're here — reach out and we'll get back to you fast.</p>
+      <div class="contact-inner jp-wrap">
+        <div class="contact-copy fade-in">
+          <div class="eyebrow jp-label">Get In Touch</div>
+          <h2 class="font-display jp-d-l">Got an idea? <em>Let's build it.</em></h2>
+          <p class="contact-intro jp-lede jp-muted">Ready to start your custom order? Have a question about bulk pricing? We're here, reach out and we'll get back to you fast.</p>
           <div class="contact-email">
             <div class="contact-email-icon">✉️</div>
             <a href="mailto:jpcustomgear@gmail.com">jpcustomgear@gmail.com</a>
           </div>
           <div class="contact-tags">
-            <p>What can we help with?</p>
+            <p class="jp-spec">What can we help with?</p>
             <div class="contact-tags-wrap">
               <span class="contact-tag">Custom Hats</span>
               <span class="contact-tag">Bulk Orders</span>
@@ -509,18 +589,18 @@
           </div>
         </div>
 
-        <div class="fade-in fade-in-delay-1">
-          <div id="contactForm">
+        <div class="contact-right fade-in fade-in-delay-1">
+          <div id="contactForm" class="contact-form">
             <p class="form-required-legend"><span class="required-mark" aria-hidden="true">*</span> indicates a required field</p>
-            <div style="margin-bottom:16px;">
+            <div class="form-row">
               <label class="form-label" for="fname">Your Name <span class="required-mark" aria-hidden="true">*</span></label>
               <input class="form-input" type="text" placeholder="John Smith" id="fname" required aria-required="true" />
             </div>
-            <div style="margin-bottom:16px;">
+            <div class="form-row">
               <label class="form-label" for="femail">Email Address <span class="required-mark" aria-hidden="true">*</span></label>
               <input class="form-input" type="email" placeholder="john@example.com" id="femail" required aria-required="true" />
             </div>
-            <div style="margin-bottom:16px;">
+            <div class="form-row">
               <label class="form-label" for="ftype">Order Type</label>
               <select class="form-select" id="ftype">
                 <option value="" disabled selected>Select a service…</option>
@@ -532,15 +612,15 @@
                 <option>Other</option>
               </select>
             </div>
-            <div style="margin-bottom:16px;">
+            <div class="form-row">
               <label class="form-label" for="fmessage">Message <span class="required-mark" aria-hidden="true">*</span></label>
               <textarea class="form-textarea" rows="4" placeholder="Tell us about your order — quantity, design ideas, deadline…" id="fmessage" required aria-required="true"></textarea>
             </div>
-            <button class="form-submit" onclick="submitForm()"><span style="font-size:1.5em;line-height:1;display:inline-flex;align-items:center;">✉️</span> Send Message</button>
+            <button class="form-submit" onclick="submitForm()"><span class="form-submit-icon">✉️</span> Send Message</button>
           </div>
           <div id="formSuccess" class="form-success" style="display:none;">
             <div class="check-big">✅</div>
-            <h3 class="font-display">Got it — we'll be in touch!</h3>
+            <h3 class="font-display">Got it, we'll be in touch!</h3>
             <p>Usually within 1 business day.</p>
           </div>
         </div>
@@ -564,11 +644,12 @@
       <div class="footer-main-inner">
         <div>
           <div class="footer-brand-badge">
-            <img class="footer-logo-img" src="images/J.PATS.png" alt="JP Custom Gear logo" />
+            <img class="footer-logo-img" src="images/jp-custom-gear-logo-512.webp" alt="JP Custom Gear logo" />
             <div class="footer-brand-text">
               <strong>JP Custom</strong>
               <small>Gear</small>
             </div>
+            <p class="footer-built jp-d-l">Built for <em>you.</em></p>
           </div>
           <p class="footer-brand-desc">Custom headwear built with care. From one hat to a hundred — made right.</p>
           <div class="footer-socials">
@@ -586,6 +667,7 @@
             <li><a href="shop-caution-may-offend.html">Caution: May Offend</a></li>
             <li><a href="shop-foam-side.html">The Foam Side</a></li>
             <li><a href="shop-forever-favorites.html">Forever Favorites</a></li>
+            <li><a href="shop-camo-reserve.html">The Camo Reserve</a></li>
           </ul>
         </div>
         <div class="footer-col">

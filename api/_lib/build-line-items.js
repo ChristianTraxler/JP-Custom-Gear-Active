@@ -3,9 +3,22 @@
 'use strict';
 
 const { isCustomProduct, unitPriceCents, selectionFromCustomizations } = require('../../js/custom-pricing.js');
+const { sanitizeLogoUrl } = require('./logo-url.js');
 
 const MAX_LINES = 50;
 const MAX_METADATA_VALUE = 500;
+
+// Camo hoodie designs share one price; the chosen pattern is appended to the line item name.
+const HOODIE_PATTERNS = ['Duck Camo', 'Washed Camo', 'Desert Duck Camo'];
+
+// Camo tumbler patterns share one price too; the pattern is appended to the line item name.
+const CAMO_TUMBLER_PATTERNS = ['Bone Yard Camo', 'Blackwater Camo', 'Timber Bark Camo'];
+
+// Camo koozie patterns share one price too; the pattern is appended to the line item name.
+const CAMO_KOOZIE_PATTERNS = ['Ghost Marsh Camo', 'Timber Bark Camo'];
+
+// Camo beanie colors share one price; the color is appended to the line item name.
+const CAMO_BEANIE_COLORS = ['Americana', 'Bark', 'Blaze', 'Blizzard', 'Harvest', 'Marsh', 'Sable'];
 
 // For sized apparel (e.g. tees), the unit price depends on the chosen size
 // (2X/3X cost more). The price always comes from the catalog's `sizes` table —
@@ -40,11 +53,28 @@ function buildLineItems({ items, catalog, shippingCents, shippingUpgradeAtCents,
       ? unitPriceCents(item.productId, selectionFromCustomizations(item.customizations))
       : catalogUnitPrice(product, item.customizations);
     subtotalCents += unitAmount * qty;
+    let displayName = product.name;
+    if (item.productId === 'custom-hoodie') {
+      const pattern = item.customizations && item.customizations.Pattern;
+      if (HOODIE_PATTERNS.includes(pattern)) displayName = 'Custom Independent Trading Co. ' + pattern + ' Hoodie';
+    }
+    if (item.productId === 'custom-camo-tumbler') {
+      const pattern = item.customizations && item.customizations.Pattern;
+      if (CAMO_TUMBLER_PATTERNS.includes(pattern)) displayName = pattern + ' 20 oz Tumbler';
+    }
+    if (item.productId === 'custom-camo-beanie') {
+      const color = item.customizations && item.customizations.Pattern;
+      if (CAMO_BEANIE_COLORS.includes(color)) displayName = 'Richardson Duck Camo Beanie - ' + color;
+    }
+    if (item.productId === 'custom-camo-koozie') {
+      const pattern = item.customizations && item.customizations.Pattern;
+      if (CAMO_KOOZIE_PATTERNS.includes(pattern)) displayName = pattern + ' Can Koozie';
+    }
     return {
       price_data: {
         currency: 'usd',
         unit_amount: unitAmount,
-        product_data: { name: product.name }
+        product_data: { name: displayName }
       },
       quantity: qty
     };
@@ -67,16 +97,24 @@ function buildLineItems({ items, catalog, shippingCents, shippingUpgradeAtCents,
 
   // Encode customizations + productId into Stripe metadata.
   const metadata = {};
+  // The uploaded-logo link goes in its own key (logo_N) so a long URL can never push
+  // item_N past the length cap and get its JSON cut off. Only our Blob host is accepted.
   items.forEach((item, idx) => {
+    const customizations = Object.assign({}, item.customizations || {});
+    const logoUrl = sanitizeLogoUrl(customizations['Logo URL']);
+    delete customizations['Logo URL'];
+    if (logoUrl) metadata['logo_' + idx] = logoUrl;
     const payload = JSON.stringify({
       productId: item.productId,
-      customizations: item.customizations || {}
+      customizations
     });
     metadata['item_' + idx] = payload.length > MAX_METADATA_VALUE
       ? payload.slice(0, MAX_METADATA_VALUE - 1) + '…'
       : payload;
   });
   if (localPickup) metadata.local_pickup = '1';
+  // Stripe allows at most 50 metadata keys per object.
+  if (Object.keys(metadata).length > 50) throw new Error('too many line items with uploaded logos');
 
   return { lineItems, shippingItem, metadata };
 }
