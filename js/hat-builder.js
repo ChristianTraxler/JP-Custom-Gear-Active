@@ -191,7 +191,7 @@
         text.textContent = file.name;
         clear.style.display = 'inline-flex';
         // PNG, JPG and SVG preview on the patch; a PDF is listed by name only.
-        if (/^image\//.test(file.type) || /\.(png|jpe?g|svg)$/i.test(file.name)) logoPreviewUrl = URL.createObjectURL(file);
+        if (/^image\//.test(file.type) || /\.(png|jpe?g)$/i.test(file.name)) logoPreviewUrl = URL.createObjectURL(file);
         hideError('design');
       } else {
         state.logoName = '';

@@ -6,6 +6,8 @@ const { renderOrderEmails } = require('../api/_lib/render-order-emails.js');
 const { PRODUCTS } = require('../js/products.js');
 const uploadLogo = require('../api/upload-logo.js');
 
+// Logo URLs are pinned to the store behind BLOB_READ_WRITE_TOKEN (fake token for tests).
+process.env.BLOB_READ_WRITE_TOKEN = 'vercel_blob_rw_AbC123Def456_fakesecretfakesecret';
 const GOOD = 'https://abc123def456.public.blob.vercel-storage.com/logos/my-logo-Xy12Zk.png';
 
 function mockRes() {
@@ -24,8 +26,16 @@ test('sanitizeLogoUrl accepts only https URLs on the Blob public host', () => {
     null,
     undefined,
     123,
-    'http://abc123.public.blob.vercel-storage.com/logos/a.png',
+    'http://abc123def456.public.blob.vercel-storage.com/logos/a.png',
     'https://evil.example.com/logos/a.png',
+    'https://abc123.public.blob.vercel-storage.com/logos/a.png',
+    'https://xabc123def456.public.blob.vercel-storage.com/logos/a.png',
+    'https://abc123def456.public.blob.vercel-storage.com.evil.com/logos/a.png',
+    'https://abc123def456.public.blob.vercel-storage.com@evil.com/logos/a.png',
+    'https://abc123def456.public.blob.vercel-storage.com:8443/logos/a.png',
+    'https://abc123def456.public.blob.vercel-storage.com/other/a.png',
+    'https://abc123def456.public.blob.vercel-storage.com/logos/a.png?x=1',
+    'https://abc123def456.private.blob.vercel-storage.com/logos/a.png',
     'https://public.blob.vercel-storage.com/logos/a.png',
     'https://abc.public.blob.vercel-storage.com.evil.com/a.png',
     'https://evilpublic.blob.vercel-storage.com/a.png',
@@ -83,7 +93,7 @@ test('owner email shows a Download logo link and an inline preview for png', () 
 });
 
 test('owner email links a pdf logo but does not inline it', () => {
-  const pdf = 'https://abc.public.blob.vercel-storage.com/logos/art-Q1.pdf';
+  const pdf = 'https://abc123def456.public.blob.vercel-storage.com/logos/art-Q1.pdf';
   const s = Object.assign({}, session, { metadata: Object.assign({}, session.metadata, { logo_0: pdf }) });
   const { ownerHtml } = renderOrderEmails(s, { catalog: PRODUCTS, siteUrl: 'https://example.com' });
   assert.ok(ownerHtml.includes('Download logo'));
@@ -119,4 +129,26 @@ test('upload-logo rejects non-POST and fails gracefully without a Blob token', a
   } finally {
     if (saved !== undefined) process.env.BLOB_READ_WRITE_TOKEN = saved;
   }
+});
+
+test('sanitizeLogoUrl rejects everything when no Blob token is configured', () => {
+  const saved = process.env.BLOB_READ_WRITE_TOKEN;
+  try {
+    delete process.env.BLOB_READ_WRITE_TOKEN;
+    assert.equal(sanitizeLogoUrl(GOOD), '');
+    process.env.BLOB_READ_WRITE_TOKEN = 'garbage';
+    assert.equal(sanitizeLogoUrl(GOOD), '');
+  } finally {
+    process.env.BLOB_READ_WRITE_TOKEN = saved;
+  }
+});
+
+test('sanitizeLogoUrl is case-insensitive on the host and lowercases the store id', () => {
+  assert.equal(sanitizeLogoUrl('https://ABC123DEF456.public.blob.vercel-storage.com/logos/a.png'),
+    'https://abc123def456.public.blob.vercel-storage.com/logos/a.png');
+});
+
+test('upload-logo no longer allows SVG', () => {
+  const src = require('node:fs').readFileSync(require('node:path').join(__dirname, '../api/upload-logo.js'), 'utf8');
+  assert.ok(!/svg/i.test(src));
 });

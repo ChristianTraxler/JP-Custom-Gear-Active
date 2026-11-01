@@ -157,7 +157,7 @@
       URL.revokeObjectURL(currentObjectURL);
       currentObjectURL = null;
     }
-    const isImage = /^image\//.test(file.type) || /\.(png|jpe?g|svg)$/i.test(file.name);
+    const isImage = /^image\//.test(file.type) || /\.(png|jpe?g)$/i.test(file.name);
     if (isImage) {
       currentObjectURL = URL.createObjectURL(file);
       logoThumbImg.src = currentObjectURL;

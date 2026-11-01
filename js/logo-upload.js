@@ -19,7 +19,6 @@
     png: 'image/png',
     jpg: 'image/jpeg',
     jpeg: 'image/jpeg',
-    svg: 'image/svg+xml',
     pdf: 'application/pdf'
   };
   const ALLOWED_TYPES = Object.values(TYPE_BY_EXT);
@@ -55,7 +54,7 @@
   }
 
   function validate(file) {
-    if (!contentTypeFor(file)) return 'That file type is not supported. Use .png, .jpg, .svg or .pdf.';
+    if (!contentTypeFor(file)) return 'That file type is not supported. Use .png, .jpg or .pdf.';
     if (file.size > MAX_BYTES) return 'That file is too large (max 10 MB).';
     if (file.size === 0) return 'That file is empty.';
     return '';
@@ -70,7 +69,7 @@
         headers: { 'content-type': 'application/json' },
         body: '{}'
       });
-      if (res.status === 503) {
+      if (res.status === 503 || res.status === 429) {
         const data = await res.json();
         if (data && data.error) return data.error;
       }

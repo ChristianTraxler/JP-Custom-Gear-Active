@@ -1,10 +1,13 @@
 'use strict';
 
 const { handleUpload } = require('@vercel/blob/client');
+const { createRateLimiter, clientIp } = require('./_lib/rate-limit.js');
 
-const ALLOWED_CONTENT_TYPES = ['image/png', 'image/jpeg', 'image/svg+xml', 'application/pdf'];
+const ALLOWED_CONTENT_TYPES = ['image/png', 'image/jpeg', 'application/pdf'];
 const MAX_BYTES = 10 * 1024 * 1024; // 10 MB
 // Letters, digits, dot, dash, underscore only, after the logos/ prefix.
+// Per visitor (client IP): 10 token requests per 10 minutes. Per instance, see rate-limit.js.
+const limiter = createRateLimiter({ max: 10, windowMs: 10 * 60 * 1000 });
 const SAFE_PATHNAME = /^logos\/[A-Za-z0-9._-]{1,120}$/;
 
 // Vercel Blob client-upload token endpoint. The browser (js/logo-upload.js) calls this
@@ -20,6 +23,14 @@ module.exports = async function handler(req, res) {
     console.error('upload-logo: BLOB_READ_WRITE_TOKEN is not set (create a Blob store in the Vercel project).');
     return res.status(503).json({
       error: 'Logo upload is not available right now. Please add your order without the file and email it to us after checkout.'
+    });
+  }
+
+  const rl = limiter.check(clientIp(req));
+  if (!rl.allowed) {
+    res.setHeader('Retry-After', String(rl.retryAfterSec));
+    return res.status(429).json({
+      error: 'You have uploaded a lot of files in a short time. Please wait a few minutes and try again, or email your logo to us after checkout.'
     });
   }
 
