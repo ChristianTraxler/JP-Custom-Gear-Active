@@ -67,3 +67,8 @@ coverage/
 
 # DOC Tracker link (local only)
 .doc-tracker.json
+
+# Dependencies excluded from iCloud (node_modules links to node_modules.nosync)
+node_modules
+node_modules.nosync
+.env*
