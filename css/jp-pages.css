@@ -5194,3 +5194,14 @@
   content: counter(cz-step, decimal-leading-zero);
   font-size: 0.7rem;
 }
+
+/* Hold the cart icon's spot (44px icon + 10px gap) until cart-badge.js inserts it,
+   so the search box and links don't shift on every page load */
+.nav-right:not(:has(.nav-cart)) .nav-cta {
+  margin-left: 54px;
+}
+@media (min-width: 901px) and (max-width: 1299px) {
+  .nav-right:not(:has(.nav-cart)) .nav-cta {
+    margin-left: 50px; /* the compact header uses a 6px gap */
+  }
+}
